@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Outfit:wght@100..900&display=swap');
+
+
+:root {
+    /* colors */
+    --aqua: #4df5c6;
+    --aquaT: #4df5c500;
+
+    --euca: #08976f;
+    --amar: #de0d48;
+    --razz: #f32a63;
+    --tiar: #bccece;
+    --gall: #eeeeee;
+    --white: #ffffff;
+    --grey: #292929;
+    --shar: #1f1f1f;
+    --wood: #181818;
+
+    /* fonts */
+    --sFont: "Outfit", sans-serif;
+    --rFont: "Almarai", sans-serif;
+}
+
+
+
+
+/* doc */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    max-width: 100vw;
+
+    min-height: 100vh;
+}
+
+body {
+    background-image: linear-gradient(#1F1F1F 50%, #181818);
+}
+
+
+
+
+/* reusable */
+.flex {
+    display: flex;
+}
