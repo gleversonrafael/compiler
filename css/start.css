@@ -35,6 +35,10 @@ main::before {
     background-image: linear-gradient(var(--aquaT), var(--aqua));
 }
 
+main::after {
+    z-index: -2;
+}
+
 main::before, main::after {
     content: "";
     
@@ -44,6 +48,7 @@ main::before, main::after {
     width: 100%;
     height: 40vh;
 }
+
 
 #mCon {
     justify-content: space-between;
@@ -162,13 +167,7 @@ main::before, main::after {
         margin: 0 70px;
     }
 
-
-    /* continuar */
-
     main::after {
-        content: "";
-
-        z-index: -2;
         opacity: 0.03;
     
         background-image: url(../media/img/F-start-eff.png);
