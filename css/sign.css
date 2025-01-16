@@ -205,7 +205,7 @@ input[type=radio] {
 
         margin: 15px 0px 0px 50px;
 
-        background-image: url(../media/img/sign-bg.jpg);
+        background: url(../media/img/sign-bg.jpg) center right;
         background-size: cover;
         border-radius: 0px 0px 15px;
     }
