@@ -11,7 +11,7 @@
 
 <body>
     <main class="flex">
-        <section id="mCon" class="flex">
+        <section id="mCon" class="flex flex-col">
             <!-- content div -->
              
             <form id="mForm">
@@ -55,22 +55,29 @@
                         <!-- help icon here -->
                     </div>
 
-                    <label for="">
-                        <!-- div here -->
-                    </label>
+                    <!-- user type -->
+                    <div id="userTyDiv" class="flex flex-col">
+                        <!-- regUser -->
+                        <input type="radio" name="userType" id="regUserInp">
 
-                    <label for="">
-                        <!-- div here -->
-                    </label>
+                        <label id="regUserB" class="userTyB" for="regUserInp">
+                            Regular
+                        </label>
+                        
+                        <!-- admUser -->
+                        <input type="radio" name="userType" id="admUserInp">
 
-                    <input type="radio" name="userType" id="">
-                    <input type="radio" name="userType" id="">
+                        <label id="admUserB" class="userTyB" for="admUserInp">
+                            Admin
+                        </label>
+
+                    </div>
                     
                 </section>
 
                 <section class="flex inpB">
                     <label for=""> Senha cadastral </label>
-                    <input type="number">
+                    <input type="text">
 
                 </section>
 

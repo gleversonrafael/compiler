@@ -53,6 +53,11 @@ body {
     display: flex;
 }
 
+.flex-col {
+    flex-flow: column wrap;
+}
+
 .bdev {
     border: 2px solid red;
 }
+
