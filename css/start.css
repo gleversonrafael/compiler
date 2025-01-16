@@ -13,10 +13,6 @@
     font-weight: 300;
 }
 
-.bdev {
-    border: 2px solid red;
-}
-
 
 
 /* main content - conteúdo principal */
@@ -106,6 +102,7 @@ main::before, main::after {
     text-align: left;
 
     background-color: transparent;
+    text-decoration: none;
     border-radius: 25px;
 }
 
@@ -114,6 +111,10 @@ main::before, main::after {
     font-weight: bold;
     color: var(--black);
     transition: all 500ms;    
+}
+
+#signB:active, #loginB:active {
+    transition: all 100ms;
 }
 
 
@@ -130,6 +131,10 @@ main::before, main::after {
     background-color: var(--razz);
 }
 
+#signB:active {
+    background-color: var(--amar) ;
+}
+
 
 /* loginB */
 #loginB {
@@ -144,14 +149,16 @@ main::before, main::after {
     background-color: var(--aqua);
 }
 
+#loginB:active {
+    background-color: var(--euca);
+}
+
 
 
 /* desktop */
 @media screen and (min-width: 768px) {
     #mCon {
         min-height: 400px;
-        max-height: 500px;
-
         margin: 0 70px;
     }
 
@@ -162,10 +169,31 @@ main::before, main::after {
         content: "";
 
         z-index: -2;
-        opacity: 1;
+        opacity: 0.03;
     
-        background-image: url(../media/img/start-eff.png) no-repeat;
+        background-image: url(../media/img/F-start-eff.png);
         background-size: cover;
+
+        height: 70vh;
     }
     
+}
+
+@media screen  and (min-width: 1980px) {    
+    #mTitle-sec h1 {
+        font-size: 10vh;
+    }
+
+    #mTitle-sec h2 {
+        font-size: 2vh;
+    }
+
+    #signB, #loginB {
+        font-size: 3vh;
+        border-radius: 10vh;
+
+        max-width: none;
+        max-height: none;
+    }
+
 }

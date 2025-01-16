@@ -52,3 +52,7 @@ body {
 .flex {
     display: flex;
 }
+
+.bdev {
+    border: 2px solid red;
+}

@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+main {
+    align-items: center;
+    justify-content: center;
+
+    height: 100vh;
+}
+
+#mCon {
+    flex-flow: column wrap;
+
+    min-width: 300px;
+    min-height: 500px;
+
+    background-color: var(--gall);
+}
+
