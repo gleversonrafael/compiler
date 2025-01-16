@@ -11,7 +11,7 @@
 
 <body>
     <main class="flex">
-        <section id="mCon" class="flex flex-col">
+        <section id="mCon" class="flex">
             <!-- content div -->
              
             <form id="mForm">
@@ -35,14 +35,14 @@
                 <!-- user e-mail -->
                 <section class="flex inpB">
                     <label for="emailInp"> E-mail</label>
-                    <input type="email" name="emailInp" id="emailInp">
+                    <input type="email" name="emailInp" id="emailInp" placeholder="ex: abcdef@email.com">
 
                 </section>
 
                 <!-- user password -->
                 <section class="flex inpB">
                     <label for=""> Senha</label>
-                    <input type="password" name="passwordInp" id="passInp">
+                    <input type="password" name="passwordInp" id="passInp" placeholder="Insira no máximo 10 caracteres">
 
                 </section>
 
@@ -60,14 +60,14 @@
                         <!-- regUser -->
                         <input type="radio" name="userType" id="regUserInp">
 
-                        <label id="regUserB" class="userTyB" for="regUserInp">
+                        <label id="regUserB" class="userTyB dTrans" for="regUserInp">
                             Regular
                         </label>
                         
                         <!-- admUser -->
                         <input type="radio" name="userType" id="admUserInp">
 
-                        <label id="admUserB" class="userTyB" for="admUserInp">
+                        <label id="admUserB" class="userTyB dTrans" for="admUserInp">
                             Admin
                         </label>
 
@@ -82,13 +82,17 @@
                 </section>
 
                 <!-- buttons -->
-                <section></section>
+                <section id="finalBox" class="flex">
+                    <input id="eButton" class="fButton dTrans" type="reset"  value="Apagar">
+                    <input id="cButton" class="fButton dTrans" type="submit" value="Cadastrar">
+
+                </section>
 
             </form>
 
             <!-- visual div(viewport >= 768px) -->
 
-            <div>
+            <div id="visualD">
 
             </div>
 

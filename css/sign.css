@@ -14,15 +14,13 @@ main {
     
     min-width: 200px;
     width: 80vw;
-    max-width: 900px;
+    max-width: 1100px;
 
     min-height: 500px;
 
-    padding: 50px 35px 35px;
     margin: 40px 20px;
 
     border-radius: 15px;
-
     background-color: var(--gall);
 }
 
@@ -42,7 +40,12 @@ main {
 }
 
 #mForm { /* main form*/
-    max-width: 450px;
+    margin: 50px 35px 35px;
+    max-width: 600px;
+}
+
+#visualD {
+    display: none;
 }
 
 
@@ -76,7 +79,7 @@ main {
 /* subtopics */
 .stopic {
     font: 500 min(1.25em) var(--sFont);
-    margin: 30px 0px 15px;
+    margin: 40px 0px 20px;
 }
 
 .stopic:nth-of-type(2) {
@@ -89,7 +92,7 @@ main {
 /* input sections */
 .inpB { /* input box */
     flex-flow: column wrap;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     gap: 5px;
 }
 
@@ -131,16 +134,80 @@ input[type=radio] {
     color: var(--white);
     background-color: var(--razz);
 
-    transition: all 200ms;
+    cursor: pointer;
 }
 
 #regUserB, #admUserB {
-    font-size: 1em;
+    font: 300 1em var(--sFont);
 }
 
 /* radio box checked? */
 #regUserInp:checked + #regUserB, #admUserInp:checked + #admUserB  {
     color: var(--white);
     background-color: var(--amar);
+}
+
+
+
+
+/* confirm and erase buttons */
+#finalBox {
+    margin-top: 50px;
+    justify-content: space-between;
+}
+
+.fButton {
+    width: 49%;
+    padding: 15px;
+
+    font-family: var(--sFont);
+    color: var(--white);
+
+    border: none;
+    border-radius: 50px;
+}
+
+#eButton {
+    background-color: var(--amar);
+}
+
+#cButton {
+    background-color: var(--euca)
+}
+
+#eButton:hover, #cButton:hover {
+    background-color: var(--wood);
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+
+/* --------------------------------------------------------------------------- */
+/* media */
+@media screen and (min-width: 768px) {
+    #mCon {
+        padding-right: 0px;
+    }
+
+    #mForm {
+        margin: 70px 50px 50px;
+    }
+
+    #visualD {
+        /* flex grow ajusta a altura */
+        display: flex;
+
+        opacity: 0.6;
+
+        width: 100%;
+
+        margin: 15px 0px 0px 50px;
+
+        background-image: url(../media/img/sign-bg.jpg);
+        background-size: cover;
+        border-radius: 0px 0px 15px;
+    }
 }
 
