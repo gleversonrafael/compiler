@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+/* main doc */
+main {
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100vh;
+}
+
+
+
+
+/* sign title box */
+#signTB {
+    justify-content: space-between;
+}
+
+#signTB h1 {
+    font: normal 700 min(2em) var(--sFont);
+}
+
+
+
+
+/* input sections */
+.inpB { /* input box */
+    flex-flow: column wrap;
+    margin-bottom: 30px;
+    gap: 10px;
+}
+
+.inpB input {    
+    font: normal 400 1em var(--sFont);
+
+    /* Input com tamanho equivalente ao mCon*/
+    width: calc(80vw - 70px);
+    max-width: 100%;
+
+    height: 50px;
+
+    padding: 0px 10px 0px 25px;
+
+    border-radius: 25px;
+    border: none;
+}
+
+.inpB label, .inpB > div > p {
+    font: 100 0.9em var(--rFont);
+}
+

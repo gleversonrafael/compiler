@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+#mCon {
+    position: relative;
+    
+    min-width: 200px;
+    width: 80vw;
+    max-width: 1100px;
+
+    min-height: 500px;
+
+    margin: 40px 20px;
+
+    border-radius: 15px;
+    background-color: var(--gall);
+}
+
+#mForm { /* main form*/
+    margin: 50px 35px 35px;
+    max-width: 600px;
+}

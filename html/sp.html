@@ -7,7 +7,8 @@
     <link rel="shortcut icon" href="../media/ico/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="../css/general.css">
-    <link rel="stylesheet" href="../css/sign.css">
+    <link rel="stylesheet" href="../css/sign-login/log-sign.css">
+    <link rel="stylesheet" href="../css/sign-login/sign.css">
 
 </head>
 
@@ -21,9 +22,10 @@
                 <section id="signTB" class="flex">
                     <h1> Cadastro</h1>
 
-                    <p> C<span id="II-redEff">I<!----><span id="Ib">l</span><!----></span></p>
+                    <a href="../index.html"> C<span id="II-redEff">I<!----><span id="Ib">l</span><!----></span></a>
 
                 </section>
+
 
                 <h2 class="stopic"> Dados pessoais</h2>
 
@@ -34,6 +36,7 @@
 
                 </section>
 
+
                 <!-- user e-mail -->
                 <section class="flex inpB">
                     <label for="emailInp"> E-mail</label>
@@ -41,12 +44,15 @@
 
                 </section>
 
+
                 <!-- user password -->
                 <section class="flex inpB">
-                    <label for=""> Senha</label>
+                    <label for="passInp"> Senha</label>
                     <input type="password" name="passwordInp" id="passInp" placeholder="Insira no máximo 10 caracteres">
 
                 </section>
+
+
 
                 <h2 class="stopic"> Dados profissionais</h2>
 
@@ -54,10 +60,12 @@
                 <section class="inpB">
                     <div>
                         <p> Tipo de usuário</p>
-                        <!-- help icon here -->
+                        
                     </div>
 
+
                     <!-- user type -->
+
                     <div id="userTyDiv" class="flex flex-col">
                         <!-- regUser -->
                         <input type="radio" name="userType" id="regUserInp">
@@ -65,6 +73,7 @@
                         <label id="regUserB" class="userTyB dTrans" for="regUserInp">
                             Regular
                         </label>
+                        
                         
                         <!-- admUser -->
                         <input type="radio" name="userType" id="admUserInp">
@@ -78,10 +87,11 @@
                 </section>
 
                 <section class="flex inpB">
-                    <label for=""> Senha cadastral </label>
-                    <input type="text">
+                    <label for="sPassInp"> Senha cadastral </label>
+                    <input type="text" id="sPassInp">
 
                 </section>
+
 
                 <!-- buttons -->
                 <section id="finalBox" class="flex">
@@ -93,14 +103,13 @@
             </form>
 
             <!-- visual div(viewport >= 768px) -->
-
-            <div id="visualD">
-
-            </div>
+            <div id="visualD"></div>
 
         </section>
 
     </main>
+
+    <script src="../js/sign.js"></script>
 
 </body>
 
