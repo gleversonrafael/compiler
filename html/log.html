@@ -14,17 +14,29 @@
 </head>
 
 <body>
-    <main>
+    <main class="flex flex-col">
         <section id="mCon" class="flex">
-            <form action="" id="mForm" class="flex flex-col">
-                <!-- <div class="inpB flex flex-col">
-                    <label for=""></label>
-                    <input type="email" name="" id="">
-                </div>
-                <div class="inpB">
-                    <label for="">Senha</label>
-                    <input type="password" name="" id="">
-                </div> -->
+            <form id="mForm" action="" class="flex flex-col">
+                <h1> Entrar</h1>
+
+                <section class="inpB">
+                    <label for="emailInp">E-mail</label>
+                    <input type="email" name="email" id="emailInp">
+
+                </section>
+
+                <section class="inpB">
+                    <label for="passInp">Senha</label>
+                    <input type="password" name="passw" id="passInp">
+
+                </section>
+
+                <setion id="finalBox" class="flex">
+                    <a id="rButton" class="fButton dTrans" href="../index.html"> Retornar</a>
+                    <input id="lButton" class="fButton dTrans" type="submit" value="Entrar">
+                    
+
+                </section>
 
             </form>
 

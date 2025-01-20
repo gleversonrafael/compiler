@@ -1,21 +1,55 @@
 @charset "UTF-8";
 
 #mCon {
-    position: relative;
-    
-    min-width: 200px;
-    width: 80vw;
-    max-width: 1100px;
-
-    min-height: 500px;
-
-    margin: 40px 20px;
-
-    border-radius: 15px;
-    background-color: var(--gall);
+    min-height: 0px;
+    max-width: 800px;
+    justify-content: center;
 }
 
 #mForm { /* main form*/
     margin: 50px 35px 35px;
-    max-width: 600px;
+    max-width: 550px;
+}
+
+#mCon::before {
+    background-color: var(--aqua);
+}
+
+
+
+
+/* login title box */
+#mForm h1 {
+    margin-bottom: 50px;
+}
+
+
+
+
+/* final buttons */
+#rButton {
+    background-color: var(--wood);
+}
+
+#rButton {
+    text-decoration: none;
+    text-align: center;
+}
+
+
+
+
+/* final box */
+#finalBox {
+    margin: 25px 0px;
+}
+
+
+
+
+/* media */
+@media screen and (min-width: 768px) {
+    #mForm h1 {
+        text-align: center;
+    }
 }
