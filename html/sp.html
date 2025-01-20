@@ -13,6 +13,14 @@
 </head>
 
 <body>
+    <header>
+        <div id="msgB">
+            <p> Preencha as seções de: <span> nome, cadastro, e-mail, senha, tipo de usuário e senha cadastral</span> </p>
+
+        </div>
+
+    </header>
+
     <main class="flex">
         <section id="mCon" class="flex">
             <!-- content div -->
@@ -32,7 +40,7 @@
                 <!-- user name -->
                 <section class="flex inpB">
                     <label for="nameInp"> Nome</label>
-                    <input id="nameInp" type="text" minlength="3" maxlength="20" placeholder="Insira no máximo 20 caracteres">
+                    <input id="nameInp" name="name" type="text" minlength="3" maxlength="20" placeholder="Insira no máximo 20 caracteres">
 
                 </section>
 
@@ -40,7 +48,7 @@
                 <!-- user e-mail -->
                 <section class="flex inpB">
                     <label for="emailInp"> E-mail</label>
-                    <input type="email" name="emailInp" id="emailInp" placeholder="ex: abcdef@email.com">
+                    <input type="email" name="email" id="emailInp" placeholder="ex: abcdef@email.com">
 
                 </section>
 
@@ -48,7 +56,7 @@
                 <!-- user password -->
                 <section class="flex inpB">
                     <label for="passInp"> Senha</label>
-                    <input type="password" name="passwordInp" id="passInp" placeholder="Insira no máximo 10 caracteres">
+                    <input type="password" name="pass" id="passInp" placeholder="Insira no máximo 10 caracteres" autocomplete="off">
 
                 </section>
 
@@ -60,7 +68,7 @@
                 <section class="inpB">
                     <div>
                         <p> Tipo de usuário</p>
-                        
+
                     </div>
 
 
@@ -88,7 +96,7 @@
 
                 <section class="flex inpB">
                     <label for="sPassInp"> Senha cadastral </label>
-                    <input type="text" id="sPassInp">
+                    <input type="text" id="sPassInp" name="sPass" autocomplete="off">
 
                 </section>
 

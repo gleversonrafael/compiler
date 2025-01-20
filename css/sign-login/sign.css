@@ -22,7 +22,7 @@
 
 
 
-/* sign title box */
+/* sign title box and msgBox */
 #signTB {
     justify-content: space-between;
 }
@@ -40,6 +40,26 @@
 
 #Ib {
     font-size: 1.3em;
+}
+
+#msgB {   
+    z-index: 1;
+
+    position: fixed;
+    top: 0;
+    margin: 15px;
+
+    min-width: 150px;
+    padding: 15px 50px;
+
+    font: 500 1.25em var(--sFont);
+    text-align: center;
+
+    background-color: var(--amar);
+    color: var(--white);
+
+    border: 5px solid var(--razz);
+    border-radius: 50px;
 }
 
 
