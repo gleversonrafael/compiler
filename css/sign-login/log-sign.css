@@ -70,9 +70,11 @@ main {
     border: none;
 }
 
+
 .inpB label, .inpB > div > p {
     font: 100 0.9em var(--rFont);
 }
+
 
 
 

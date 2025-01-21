@@ -22,6 +22,7 @@
 
 
 
+
 /* sign title box and msgBox */
 #signTB {
     justify-content: space-between;
@@ -42,7 +43,9 @@
     font-size: 1.3em;
 }
 
-#msgB {   
+#msgB {  
+    display: none;
+
     z-index: 1;
 
     position: fixed;

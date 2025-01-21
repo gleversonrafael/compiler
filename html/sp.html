@@ -13,10 +13,8 @@
 </head>
 
 <body>
-    <header>
+    <header id="mHead" class="flex fCent">
         <div id="msgB">
-            <p> Preencha as seções de: <span> nome, cadastro, e-mail, senha, tipo de usuário e senha cadastral</span> </p>
-
         </div>
 
     </header>
@@ -40,7 +38,7 @@
                 <!-- user name -->
                 <section class="flex inpB">
                     <label for="nameInp"> Nome</label>
-                    <input id="nameInp" name="name" type="text" minlength="3" maxlength="20" placeholder="Insira no máximo 20 caracteres">
+                    <input type="text" id="nameInp" class="mfDep" name="nome"  minlength="3"  maxlength="20" placeholder="Insira no máximo 20 caracteres">
 
                 </section>
 
@@ -48,7 +46,7 @@
                 <!-- user e-mail -->
                 <section class="flex inpB">
                     <label for="emailInp"> E-mail</label>
-                    <input type="email" name="email" id="emailInp" placeholder="ex: abcdef@email.com">
+                    <input type="email" id="emailInp" class="mfDep"  name="email"  placeholder="ex: abcdef@email.com" autocomplete="on">
 
                 </section>
 
@@ -56,7 +54,7 @@
                 <!-- user password -->
                 <section class="flex inpB">
                     <label for="passInp"> Senha</label>
-                    <input type="password" name="pass" id="passInp" placeholder="Insira no máximo 10 caracteres" autocomplete="off">
+                    <input type="password" id="passInp" class="mfDep" name="senha" maxlength="10" placeholder="Insira no máximo 10 caracteres" autocomplete="off">
 
                 </section>
 
@@ -73,7 +71,6 @@
 
 
                     <!-- user type -->
-
                     <div id="userTyDiv" class="flex flex-col">
                         <!-- regUser -->
                         <input type="radio" name="userType" id="regUserInp">
@@ -84,7 +81,7 @@
                         
                         
                         <!-- admUser -->
-                        <input type="radio" name="userType" id="admUserInp">
+                        <input type="radio" id="admUserInp"  name="userType">
 
                         <label id="admUserB" class="userTyB dTrans" for="admUserInp">
                             Admin
@@ -96,7 +93,7 @@
 
                 <section class="flex inpB">
                     <label for="sPassInp"> Senha cadastral </label>
-                    <input type="text" id="sPassInp" name="sPass" autocomplete="off">
+                    <input type="text" id="sPassInp" class="mfDep" name="senhacadastral" autocomplete="off">
 
                 </section>
 
