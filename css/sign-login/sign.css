@@ -2,12 +2,11 @@
 
 /* main doc */
 #mCon {
-    max-width: 1100px;
+    max-width: 1500px;
     min-height: 500px;
 }
 
 #mForm { /* main form*/
-    margin: 50px 35px 35px;
     max-width: 600px;
 }
 
@@ -15,32 +14,12 @@
     display: none;
 }
 
-#mCon::before {
-    background-color: var(--razz);
-}
 
 
 
-
-
-/* sign title box and msgBox */
-#signTB {
-    justify-content: space-between;
-}
-
-#signTB a {
-    color: var(--wood);
-    font: normal 900 min(2em) var(--sFont);
-    text-decoration: none;
-}
-
-#II-redEff {
-    font-size: 0.75em;
-    color: var(--razz);
-}
-
-#Ib {
-    font-size: 1.3em;
+/* header */
+#mHead > p {
+    color: var(--white);
 }
 
 #msgB {  
@@ -64,6 +43,30 @@
     border: 5px solid var(--razz);
     border-radius: 50px;
 }
+
+
+
+
+/* sign title box */
+#signTB {
+    justify-content: space-between;
+}
+
+#signTB a {
+    color: var(--wood);
+    font: normal 900 min(2em) var(--sFont);
+    text-decoration: none;
+}
+
+#II-redEff {
+    font-size: 0.75em;
+    color: var(--euca);
+}
+
+#Ib {
+    font-size: 1.3em;
+}
+
 
 
 
@@ -96,7 +99,8 @@ input[type=radio] {
 
 .userTyB:hover {
     color: var(--white);
-    background-color: var(--razz);
+    background-color: var(--grey);
+    opacity: 0.9;
 
     cursor: pointer;
 }
@@ -108,7 +112,7 @@ input[type=radio] {
 /* radio box checked? */
 #regUserInp:checked + #regUserB, #admUserInp:checked + #admUserB  {
     color: var(--white);
-    background-color: var(--amar);
+    background-color: var(--wood);
 }
 
 
@@ -116,7 +120,7 @@ input[type=radio] {
 
 /* confirm and erase buttons */
 #eButton {
-    background-color: var(--amar);
+    background-color: var(--gree);
 }
 
 
@@ -138,7 +142,7 @@ input[type=radio] {
     }
 
     #mForm {
-        margin: 70px 50px 50px;
+        margin: 60px;
     }
 
     #userTyDiv {
@@ -158,16 +162,13 @@ input[type=radio] {
     #visualD {
         /* flex grow ajusta a altura */
         display: flex;
-
-        opacity: 0.6;
-
+    
         width: 100%;
-
-        margin: 15px 0px 0px 50px;
 
         background: url(../../media/img/sign-bg.jpg) center right;
         background-size: cover;
-        border-radius: 0px 0px 15px;
+
+        border-radius: 0px 25px 25px 0px;
     }
 }
 
