@@ -35,13 +35,14 @@
 
 
 /* msgB Reg */
-#msgB {  
+#msgB, #closeMsg {
     align-self: center;
+}
 
+#msgB {  
     min-width: 150px;
 
     padding: 15px 50px;
-    margin: 0px;
 
     font: 500 1.25em var(--sFont);
     text-align: center;
@@ -52,11 +53,16 @@
     box-shadow: 2px 2px 2px #2222223d;
 }
 
+
 #closeMsg { 
-    align-self: center;
     padding: 5px;
     border-radius: 0px 0px 50px 50px;
 }
+
+#closeMsg:active {
+    background-color: var(--wood);
+}
+
 
 #closeMsg > img {
     width: 50px;
@@ -64,17 +70,27 @@
 }
 
 
-/* msgB correct */
-#msgB.cor {
+/* msgB correct / incorrect */
+#msgB.cor, #closeMsg.cor {
+    background-color: var(--euca);
+    border: 2px solid var(--gree);
+}
+
+#closeMsg.cor:hover {
+    background-color: var(--gree);
+}
+
+#msgB.inc, #closeMsg.inc{
     background-color: var(--amar);
+    border: 2px solid var(--papr);
 }
 
-#closeMsg.inc {
-    background-color: var(--razz);
+#closeMsg.inc:hover {
+    background-color: var(--papr);
 }
 
 
-/* msgB incorrect */
+
 
 
 
