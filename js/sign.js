@@ -1,68 +1,74 @@
 // gl variables
+// form
 const mForm = document.querySelector("#mForm"); 
 const nameInp = document.getElementById("nameInp");
+
+
+// data list and wrong counter
+let dList = {nome: true, email: true, senha: true, senhacadastral: true, tusuario: true};
+let wrongC;
+
+
+// others
+const msgB = document.getElementById("msgB");
+const closeMB = document.querySelector("#closeMsg");
+
+
 
 
 
 
 // events
 mForm.addEventListener("submit", fSubmit);
+closeMB.addEventListener("click", hideMsgB);
 
-
-
-
-nameInp.addEventListener("change", (nEv) => {
-    if(nEv.target.value.length < 3) {
-        nEv.target.style.border = "2px solid var(--razz)";
-
-    } else {
-        nEv.target.style.border = "2px solid var(--aqua)";
-    }
-
-} )
 
 
 
 // functions
-// m level
+// main level - independents
+// ---------------------------------
 function fSubmit(ev) {
-    let analyzeT = checkFields();
+    console.clear()
 
-    if(analyzeT == true) {
+    // check fields
+    if(checkFields() == true) {
+        ev.preventDefault();
+        
+
         console.log("Valid");
     
     } else {
         ev.preventDefault();
-        dataError(analyzeT);
+        dataError();
     };
+
+    console.log(dList);
 }
 
-function verInp() {
 
+function hideMsgB() {
+    msgB.style.display = "none";
+    closeMB.style.display = "none";
 }
 
 
 
 
 
-// s level
-
-// checkFields SSS
-let wrongC;
-
+// secondary level
+// ---------------------------------
 function checkFields() {
-    // var
-    let dList = {nome: true, email: true, senha: true, senhacadastral: true, tusuario: true};
-    
     wrongC = 0;
 
     // are the inputs filled?   
     analyzeGinp()
     analyzeRad()
 
-    // checkResult
+    
+    // send Result
     if(Object.values(dList).includes(false)) {
-        return dList
+        return false
   
     } else {
         return true
@@ -76,48 +82,58 @@ function checkFields() {
         let mFormD = document.querySelectorAll(".mfDep"); // main form dependencies
 
         mFormD.forEach((gInput) => {        
-            if(gInput.value == "") {
+            let aVal = gInput.value // analyzed value
+            let ipN = gInput.name // input id
+
+            // analyze each case
+            if((aVal == "")   ||   (ipN == "nome" && aVal.length < 3)   ||   (ipN == "email" && ! aVal.includes("@"))   ||   (ipN == "senha" && aVal.length != 8)   ||   (ipN == "senhacadastral" && aVal != "appmoove"))  {
                 // visual
-                console.log(`Error 001. ${gInput.id} isn't correctly filled.`);
-                gInput.style.border = "2px solid var(--razz)";
+                console.log(`O campo ${ipN} não foi preenchido corretamente.`);
     
-                dList[gInput.name] = false;
+                dList[ipN] = false;
                 wrongC++;
+            
+            } else {
+                dList[ipN] = true;
             }
         })
 
     }
 
-    function analyzeRad() {
+
+    function analyzeRad() {        
         let radioSel = document.querySelector("input[name=userType]:checked");
 
         if(radioSel == null) {
             dList.tusuario = false;
             wrongC++;
+
+            console.log(`O campo tipo de usuários não foi preenchido`);
+        } else {
+            dList.tusuario = true;
         } 
     }
 }
 
 
 // dataError SSS
-function dataError(dataOB) {
+function dataError() {
     console.log("Invalid form data");
     
-    let createP = document.createElement("p");
-    let txtP = wrongC > 1? "Preencha as seções de: " : "Preencha a seção de "
-
+    let txtP = wrongC > 1? "Preencha corretamente as seções de: " : "Preencha corretamente a seção de "
     textCreator();
-    blockS();
+
+    msgError();
 
 
     // complementary functions
     function textCreator() {
-        for(let attr in dataOB) {
-            if(dataOB[attr] == false) {             
+        for(let attr in dList) {
+            if(dList[attr] == false) {             
                 addNtxt(attr)
                 addComma()
                 wrongC--;
-    
+
             }
         }
     }
@@ -156,19 +172,19 @@ function dataError(dataOB) {
     }
 
 
-    function blockS() {
+    function msgError() {
         msgB.innerHTML = "";
 
+        let createP = document.createElement("p");
         let txtC = document.createTextNode(txtP);
 
         createP.appendChild(txtC);
         msgB.appendChild(createP);
 
         msgB.style.display = "flex";
+        closeMB.style.display = "flex";
     }
 }
-
-
 
 
 

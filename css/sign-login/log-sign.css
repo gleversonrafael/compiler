@@ -57,7 +57,19 @@ main {
 
     border-radius: 25px;
     border: none;
+    box-shadow: 0.5px 0.5px 2px #18181823;
 }
+
+.valEff:valid {
+    position: relative;
+    border: 2px solid var(--aqua);
+}
+
+.valEff:invalid {
+    border: 2px solid var(--razz);
+}
+
+
 
 
 .inpB label, .inpB > div > p {

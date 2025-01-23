@@ -13,9 +13,17 @@
 </head>
 
 <body>
-    <header id="mHead" class="flex fCent">
-        <div id="msgB">
+    <header id="mHead" class="flex flex-col">
+        <div id="msgB" class="inc">
+            <!-- transformar a msgbox em errorbox ou correctbox -->
+            <p> Preencha as seções de: email, senha, senha cadastral, tipo de usuário</p>
+
         </div>
+
+        <button id="closeMsg">
+            <img src="../media/ico/closeicon.png" alt="Símbolo X que, ao ser acionado, remove a caixa de login visual">
+
+        </button>
 
     </header>
 
@@ -23,7 +31,7 @@
         <section id="mCon" class="flex">
             <!-- content div -->
              
-            <form id="mForm">
+            <form id="mForm" novalidate>
                 <!-- title and subtitle -->
                 <section id="signTB" class="flex">
                     <h1> Cadastro</h1>
@@ -38,7 +46,7 @@
                 <!-- user name -->
                 <section class="flex inpB">
                     <label for="nameInp"> Nome</label>
-                    <input type="text" id="nameInp" class="mfDep" name="nome"  minlength="3"  maxlength="20" placeholder="Insira no máximo 20 caracteres">
+                    <input type="text" id="nameInp" class="mfDep valEff" name="nome"  minlength="3"  maxlength="20" placeholder="Insira no máximo 20 caracteres" required>
 
                 </section>
 
@@ -46,7 +54,7 @@
                 <!-- user e-mail -->
                 <section class="flex inpB">
                     <label for="emailInp"> E-mail</label>
-                    <input type="email" id="emailInp" class="mfDep"  name="email"  placeholder="ex: abcdef@email.com" autocomplete="on">
+                    <input type="email" id="emailInp" class="mfDep valEff"  name="email"  placeholder="ex: abcdef@email.com" autocomplete="on" required>
 
                 </section>
 
@@ -54,7 +62,7 @@
                 <!-- user password -->
                 <section class="flex inpB">
                     <label for="passInp"> Senha</label>
-                    <input type="password" id="passInp" class="mfDep" name="senha" minlength="5" maxlength="10" placeholder="Insira no mínimo 5 e, no máximo 10 caracteres" autocomplete="off">
+                    <input type="password" id="passInp" class="mfDep valEff" name="senha" minlength="8" maxlength="8" placeholder="Defina uma senha de 8 dígitos" autocomplete="off" required>
 
                 </section>
 
@@ -93,7 +101,7 @@
 
                 <section class="flex inpB">
                     <label for="sPassInp"> Senha cadastral </label>
-                    <input type="text" id="sPassInp" class="mfDep" name="senhacadastral" autocomplete="off" placeholder="Uma senha cadastral é única e concedida por um administrador">
+                    <input type="text" id="sPassInp" class="mfDep" name="senhacadastral" autocomplete="off" minlength="8" maxlength="8" placeholder="Uma senha cadastral é única e concedida por um administrador" required>
 
                 </section>
 
@@ -108,6 +116,20 @@
             </form>
 
             <!-- visual div(viewport >= 768px) -->
+             <!-- substituir por imagem
+             -------------- 
+              -------------- 
+               -------------- 
+
+
+                -------------- 
+
+                 -------------- 
+                  -------------- 
+                   -------------- 
+             
+             
+             -->
             <div id="visualD"></div>
 
         </section>

@@ -18,31 +18,66 @@
 
 
 /* header */
+#mHead {
+    position: fixed;
+    z-index: 2;
+
+    display: flex;
+    border: 2px solid #63b163;
+
+    width: 100%;
+    height: fit-content;
+}
+
 #mHead > p {
     color: var(--white);
 }
 
+
+/* msgB Reg */
 #msgB {  
-    display: none;
-
-    z-index: 1;
-
-    position: fixed;
-    top: 0;
-    margin: 15px;
+    align-self: center;
 
     min-width: 150px;
+
     padding: 15px 50px;
+    margin: 0px;
 
     font: 500 1.25em var(--sFont);
     text-align: center;
 
-    background-color: var(--amar);
     color: var(--white);
 
-    border: 5px solid var(--razz);
     border-radius: 50px;
+    box-shadow: 2px 2px 2px #2222223d;
 }
+
+#closeMsg { 
+    align-self: center;
+    padding: 5px;
+    border-radius: 0px 0px 50px 50px;
+}
+
+#closeMsg > img {
+    width: 50px;
+    height: 50px;
+}
+
+
+/* msgB correct */
+#msgB.cor {
+    background-color: var(--amar);
+}
+
+#closeMsg.inc {
+    background-color: var(--razz);
+}
+
+
+/* msgB incorrect */
+
+
+
 
 
 
@@ -66,7 +101,6 @@
 #Ib {
     font-size: 1.3em;
 }
-
 
 
 
