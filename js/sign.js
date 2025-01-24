@@ -49,7 +49,6 @@ function fSubmit(ev) {
 
 function hideMsgB() {
     msgB.style.display = "none";
-    closeMB.style.display = "none";
 }
 
 
@@ -173,7 +172,7 @@ function dataError() {
 
 
     function msgError() {
-        msgB.innerHTML = "";
+        removeP()
 
         let createP = document.createElement("p");
         let txtC = document.createTextNode(txtP);
@@ -181,12 +180,41 @@ function dataError() {
         createP.appendChild(txtC);
         msgB.appendChild(createP);
 
-        msgB.style.display = "flex";
-        closeMB.style.display = "flex";
+        showMsgB("wrong")
     }
+
+    function removeP() {
+        if(document.querySelector("#msgB > p") != null) {
+            msgB.removeChild(document.querySelector("#msgB > p"));
+        }
+    }
+
 }
 
 
 
 
-// t level
+
+
+// third level
+function showMsgB() {
+    msgB.style.display = "flex";
+
+    if(msgB.classList.contains("inc")) {
+        console.log("Incorrect message");
+         
+    } else {
+        console.log("Correct message");
+
+    }
+
+
+    if("wrong") {
+        msgB.classList.add("inc");
+        closeMB.classList.add("inc");
+    
+    } else {
+        msgB.classList.add("cor");
+        closeMB.classList.add("cor");
+    }
+}

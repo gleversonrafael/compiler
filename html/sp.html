@@ -13,19 +13,22 @@
 </head>
 
 <body>
-    <header id="mHead" class="flex flex-col">
-        <div id="msgB" class="cor">
+    <header id="mHead" class="flex fJustC">
+        <div id="msgB" class="flex fJustC bAll">
             <!-- transformar a msgbox em errorbox ou correctbox -->
-            <p> Preencha as seções de: email, senha, senha cadastral, tipo de usuário</p>
+            <p> Preencha as seções de: nome, email, senha, senha cadastral e tipo de usuário</p>
+
+            <button id="closeMsg" class="cor dTrans">
+                <img src="../media/ico/closeicon.png" alt="Símbolo X que, ao ser acionado, remove a caixa de login visual">
+    
+            </button>
 
         </div>
 
-        <button id="closeMsg" class="cor dTrans">
-            <img src="../media/ico/closeicon.png" alt="Símbolo X que, ao ser acionado, remove a caixa de login visual">
-
-        </button>
-
     </header>
+
+
+
 
     <main class="flex">
         <section id="mCon" class="flex">
@@ -83,7 +86,7 @@
                         <!-- regUser -->
                         <input type="radio" name="userType" id="regUserInp">
 
-                        <label id="regUserB" class="userTyB dTrans" for="regUserInp">
+                        <label id="regUserB" class="userTyB bAll dTrans" for="regUserInp">
                             Regular
                         </label>
                         
@@ -91,7 +94,7 @@
                         <!-- admUser -->
                         <input type="radio" id="admUserInp"  name="userType">
 
-                        <label id="admUserB" class="userTyB dTrans" for="admUserInp">
+                        <label id="admUserB" class="userTyB bAll dTrans" for="admUserInp">
                             Admin
                         </label>
 
@@ -136,6 +139,9 @@
 
     </main>
 
+    
+
+    
     <script src="../js/sign.js"></script>
 
 </body>

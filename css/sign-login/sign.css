@@ -22,15 +22,7 @@
     position: fixed;
     z-index: 2;
 
-    display: flex;
-    border: 2px solid #63b163;
-
     width: 100%;
-    height: fit-content;
-}
-
-#mHead > p {
-    color: var(--white);
 }
 
 
@@ -40,53 +32,58 @@
 }
 
 #msgB {  
-    min-width: 150px;
+    /* display: none; */
+    position: relative;
 
-    padding: 15px 50px;
+    min-width: 150px;
+    padding: 15px 50px 15px;
+    margin-top: 1vh;
 
     font: 500 1.25em var(--sFont);
-    text-align: center;
 
     color: var(--white);
-
-    border-radius: 50px;
     box-shadow: 2px 2px 2px #2222223d;
 }
 
-
-#closeMsg { 
-    padding: 5px;
-    border-radius: 0px 0px 50px 50px;
+#msgB > p {
+    color: var(--white);
 }
-
-#closeMsg:active {
-    background-color: var(--wood);
-}
-
-
-#closeMsg > img {
-    width: 50px;
-    height: 50px;
-}
-
 
 /* msgB correct / incorrect */
-#msgB.cor, #closeMsg.cor {
-    background-color: var(--euca);
-    border: 2px solid var(--gree);
-}
-
-#closeMsg.cor:hover {
+#msgB.cor {
     background-color: var(--gree);
+    border: 5px solid var(--euca);
 }
 
-#msgB.inc, #closeMsg.inc{
+#msgB.inc{
     background-color: var(--amar);
-    border: 2px solid var(--papr);
+    border: 5px solid var(--papr);
 }
 
-#closeMsg.inc:hover {
-    background-color: var(--papr);
+#closeMsg.cor {
+    background-color: var(--euca);
+}
+
+
+#closeMsg {
+    position: absolute;
+    top: 100%;
+    
+    padding: 10px;
+
+    border: none;
+    border-radius: 0px 0px 25px 25px;
+}
+
+#closeMsg > img {
+    width: 25px;
+    height: fit-content;
+
+    cursor: pointer;
+}
+
+#closeMsg:hover {
+    color: var(--red);
 }
 
 
@@ -142,7 +139,6 @@ input[type=radio] {
 .userTyB {
     padding: 20px 25px;
     margin: 5px 0px;
-    border-radius: 50px;
 
     background-color: var(--tiar);  
 }
@@ -187,12 +183,25 @@ input[type=radio] {
 /* --------------------------------------------------------------------------- */
 /* media */
 @media screen and (min-width: 768px) {
-    #mCon {
-        padding-right: 0px;
+    /* header */
+    #msgB {
+        padding: 15px 80px 15px;
     }
 
+    #closeMsg {     
+        top: auto;   
+        right: 10px;
+    
+        background-color: transparent;
+        border: none;
+    }
+
+
+
+
+    /* form */
     #mForm {
-        margin: 60px;
+        padding: 10px 60px 10px 30px;
     }
 
     #userTyDiv {
@@ -209,6 +218,8 @@ input[type=radio] {
 
 
 
+
+    /* aside */
     #visualD {
         /* flex grow ajusta a altura */
         display: flex;

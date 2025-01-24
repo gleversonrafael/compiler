@@ -62,14 +62,24 @@ body {
     flex-flow: column wrap;
 }
 
+.fJustC {
+    justify-content: center;
+}
+
+.fAlignC {
+    align-items: center;
+}
+
+
 .bdev {
     border: 2px solid red;
+}
+
+.bAll {
+    border-radius: 65px;
 }
 
 .dTrans {
     transition: all 200ms;
 }
 
-.fCent {
-    justify-content: center;
-}
