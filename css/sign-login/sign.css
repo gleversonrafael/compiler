@@ -32,22 +32,27 @@
 }
 
 #msgB {  
-    /* display: none; */
+    display: none;
     position: relative;
 
     min-width: 150px;
     padding: 15px 50px 15px;
     margin-top: 1vh;
 
-    font: 500 1.25em var(--sFont);
-
-    color: var(--white);
     box-shadow: 2px 2px 2px #2222223d;
 }
 
 #msgB > p {
+    font: 500 1.25em var(--sFont);
     color: var(--white);
 }
+
+#msgB a {
+    text-decoration: none;
+    color: var(--aqua);
+}
+
+
 
 /* msgB correct / incorrect */
 #msgB.cor {
@@ -60,8 +65,13 @@
     border: 5px solid var(--papr);
 }
 
+
 #closeMsg.cor {
     background-color: var(--euca);
+}
+
+#closeMsg.inc {
+    background-color: var(--papr);
 }
 
 
@@ -188,13 +198,18 @@ input[type=radio] {
         padding: 15px 80px 15px;
     }
 
-    #closeMsg {     
+    #closeMsg{     
         top: auto;   
         right: 10px;
-    
+        transition: none;
+    }
+
+    #closeMsg, #closeMsg.inc, #closeMsg.cor {
         background-color: transparent;
         border: none;
     }
+
+
 
 
 

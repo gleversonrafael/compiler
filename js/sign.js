@@ -10,8 +10,9 @@ let wrongC;
 
 
 // others
-const msgB = document.getElementById("msgB");
 const closeMB = document.querySelector("#closeMsg");
+const msgB = document.getElementById("msgB");
+
 
 
 
@@ -34,9 +35,8 @@ function fSubmit(ev) {
     // check fields
     if(checkFields() == true) {
         ev.preventDefault();
-        
 
-        console.log("Valid");
+        showMsgB("cor", "Cadastro efetuado! ");
     
     } else {
         ev.preventDefault();
@@ -122,7 +122,9 @@ function dataError() {
     let txtP = wrongC > 1? "Preencha corretamente as seções de: " : "Preencha corretamente a seção de "
     textCreator();
 
-    msgError();
+    showMsgB("inc", txtP)
+
+
 
 
     // complementary functions
@@ -170,25 +172,6 @@ function dataError() {
 
     }
 
-
-    function msgError() {
-        removeP()
-
-        let createP = document.createElement("p");
-        let txtC = document.createTextNode(txtP);
-
-        createP.appendChild(txtC);
-        msgB.appendChild(createP);
-
-        showMsgB("wrong")
-    }
-
-    function removeP() {
-        if(document.querySelector("#msgB > p") != null) {
-            msgB.removeChild(document.querySelector("#msgB > p"));
-        }
-    }
-
 }
 
 
@@ -197,24 +180,53 @@ function dataError() {
 
 
 // third level
-function showMsgB() {
+function showMsgB(msgT, content /* msg type == incorrect/correct*/ ) {
+    createText()
+
+    if(msgB.classList.contains(msgT) == false) {
+        verifyRemoveAttr();  
+        addAttr();
+    } 
+
+
+    if(msgT == "cor") {
+        let p = document.querySelector("#msgB > p");
+
+        p.innerHTML += "<span> <a href=../html/log.html> Entre aqui </a> <span>"
+    }
+
     msgB.style.display = "flex";
 
-    if(msgB.classList.contains("inc")) {
-        console.log("Incorrect message");
-         
-    } else {
-        console.log("Correct message");
 
+
+    // compl
+    function createText() {
+        if(document.querySelector("#msgB > p") != null) {
+            msgB.removeChild(document.querySelector("#msgB > p"));
+        }
+
+        let createP = document.createElement("p");
+        let txtC = document.createTextNode(content);
+    
+        createP.appendChild(txtC);
+        msgB.appendChild(createP);
     }
 
 
-    if("wrong") {
-        msgB.classList.add("inc");
-        closeMB.classList.add("inc");
-    
-    } else {
-        msgB.classList.add("cor");
-        closeMB.classList.add("cor");
+    function verifyRemoveAttr() {
+        if(msgT == "inc" && msgB.classList.contains("cor")) {
+            msgB.classList.remove("cor");
+            closeMB.classList.remove("cor");
+        
+        } else if(msgB.classList.contains("inc")) {
+            msgB.classList.remove("inc");
+            closeMB.classList.remove("inc");
+        }
+    }
+
+
+    function addAttr() {
+        msgB.classList.add(msgT);
+        closeMB.classList.add(msgT);
     }
 }
