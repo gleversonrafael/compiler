@@ -5,11 +5,11 @@
 #mCon {    
     display: flex;
     min-height: 0px;
-    max-width: 800px;
+    max-width: 900px;
 }
 
 #mForm { /* main form*/
-    max-width: 550px;
+    max-width: 400px;
 }
 
 
@@ -17,8 +17,7 @@
 
 /* img */
 #visualImg {
-    height: 500px;
-    width: 100%;
+    display: none;
 }
 
 
@@ -33,7 +32,7 @@
 
 /* final box */
 #finalBox {
-    margin: 25px 0px;
+    margin: 25px 0px 0px;
 }
 
 
@@ -48,15 +47,72 @@
 
 
 
-
-
-
-
-
 /* media */
 @media screen and (min-width: 768px) {
+    /* main content */
+    #mForm {
+        margin: 60px 80px 60px 50px;
+    }
+    
+    #finalBox {
+        margin-top: 40px;
+    }
+
+
     #visualImg {
-        background: url(../../media/img/sign-bg.jpg) center right;
-        background-size: cover;
+        display: flex;
+
+        width: 100%;
+        max-width: 500px;
+
+        align-self: stretch;
+    }
+}
+
+
+@media screen and (min-width: 1366px) {
+    /* main content */
+    #mCon {
+        width: fit-content;
+        max-width: 1500px;
+    }
+
+    #mForm {
+        margin: 70px;
+        max-width: 550px;
+    }
+    
+    #mForm h1 {
+        font-size: min(64px, 3vw);
+    }
+
+
+    /* inputs */
+    .inpB:nth-of-type(1) {
+        margin-top: 20px;
+    }
+
+    .inpB label, .fButton, .inpB input {
+        border-radius: 200px;
+    }
+
+    .inpB label, .fButton {
+        font-size: min(25px, 2vw);
+    }
+
+    .inpB input {
+        font-size: min(25px, 2vw);
+        height: 60px;
+    }
+
+    #finalBox {
+        margin-top: 70px;
+    }
+
+
+    /* visual img */
+    #visualImg {
+        margin-left: 40px;
+        max-height: 680px;
     }
 }

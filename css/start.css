@@ -59,7 +59,7 @@ main::after {
     flex-flow: column wrap;
     flex-shrink: 0;
 
-    min-height: 300px;
+    min-height: 350px;
     height: 60vh;
 
     width: fit-content;

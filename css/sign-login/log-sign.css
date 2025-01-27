@@ -12,7 +12,6 @@ main {
 
 
 /* main content boxes */
-/* /// */
 #mCon {
     position: relative;
 
@@ -23,10 +22,10 @@ main {
 
     background-color: var(--gall);
 }
-/* /// */
+
 #mForm {
     flex-shrink: 0;
-    margin: 50px 35px 35px;
+    margin: 40px 35px;
     width: calc(80vw - 70px);
 }
 
@@ -35,7 +34,7 @@ main {
 
 /* sign title box */
 #mForm h1 {
-    font: normal 700 min(2em) var(--sFont);
+    font: normal 500 min(2em) var(--sFont);
 }
 
 
@@ -45,7 +44,7 @@ main {
 .inpB { /* input box */
     flex-flow: column wrap;
     margin-bottom: 30px;
-    gap: 10px;
+    gap: 20px;
 }
 
 .inpB input {    
@@ -109,7 +108,7 @@ main {
 }
 
 .fButton:hover {
-    font-weight: bold;
+    color: var(--aqua);
     opacity: 0.75;
 }
 

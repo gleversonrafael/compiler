@@ -17,20 +17,20 @@
     <main class="flex flex-col">
         <section id="mCon" class="flex">
             
-            <form id="mForm" class="flex flex-col">
+            <form id="mForm" class="flex flex-col" novalidate=>
                 <h1> Log-in</h1>
 
                 <!-- e-mail -->
                 <section class="inpB">
                     <label for="emailInp">E-mail</label>
-                    <input type="email" name="email" id="emailInp" autocomplete="on">
+                    <input type="email" name="email" id="emailInp" required autocomplete="on">
 
                 </section>
 
                 <!-- password -->
                 <section class="inpB">
                     <label for="passInp">Senha</label>
-                    <input type="password" name="passw" id="passInp" autocomplete="off">
+                    <input type="password" name="passw" id="passInp" required maxlength="8" autocomplete="off">
 
                 </section>
 
@@ -43,11 +43,17 @@
 
             </form>
 
-            <!-- <img id="visualImg" src="../media/img/sign-bg.jpg" alt="Imagem de fundo"> -->
+            <!-- visualImg -->
+            <div id="visualImg">
+                <img id="visualImg" src="../media/img/sign-bg.jpg" alt="Ondas verdes em um fundo verde-escuro">
+
+            </div>
 
         </section>
 
     </main>
+
+    <script src="../js/login.js"></script>
 
 </body>
 
