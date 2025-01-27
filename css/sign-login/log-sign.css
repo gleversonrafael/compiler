@@ -12,6 +12,7 @@ main {
 
 
 /* main content boxes */
+/* /// */
 #mCon {
     position: relative;
 
@@ -21,9 +22,8 @@ main {
     margin: 40px 20px; 
 
     background-color: var(--gall);
-    border-radius: 25px;
 }
-
+/* /// */
 #mForm {
     flex-shrink: 0;
     margin: 50px 35px 35px;
@@ -102,6 +102,10 @@ main {
 
 #cButton, #lButton {
     background-color: var(--euca)
+}
+
+#rButton, #eButton {
+    background-color: var(--gree);  
 }
 
 .fButton:hover {

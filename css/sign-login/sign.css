@@ -174,14 +174,6 @@ input[type=radio] {
 
 
 
-/* confirm and erase buttons */
-#eButton {
-    background-color: var(--gree);
-}
-
-
-
-
 /* final box */
 #finalBox {
     margin-top: 50px;
@@ -231,20 +223,5 @@ input[type=radio] {
         width: 49%;
     }
 
-
-
-
-    /* aside */
-    #visualD {
-        /* flex grow ajusta a altura */
-        display: flex;
-    
-        width: 100%;
-
-        background: url(../../media/img/sign-bg.jpg) center right;
-        background-size: cover;
-
-        border-radius: 0px 25px 25px 0px;
-    }
 }
 

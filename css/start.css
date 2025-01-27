@@ -28,17 +28,6 @@ main {
     height: 100vh;
 }
 
-main::before {
-    z-index: -1;
-    opacity: 0.1;
-
-    background-image: linear-gradient(var(--aquaT), var(--aqua));
-}
-
-main::after {
-    z-index: -2;
-}
-
 main::before, main::after {
     content: "";
     
@@ -49,18 +38,33 @@ main::before, main::after {
     height: 40vh;
 }
 
+main::before {
+    z-index: -1;
+    opacity: 0.1;
+
+    background-image: linear-gradient(var(--aquaT), var(--aqua));
+    transition: all 500ms;
+}
+
+
+main::after {
+    z-index: -2;
+}
+
+
+
 
 #mCon {
     justify-content: space-between;
     flex-flow: column wrap;
     flex-shrink: 0;
 
-    min-height: 350px;
+    min-height: 300px;
     height: 60vh;
 
     width: fit-content;
 
-    margin: 0px 30px;
+    margin: 0px 40px;
 }
 
 
@@ -100,7 +104,7 @@ main::before, main::after {
     gap: 1vh;
 }
 
-#signB, #loginB {
+#loginB {
     padding: 15px 15px 15px 30px;
 
     font: bold 1em;
@@ -111,35 +115,12 @@ main::before, main::after {
     border-radius: 25px;
 }
 
-#signB:hover, #loginB:hover {
+#loginB:hover {
     cursor: pointer;
     font-weight: bold;
     color: var(--black);
     transition: all 500ms;    
 }
-
-#signB:active, #loginB:active {
-    transition: all 100ms;
-}
-
-
-/* signB */
-#signB {
-    width: 70%;
-    max-width: 150px;
-
-    color: var(--razz);
-    border: 1px solid var(--razz);
-}
-
-#signB:hover {
-    background-color: var(--razz);
-}
-
-#signB:active {
-    background-color: var(--amar) ;
-}
-
 
 /* loginB */
 #loginB {
@@ -164,7 +145,7 @@ main::before, main::after {
 @media screen and (min-width: 768px) {
     #mCon {
         min-height: 400px;
-        margin: 0 70px;
+        margin: 0 5vw;
     }
 
     main::after {
@@ -187,12 +168,14 @@ main::before, main::after {
         font-size: 2vh;
     }
 
-    #signB, #loginB {
+    #loginB {
         font-size: 3vh;
-        border-radius: 10vh;
+        padding: 2vh 4vh;
 
         max-width: none;
         max-height: none;
+
+        border-radius: 10vh;
     }
 
 }

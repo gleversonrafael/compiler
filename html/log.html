@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entre em sua conta no CompIler</title>
+    <title>Entre em sua conta CompIler</title>
     <link rel="shortcut icon" href="../media/ico/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="../css/general.css">
@@ -16,29 +16,34 @@
 <body>
     <main class="flex flex-col">
         <section id="mCon" class="flex">
-            <form id="mForm" action="" class="flex flex-col">
-                <h1> Entrar</h1>
+            
+            <form id="mForm" class="flex flex-col">
+                <h1> Log-in</h1>
 
+                <!-- e-mail -->
                 <section class="inpB">
                     <label for="emailInp">E-mail</label>
-                    <input type="email" name="email" id="emailInp">
+                    <input type="email" name="email" id="emailInp" autocomplete="on">
 
                 </section>
 
+                <!-- password -->
                 <section class="inpB">
                     <label for="passInp">Senha</label>
-                    <input type="password" name="passw" id="passInp">
+                    <input type="password" name="passw" id="passInp" autocomplete="off">
 
                 </section>
 
-                <setion id="finalBox" class="flex">
+                <!-- f buttons -->
+                <section id="finalBox" class="flex">
                     <a id="rButton" class="fButton dTrans" href="../index.html"> Retornar</a>
                     <input id="lButton" class="fButton dTrans" type="submit" value="Entrar">
-                    
 
                 </section>
 
             </form>
+
+            <!-- <img id="visualImg" src="../media/img/sign-bg.jpg" alt="Imagem de fundo"> -->
 
         </section>
 

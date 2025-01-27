@@ -1,8 +1,9 @@
 @charset "UTF-8";
 
-#mCon {
-    justify-content: center;
-    
+
+/* main content */
+#mCon {    
+    display: flex;
     min-height: 0px;
     max-width: 800px;
 }
@@ -11,41 +12,20 @@
     max-width: 550px;
 }
 
-#mCon::before {
-    content: "";
-    z-index: 0;
 
-    position: absolute;
-    top: 0px;
-    left: 0;
 
+
+/* img */
+#visualImg {
+    height: 500px;
     width: 100%;
-    height: 15px;
-
-    background-color: var(--aqua);
-    border-radius: 25px 25px 0px 0px;
 }
-
 
 
 
 /* login title box */
 #mForm h1 {
     margin-bottom: 50px;
-}
-
-
-
-
-
-/* final buttons */
-#rButton {
-    background-color: var(--wood);
-}
-
-#rButton {
-    text-decoration: none;
-    text-align: center;
 }
 
 
@@ -59,9 +39,24 @@
 
 
 
+/* final buttons */
+#rButton {
+    text-decoration: none;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
 /* media */
 @media screen and (min-width: 768px) {
-    #mForm h1 {
-        text-align: center;
+    #visualImg {
+        background: url(../../media/img/sign-bg.jpg) center right;
+        background-size: cover;
     }
 }
