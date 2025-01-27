@@ -49,7 +49,7 @@ function loginP(sEvent) {
       })
 
 
-      .catch(showMsg("inc"));
+      .catch(setTimeout(showMsg("inc"), 10000));
 }
 
 
@@ -68,7 +68,6 @@ function showMsg(msgObtained) {
 
   } else {
     loginInc();
-    console.log("Incorrect");
   }
 
 
