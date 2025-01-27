@@ -125,7 +125,6 @@ main::after {
 /* loginB */
 #loginB {
     width: 100%;
-    max-width: 300px;
 
     color: var(--aqua);
     border: 1px solid var(--aqua);
@@ -171,8 +170,7 @@ main::after {
     #loginB {
         font-size: 3vh;
         padding: 2vh 4vh;
-
-        max-width: none;
+        
         max-height: none;
 
         border-radius: 10vh;

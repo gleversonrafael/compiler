@@ -15,22 +15,38 @@
 
 <body>
     <main class="flex flex-col">
-        <section id="mCon" class="flex">
-            
+        <!-- msg section -->
+        <section id="msgCon" class="fAlignC fJustC abs">
+            <section class="flex flex-col fAlignC">
+                <img id="msgIco"src="../media/ico/ico-wrong.svg" alt="Símbolo X/ Verificado que indica o resultado do sistema de log-in">
+                
+                <h1 id="msgT"> Erro </h1>
+                <p id="msgD"> Dados incorretos</p>
+
+                <button id="closeMsgB" class="dTrans"> Fechar </button>
+
+            </section>
+
+        </section>
+
+
+
+        <!-- main content -->
+        <section id="mCon" class="flex">             
             <form id="mForm" class="flex flex-col" novalidate=>
-                <h1> Log-in</h1>
+                <h1> Log-in C<span>Il</span></h1>
 
                 <!-- e-mail -->
                 <section class="inpB">
                     <label for="emailInp">E-mail</label>
-                    <input type="email" name="email" id="emailInp" required autocomplete="on">
+                    <input type="email" name="email" id="emailInp" class="valEff" required autocomplete="on">
 
                 </section>
 
                 <!-- password -->
                 <section class="inpB">
                     <label for="passInp">Senha</label>
-                    <input type="password" name="passw" id="passInp" required maxlength="8" autocomplete="off">
+                    <input type="password" name="passw" id="passInp" class="valEff" required maxlength="8" autocomplete="off">
 
                 </section>
 
@@ -43,15 +59,14 @@
 
             </form>
 
-            <!-- visualImg -->
-            <div id="visualImg">
-                <img id="visualImg" src="../media/img/sign-bg.jpg" alt="Ondas verdes em um fundo verde-escuro">
-
-            </div>
+            <!-- visualdiv -->
+            <div id="visualD"></div>
 
         </section>
 
     </main>
+
+    <aside></aside>
 
     <script src="../js/final/fbasef.js"></script>
     <script src="../js/final/logpf.js"></script>

@@ -4,7 +4,7 @@
 main {
     align-items: center;
     justify-content: center;
-
+    
     min-height: 100vh;
 }
 
@@ -20,7 +20,8 @@ main {
     
     margin: 40px 20px; 
 
-    background-color: var(--gall);
+    background-color: var(--wood);
+    border: 1px solid var(--whiteT);
 }
 
 #mForm {
@@ -55,23 +56,25 @@ main {
     padding: 0px 10px 0px 25px;
 
     border-radius: 25px;
-    border: none;
+
+    color: var(--aqua);
+    background-color: transparent;
+
+    border: 1px solid var(--white);
     box-shadow: 0.5px 0.5px 2px #18181823;
 }
 
 .valEff:valid {
     position: relative;
-    border: 2px solid var(--aqua);
+    border: 2px solid var(--whiteT);
 }
 
-.valEff:invalid {
-    border: 2px solid var(--razz);
-}
 
 
 
 
 .inpB label, .inpB > div > p {
+    color: var(--white);
     font: 100 0.9em var(--rFont);
 }
 
@@ -90,25 +93,42 @@ main {
     width: 49%;
     padding: 15px;
 
-    border: none;
     cursor: pointer;
-
+    
     font-family: var(--sFont);
-    color: var(--white);
 
+    background-color: transparent;
     border-radius: 25px;
 }
 
+
+/* confirm / login button */
 #cButton, #lButton {
-    background-color: var(--euca)
-}
-
-#rButton, #eButton {
-    background-color: var(--gree);  
-}
-
-.fButton:hover {
     color: var(--aqua);
-    opacity: 0.75;
+    border: 1px solid var(--aqua);
 }
+
+#cButton:hover, #lButton:hover {
+    background-color: var(--aqua);
+}
+
+/* reset / erase button */
+#rButton, #eButton {
+    color: var(--razz);
+    border: 1px solid var(--razz);  
+}
+
+#rButton:hover, #eButton:hover {
+    background-color: var(--razz);
+}
+
+
+/* all buttons */
+#cButton:hover, #lButton:hover, #rButton:hover, #eButton:hover {
+    color: var(--wood);
+}
+
+
+
+
 

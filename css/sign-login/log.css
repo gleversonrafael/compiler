@@ -1,11 +1,10 @@
 @charset "UTF-8";
 
-
 /* main content */
 #mCon {    
     display: flex;
-    min-height: 0px;
-    max-width: 900px;
+    
+    width: fit-content;
 }
 
 #mForm { /* main form*/
@@ -15,16 +14,22 @@
 
 
 
-/* img */
-#visualImg {
-    display: none;
+/* visual D*/
+#visualD {
+    background-color: var(--aqua);
+    width: 1vw;
 }
 
 
 
 /* login title box */
 #mForm h1 {
+    color: var(--white);
     margin-bottom: 50px;
+}
+
+#mForm > h1 span {
+    color: var(--aqua);
 }
 
 
@@ -47,6 +52,77 @@
 
 
 
+/* message content */
+#msgCon {
+    display: none;
+    z-index: 1;
+
+    background-color: #000000ad;
+    min-height: 600px;
+    height: 100vh;
+
+    width: 100%;
+}
+
+#msgCon > section {
+    width: fit-content;
+    max-width: 80%;
+}
+
+#msgIco {
+    min-width: 200px;
+    width: 20vw;
+    max-width: 700px;
+}
+
+
+/* msg text */
+#msgT, #msgD {
+    text-align: center;
+}
+
+
+
+#msgT {
+    font: normal 4.5em var(--sFont);
+}
+
+#msgT.inc {
+    color: var(--razz);
+}
+
+#msgT.cor {
+    color: var(--aqua);
+}
+
+
+
+#msgD {
+    color: var(--white);
+    font: 100 min(1.5em, 5vw) var(--rFont);
+}
+
+
+#closeMsgB {
+    width: 100%;
+    padding: 10px;
+
+    cursor: pointer;
+    margin-top: 5vh;
+
+    font: normal 2em var(--rFont);
+    background-color: var(--white);
+}
+
+#closeMsgB:hover {
+    color: var(--white);
+    background-color: transparent;
+    border: 2px solid var(--white);
+}
+
+
+
+
 /* media */
 @media screen and (min-width: 768px) {
     /* main content */
@@ -58,25 +134,11 @@
         margin-top: 40px;
     }
 
-
-    #visualImg {
-        display: flex;
-
-        width: 100%;
-        max-width: 500px;
-
-        align-self: stretch;
-    }
 }
 
 
 @media screen and (min-width: 1366px) {
     /* main content */
-    #mCon {
-        width: fit-content;
-        max-width: 1500px;
-    }
-
     #mForm {
         margin: 70px;
         max-width: 550px;
@@ -85,8 +147,13 @@
     #mForm h1 {
         font-size: min(64px, 3vw);
     }
+    
+    /* msg content -- bug fix*/
+    #msgCon {
+        min-height: 720px;
+    }
 
-
+    
     /* inputs */
     .inpB:nth-of-type(1) {
         margin-top: 20px;
@@ -107,12 +174,5 @@
 
     #finalBox {
         margin-top: 70px;
-    }
-
-
-    /* visual img */
-    #visualImg {
-        margin-left: 40px;
-        max-height: 680px;
     }
 }

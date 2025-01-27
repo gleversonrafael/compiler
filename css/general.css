@@ -19,6 +19,7 @@
     --tiar: #bccece;
     --gall: #eeeeee;
     --white: #ffffff;
+    --whiteT: #ffffff62;
     
     --grey: #292929;
     --shar: #1f1f1f;
@@ -47,7 +48,7 @@ body, html {
 }
 
 body {
-    background-image: linear-gradient(#1F1F1F 50%, #181818);
+    background-image: linear-gradient(#1F1F1F 50%, #1D1D1D);
 }
 
 
@@ -56,6 +57,10 @@ body {
 /* reusable */
 .flex {
     display: flex;
+}
+
+.abs {
+    position: absolute;
 }
 
 .flex-col {
