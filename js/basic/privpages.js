@@ -34,11 +34,3 @@ function analyzeLogState(data) {
 
      }  
 }
-
-
-
-if(window.location.href.includes("dashboard")) {
-     document.getElementById("logoutB").addEventListener("click", () => {
-          signOut(auth);
-     });
-}

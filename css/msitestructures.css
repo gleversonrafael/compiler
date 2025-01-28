@@ -1,0 +1,159 @@
+@charset "UTF-8";
+
+
+/* header */
+#mHead {
+     position: fixed;
+     top: 0;
+     z-index: 1;
+
+     background-color: var(--grey);
+
+     min-height: 60px;
+
+     height: 12vh;
+     width: 100%;
+}
+
+#mIcon {
+     margin-left: 10px;
+     height: 80%;
+     max-height: 50px;
+}
+
+#mIcon:active {
+     background-color: var(--wood);
+}
+
+
+/* main content */
+#mCon {
+     height: 100%;
+}
+
+#bEff {
+     background-color: var(--aqua);
+
+     width: 100%;
+     height: 100%;
+}
+
+
+
+
+/* main menu box and content*/
+#mMenuB {
+     display: none;
+
+     position: fixed;
+     top: 0px;
+
+     z-index: 0;
+
+     background-color: var(--wood);
+
+     min-width: 150px;
+     width: 60vw;
+     max-width: 250px;
+
+     height: 100vh;
+
+     overflow: scroll;
+}
+
+#mMenu {
+     margin-top: max(12vh, 60px);
+     width: 100%;
+}
+
+#mMenu a {
+     min-height: 60px;
+     
+     color: var(--white);
+
+     border-bottom: 1px solid var(--whiteT);
+}
+
+#mMenu a > p {
+     font: 100 1em var(--sFont);
+}
+
+#mMenu a > img {
+     border: 1px solid #2600ff;
+
+     width: 50px;
+     height: 50px;
+
+     margin-left: 25px;
+}
+
+
+
+
+
+
+
+
+/* dashboard content */
+#dashbC {
+     margin: calc(12vh + 40px) 50px;
+}
+
+#dashbMsg {
+     color: var(--white);
+     font: normal 2em var(--rFont);
+
+     margin-bottom: 8vh;
+}
+
+
+
+
+/* dashB nav */
+#dashbAnchors a  {
+     align-items: center;
+     justify-content: space-between;
+
+     min-height: 60px;
+     margin-bottom: 15px;
+     
+     padding: 15px 15px 15px 30px;
+
+     text-decoration: none;
+     border: 1px solid var(--white);
+}
+
+
+#dashbAnchors a::after {
+     content: "";
+
+     background-image: url(../media/ico/ico-warrow.svg);
+     background-size: cover;
+
+     width: 25px;
+     height: 25px;
+}
+
+#dashbAnchors a > div {
+     color: var(--white);
+     font: 500 1.1em var(--sFont);
+}
+
+
+/* dashb anchor active */
+#dashbAnchors a:active {
+     background-color: var(--aqua);
+     border: none;
+}
+
+
+#dashbAnchors a:active > div {
+     font-weight: 700;
+     color: var(--wood);
+}
+
+#dashbAnchors a:active::after {
+     content: "";
+     background-image: url(../media/ico/ico-barrow.svg);
+}
+
