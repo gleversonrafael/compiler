@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -16,8 +17,14 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth();
 
 // exports
 export { firebaseConfig };
 export { app };
 export { db };
+export { auth };
+
+
+
+

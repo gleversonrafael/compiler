@@ -4,10 +4,10 @@ module.exports = {
   mode: "development",
 
   entry: {
-    fbase: "./js/basic/fb.js",
+    mdependencies: ["./js/basic/private-pages.js"],
 
     logp: {
-        dependOn: "fbase",
+        dependOn: "mdependencies",
         import: ["./js/basic/login.js"]
     }
   },

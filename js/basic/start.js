@@ -1,7 +1,6 @@
 // var
 let mainB = document.styleSheets[1].cssRules[4];
 let loginB = document.getElementById("loginB");
-console.log(mainB);
 
 
 // linear gradient opacity change

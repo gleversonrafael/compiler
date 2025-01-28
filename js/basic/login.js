@@ -1,22 +1,19 @@
 // firebase
-import { getDoc } from "firebase/firestore"
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import { signInWithEmailAndPassword, onAuthStateChanged, getAuth } from "firebase/auth";
 
-
-// vanilla js
-import { firebaseConfig } from "./fb.js";
-import { db } from "./fb.js";
-import { app } from "./fb.js";
-
+import { auth } from "./fb.js";
 
 
 
 // global var
-const auth = getAuth();
 const mForm = document.getElementById("mForm");
+let loginResult;
 
 const msgCon = document.querySelector("#msgCon");
 const closeMsgButton = document.querySelector("closeMsgB");
+
+
+
 
 
 
@@ -27,6 +24,12 @@ mForm.addEventListener("submit", loginP)
 document.getElementById("closeMsgB").addEventListener("click", 
   function closeMsg(){
     msgCon.style.display = "none"
+
+    if(loginResult == "cor") {
+      window.location.href = "./dashboard.html"
+      console.log("redirect")
+    }
+
   }
 )
 
@@ -34,22 +37,27 @@ document.getElementById("closeMsgB").addEventListener("click",
 
 // functions
 // main level
-function loginP(sEvent) {
+async function loginP(sEvent) {
     sEvent.preventDefault();
 
     // user data
     const emailD = mForm.email.value;
     const passD = mForm.passw.value ;
 
-    // user authentication
-    signInWithEmailAndPassword(auth, emailD, passD)
-      .then(() => { 
-        showMsg("cor");
 
-      })
+    loginResult = await signInWithEmailAndPassword(auth, emailD, passD)
+    .then(() => {
+      return "cor";
+
+    })
+    .catch((err) => {
+      console.log(err.code);
+      return "inc";
+
+    });
 
 
-      .catch(setTimeout(showMsg("inc"), 10000));
+    showMsg(loginResult);
 }
 
 
@@ -105,16 +113,11 @@ function showMsg(msgObtained) {
         msgType.classList.remove("inc");  
 
     } else if(msgObtained == "inc" && msgType.classList.contains("cor")) {
-        msgType.classList.remove("cor");
+      msgType.classList.remove("cor");  
     }
 
-
     // addClass
-    msgType.classList.add(msgObtained);
+    msgType.classList.add(msgObtained);  
   }
 }
-
-
-// third level
-
 
