@@ -4,7 +4,7 @@ module.exports = {
   mode: "development",
 
   entry: {
-    mdependencies: ["./js/basic/private-pages.js"],
+    mdependencies: ["./js/basic/fb.js", "./js/basic/privpages.js"],
 
     logp: {
         dependOn: "mdependencies",

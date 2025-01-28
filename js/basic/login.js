@@ -16,8 +16,6 @@ const closeMsgButton = document.querySelector("closeMsgB");
 
 
 
-
-
 // events
 mForm.addEventListener("submit", loginP)
 
@@ -56,7 +54,6 @@ async function loginP(sEvent) {
 
     });
 
-
     showMsg(loginResult);
 }
 
@@ -77,7 +74,6 @@ function showMsg(msgObtained) {
   } else {
     loginInc();
   }
-
 
 
   // compl

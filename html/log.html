@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entre em sua conta CompIler</title>
+    <title> Log-in CompIler</title>
     <link rel="shortcut icon" href="../media/ico/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="../css/general.css">
@@ -18,10 +18,10 @@
         <!-- msg section -->
         <section id="msgCon" class="fAlignC fJustC abs">
             <section class="flex flex-col fAlignC">
-                <img id="msgIco"src="../media/ico/ico-wrong.svg" alt="Símbolo X/ Verificado que indica o resultado do sistema de log-in">
+                <img id="msgIco" src="../media/ico/ico-notfound.svg" alt="Símbolo X/ Verificado que indica o resultado do sistema de log-in">
                 
-                <h1 id="msgT"> Erro </h1>
-                <p id="msgD"> Dados incorretos</p>
+                <h1 id="msgT"> null </h1>
+                <p id="msgD"> null</p>
 
                 <button id="closeMsgB" class="dTrans"> Fechar </button>
 
@@ -46,7 +46,7 @@
                 <!-- password -->
                 <section class="inpB">
                     <label for="passInp">Senha</label>
-                    <input type="password" name="passw" id="passInp" class="valEff" required maxlength="8" autocomplete="off">
+                    <input type="password" name="passw" id="passInp" class="valEff" required maxlength="8" autocomplete="off" value="">
 
                 </section>
 
@@ -61,12 +61,13 @@
 
             <!-- visualdiv -->
             <div id="visualD"></div>
-            <button id="testB">Teste</button>
 
         </section>
 
     </main>
 
+
+    <!-- scripts -->
     <script src="../js/final/mdependenciesf.js"></script>
     <script src="../js/final/logpf.js"></script>
 
