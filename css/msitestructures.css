@@ -67,18 +67,20 @@
 }
 
 #mMenu a {
-     min-height: 60px;
-     
-     color: var(--white);
 
+     color: var(--white);
      border-bottom: 1px solid var(--whiteT);
+}
+
+#mMenu li {
+     height: fit-content;
 }
 
 #mMenu a > p {
      font: 100 1em var(--sFont);
 }
 
-#mMenu a > img {
+#mMenu > li > a > img {
      border: 1px solid #2600ff;
 
      width: 50px;
