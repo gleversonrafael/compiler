@@ -13,7 +13,7 @@ onAuthStateChanged(auth, (userData) => {
 // // functions
 function analyzeLogState(data) {
      // user is not logged in, therefore he doesn't have acess to the site 
-     if(data === null && !window.location.href.includes("index") && !window.location.href.includes("log")) {
+     if(data === null && !window.location.href.includes("index") && !window.location.href.includes("log") && !window.location.href.includes("github")) {
           // GITHUB COMPATIBILITY
           if(window.location.href.includes("github")) {
                window.location.href = "https://gleversonrafael.github.io/compiler/"
