@@ -16,7 +16,8 @@ function analyzeLogState(data) {
      if(data === null && !window.location.href.includes("index") && !window.location.href.includes("log") && !window.location.href.includes("compiler")) {
           // GITHUB COMPATIBILITY
           if(window.location.href.includes("github")) {
-               window.location.href = "https://gleversonrafael.github.io/compiler/"
+               // window.location.href = "https://gleversonrafael.github.io/compiler/"
+               console.log("test");
 
           } else {
                window.location.href = "./../index.html";
@@ -26,7 +27,7 @@ function analyzeLogState(data) {
 
 
      // user is logged in and tries to acess start page / login (GITHUB COMPATIBILITY)
-     if(data != null && (window.location.href.includes("index") || window.location.href.includes("compiler"))) {
+     if(data != null && ((window.location.href.includes("index")) || (window.location.href.includes("compiler")))) {
           window.location.href = "./html/dashboard.html";  
      }
 
