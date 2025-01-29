@@ -5,18 +5,26 @@ const mIcon = document.getElementById("mIcon");
 
 
 mIcon.addEventListener("click", toggleMenu);
+leaveM.addEventListener("click", toggleMenu);
 
 
 
 
 // functions
 function toggleMenu() {
-     let mMenuB = document.getElementById("mMenuB");
-     
-     if(mMenuB.style.display == "flex") {
-          mMenuB.style.display = "none";
+     let mMenuBox = document.getElementById("mMenuB");
 
-     } else {
-          mMenuB.style.display = "flex";
+     if(window.innerWidth < 768) {
+          if(mMenuBox.style.display == "flex") {
+               mMenuBox.style.display = "none";
+               mIcon.style.display = "block";
+               leaveM.style.display = "flex";
+     
+          } else {
+               mMenuBox.style.display = "flex";
+               mIcon.style.display = "none";
+          }
+
      }
+
 }

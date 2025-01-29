@@ -52,8 +52,12 @@ body {
     background-image: linear-gradient(#1F1F1F 50%, #1D1D1D);
 }
 
-.li {
+li {
     list-style: none;
+}
+
+a {
+    text-decoration: none;
 }
 
 
@@ -62,10 +66,6 @@ body {
 /* reusable */
 .flex {
     display: flex;
-}
-
-.abs {
-    position: absolute;
 }
 
 .flex-col {
@@ -78,6 +78,11 @@ body {
 
 .fAlignC {
     align-items: center;
+}
+
+
+.abs {
+    position: absolute;
 }
 
 
