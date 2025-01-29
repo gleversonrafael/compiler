@@ -28,7 +28,8 @@ function analyzeLogState(data) {
 
      // user is logged in and tries to acess start page / login (GITHUB COMPATIBILITY)
      if(data != null && ((window.location.href.includes("index")) || (window.location.href.includes("compiler")))) {
-          window.location.href = "./html/dashboard.html";  
+          // window.location.href = "./html/dashboard.html";  
+          console.log("test2");
      }
 
      
