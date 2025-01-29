@@ -1,0 +1,63 @@
+@charset "UTF-8";
+/* dashboard content */
+#dashbC {
+     margin: 100px 50px;
+}
+
+#dashbMsg {
+     color: var(--white);
+     font: normal 2em var(--rFont);
+
+     margin-bottom: 8vh;
+}
+
+
+
+
+/* dashB nav */
+#dashbAnchors a  {
+     align-items: center;
+     justify-content: space-between;
+
+     min-height: 60px;
+     margin-bottom: 15px;
+     
+     padding: 15px 15px 15px 30px;
+
+     text-decoration: none;
+     border: 1px solid var(--white);
+}
+
+
+#dashbAnchors a::after {
+     content: "";
+
+     background-image: url(../media/ico/ico-warrow.svg);
+     background-size: cover;
+
+     width: 25px;
+     height: 25px;
+}
+
+#dashbAnchors a > div {
+     color: var(--white);
+     font: 500 1.1em var(--sFont);
+}
+
+
+/* dashb anchor active */
+#dashbAnchors a:active {
+     background-color: var(--aqua);
+     border: none;
+}
+
+
+#dashbAnchors a:active > div {
+     font-weight: 700;
+     color: var(--wood);
+}
+
+#dashbAnchors a:active::after {
+     content: "";
+     background-image: url(../media/ico/ico-barrow.svg);
+}
