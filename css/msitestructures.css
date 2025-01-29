@@ -7,10 +7,16 @@
      top: 0;
      z-index: 1;
 
-     height: 60px;
+     flex-flow: row-reverse wrap;
+
+     min-height: 40px;
+     height: 10vh;
+     max-height: 60px;
+
      width: 100%;
 
      background-color: var(--grey);
+     border-bottom: 1px solid var(--whiteT);
 }
 
 #mIcon {
@@ -23,6 +29,10 @@
 
 #mIcon:active {
      background-color: var(--wood);
+}
+
+#cllIcon {
+     height: 100%;
 }
 
 
@@ -58,10 +68,13 @@
      max-width: fit-content;
 
      height: 100vh;
+     border-right: 1px solid var(--whiteTT);
+
+     overflow: scroll;
 }
 
 #mMenu {
-     margin-top: 60px;
+     margin-top: clamp(40px, 10vh, 60px);
      width: 100%;
 }
 
@@ -103,7 +116,7 @@
 
 
 #mMenu img {
-     height: 60%;
+     height: 50%;
 
      margin: 0px 15px 0px 25px;
      background-size: 50px 50px;

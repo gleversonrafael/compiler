@@ -14,7 +14,7 @@ leaveM.addEventListener("click", toggleMenu);
 function toggleMenu() {
      let mMenuBox = document.getElementById("mMenuB");
 
-     if(window.innerWidth < 768) {
+     // if(window.innerWidth < 768) {
           if(mMenuBox.style.display == "flex") {
                mMenuBox.style.display = "none";
                mIcon.style.display = "block";
@@ -25,6 +25,6 @@ function toggleMenu() {
                mIcon.style.display = "none";
           }
 
-     }
+     // }
 
 }

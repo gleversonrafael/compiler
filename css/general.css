@@ -20,6 +20,7 @@
     --gall: #eeeeee;
     --white: #ffffff;
     --whiteT: #ffffff62;
+    --whiteTT: #ffffff1c;
     
     --grey: #292929;
     --shar: #1f1f1f;
@@ -63,7 +64,31 @@ a {
 
 
 
+/* scroll bar */
+::-webkit-scrollbar, ::-webkit-scrollbar-button {
+    background-color: transparent;
+}
+
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--whiteTT);
+}
+
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner {
+    display: none;
+}
+
+
+
+
+
+
 /* reusable */
+/* alignment / display */
 .flex {
     display: flex;
 }
@@ -76,16 +101,20 @@ a {
     justify-content: center;
 }
 
+.fJustSB {
+    justify-content: space-between;
+}
+
 .fAlignC {
     align-items: center;
 }
-
 
 .abs {
     position: absolute;
 }
 
 
+/* others */
 .bdev {
     border: 2px solid red;
 }
