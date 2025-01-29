@@ -4,6 +4,7 @@ import { auth } from "./fb.js"
 
 // var
 let signoutB = document.querySelector("button#signoutB");
+let mMenuBox = document.getElementById("mMenuB");
 const mIcon = document.getElementById("mIcon");
 
 
@@ -12,7 +13,9 @@ const mIcon = document.getElementById("mIcon");
 // events
 mIcon.addEventListener("click", toggleMenu);
 leaveM.addEventListener("click", toggleMenu);
-document.body.addEventListener("resize", toggleMenu);
+document.body.addEventListener("load", menuVisualState)
+
+
 
 signoutB.addEventListener("click", () => {
      signOut(auth);
@@ -22,13 +25,9 @@ signoutB.addEventListener("click", () => {
 
 
 // functions
+// m level
 function toggleMenu() {
-     console.log("menu toggle")
-     let mMenuBox = document.getElementById("mMenuB");
-
-     if((window.innerWidth >= 768) || (window.innerWidth < 768)) {
-          changeMenuDisplay()   
-     }
+     changeMenuDisplay()   
       
 
      // compl
@@ -38,12 +37,29 @@ function toggleMenu() {
                mMenuBox.style.display = "flex";
                mIcon.style.display = "none";
           
-          } else if(window.innerWidth < 768) {
+          // close menu -- only mob
+          } else {
                mMenuBox.style.display = "none";
                mIcon.style.display = "block";
           }
      }
 }
+
+
+// s level
+function menuVisualState() {
+     let navSections = ["dashboard", "mycourses", "managecourses", "allcourses", "manageusers"]
+
+     if(window.location.href.includes(navSections)) {
+          let elem = document.getElementById(navSections[1])
+
+     }
+
+}
+
+
+
+
 
 
 

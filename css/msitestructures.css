@@ -209,6 +209,14 @@
 /* pc / tablet media */
 @media screen and (min-width: 768px) {
      /* mMenu */
+     #mMenuB {
+          display: flex;
+     }
+
+     #mIcon {
+          display: none;
+     }
+
      .mmBlock, #leaveM {
           height: 50px;
      }
