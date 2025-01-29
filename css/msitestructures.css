@@ -56,6 +56,7 @@
 /* main menu box and content*/
 #mMenuB {
      display: none;
+     flex-flow: column nowrap;
 
      position: fixed;
      top: 0px;
@@ -78,10 +79,14 @@
      width: 100%;
 }
 
+.menuFont {
+     font: 100 0.75em var(--sFont);
+}
+
 
 /* mMenu boxes */
 .mmBlock, #leaveM {
-     height: 50px;
+     height: 70px;
 }
 
 
@@ -125,9 +130,78 @@
 }
 
 #mMenu p {
-     font: 100 0.75em var(--sFont);
      margin-right: 20px;
 }
+
+
+
+
+/* user section */
+#userSec {
+     justify-self: center;
+     margin: 100px 20px 15px;
+}
+
+#userIcon {
+     height: 80px;
+     width: 80px;
+
+     margin-right: 10px;
+
+     padding: 15px;
+
+     border-radius: 50px;
+     background-color: var(--grey);
+}
+
+
+#userInfo {
+     width: 100%;
+}
+
+#userName, #userType {
+     font-weight: 300;
+}
+
+#userName {
+     color: var(--aqua);
+}
+
+#userType {
+     color: var(--razz);
+}
+
+
+.userB {
+     width: 100%;
+     padding: 15px;
+
+     cursor: pointer;
+
+     border: none;
+     border-radius: 50px;
+
+     color: var(--white);
+     background-color: var(--grey);
+}
+
+.userB:hover {
+     background-color: #000;
+}
+
+#userSec a {
+     gap: 10px;
+}
+
+#signoutB:hover {
+     background-color: var(--amar);
+}
+
+
+.userMSpace {
+     margin-bottom: 5px;
+}
+
 
 
 
@@ -135,11 +209,40 @@
 /* pc / tablet media */
 @media screen and (min-width: 768px) {
      /* mMenu */
+     .mmBlock, #leaveM {
+          height: 50px;
+     }
+
      .mmBlock {
           opacity: 0.75;
      }
 
      .mmBlock:hover {
+          opacity: 1;
+     }
+
+
+     #leaveM {
+          display: none;
+     }
+
+
+
+
+     /* user info */
+     #userIcon {
+          padding: 10px;
+
+          width: 60px;
+          height: 60px;
+     }
+
+     .userB {
+          opacity: 0.5;
+          padding: 5px;
+     }
+
+     .userB:hover {
           opacity: 1;
      }
 

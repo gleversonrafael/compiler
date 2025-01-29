@@ -8,7 +8,13 @@ module.exports = {
 
     logp: {
         dependOn: "mdependencies",
-        import: ["./js/basic/login.js"]
+        import: "./js/basic/login.js"
+    },
+
+    dashbp: {
+      dependOn: "mdependencies",
+      import : ["./js/basic/menu.js", "./js/basic/dashb.js"]
+
     }
   },
 

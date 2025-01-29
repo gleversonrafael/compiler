@@ -7,11 +7,9 @@
      
      <link rel="shortcut icon" href="../media/ico/favicon.ico" type="image/x-icon">
 
-     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-
      <link rel="stylesheet" href="../css/general.css">
      <link rel="stylesheet" href="../css/msitestructures.css">
-     <link rel="stylesheet" href="../css/msite/dboard.css.css">
+     <link rel="stylesheet" href="../css/msite/dboard.css">
 
 
 </head>
@@ -24,52 +22,59 @@
 
      </header>
 
-     <section id="mMenuB" class="flex flex-col fJustSB">
+     <section id="mMenuB" class="flex fJustSB">
           <menu id="mMenu">
+               <!-- dashboard -->
                <li> 
                     <a href="" class="mmBlock flex fAlignC dTrans">
                          <img src="../media/ico/menu/dashboard.svg" alt="">
-                         <p> Painel</p>
+                         <p class="menuFont"> Painel</p>
                     </a>
 
                </li>
 
+               <!-- my courses -->
                <li>
                     <a href="" class="mmBlock flex fAlignC dTrans">
                          <img src="../media/ico/menu/mycourses.svg" alt="">
-                         <p> Meus cursos</p>
+                         <p class="menuFont"> Meus cursos</p>
                     </a>
 
                </li>
                
+               <!-- manage courses -->
                <li>
                     <a href="" class="mmBlock flex fAlignC dTrans">
                          <img src="../media/ico/menu/managecourses.svg" alt="">
-                         <p> Gerenciar cursos</p>
+                         <p class="menuFont"> Gerenciar cursos</p>
                     </a>
 
                </li>
                
+               <!-- all courses -->
                <li>
                     <a href="" class="mmBlock flex fAlignC dTrans">
                          <img src="../media/ico/menu/allcourses.svg" alt="">
-                         <p> Todos os cursos</p>
+                         <p class="menuFont"> Todos os cursos</p>
+
                     </a>
 
                </li>
                
+               <!-- manage users -->
                <li>
                     <a href="" class="mmBlock flex fAlignC dTrans">
                          <img src="../media/ico/menu/manageusers.svg" alt="">
-                         <p> Gestão de usuários</p>
+                         <p class="menuFont"> Gestão de usuários</p>
                     </a>
 
                </li>
 
+               <!-- closeM -->
                <li>
                     <button id="leaveM" class="flex fAlignC dTrans">
                          <img src="../media/ico/menu/closem.svg" alt="">
-                         <p> Sair do menu</p>
+                         <p class="menuFont"> Fechar menu</p>
 
                     </button>
 
@@ -77,6 +82,28 @@
 
           </menu>
 
+
+          <!-- user section -->
+          <section id="userSec" class="flex flex-col">
+               <div class="flex userMSpace">
+                    <img id="userIcon" src="../media/ico/menu/user.svg" alt="">
+                    
+                    <div id="userInfo" class="userMSpace">
+                         <p id="userName" class="menuFont"> null </p>
+                         <p id="userType" class="userMSpace menuFont"> null </p>
+
+                         <button id="signoutB" class="userB menuFont dTrans"> Sair </button>
+                   
+                    </div> 
+
+               </div>    
+
+               <a class="flex fAlignC fJustC userB menuFont dTrans" href=""> 
+                    <img src="../media/ico/menu/settings.svg" alt="">
+                    Configurações 
+               </a>
+
+          </section>
 
      </section>
 
@@ -130,7 +157,7 @@
 
      <!-- scripts -->
      <script src="../js/final/mdependenciesf.js"></script>
-     <script src="../js/basic/dashb.js"></script>
+     <script src="../js/final/dashbpf.js"></script>
 
 
 

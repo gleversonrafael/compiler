@@ -14,13 +14,13 @@ onAuthStateChanged(auth, (userData) => {
 function analyzeLogState(data) {
      // user is not logged in, therefore he doesn't have acess to the site 
      if(data === null && !window.location.href.includes("index") && !window.location.href.includes("log")) {
-          window.location.href = "./../index.html";
+          // window.location.href = "./../index.html";
      }
 
 
      // user is logged in and tries to acess start page / login
      if(data != null && window.location.href.includes("index")) {
-          window.location.href = "./html/dashboard.html";  
+          // window.location.href = "./html/dashboard.html";  
      }
 
      
@@ -29,7 +29,7 @@ function analyzeLogState(data) {
 
           // is the password input filled? prevents user from being auto redirected afther finishing the form.
           if(passInp.value.length == 0) {
-               window.location.href = "./dashboard.html"
+               // window.location.href = "./dashboard.html"
           }
 
      }  
