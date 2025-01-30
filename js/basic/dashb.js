@@ -1,4 +1,4 @@
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "./fb.js"
 
 
@@ -8,11 +8,16 @@ let authdata = document.getElementById("authData");
 
 signoutB.addEventListener("click", () => {
      console.log("SignOUTED")
+
      signOut(auth);
 })
 
 
 authdata.addEventListener("click", () => {
-     console.log("AUTH DATA__--")
-     console.log(auth);
+     onAuthStateChanged(auth, (userData) => {
+          console.log(userData);
+          console.log("AUTH::");
+          console.log(auth);
+     })
+     
 })
