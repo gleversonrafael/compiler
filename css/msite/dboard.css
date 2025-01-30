@@ -1,11 +1,6 @@
 @charset "UTF-8";
 
-
 /* dashboard content */
-#dashbCon {
-     margin: 50px;
-}
-
 #dashbMsg {
      margin-bottom: 50px;
 
@@ -15,15 +10,9 @@
 
 #userGreetings {
      color: var(--aqua);
-     font-size: 1.25em;
+     font-size: 2em;
 }
 
-
-.secP {
-     color: var(--whiteT);
-     font: 100 1em var(--rFont);
-     margin-bottom: 5px;
-}
 
 
 
@@ -87,18 +76,7 @@
 
 /* media */
 @media screen and (min-width: 768px) {
-     #mCon {
-          margin-left: 191px;
-     }
-
-
-
-
      /* dashb content */
-     #dashbCon {
-          margin: 50px 80px;
-     }
-
      #dashbMsg {
           margin-bottom: 50px;
      }

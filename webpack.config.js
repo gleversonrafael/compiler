@@ -7,15 +7,26 @@ module.exports = {
     mdependencies: ["./js/basic/fb.js", "./js/basic/privpages.js"],
 
     logp: {
-        dependOn: "mdependencies",
-        import: "./js/basic/login.js"
+      dependOn: "mdependencies",
+      import: "./js/basic/login.js"
+    },
+
+    signp: {
+      dependOn: "mdependencies",
+      import: ["./js/basic/menu.js", "./js/basic/sign.js"]
     },
 
     dashbp: {
       dependOn: "mdependencies",
       import : ["./js/basic/menu.js", "./js/basic/dashb.js"]
+    },
+
+    manageup: {
+      dependOn: "mdependencies",
+      import: ["./js/basic/menu.js"]
 
     }
+
   },
 
   output: {

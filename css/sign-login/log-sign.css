@@ -1,31 +1,20 @@
 @charset "UTF-8";
 
-/* main doc */
-main {
-    align-items: center;
-    justify-content: center;
-    
-    min-height: 100vh;
-}
-
-
-
-
 /* main content boxes */
-#mCon {
+#mSignStyle {
     position: relative;
+    z-index: 0;
 
     min-width: 200px;
     width: 80vw;
-    
-    margin: 40px 20px; 
+    max-width: fit-content;
 
     background-color: var(--wood);
     border: 1px solid var(--whiteT);
 }
 
 #mForm {
-    flex-shrink: 0;
+    flex-shrink: 1;
     margin: 40px 35px;
     width: calc(80vw - 70px);
 }
@@ -33,9 +22,9 @@ main {
 
 
 
-/* sign title box */
-#mForm h1 {
-    font: normal 500 min(2em) var(--sFont);
+/* sign-in / out title  */
+#signTitle {
+    font: normal 500 2em var(--sFont);
 }
 
 
@@ -45,7 +34,6 @@ main {
 .inpB { /* input box */
     flex-flow: column wrap;
     margin-bottom: 30px;
-    gap: 20px;
 }
 
 .inpB input {    
@@ -56,11 +44,6 @@ main {
     padding: 0px 10px 0px 25px;
 
     border-radius: 25px;
-
-    color: var(--aqua);
-    background-color: transparent;
-
-    border: 1px solid var(--white);
     box-shadow: 0.5px 0.5px 2px #18181823;
 }
 
@@ -70,14 +53,10 @@ main {
 }
 
 
-
-
-
 .inpB label, .inpB > div > p {
     color: var(--white);
     font: 100 0.9em var(--rFont);
 }
-
 
 
 
@@ -96,37 +75,20 @@ main {
     cursor: pointer;
     
     font-family: var(--sFont);
-
     background-color: transparent;
     border-radius: 25px;
 }
 
 
-/* confirm / login button */
-#cButton, #lButton {
-    color: var(--aqua);
-    border: 1px solid var(--aqua);
-}
 
-#cButton:hover, #lButton:hover {
-    background-color: var(--aqua);
-}
 
-/* reset / erase button */
-#rButton, #eButton {
-    color: var(--razz);
-    border: 1px solid var(--razz);  
-}
-
-#rButton:hover, #eButton:hover {
-    background-color: var(--razz);
+/* visual div */
+#visualD {
+    width: 1vw;
+    max-width: 10px;
 }
 
 
-/* all buttons */
-#cButton:hover, #lButton:hover, #rButton:hover, #eButton:hover {
-    color: var(--wood);
-}
 
 
 

@@ -1,30 +1,9 @@
 @charset "UTF-8";
 
 /* main doc */
-#mCon {
-    max-width: 1500px;
-    min-height: 500px;
-}
-
 #mForm { /* main form*/
     max-width: 600px;
 }
-
-#visualD {
-    display: none;
-}
-
-
-
-
-/* header */
-#mHead {
-    position: fixed;
-    z-index: 2;
-
-    width: 100%;
-}
-
 
 /* msgB Reg */
 #msgB, #closeMsg {
@@ -39,6 +18,7 @@
     padding: 15px 50px 15px;
     margin-top: 1vh;
 
+    background-color: var(--grey);
     box-shadow: 2px 2px 2px #2222223d;
 }
 
@@ -56,13 +36,11 @@
 
 /* msgB correct / incorrect */
 #msgB.cor {
-    background-color: var(--gree);
-    border: 5px solid var(--euca);
+    border: 1px solid var(--euca);
 }
 
 #msgB.inc{
-    background-color: var(--amar);
-    border: 5px solid var(--papr);
+    border: 1px solid var(--amar);
 }
 
 
@@ -81,8 +59,8 @@
     
     padding: 10px;
 
-    border: none;
     border-radius: 0px 0px 25px 25px;
+    border: none;
 }
 
 #closeMsg > img {
@@ -105,24 +83,11 @@
 
 
 
-/* sign title box */
-#signTB {
-    justify-content: space-between;
-}
-
-#signTB a {
-    color: var(--wood);
+/* sign title */
+#signTitle {
+    color: var(--white);
     font: normal 900 min(2em) var(--sFont);
     text-decoration: none;
-}
-
-#II-redEff {
-    font-size: 0.75em;
-    color: var(--euca);
-}
-
-#Ib {
-    font-size: 1.3em;
 }
 
 
@@ -130,6 +95,7 @@
 
 /* subtopics */
 .stopic {
+    color: var(--white);
     font: 500 min(1.25em) var(--sFont);
     margin: 40px 0px 20px;
 }
@@ -141,6 +107,12 @@
 
 
 
+/* inputs */
+.inpB {
+    gap: 10px;
+}
+
+
 /* radio inputs -- user type*/
 input[type=radio] {
     display: none;
@@ -150,7 +122,7 @@ input[type=radio] {
     padding: 20px 25px;
     margin: 5px 0px;
 
-    background-color: var(--tiar);  
+    background-color: var(--whiteTT);
 }
 
 .userTyB:hover {
@@ -165,18 +137,48 @@ input[type=radio] {
     font: 300 1em var(--sFont);
 }
 
+
 /* radio box checked? */
 #regUserInp:checked + #regUserB, #admUserInp:checked + #admUserB  {
     color: var(--white);
-    background-color: var(--wood);
+    background-color: var(--razz);
 }
 
 
 
 
-/* final box */
+/* final form box - submit - and buttons */
 #finalBox {
     margin-top: 50px;
+}
+
+#eButton, #cButton {
+    color: var(--white);
+}
+
+#eButton {
+    border: 1px solid var(--whiteT);
+}
+
+#eButton:hover {
+    background-color: var(--whiteTT);
+}
+
+
+#cButton {
+    border: 1px solid var(--amar);
+}
+
+#cButton:hover {
+    background-color: var(--amar);
+}
+
+
+
+
+/* visual div */
+#visualD {
+    background-color: var(--amar);
 }
 
 
@@ -185,7 +187,7 @@ input[type=radio] {
 /* --------------------------------------------------------------------------- */
 /* media */
 @media screen and (min-width: 768px) {
-    /* header */
+    /* message box */
     #msgB {
         padding: 15px 80px 15px;
     }
@@ -200,8 +202,6 @@ input[type=radio] {
         background-color: transparent;
         border: none;
     }
-
-
 
 
 
@@ -225,3 +225,12 @@ input[type=radio] {
 
 }
 
+
+
+
+/* center the sign box -- bug fix */
+@media screen and (min-width: 1366px) {
+    #mSignStyle {
+        margin-right: 191px;
+    }
+}

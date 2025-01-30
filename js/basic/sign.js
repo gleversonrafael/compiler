@@ -1,7 +1,16 @@
+// imports
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
+import { auth, db } from "./fb.js";
+
+
+
+
+
 // gl variables
 // form
 const mForm = document.querySelector("#mForm"); 
-const nameInp = document.getElementById("nameInp");
+const usersCol = collection(db, "usersInfo");
 
 
 // data list and wrong counter
@@ -29,27 +38,75 @@ closeMB.addEventListener("click", hideMsgB);
 // functions
 // main level - independents
 // ---------------------------------
-function fSubmit(ev) {
+async function fSubmit(ev) {
+    ev.preventDefault();
     console.clear()
 
+    let credentialsCheck = checkFields();
+    let checkUserExistence = signAttempt();
+
+    setTimeout(final, 2000);
+
     // check fields
-    if(checkFields() == true) {
-        ev.preventDefault();
-
-        showMsgB("cor", "Cadastro efetuado! ");
+    function final() {
+        if(credentialsCheck == true && checkUserExistence == true) {
+            showMsgB("cor", "Cadastro efetuado!");
+            console.log("Passed")
+        
+        } else if(credentialsCheck == false) {
+            dataError("wrongCredentials");
     
-    } else {
-        ev.preventDefault();
-        dataError();
-    };
+        } else if(checkUserExistence == false) {
+            dataError("userAlreadyExists");
+    
+        };
+    }
 
-    console.log(dList);
+
 }
+
+
+
+function signAttempt() {
+    createUserWithEmailAndPassword(auth, mForm.email.value, mForm.senha.value)
+      .then(() => {
+        console.log("User created!");
+
+        addDoc(usersCol, {
+            name: mForm.nome.value,
+            email: mForm.email.value ,
+            usertype: obtainRadSel()
+        });
+
+        console.log("User has been added!")
+
+
+        return true
+
+      })
+      
+      .catch(() => {
+        return false
+
+      });
+
+
+    // compl
+    function obtainRadSel() {
+      let input = document.querySelector("input[type=radio]:checked");
+      return input.value
+    }
+
+}
+
 
 
 function hideMsgB() {
     msgB.style.display = "none";
 }
+
+
+
 
 
 
@@ -67,9 +124,11 @@ function checkFields() {
     
     // send Result
     if(Object.values(dList).includes(false)) {
+        console.log("Checkfields finalizado");
         return false
   
     } else {
+        console.log("Checkfields finalizado")
         return true
     }
 
@@ -77,6 +136,7 @@ function checkFields() {
 
 
     // compl
+    // gInput = generic input
     function analyzeGinp() {
         let mFormD = document.querySelectorAll(".mfDep"); // main form dependencies
 
@@ -85,10 +145,11 @@ function checkFields() {
             let ipN = gInput.name // input id
 
             // analyze each case
-            if((aVal == "")   ||   (ipN == "nome" && aVal.length < 3)   ||   (ipN == "email" && ! aVal.includes("@"))   ||   (ipN == "senha" && aVal.length != 8)   ||   (ipN == "senhacadastral" && aVal != "appmoove"))  {
+            if((aVal == "")   ||   (ipN == "nome" && aVal.length < 3)   ||   (ipN == "email" && ! aVal.includes("@"))   ||   (ipN == "senha" && aVal.length != 8))  {
                 // visual
                 console.log(`O campo ${ipN} não foi preenchido corretamente.`);
     
+                // server-side
                 dList[ipN] = false;
                 wrongC++;
             
@@ -115,14 +176,25 @@ function checkFields() {
 }
 
 
+
+
+// s level
 // dataError SSS
-function dataError() {
-    console.log("Invalid form data");
+function dataError(param) {
+    console.log("Error: " + param);
+
+    let txtP;
+
+    if(param == "wrongCredentials") {
+        txtP = wrongC > 1? "Preencha corretamente as seções de: " : "Preencha corretamente a seção de ";
+        textCreator();
     
-    let txtP = wrongC > 1? "Preencha corretamente as seções de: " : "Preencha corretamente a seção de "
-    textCreator();
+    } else {
+        txtP = "Esses dados já existem!";       
+    }
 
     showMsgB("inc", txtP)
+
 
 
 
@@ -188,12 +260,6 @@ function showMsgB(msgT, content /* msg type == incorrect/correct*/ ) {
         addAttr();
     } 
 
-
-    if(msgT == "cor") {
-        let p = document.querySelector("#msgB > p");
-
-        p.innerHTML += "<span> <a href=../html/log.html> Entre aqui </a> <span>"
-    }
 
     msgB.style.display = "flex";
 

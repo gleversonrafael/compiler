@@ -3,47 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Cadastre-se no CompIler </title>
+    <title> Cadastrar usuário </title>
     <link rel="shortcut icon" href="../media/ico/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/msitestructures.css">
+
     <link rel="stylesheet" href="../css/sign-login/log-sign.css">
     <link rel="stylesheet" href="../css/sign-login/sign.css">
 
 </head>
 
 <body>
-    <header id="mHead" class="flex fJustC">
+    <!-- mheader -->
+    <header id="mHead" class="flex fAlignC fJustSB">
+        <img id="cllIcon" src="../media/ico/ico-comp.svg" alt="C e duas listras" >
+        <img id="mIcon" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais">
+
         <div id="msgB" class="flex fJustC bAll">
             <!-- transformar a msgbox em errorbox ou correctbox -->
-
+    
             <button id="closeMsg" class="dTrans">
                 <img src="../media/ico/closeicon.png" alt="Símbolo X que, ao ser acionado, remove a caixa de login visual">
     
             </button>
-
+    
             <a href="../html/log.html"></a>
-
+    
         </div>
 
-    </header>
+   </header>
+
+   
+   <!-- menubar -->
+   <section role="menubar" id="mMenuB" class="flex fJustSB">
+        <menu id="mMenu">
+             <!-- dashboard -->
+             <li> 
+                  <a href="../html/dashboard.html" id="dashboard" class="mmBlock flex fAlignC dTrans onpage">
+                       <img src="../media/ico/menu/dashboard.svg" alt="Ícone de 3 pontos interligados simbolizando tanto um l quanto links">
+                       <p class="menuFont"> Painel</p>
+                  </a>
+
+             </li>
+
+             <!-- my courses -->
+             <li>
+                  <a href="../html/mycourses.html" id="mycourses" class="mmBlock flex fAlignC dTrans">
+                       <img src="../media/ico/menu/mycourses.svg" alt="Ícone de duas notas de papel">
+                       <p class="menuFont"> Meus cursos</p>
+                  </a>
+
+             </li>
+             
+             <!-- manage courses -->
+             <li>
+                  <a href="../html/managecourses.html" id="managecourses" class="mmBlock flex fAlignC dTrans">
+                       <img src="../media/ico/menu/managecourses.svg" alt="Ícone de uma caixa com uma engrenagem centralizada em seu interior.">
+                       <p class="menuFont"> Cursos gerenciados</p>
+                  </a>
+
+             </li>
+             
+             <!-- all courses -->
+             <li>
+                  <a href="../html/allcourses.html" id="allcourses" class="mmBlock flex fAlignC dTrans">
+                       <img src="../media/ico/menu/allcourses.svg" alt="Ícone de duas pastas de navegador.">
+                       <p class="menuFont"> Todos os cursos</p>
+
+                  </a>
+
+             </li>
+             
+             <!-- manage users -->
+             <li>
+                  <a href="../html/manageusers.html" id="manageusers" class="mmBlock flex fAlignC dTrans">
+                       <img src="../media/ico/menu/manageusers.svg" alt="Ícone de uma pessoa ao lado de uma engrenagem.">
+                       <p class="menuFont"> Gestão de usuários</p>
+                  </a>
+
+             </li>
+
+             <!-- closeM -->
+             <li>
+                  <button id="leaveM" class="flex fAlignC dTrans">
+                       <img src="../media/ico/menu/closem.svg" alt="Ícone de seta esquerda.">
+                       <p class="menuFont"> Fechar menu</p>
+
+                  </button>
+
+             </li>               
+
+        </menu>
+
+
+        <!-- user section -->
+        <section id="userSec" class="flex flex-col">
+             <div class="flex userMSpace">
+                  <img id="userIcon" src="../media/ico/menu/user.svg" alt="">
+                  
+                  <div id="userInfo" class="userMSpace">
+                       <p id="userName" class="menuFont"> null </p>
+                       <p id="userType" class="userMSpace menuFont"> null </p>
+
+                       <button id="signoutB" class="userB menuFont dTrans"> Sair </button>
+                  
+                  </div> 
+
+             </div>    
+
+             <a class="flex fAlignC fJustC userB menuFont dTrans" href=""> 
+                  <img src="../media/ico/menu/settings.svg" alt="">
+                  Configurações 
+             </a>
+
+        </section>
+
+   </section>
 
 
 
 
-    <main class="flex">
-        <section id="mCon" class="flex">
+
+    <main id="mCon" class="flex fJustC">
+        <section id="mSignStyle" class="flex conPattern">
             <!-- content div -->
              
-            <form id="mForm" novalidate>
+            <form id="mForm" novalidate  >
                 <!-- title and subtitle -->
-                <section id="signTB" class="flex">
-                    <h1> Cadastro</h1>
-
-                    <a href="../index.html"> C<span id="II-redEff">I<!----><span id="Ib">l</span><!----></span></a>
-
-                </section>
-
+                <h1 id="signTitle"> Cadastrar usuário</h1>
 
                 <h2 class="stopic"> Dados pessoais</h2>
 
@@ -74,7 +162,7 @@
 
                 <h2 class="stopic"> Dados profissionais</h2>
 
-                <!-- user type -->
+                <!-- user type section -->
                 <section class="inpB">
                     <div>
                         <p> Tipo de usuário</p>
@@ -85,7 +173,7 @@
                     <!-- user type -->
                     <div id="userTyDiv" class="flex flex-col">
                         <!-- regUser -->
-                        <input type="radio" name="userType" id="regUserInp">
+                        <input type="radio" name="userType" id="regUserInp" value="regular">
 
                         <label id="regUserB" class="userTyB bAll dTrans" for="regUserInp">
                             Regular
@@ -93,7 +181,7 @@
                         
                         
                         <!-- admUser -->
-                        <input type="radio" id="admUserInp"  name="userType">
+                        <input type="radio" id="admUserInp"  name="userType" value="admin">
 
                         <label id="admUserB" class="userTyB bAll dTrans" for="admUserInp">
                             Admin
@@ -101,12 +189,6 @@
 
                     </div>
                     
-                </section>
-
-                <section class="flex inpB">
-                    <label for="sPassInp"> Senha cadastral </label>
-                    <input type="text" id="sPassInp" class="mfDep" name="senhacadastral" autocomplete="off" minlength="8" maxlength="8" placeholder="Uma senha cadastral é única e concedida por um administrador" required>
-
                 </section>
 
 
@@ -119,13 +201,15 @@
 
             </form>
 
+            <div id="visualD"></div>
+
         </section>
+        
 
     </main>
 
-    
-
-    <script src="../js/basic/sign.js"></script>
+    <script src="../js/final/mdependenciesf.js"></script>
+    <script src="../js/final/signpf.js"></script>
 
 </body>
 

@@ -73,8 +73,17 @@ function menuVisualState() {
                // css - change box and img
                selMenuBox.style.opacity = "1";
                selMenuBox.style.backgroundColor = "#000"
-               selMenuBox.style.borderBottom = "1px solid var(--aqua)";
-               selMenuBox.style.color = "var(--aqua)";
+
+               if(selMenuBox.id == "dashboard" || selMenuBox.id == "mycourses") {
+                    selMenuBox.style.borderBottom = "1px solid var(--aqua)";
+                    selMenuBox.style.color = "var(--aqua)";
+
+               } else {
+                    selMenuBox.style.borderBottom = "1px solid var(--razz)";
+                    selMenuBox.style.color = "var(--razz)";
+               }
+
+
 
                imgChange.setAttribute("src", `../media/ico/menu/fill-${menuSections[elem]}.svg`);
           }

@@ -1,10 +1,19 @@
 @charset "UTF-8";
 
 /* main content */
-#mCon {    
-    display: flex;
+main {
+    align-items: center;
+    justify-content: center;
     
-    width: fit-content;
+    min-height: 100vh;
+}
+
+
+#mSignStyle {    
+    display: flex;
+    max-width: fit-content;
+
+    margin: 40px 20px; 
 }
 
 #mForm { /* main form*/
@@ -17,7 +26,6 @@
 /* visual D*/
 #visualD {
     background-color: var(--aqua);
-    width: 1vw;
 }
 
 
@@ -33,6 +41,20 @@
 }
 
 
+/* input buttons */
+.inpB {
+    gap: 20px;
+}
+
+.inpB input {
+    color: var(--aqua);
+    background-color: transparent;
+
+    border: 1px solid var(--white);
+
+}
+
+
 
 
 /* final box */
@@ -44,9 +66,31 @@
 
 
 /* final buttons */
+#lButton {
+    color: var(--aqua);
+    border: 1px solid var(--aqua);
+}
+
+#lButton:hover {
+    background-color: var(--aqua);
+}
+
 #rButton {
+    color: var(--razz);
+    border: 1px solid var(--razz);  
+
     text-decoration: none;
     text-align: center;
+}
+
+#rButton:hover {
+    background-color: var(--razz);
+}
+
+
+/* all buttons */
+#lButton:hover, #rButton:hover {
+    color: var(--wood);
 }
 
 
@@ -154,6 +198,8 @@
     }
 
     
+
+
     /* inputs */
     .inpB:nth-of-type(1) {
         margin-top: 20px;

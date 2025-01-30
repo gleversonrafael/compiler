@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+
+/* manage users link page ---------------- */
+/* main content */
+.conPattern {
+     width: fit-content;
+}
+
+.conPattern a {
+     margin-bottom: 10px;
+}
+
+.genericButton {
+     text-align: left;
+     width: 100%;
+     cursor: pointer;
+}
+
+.genericButton:hover {
+     color: var(--razz);
+     border-color: var(--amar);
+}
+
+
+
+
+/* ---------------------------------------- */

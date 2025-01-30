@@ -16,17 +16,19 @@
 
 
 <body>
+     <!-- menu -->
      <header id="mHead" class="flex fAlignC fJustSB">
           <img id="cllIcon" src="../media/ico/ico-comp.svg" alt="C e duas listras" >
           <img id="mIcon" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais">
 
      </header>
 
+
      <section role="menubar" id="mMenuB" class="flex fJustSB">
           <menu id="mMenu">
                <!-- dashboard -->
                <li> 
-                    <a role="menuitem" id="dashboard" class="mmBlock flex fAlignC dTrans onpage">
+                    <a href="../html/dashboard.html" id="dashboard" class="mmBlock flex fAlignC dTrans onpage">
                          <img src="../media/ico/menu/dashboard.svg" alt="">
                          <p class="menuFont"> Painel</p>
                     </a>
@@ -106,18 +108,19 @@
           </section>
 
      </section>
-
+               
 
 
 
      <!-- dashboard page ----------------->
-     <main id="mCon" class="bde">
-          <div id="bgEff"></div>
+     <main id="mCon">
+          <!-- <div id="bgEff"></div> -->
 
-          <section id="dashbCon">
+          <section id="dashbCon" class="conPattern">
                <p id="dashbMsg"> Olá, <br> <span id="userGreetings">null</span></p>
 
-               <p class="secP"> Navegue</p>
+               <p class="subtitle"> Navegue</p>
+               
                <nav>
                     <ul>
                          <!-- my courses -->
@@ -129,36 +132,40 @@
                               </a> 
                          </li>
 
+
                          <!-- user area -->
                          <li > 
-                              <a class="dashbAnchor regHover flex bAll sTrans" href="../media/ico/menu/user.svg"> 
+                              <a class="dashbAnchor regHover flex bAll sTrans" href=""> 
                                    <img class="sTrans" src="../media/ico/menu/user.svg" alt="">
 
                                    <p> Meu usuário </p> 
                               </a> 
                          </li>
 
+
                          <!-- courses managed -->
                          <li> 
-                              <a class="dashbAnchor admHover flex bAll sTrans" href="#"> 
+                              <a class="dashbAnchor admHover flex bAll sTrans" href="managecourses.html"> 
                                    <img class="sTrans" src="../media/ico/menu/managecourses.svg" alt="">
 
                                    <p> Gerenciar cursos </p> 
                               </a> 
                          </li>
                          
+
                          <!-- all courses -->
                          <li> 
-                              <a class="dashbAnchor admHover flex bAll sTrans" href="#"> 
+                              <a class="dashbAnchor admHover flex bAll sTrans" href="allcourses.html"> 
                                    <img class="sTrans" src="../media/ico/menu/allcourses.svg" alt="">
 
                                    <p> Todos os cursos </p> 
                               </a> 
                          </li>
 
+
                          <!-- manage users -->
                          <li> 
-                              <a class="dashbAnchor admHover flex bAll sTrans" href="#"> 
+                              <a class="dashbAnchor admHover flex bAll sTrans" href="manageusers.html"> 
                                    <img class="sTrans" src="../media/ico/menu/manageusers.svg" alt="">
 
                                    <p> Gerir usuários </p> 
