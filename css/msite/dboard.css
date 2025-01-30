@@ -1,63 +1,166 @@
 @charset "UTF-8";
+
+
 /* dashboard content */
-#dashbC {
-     margin: 100px 50px;
+#dashbCon {
+     margin: 50px;
 }
 
 #dashbMsg {
-     color: var(--white);
-     font: normal 2em var(--rFont);
+     margin-bottom: 50px;
 
-     margin-bottom: 8vh;
+     font: 100 2em var(--rFont);
+     color: var(--white);
 }
 
+#userGreetings {
+     color: var(--aqua);
+     font-size: 1.25em;
+}
+
+
+.secP {
+     color: var(--whiteT);
+     font: 100 1em var(--rFont);
+     margin-bottom: 5px;
+}
 
 
 
 /* dashB nav */
-#dashbAnchors a  {
+.dashbAnchor  {
      align-items: center;
      justify-content: space-between;
 
      min-height: 60px;
-     margin-bottom: 15px;
-     
      padding: 15px 15px 15px 30px;
+
+     margin-bottom: 15px;     
 
      text-decoration: none;
      border: 1px solid var(--white);
 }
 
-
-#dashbAnchors a::after {
+.dashbAnchor::after {
      content: "";
 
-     background-image: url(../media/ico/ico-warrow.svg);
+     background-image: url(../../media/ico/ico-warrow.svg);
      background-size: cover;
 
      width: 25px;
      height: 25px;
 }
 
-#dashbAnchors a > div {
-     color: var(--white);
-     font: 500 1.1em var(--sFont);
+
+.dashbAnchor > img {
+     display: none;
 }
 
 
+.dashbAnchor > p {
+     color: var(--white);
+     font: 500 1.1em var(--rFont);
+}
+
+
+
+
 /* dashb anchor active */
-#dashbAnchors a:active {
+.dashbAnchor:active {
      background-color: var(--aqua);
      border: none;
 }
 
 
-#dashbAnchors a:active > div {
+.dashbAnchor:active > p {
      font-weight: 700;
      color: var(--wood);
 }
 
-#dashbAnchors a:active::after {
+.dashbAnchor:active::after {
      content: "";
-     background-image: url(../media/ico/ico-barrow.svg);
+     background-image: url(../../media/ico/ico-barrow.svg);
+}
+
+
+
+
+/* media */
+@media screen and (min-width: 768px) {
+     #mCon {
+          margin-left: 191px;
+     }
+
+
+
+
+     /* dashb content */
+     #dashbCon {
+          margin: 50px 80px;
+     }
+
+     #dashbMsg {
+          margin-bottom: 50px;
+     }
+
+     #dashbCon ul {
+          display: flex;
+          flex-flow: row wrap;
+
+          gap: 20px;
+     }
+
+
+     .dashbAnchor {
+          flex-flow: column wrap;
+          padding: 0;
+
+          background-color: var(--grey);
+
+          border: none;
+          border-radius: 5px;
+     }
+
+     .dashbAnchor::after {
+          display: none;
+     }
+
+
+     .dashbAnchor > img {
+          display: block;
+
+          height: 200px;
+
+          padding: 20px;
+          margin: 20px;
+     }
+
+     .dashbAnchor > p {
+          text-align: center;
+
+          color: var(--wood);
+          background-color: var(--white);
+
+          padding: 10px;
+          width: 100%;
+     }
+
+
+     /* hover - "growing animation" */
+     .dashbAnchor:hover > img {
+          padding: 5px;
+          margin: 30px;
+     }
+
+     /* reg */
+     .regHover:hover > P, .regHover:hover {
+          background-color: var(--aqua);
+     }
+
+     /* adm */
+     .admHover:hover > p, .admHover:active, .admHover:hover {
+          color: var(--white);
+          background-color: var(--razz);
+     }
+
 }

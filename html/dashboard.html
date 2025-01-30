@@ -22,12 +22,12 @@
 
      </header>
 
-     <section id="mMenuB" class="flex fJustSB">
+     <section role="menubar" id="mMenuB" class="flex fJustSB">
           <menu id="mMenu">
                <!-- dashboard -->
                <li> 
-                    <a href="" class="mmBlock flex fAlignC dTrans">
-                         <img id="dashboard" src="../media/ico/menu/dashboard.svg" alt="">
+                    <a role="menuitem" id="dashboard" class="mmBlock flex fAlignC dTrans onpage">
+                         <img src="../media/ico/menu/dashboard.svg" alt="">
                          <p class="menuFont"> Painel</p>
                     </a>
 
@@ -35,8 +35,8 @@
 
                <!-- my courses -->
                <li>
-                    <a href="" class="mmBlock flex fAlignC dTrans">
-                         <img id="mycourses" src="../media/ico/menu/mycourses.svg" alt="">
+                    <a href="../html/mycourses.html" id="mycourses" class="mmBlock flex fAlignC dTrans">
+                         <img src="../media/ico/menu/mycourses.svg" alt="">
                          <p class="menuFont"> Meus cursos</p>
                     </a>
 
@@ -44,17 +44,17 @@
                
                <!-- manage courses -->
                <li>
-                    <a href="" class="mmBlock flex fAlignC dTrans">
-                         <img id="managecourses" src="../media/ico/menu/managecourses.svg" alt="">
-                         <p class="menuFont"> Gerenciar cursos</p>
+                    <a href="../html/managecourses.html" id="managecourses" class="mmBlock flex fAlignC dTrans">
+                         <img src="../media/ico/menu/managecourses.svg" alt="">
+                         <p class="menuFont"> Cursos gerenciados</p>
                     </a>
 
                </li>
                
                <!-- all courses -->
                <li>
-                    <a href="" class="mmBlock flex fAlignC dTrans">
-                         <img id="allcourses" src="../media/ico/menu/allcourses.svg" alt="">
+                    <a href="../html/allcourses.html" id="allcourses" class="mmBlock flex fAlignC dTrans">
+                         <img src="../media/ico/menu/allcourses.svg" alt="">
                          <p class="menuFont"> Todos os cursos</p>
 
                     </a>
@@ -63,7 +63,7 @@
                
                <!-- manage users -->
                <li>
-                    <a href="" class="mmBlock flex fAlignC dTrans">
+                    <a href="../html/manageusers.html" id="manageusers" class="mmBlock flex fAlignC dTrans">
                          <img src="../media/ico/menu/manageusers.svg" alt="">
                          <p class="menuFont"> Gestão de usuários</p>
                     </a>
@@ -78,7 +78,7 @@
 
                     </button>
 
-               </li>
+               </li>               
 
           </menu>
 
@@ -107,45 +107,63 @@
 
      </section>
 
-     <!-- <main id="mCon">
+
+
+
+     <!-- dashboard page ----------------->
+     <main id="mCon" class="bde">
           <div id="bgEff"></div>
 
-          <section id="dashbC">
-               <p id="dashbMsg"> Olá, <br> Leonardo </p>
+          <section id="dashbCon">
+               <p id="dashbMsg"> Olá, <br> <span id="userGreetings">null</span></p>
 
+               <p class="secP"> Navegue</p>
                <nav>
-                    <ul id="dashbAnchors">
-                         my courses
-                         <li > <a class="flex bAll" href="#"> 
-                              Ico
+                    <ul>
+                         <!-- my courses -->
+                         <li> 
+                              <a class="dashbAnchor regHover flex bAll sTrans" href="mycourses.html"> 
+                                   <img class="sTrans" src="../media/ico/menu/mycourses.svg" alt="">
 
-                              <div> Meus cursos </div>     
+                                   <p> Meus cursos </p>     
+                              </a> 
+                         </li>
 
-                         </a> </li>
-
-                         user area
+                         <!-- user area -->
                          <li > 
-                              <a class="flex bAll" href="#"> <div> Área do usuário </div> 
+                              <a class="dashbAnchor regHover flex bAll sTrans" href="../media/ico/menu/user.svg"> 
+                                   <img class="sTrans" src="../media/ico/menu/user.svg" alt="">
 
-                         </a> </li>
+                                   <p> Meu usuário </p> 
+                              </a> 
+                         </li>
 
-                         courses managed
-                         <li > <a class="flex bAll" href="#"> 
-                              <div> Cursos gerenciados </div> 
+                         <!-- courses managed -->
+                         <li> 
+                              <a class="dashbAnchor admHover flex bAll sTrans" href="#"> 
+                                   <img class="sTrans" src="../media/ico/menu/managecourses.svg" alt="">
 
-                         </a> </li>
+                                   <p> Gerenciar cursos </p> 
+                              </a> 
+                         </li>
                          
-                         all courses
-                         <li > <a class="flex bAll" href="#"> 
-                              <div> Todos os cursos </div> 
+                         <!-- all courses -->
+                         <li> 
+                              <a class="dashbAnchor admHover flex bAll sTrans" href="#"> 
+                                   <img class="sTrans" src="../media/ico/menu/allcourses.svg" alt="">
 
-                         </a> </li>
+                                   <p> Todos os cursos </p> 
+                              </a> 
+                         </li>
 
-                         manage users
-                         <li > <a class="flex bAll" href="#"> 
-                              <div>Gerir usuários</div> 
+                         <!-- manage users -->
+                         <li> 
+                              <a class="dashbAnchor admHover flex bAll sTrans" href="#"> 
+                                   <img class="sTrans" src="../media/ico/menu/manageusers.svg" alt="">
 
-                         </a> </li>
+                                   <p> Gerir usuários </p> 
+                              </a> 
+                         </li>                         
 
                     </ul>
                                    
@@ -153,7 +171,7 @@
 
           </section>
 
-     </main> -->
+     </main>
 
      <!-- scripts -->
      <script src="../js/final/mdependenciesf.js"></script>

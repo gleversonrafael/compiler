@@ -3,7 +3,7 @@
 
 /* header */
 #mHead {
-     position: fixed;
+     position: sticky;
      top: 0;
      z-index: 1;
 
@@ -205,7 +205,6 @@
 
 
 
-
 /* pc / tablet media */
 @media screen and (min-width: 768px) {
      /* mMenu */
@@ -216,6 +215,7 @@
      #mIcon {
           display: none;
      }
+
 
      .mmBlock, #leaveM {
           height: 50px;

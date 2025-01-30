@@ -11,9 +11,20 @@ const mIcon = document.getElementById("mIcon");
 
 
 // events
+// menu state
+document.body.addEventListener("load", menuVisualState())
+
+// toggle menu
 mIcon.addEventListener("click", toggleMenu);
 leaveM.addEventListener("click", toggleMenu);
-document.body.addEventListener("load", menuVisualState)
+window.addEventListener("resize", () => {
+     if(mMenuBox.style.display == "none" && window.innerWidth > 768) {
+          // only happens when the user, from a pc screen, changes viewpowrt to one lighter than 768px and open and closes the menu
+          toggleMenu();
+     }     
+});
+
+
 
 
 
@@ -46,12 +57,27 @@ function toggleMenu() {
 }
 
 
+
+
 // s level
 function menuVisualState() {
-     let navSections = ["dashboard", "mycourses", "managecourses", "allcourses", "manageusers"]
+     let menuSections = ["dashboard", "mycourses", "managecourses", "allcourses", "manageusers"]
 
-     if(window.location.href.includes(navSections)) {
-          let elem = document.getElementById(navSections[1])
+
+     for(let elem in menuSections) {
+          if(window.location.href.includes(menuSections[elem])) {
+               // create var
+               let selMenuBox = document.getElementById(menuSections[elem]);
+               let imgChange = document.querySelector(`a#${menuSections[elem]} > img`);
+
+               // css - change box and img
+               selMenuBox.style.opacity = "1";
+               selMenuBox.style.backgroundColor = "#000"
+               selMenuBox.style.borderBottom = "1px solid var(--aqua)";
+               selMenuBox.style.color = "var(--aqua)";
+
+               imgChange.setAttribute("src", `../media/ico/menu/fill-${menuSections[elem]}.svg`);
+          }
 
      }
 

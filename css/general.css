@@ -26,6 +26,7 @@
     --shar: #1f1f1f;
     --wood: #181818;
     --woodT: #000000ad;
+    --black: #000;
 
     /* fonts */
     --sFont: "Outfit", sans-serif;
@@ -65,20 +66,20 @@ a {
 
 
 /* scroll bar */
-::-webkit-scrollbar, ::-webkit-scrollbar-button {
-    background-color: transparent;
-}
-
-
 ::-webkit-scrollbar {
     width: 5px;
 }
 
-::-webkit-scrollbar-thumb {
-    background-color: var(--whiteTT);
+::-webkit-scrollbar-track-piece {
+    background-color: var(--wood);
 }
 
-::-webkit-scrollbar-track, ::-webkit-scrollbar-corner {
+::-webkit-scrollbar-thumb {
+    background-color: var(--whiteTT);
+    border-radius: 25px;
+}
+
+::-webkit-scrollbar-button, ::-webkit-scrollbar-corner {
     display: none;
 }
 
@@ -123,7 +124,19 @@ a {
     border-radius: 65px;
 }
 
+
+/* fast, default and slow transition */
+.fTrans {
+    transition: all 100ms;
+}
+
 .dTrans {
     transition: all 200ms;
 }
+
+.sTrans {
+    transition: all 500ms;
+}
+
+
 
