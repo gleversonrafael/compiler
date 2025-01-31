@@ -7,6 +7,7 @@ onAuthStateChanged(auth, (userData) => {
      analyzeLogState(userData);
 })
 
+console.log("Current version: 3101")
 
 
 
