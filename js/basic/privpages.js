@@ -2,6 +2,7 @@ import { onAuthStateChanged } from "firebase/auth"
 import { auth } from "./fb.js"
 
 console.log(auth);
+console.log(window.location.href);
 
 
 // redirect to the first page if there is no user
