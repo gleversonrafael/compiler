@@ -25,5 +25,6 @@ export { app };
 export { db };
 export { auth };
 
+console.log("Current version: 3101-02")
 
 

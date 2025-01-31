@@ -1,11 +1,13 @@
 // imports
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
-import { auth, db } from "./fb.js";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db} from "./fb.js";
 
 
+initializeApp( {
+    credential: cert("./../compiler-d5a27-firebase-adminsdk-fbsvc-ab72fc8316.json")
 
-
+})
 
 // gl variables
 // form
@@ -38,76 +40,49 @@ closeMB.addEventListener("click", hideMsgB);
 // functions
 // main level - independents
 // ---------------------------------
-async function fSubmit(ev) {
+function fSubmit(ev) {
     ev.preventDefault();
-    console.clear()
+    console.clear();
 
-    let credentialsCheck = checkFields();
-    let checkUserExistence = signAttempt();
+    if(checkFields()) {
+        signResult()
 
-    setTimeout(final, 2000);
-
-    // check fields
-    function final() {
-        if(credentialsCheck == true && checkUserExistence == true) {
-            showMsgB("cor", "Cadastro efetuado!");
-            console.log("Passed")
-        
-        } else if(credentialsCheck == false) {
-            dataError("wrongCredentials");
-    
-        } else if(checkUserExistence == false) {
-            dataError("userAlreadyExists");
-    
-        };
+    } else {
+        showMsgB("inc", generateDataErrorTxt("wrongCredentials"));
     }
 
-
-}
-
-
-
-function signAttempt() {
-    createUserWithEmailAndPassword(auth, mForm.email.value, mForm.senha.value)
-      .then(() => {
-        console.log("User created!");
-
-        addDoc(usersCol, {
-            name: mForm.nome.value,
-            email: mForm.email.value ,
-            usertype: obtainRadSel()
-        });
-
-        console.log("User has been added!")
-
-
-        return true
-
-      })
-      
-      .catch(() => {
-        return false
-
-      });
 
 
     // compl
-    function obtainRadSel() {
-      let input = document.querySelector("input[type=radio]:checked");
-      return input.value
+    async function signResult() {
+        let sRes = await signAttempt();
+
+
+        // analyze result
+        switch (sRes) {
+            case true:
+                showMsgB("cor", "Usuário cadastrado!");
+                
+                break;
+
+            case "auth/invalid-email": 
+                dList.email = false;
+                wrongC = 1;
+
+                showMsgB("inc", generateDataErrorTxt("wrongCredentials"));
+
+                break;
+
+
+            case "auth/email-already-in-use":
+                showMsgB("inc", generateDataErrorTxt("userAlreadyExists"));
+            
+                break;
+        }
+
     }
 
 }
-
-
-
-function hideMsgB() {
-    msgB.style.display = "none";
-}
-
-
-
-
 
 
 
@@ -177,30 +152,75 @@ function checkFields() {
 
 
 
+// ---
 
-// s level
-// dataError SSS
-function dataError(param) {
+async function signAttempt() {
+    let res;
+
+    await createUserWithEmailAndPassword(auth, mForm.email.value, mForm.senha.value)
+      .then(() => {
+        addToDatabase()
+        console.log(auth.currentUser);
+        
+        res = true
+      })
+
+      .catch((err) => {
+        res = err.code
+        
+      }
+    );
+
+    return res
+
+
+    // compl
+    function addToDatabase() {
+        addDoc(usersCol, {
+            name: mForm.nome.value,
+            email: mForm.email.value ,
+            usertype: obtainRadSel(),
+
+        });
+    }
+
+
+    function obtainRadSel() {
+      let input = document.querySelector("input[type=radio]:checked");
+      return input.value
+    }
+
+}
+
+
+
+// ---
+function hideMsgB() {
+    msgB.style.display = "none";
+}
+
+
+
+// ---
+function generateDataErrorTxt(param) {
     console.log("Error: " + param);
-
     let txtP;
 
     if(param == "wrongCredentials") {
-        txtP = wrongC > 1? "Preencha corretamente as seções de: " : "Preencha corretamente a seção de ";
-        textCreator();
+        wcTextCreator();
     
     } else {
         txtP = "Esses dados já existem!";       
     }
 
-    showMsgB("inc", txtP)
-
-
+    return txtP;
 
 
 
     // complementary functions
-    function textCreator() {
+    function wcTextCreator() {
+        txtP = wrongC > 1? "Preencha corretamente as seções de: " : "Preencha corretamente a seção de ";
+
         for(let attr in dList) {
             if(dList[attr] == false) {             
                 addNtxt(attr)
@@ -212,7 +232,6 @@ function dataError(param) {
     }
 
 
-    
     function addNtxt(attr) {
         if(attr == "email") {
             txtP += "e-mail";
@@ -227,7 +246,6 @@ function dataError(param) {
             txtP += `${attr}`;
         }
     }
-
 
 
     function addComma() {
@@ -296,3 +314,4 @@ function showMsgB(msgT, content /* msg type == incorrect/correct*/ ) {
         closeMB.classList.add(msgT);
     }
 }
+

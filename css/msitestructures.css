@@ -187,8 +187,14 @@
 
 /* main content */
 #mCon {
-     height: 100%;
+     position: relative;
+
+     min-height: calc(100vh - 60px);
+
+     /* border that forces mCon to unfollow it's first children position as the start height "counter" */
+     border: 1px solid var(--wood);
 }
+
 
 .conPattern {
      margin: 50px;
@@ -224,6 +230,20 @@
 
 
 /* eff */
+#bgEff {
+     display: none;
+     position: fixed;
+     left: 0;
+
+     z-index: 0;
+
+     height: 100%;
+     width: 100%;
+
+     background-color: var(--woodT);
+}
+
+
 .regEff {
      color: var(--aqua);
 }
@@ -232,12 +252,6 @@
      color: var(--razz);
 }
 
-#bEff { /* INCOMPLETEEEEEEEE */
-     background-color: var(--aqua);
-
-     width: 100%;
-     height: 100%;
-}
 
 
 

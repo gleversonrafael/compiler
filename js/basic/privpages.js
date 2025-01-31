@@ -7,8 +7,6 @@ onAuthStateChanged(auth, (userData) => {
      analyzeLogState(userData);
 })
 
-console.log("Current version: 3101")
-
 
 
 // // functions
@@ -19,7 +17,7 @@ function analyzeLogState(data) {
 
      function preventUnlogUser() {
           // user is not logged in, therefore he doesn't have acess to the site 
-          if(data === null && !window.location.href.includes("index") && !window.location.href.includes("log") && window.location.href != "https://gleversonrafael.github.io/compiler/" ) {
+               if(data === null && !window.location.href.includes("index") && !window.location.href.includes("log") && window.location.href != "https://gleversonrafael.github.io/compiler/" ) {
                // GITHUB COMPATIBILITY
                if(window.location.href.includes("github")) {
                     window.location.href = "https://gleversonrafael.github.io/compiler/"
