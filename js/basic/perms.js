@@ -4,15 +4,20 @@ import { userData } from "./userdata.js"
 
 
 // redirect to the first page if there is no user
-onAuthStateChanged(auth, (currentUser) => {
-     analyzeLogState(currentUser);     
-})
+onAuthStateChanged(auth, (authData) => {
+     console.log(authData);
+     analyzeLogState(authData);     
 
-document.body.addEventListener("load", () => {
      if(userData.usertype === "admin") {
           showAdmContent();
      }
 })
+
+// document.body.addEventListener("load", () => {
+//      if(userData.usertype === "admin") {
+//           showAdmContent();
+//      }
+// })
 
 
 

@@ -8,22 +8,31 @@ let userData;
 
 await userDataProcess();
 
+// onAuthStateChanged(auth, userDataProcess); ADAPTAR --------------
+
+export { userData };
+
 
 // m function
 async function userDataProcess() {
      let uid = await obtainUID();
-     await obtainUserData();
+
+     if(uid != null) {
+          await obtainUserData();
+     }
+    
 
 
      // complementary
      async function obtainUID() {   
+          // var
           let receiveUID = new Promise((correct, wrong) => {
                onAuthStateChanged(auth, (uData) => {                        
-                    if(uData.uid) {
+                    if(uData) {
                          correct(uData.uid);
                     
                     } else {
-                         wrong("An unknown error has been found.")
+                         wrong("Null data.");
                     } 
                
                });
@@ -31,6 +40,8 @@ async function userDataProcess() {
 
           let returnVal;
 
+
+          // m process
           await receiveUID
           .then((res) => {
                returnVal = res;
@@ -39,7 +50,9 @@ async function userDataProcess() {
 
           .catch((errorMsg) => {
                console.log(errorMsg);
+               returnVal = null;
           });
+
 
           return returnVal;
      }
@@ -60,4 +73,4 @@ async function userDataProcess() {
 
 
 
-export { userData };
+// s functions
