@@ -1,18 +1,18 @@
 // imports
+import { initializeApp } from "firebase/app";
 import { addDoc, collection } from "firebase/firestore";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db} from "./fb.js";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { auth, db, firebaseConfig} from "./fb.js";
 
 
-initializeApp( {
-    credential: cert("./../compiler-d5a27-firebase-adminsdk-fbsvc-ab72fc8316.json")
 
-})
 
 // gl variables
 // form
 const mForm = document.querySelector("#mForm"); 
 const usersCol = collection(db, "usersInfo");
+
+
 
 
 // data list and wrong counter

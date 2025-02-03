@@ -1,11 +1,6 @@
 // firebase
-import { signInWithEmailAndPassword, onAuthStateChanged, getAuth } from "firebase/auth";
-import { initializeApp } from "firebase/app"
-import { auth, firebaseConfig } from "./fb.js";
-
-const authApp = initializeApp(firebaseConfig, "secondary");
-console.log(authApp);
-
+import { signInWithEmailAndPassword} from "firebase/auth";
+import { auth } from "./fb.js";
 
 
 // global var

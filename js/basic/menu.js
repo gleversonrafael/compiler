@@ -1,5 +1,8 @@
 import { signOut } from "firebase/auth"
 import { auth } from "./fb.js"
+import { userData } from "./userdata.js"
+
+
 
 
 // var
@@ -84,38 +87,55 @@ function toggleMenu(changeDisplay, changeBackground) {
 
 
 
+
 // s level
 function menuVisualState() {
-     let menuSections = ["dashboard", "mycourses", "managecourses", "allcourses", "manageusers"]
+     loadMenuBoxEffect()
+     loadNameAndType()
 
 
-     for(let elem in menuSections) {
-          if(window.location.href.includes(menuSections[elem])) {
-               // create var
-               let selMenuBox = document.getElementById(menuSections[elem]);
-               let imgChange = document.querySelector(`a#${menuSections[elem]} > img`);
+     function loadNameAndType() {
+          let userName = document.getElementById("userName");
+          let userType = document.getElementById("userType");
 
-               // css - change box and img
-               selMenuBox.style.opacity = "1";
-               selMenuBox.style.backgroundColor = "#000"
+          userName.textContent = userData.name;
 
-               if(selMenuBox.id == "dashboard" || selMenuBox.id == "mycourses") {
-                    selMenuBox.style.borderBottom = "1px solid var(--aqua)";
-                    selMenuBox.style.color = "var(--aqua)";
+          userType.textContent = userData.usertype == "regular"? "Usuário comum" : "Administrador";
+     }
 
-               } else {
-                    selMenuBox.style.borderBottom = "1px solid var(--razz)";
-                    selMenuBox.style.color = "var(--razz)";
+     function  loadMenuBoxEffect() {
+          let menuSections = ["dashboard", "mycourses", "managecourses", "allcourses", "manageusers"]
+
+          for(let elem in menuSections) {
+               if(window.location.href.includes(menuSections[elem])) {
+                    // create var
+                    let selMenuBox = document.getElementById(menuSections[elem]);
+                    let imgChange = document.querySelector(`a#${menuSections[elem]} > img`);
+     
+                    // css - change box and img
+                    selMenuBox.style.opacity = "1";
+                    selMenuBox.style.backgroundColor = "#000"
+     
+                    if(selMenuBox.id == "dashboard" || selMenuBox.id == "mycourses") {
+                         selMenuBox.style.borderBottom = "1px solid var(--aqua)";
+                         selMenuBox.style.color = "var(--aqua)";
+     
+                    } else {
+                         selMenuBox.style.borderBottom = "1px solid var(--razz)";
+                         selMenuBox.style.color = "var(--razz)";
+                    }
+     
+     
+     
+                    imgChange.setAttribute("src", `../media/ico/menu/fill-${menuSections[elem]}.svg`);
                }
-
-
-
-               imgChange.setAttribute("src", `../media/ico/menu/fill-${menuSections[elem]}.svg`);
+     
           }
-
      }
 
 }
+
+
 
 
 

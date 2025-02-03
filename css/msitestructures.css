@@ -15,7 +15,6 @@
      width: 100%;
 
      background-color: var(--grey);
-     border-bottom: 1px solid var(--whiteTT);
 }
 
 #mIcon {
@@ -49,8 +48,6 @@
      max-width: fit-content;
 
      height: 100vh;
-     border-right: 1px solid var(--whiteTT);
-
      overflow: scroll;
 }
 
@@ -67,12 +64,12 @@
 /* mMenu boxes */
 .mmBlock, #leaveM {
      height: 70px;
+     border-bottom: 1px solid #ffffff00;
 }
 
 
 .mmBlock{
      color: var(--white);
-     border-bottom: 1px solid var(--whiteT);
 }
 
 .mmBlock:hover {
@@ -224,6 +221,11 @@
      background-color: var(--wood);
 
      border: 1px solid var(--white);
+}
+
+.limitedAcess {
+     display: none;
+
 }
 
 

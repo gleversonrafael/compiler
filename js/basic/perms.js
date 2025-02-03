@@ -1,15 +1,23 @@
-import { onAuthStateChanged } from "firebase/auth"
-import { auth } from "./fb.js"
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./fb.js";
+import { userData } from "./userdata.js"
 
 
 // redirect to the first page if there is no user
-onAuthStateChanged(auth, (userData) => {
-     analyzeLogState(userData);
+onAuthStateChanged(auth, (currentUser) => {
+     analyzeLogState(currentUser);     
+})
+
+document.body.addEventListener("load", () => {
+     if(userData.usertype === "admin") {
+          showAdmContent();
+     }
 })
 
 
 
 // // functions
+// m level
 function analyzeLogState(data) {
      preventUnlogUser()
      preventLogUser()
@@ -48,5 +56,14 @@ function analyzeLogState(data) {
           
           }
      }
- 
+}
+
+
+function showAdmContent() {
+     let admClasses = document.querySelectorAll(".limitedAcess");
+
+     admClasses.forEach((analyzedElement) => {
+          analyzedElement.style.display = "flex";
+
+     })
 }

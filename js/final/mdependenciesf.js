@@ -16,17 +16,27 @@
   \************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   app: () => (/* binding */ app),\n/* harmony export */   auth: () => (/* binding */ auth),\n/* harmony export */   db: () => (/* binding */ db),\n/* harmony export */   firebaseConfig: () => (/* binding */ firebaseConfig)\n/* harmony export */ });\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n\r\n\r\n\r\n\r\n// https://firebase.google.com/docs/web/setup#available-libraries\r\n\r\nconst firebaseConfig = {\r\n    apiKey: \"AIzaSyAYOSSSxnsxVC15gTquoTsuMVT4IDhv9I0\",\r\n    authDomain: \"compiler-d5a27.firebaseapp.com\",\r\n    projectId: \"compiler-d5a27\",\r\n    storageBucket: \"compiler-d5a27.firebasestorage.app\",\r\n    messagingSenderId: \"583684137760\",\r\n    appId: \"1:583684137760:web:6f9a616e523c3ca9c3ed45\",\r\n    measurementId: \"G-YLMPS766HP\"\r\n};\r\n\r\n\r\nconst app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(app);\r\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_2__.getAuth)();\r\n\r\n// exports\r\n\r\n\r\n\r\n\r\n\r\nconsole.log(\"Current version: 3101-02\")\r\n\r\n\r\n\n\n//# sourceURL=webpack://compiler/./js/basic/fb.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   app: () => (/* binding */ app),\n/* harmony export */   auth: () => (/* binding */ auth),\n/* harmony export */   db: () => (/* binding */ db),\n/* harmony export */   firebaseConfig: () => (/* binding */ firebaseConfig)\n/* harmony export */ });\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n\r\n\r\n\r\n\r\n// https://firebase.google.com/docs/web/setup#available-libraries\r\n\r\nconst firebaseConfig = {\r\n    apiKey: \"AIzaSyAYOSSSxnsxVC15gTquoTsuMVT4IDhv9I0\",\r\n    authDomain: \"compiler-d5a27.firebaseapp.com\",\r\n    projectId: \"compiler-d5a27\",\r\n    storageBucket: \"compiler-d5a27.firebasestorage.app\",\r\n    messagingSenderId: \"583684137760\",\r\n    appId: \"1:583684137760:web:6f9a616e523c3ca9c3ed45\",\r\n    measurementId: \"G-YLMPS766HP\"\r\n};\r\n\r\n\r\nconst app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(app);\r\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_2__.getAuth)();\r\n\r\n// exports\r\n\r\n\r\n\r\n\r\n\r\nconsole.log(\"Current version: 0302-01\")\r\n\r\n\r\n\n\n//# sourceURL=webpack://compiler/./js/basic/fb.js?");
 
 /***/ }),
 
-/***/ "./js/basic/privpages.js":
-/*!*******************************!*\
-  !*** ./js/basic/privpages.js ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./js/basic/perms.js":
+/*!***************************!*\
+  !*** ./js/basic/perms.js ***!
+  \***************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var _fb_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fb.js */ \"./js/basic/fb.js\");\n\r\n\r\n\r\n\r\n// redirect to the first page if there is no user\r\n(0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.onAuthStateChanged)(_fb_js__WEBPACK_IMPORTED_MODULE_1__.auth, (userData) => {\r\n     analyzeLogState(userData);\r\n})\r\n\r\n\r\n\r\n// // functions\r\nfunction analyzeLogState(data) {\r\n     preventUnlogUser()\r\n     preventLogUser()\r\n\r\n\r\n     function preventUnlogUser() {\r\n          // user is not logged in, therefore he doesn't have acess to the site \r\n               if(data === null && !window.location.href.includes(\"index\") && !window.location.href.includes(\"log\") && window.location.href != \"https://gleversonrafael.github.io/compiler/\" ) {\r\n               // GITHUB COMPATIBILITY\r\n               if(window.location.href.includes(\"github\")) {\r\n                    window.location.href = \"https://gleversonrafael.github.io/compiler/\"\r\n\r\n               } else {\r\n                    window.location.href = \"./../index.html\";\r\n               }\r\n               \r\n          }\r\n     }\r\n\r\n\r\n     function preventLogUser() {\r\n          // user is logged in and tries to acess start page / login (GITHUB COMPATIBILITY)\r\n          if(data != null && ( window.location.href.includes(\"index\") || window.location.href == \"https://gleversonrafael.github.io/compiler/\" || window.location.href.includes(\"log\"))) {\r\n               if(window.location.href.includes(\"github\")) {\r\n                    window.location.href = \"https://gleversonrafael.github.io/compiler/html/dashboard.html\"\r\n\r\n\r\n               } else if(window.location.href.includes(\"log\") && document.getElementById(\"passInp\").value.length == 0 ){ /* suited for local server */\r\n                    window.location.href = \"./dashboard.html\"\r\n\r\n\r\n               } else if(window.location.href.includes(\"index\")) {\r\n                    window.location.href = \"./html/dashboard.html\"\r\n\r\n               }\r\n          \r\n          }\r\n     }\r\n \r\n}\n\n//# sourceURL=webpack://compiler/./js/basic/privpages.js?");
+eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var _fb_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fb.js */ \"./js/basic/fb.js\");\n/* harmony import */ var _userdata_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./userdata.js */ \"./js/basic/userdata.js\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_userdata_js__WEBPACK_IMPORTED_MODULE_2__]);\n_userdata_js__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];\n\r\n\r\n\r\n\r\n\r\n// redirect to the first page if there is no user\r\n(0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.onAuthStateChanged)(_fb_js__WEBPACK_IMPORTED_MODULE_1__.auth, (currentUser) => {\r\n     analyzeLogState(currentUser);     \r\n})\r\n\r\ndocument.body.addEventListener(\"load\", () => {\r\n     if(_userdata_js__WEBPACK_IMPORTED_MODULE_2__.userData.usertype === \"admin\") {\r\n          showAdmContent();\r\n     }\r\n})\r\n\r\n\r\n\r\n// // functions\r\n// m level\r\nfunction analyzeLogState(data) {\r\n     preventUnlogUser()\r\n     preventLogUser()\r\n\r\n\r\n     function preventUnlogUser() {\r\n          // user is not logged in, therefore he doesn't have acess to the site \r\n               if(data === null && !window.location.href.includes(\"index\") && !window.location.href.includes(\"log\") && window.location.href != \"https://gleversonrafael.github.io/compiler/\" ) {\r\n               // GITHUB COMPATIBILITY\r\n               if(window.location.href.includes(\"github\")) {\r\n                    window.location.href = \"https://gleversonrafael.github.io/compiler/\"\r\n\r\n               } else {\r\n                    window.location.href = \"./../index.html\";\r\n               }\r\n               \r\n          }\r\n     }\r\n\r\n\r\n     function preventLogUser() {\r\n          // user is logged in and tries to acess start page / login (GITHUB COMPATIBILITY)\r\n          if(data != null && ( window.location.href.includes(\"index\") || window.location.href == \"https://gleversonrafael.github.io/compiler/\" || window.location.href.includes(\"log\"))) {\r\n               if(window.location.href.includes(\"github\")) {\r\n                    window.location.href = \"https://gleversonrafael.github.io/compiler/html/dashboard.html\"\r\n\r\n\r\n               } else if(window.location.href.includes(\"log\") && document.getElementById(\"passInp\").value.length == 0 ){ /* suited for local server */\r\n                    window.location.href = \"./dashboard.html\"\r\n\r\n\r\n               } else if(window.location.href.includes(\"index\")) {\r\n                    window.location.href = \"./html/dashboard.html\"\r\n\r\n               }\r\n          \r\n          }\r\n     }\r\n}\r\n\r\n\r\nfunction showAdmContent() {\r\n     let admClasses = document.querySelectorAll(\".limitedAcess\");\r\n\r\n     admClasses.forEach((analyzedElement) => {\r\n          analyzedElement.style.display = \"flex\";\r\n\r\n     })\r\n}\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });\n\n//# sourceURL=webpack://compiler/./js/basic/perms.js?");
+
+/***/ }),
+
+/***/ "./js/basic/userdata.js":
+/*!******************************!*\
+  !*** ./js/basic/userdata.js ***!
+  \******************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   userData: () => (/* binding */ userData)\n/* harmony export */ });\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var _fb_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fb.js */ \"./js/basic/fb.js\");\n\r\n\r\n\r\n\r\n\r\n// var\r\nlet userData;\r\n\r\nawait userDataProcess();\r\n\r\n\r\n// m function\r\nasync function userDataProcess() {\r\n     let uid = await obtainUID();\r\n     await obtainUserData();\r\n\r\n\r\n     // complementary\r\n     async function obtainUID() {   \r\n          let receiveUID = new Promise((correct, wrong) => {\r\n               (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.onAuthStateChanged)(_fb_js__WEBPACK_IMPORTED_MODULE_2__.auth, (uData) => {                        \r\n                    if(uData.uid) {\r\n                         correct(uData.uid);\r\n                    \r\n                    } else {\r\n                         wrong(\"An unknown error has been found.\")\r\n                    } \r\n               \r\n               });\r\n          })\r\n\r\n          let returnVal;\r\n\r\n          await receiveUID\r\n          .then((res) => {\r\n               returnVal = res;\r\n\r\n          })\r\n\r\n          .catch((errorMsg) => {\r\n               console.log(errorMsg);\r\n          });\r\n\r\n          return returnVal;\r\n     }\r\n\r\n\r\n     async function obtainUserData() {\r\n          const uQuery = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_0__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_0__.collection)(_fb_js__WEBPACK_IMPORTED_MODULE_2__.db, \"usersInfo\"), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_0__.where)(\"uid\", \"==\", uid), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_0__.limit)(1));\r\n\r\n          const userFindProcess = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_0__.getDocs)(uQuery);\r\n     \r\n          userFindProcess.forEach((doc) => {\r\n               userData = doc.data();\r\n          })\r\n     \r\n     }\r\n};\r\n\r\n\r\n\r\n\r\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } }, 1);\n\n//# sourceURL=webpack://compiler/./js/basic/userdata.js?");
 
 /***/ }),
 
@@ -210,6 +220,75 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	__webpack_require__.m = __webpack_modules__;
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/async module */
+/******/ 	(() => {
+/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
+/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
+/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
+/******/ 		var resolveQueue = (queue) => {
+/******/ 			if(queue && queue.d < 1) {
+/******/ 				queue.d = 1;
+/******/ 				queue.forEach((fn) => (fn.r--));
+/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
+/******/ 			}
+/******/ 		}
+/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
+/******/ 			if(dep !== null && typeof dep === "object") {
+/******/ 				if(dep[webpackQueues]) return dep;
+/******/ 				if(dep.then) {
+/******/ 					var queue = [];
+/******/ 					queue.d = 0;
+/******/ 					dep.then((r) => {
+/******/ 						obj[webpackExports] = r;
+/******/ 						resolveQueue(queue);
+/******/ 					}, (e) => {
+/******/ 						obj[webpackError] = e;
+/******/ 						resolveQueue(queue);
+/******/ 					});
+/******/ 					var obj = {};
+/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
+/******/ 					return obj;
+/******/ 				}
+/******/ 			}
+/******/ 			var ret = {};
+/******/ 			ret[webpackQueues] = x => {};
+/******/ 			ret[webpackExports] = dep;
+/******/ 			return ret;
+/******/ 		}));
+/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
+/******/ 			var queue;
+/******/ 			hasAwait && ((queue = []).d = -1);
+/******/ 			var depQueues = new Set();
+/******/ 			var exports = module.exports;
+/******/ 			var currentDeps;
+/******/ 			var outerResolve;
+/******/ 			var reject;
+/******/ 			var promise = new Promise((resolve, rej) => {
+/******/ 				reject = rej;
+/******/ 				outerResolve = resolve;
+/******/ 			});
+/******/ 			promise[webpackExports] = exports;
+/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
+/******/ 			module.exports = promise;
+/******/ 			body((deps) => {
+/******/ 				currentDeps = wrapDeps(deps);
+/******/ 				var fn;
+/******/ 				var getResult = () => (currentDeps.map((d) => {
+/******/ 					if(d[webpackError]) throw d[webpackError];
+/******/ 					return d[webpackExports];
+/******/ 				}))
+/******/ 				var promise = new Promise((resolve) => {
+/******/ 					fn = () => (resolve(getResult));
+/******/ 					fn.r = 0;
+/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
+/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
+/******/ 				});
+/******/ 				return fn.r ? promise : getResult();
+/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
+/******/ 			queue && queue.d < 0 && (queue.d = 0);
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/chunk loaded */
 /******/ 	(() => {
 /******/ 		var deferred = [];
@@ -341,7 +420,8 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	__webpack_require__("./js/basic/fb.js");
-/******/ 	var __webpack_exports__ = __webpack_require__("./js/basic/privpages.js");
+/******/ 	__webpack_require__("./js/basic/perms.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./js/basic/userdata.js");
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
