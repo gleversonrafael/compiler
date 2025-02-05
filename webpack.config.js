@@ -21,6 +21,12 @@ module.exports = {
       import : ["./js/basic/menu.js", "./js/basic/dashb.js"]
     },
 
+    mycoursesp: {
+      dependOn: "mdependencies",
+      import: ["./js/basic/menu.js", "./js/basic/mycourses.js"]
+
+    },
+
     manageup: {
       dependOn: "mdependencies",
       import: ["./js/basic/menu.js"]

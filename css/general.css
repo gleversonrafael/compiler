@@ -98,6 +98,10 @@ a {
     flex-flow: column wrap;
 }
 
+.flex-row {
+    flex-flow: row wrap;
+}
+
 .fJustC {
     justify-content: center;
 }
@@ -115,6 +119,12 @@ a {
 }
 
 
+/* spacement */
+.bottomNspace {
+    margin-bottom: 5px;
+}
+
+
 /* others */
 .bdev {
     border: 2px solid red;
@@ -123,6 +133,10 @@ a {
 .bAll {
     border-radius: 65px;
 }
+
+
+
+
 
 
 /* fast, default and slow transition */

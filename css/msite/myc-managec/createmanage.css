@@ -1,0 +1,230 @@
+@charset "UTF-8";
+
+
+/* all areas */
+.conPattern section {
+     margin-bottom: 50px;
+}
+
+
+
+
+/* title area */
+#titleA {
+     text-align: center;
+}
+
+#titleA > h2 > span {
+     color: var(--white);
+}
+
+
+
+
+/* search area */
+#searchA {
+     align-self: center;
+     
+     width: 100%;
+     max-width: 500px;
+}
+
+
+#searchB { /* search box*/
+     background-color: var(--grey);
+}
+
+#searchInp {
+     padding-left: 20px;
+     width: calc(100% - 30px);
+
+     color: var(--white);
+     background-color: transparent;
+
+     border: none;
+}
+
+#searchButton {
+     margin-left: 5px;
+     padding: 25px 30px;
+
+     background: var(--wood) url(../../../media/ico/mcourses/search.svg) center center no-repeat;
+     background-size: 55%;
+
+     border: none;
+
+     cursor: pointer;
+}
+
+#searchButton:hover {
+     background-color: var(--black);
+}
+
+
+
+
+/* explore - courses area */
+#coursesA {
+     align-content: center;
+     gap: 15px;
+}
+
+
+#coursesA > div{     
+     height: fit-content;
+
+     min-width: 250px;
+     width: 40vw;
+     max-width: 500px;
+     flex-grow: 1;
+
+     padding: 25px;
+     
+     opacity: 0.8;
+
+     background-color: var(--grey);
+     border: 1px solid var(--whiteT);
+     border-radius: 25px;
+}
+
+#coursesA > div > h1 {
+     color: var(--white);
+     font: 700 1.75em var(--rFont);
+}
+
+#coursesA > div > h2 {
+     color: var(--whiteT);
+     font: normal 1.25em var(--rFont);
+}
+
+#coursesA > div:hover {
+     opacity: 1;
+
+     border: 1px solid var(--white);
+     transition: all 300ms;
+
+     cursor: pointer;
+}
+
+
+/* open */
+#coursesA > div.open {
+     opacity: 1;
+     background-color: var(--white);
+
+     cursor: default;
+}
+
+#coursesA > div.open > h1 {
+     color: var(--wood);
+}
+
+#coursesA > div.open > h2 {
+     color: var(--grey);
+}
+
+
+.subContent {
+     margin-top: 25px;
+}
+
+.subContent > h3 {
+     font: 700 1.25em var(--rFont);
+     margin: 30px 0px 20px;
+}
+
+.subContent > div {
+     display: flex;
+     justify-content: space-between;
+}
+
+.subContent button {
+     min-width: 50px;
+     height: 50px;
+
+     margin-left: 20px;
+
+     background: var(--gall) url(../../../media/ico/mcourses/ccopy.svg) center center no-repeat;
+     background-size: 70%;
+
+     border-radius: 25px;
+     border: none;
+}
+
+.subContent button:hover {
+     background-color: var(--aqua);
+     cursor: copy;
+     transition: all 300ms;
+}
+
+
+.fieldName, .fieldValue {
+     word-break: break-all;
+}
+
+.fieldName {
+     font: normal 1em var(--rFont);
+     margin-bottom: 5px;
+}
+
+.fieldValue {
+     display: flex;
+
+     font: 700 1em var(--rFont);
+     margin-bottom: 20px;
+}
+
+
+#coursesA > div > a {
+     display: block;
+
+     width: 100%;
+     padding: 25px;
+
+     margin-top: 20px;
+
+     font: 700 1em var(--rFont);
+     color: var(--black);
+
+     text-decoration: none;
+     text-align: center;
+
+     background-color: var(--aqua);
+
+     border-radius: 25px;
+     border: none;
+
+     cursor: pointer;
+}
+
+#coursesA > div > a:hover {
+     opacity: 0.75;
+     transition: all 300ms;
+}
+
+
+
+
+
+
+
+
+/* media */
+@media screen and (min-width: 768px) {
+     /* title area */
+     #titleA {
+          text-align: left;
+     }
+
+
+     /* search area */
+     #searchA{
+          align-self: start;
+     }
+
+
+     /* explore area */
+     #coursesA > div > a {
+          padding: 15px;
+     }
+}

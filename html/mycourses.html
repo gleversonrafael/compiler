@@ -3,12 +3,15 @@
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Document</title>
+     <title>Meus cursos</title>
 
      <link rel="shortcut icon" href="../media/ico/favicon.ico" type="image/x-icon">
 
      <link rel="stylesheet" href="../css/general.css">
      <link rel="stylesheet" href="../css/msitestructures.css">
+
+     <link rel="stylesheet" href="../css/msite/myc-managec/createmanage.css">
+     <link rel="stylesheet" href="../css/msite/myc-managec/createc.css">
 
 </head>
 
@@ -106,6 +109,108 @@
 
      </section>
 
+
+
+
+     <!-- site's content -->
+     <main id="mCon" class="flex fJustC">
+          <div class="conPattern flex flex-col">
+               <!-- title -->
+               <section id="titleA" class="flex-col">
+                    <h1 id="pageTitle"> Meus cursos</h1>
+                    <h2 class="subtitle"> Filtrando por: <span>Curso de Javascript</span></h2>
+
+               </section>
+
+
+               <!-- search -->
+               <section id="searchA" class="flex-col">
+                    <label for="searchInp" class="subtitle"> Pesquisar</label>
+
+                    <div role="searchbox" id="searchB" class="flex fJustSB bAll">
+                         <input id="searchInp" type="text" class="bAll">
+                         <button role="search" id="searchButton" class="bAll"></button>
+
+                    </div>
+        
+
+               </section>
+
+
+               <!-- explore -->
+               <section id="exploreA" class="flex flex-col">
+                    <h3 class="subtitle">Explorar</h3>
+
+                    <section id="coursesA" class="flex flex-row">
+                         <!-- selected div -->
+                         <div class="open">
+                              <h1> Curso de Javascript</h1>
+                              <h2> Plataforma: Alura</h2>
+
+                              <div class="subContent">
+                                   <h3> Dados </h3>
+
+                                   <div>
+                                        <div>
+                                             <p class="fieldName"> E-mail</p>
+                                             <p class="fieldValue"> email@hotmail</p>
+
+                                        </div>
+
+                                        <button></button>
+
+                                   </div>
+     
+
+                                   <div>
+                                        <div>
+                                             <p class="fieldName"> Senha</p>
+                                             <p class="fieldValue"> 526afsx4</p>
+
+                                        </div>
+
+                                        <button></button>
+
+                                   </div>
+
+                              </div>
+
+                              
+                              <a href=""> Acessar</a>
+
+                         </div>
+
+
+
+                         <!-- unselected div -->
+                         <div>
+                              <h1> Curso de Javascript</h1>
+                              <h2> Plataforma: Alura</h2>
+
+                              <!-- <h3> Dados </h3>
+
+                              <h4> E-mail</h4>
+                              <p> email@hotmail.com</p>
+
+                              <h4> Senha</h4>
+                              <p> 526afsx4</p> -->
+
+                         </div>
+
+
+                    </section>
+
+               </section>
+
+
+          </div>
+
+     </main>
+
+
+     <!-- scripts -->
+     <script src="../js/final/mdependenciesf.js"></script>
+     <script src="../js/final/mycoursespf.js"></script>
      
 </body>
 

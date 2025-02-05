@@ -185,7 +185,6 @@
 /* main content */
 #mCon {
      position: relative;
-
      min-height: calc(100vh - 60px);
 
      /* border that forces mCon to unfollow it's first children position as the start height "counter" */
@@ -195,6 +194,9 @@
 
 .conPattern {
      margin: 50px;
+          
+     height: fit-content;
+     max-width: fit-content;
 }
 
 
@@ -202,12 +204,12 @@
      color: var(--white);
      font: normal 2em var(--rFont);
 
-     margin-bottom: 30px;
+     margin-bottom: 10px;
 }
 
 .subtitle {
      color: var(--whiteT);
-     font: 100 1em var(--rFont);
+     font: 100 0.9em var(--sFont);
      margin-bottom: 5px;
 }
 
