@@ -26,7 +26,19 @@
     --shar: #1f1f1f;
     --wood: #181818;
     --woodT: #000000ad;
-    --black: #000;
+
+    --black: #151518;
+
+
+    /* ui - replace later versions */
+    --uiPrimaryBlack: #151518;
+    --uiSecondaryBlack: #1C1C1F;
+
+    --uiPrimaryGrey: #38383D;
+    --uiSecondaryGrey: #636363;
+
+    --uiPrimaryWhite: #FFFFFF;
+    --uiSecondaryWhite: #F1F1F7;
 
     /* fonts */
     --sFont: "Outfit", sans-serif;
@@ -51,7 +63,7 @@ body, html {
 }
 
 body {
-    background-image: linear-gradient(#1F1F1F 50%, #1D1D1D);
+    background-color: var(--uiSecondaryBlack);
 }
 
 li {

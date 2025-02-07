@@ -14,7 +14,6 @@ let searchInp = document.getElementById("searchInp");
 
 
 // events
-// document.body.addEventListener("load", showCourses);
 searchButton.addEventListener("click", () => {
      showCourses(searchInp.value);
 });
@@ -23,6 +22,9 @@ searchInp.addEventListener("input", () => {
      showCourses(searchInp.value);
 })
 
+onSnapshot(coursesCol, ()=> {
+     showCourses();
+});
 
 
 
@@ -43,14 +45,18 @@ async function showCourses(searchedContent) {
 }
 
 
+
+
 function openBox(event) {  
      let courseId = obtainClickedCourseId();
      let elementData = coursesData[courseId];
+     let courseBox = document.getElementById(courseId);
+
+     if(courseBox != null && (!courseBox.classList.contains("open"))) {
+          showElements();
+     }
+
      
-     openBox();
-
-
-
      // compl    
      function obtainClickedCourseId() {
           let clickedElement = event.target;
@@ -65,12 +71,10 @@ function openBox(event) {
      }
 
 
-     function openBox() {
-          let courseBox = document.getElementById(courseId);
+     function showElements() {
           courseBox.classList.add("open");
 
           createElements()
-
 
 
           // aside
@@ -83,52 +87,146 @@ function openBox(event) {
                          emailDiv: document.createElement("div"),
                          emailDivChild: document.createElement("div"),
 
-                         passwordDiv: document.createElement("div")
+                         passwordDiv: document.createElement("div"),
+                         passwordDivChild: document.createElement("div")
                     },
 
 
                     pType: {
-                         emailP: document.createElement("p"),
+                         emailParagraph: document.createElement("p"),
                          emailValue: document.createElement("p"),
 
-                         passwordP: document.createElement("p"),
+                         passwordParagraph: document.createElement("p"),
                          passwordValue: document.createElement("p")
                     },
 
 
                     others: {
                          userDataSubtitle: document.createElement("h3"),
-                         acessAnchor: document.createElement("a"),
 
-                         copyEmail: document.createElement("button"),
-                         copyPassword: document.createElement("button")
+                         acessAnchor: document.createElement("a"),
+                         closeButton: document.createElement("button"),
+
+                         emailCopy: document.createElement("button"),
+                         passwordCopy: document.createElement("button")
                     }
                }
 
 
-
-               // p
-               elements.pType.emailP.innerText = "E-mail";
-               elements.pType.emailValue.innerText = elementData[email];
-
-               elements.pType.passwordP.innerText = "Senha";
-               elements.pType.passwordValue.innerText = elementData[userPassword];
-
-               // others
-               elements.others.userDataSubtitle.innerText = "Dados";
+               setParagraphs()
+               setOthers()
+               allocateDivs()
 
 
-               // divType 
-               // elements.divType.createdContent.appendChild(elements.others.userDataSubtitle)
-               // elements.divType.createdContent.appendChild
+               // compl
+               function setParagraphs() {                    
+                    elements.pType.emailParagraph.innerText = "E-mail";
+                    elements.pType.passwordParagraph.innerText = "Senha";
 
-               // elements.divType.createdContent.append(elements.others.userDataSubtitle, elements.others)
+                    elements.pType.emailValue.innerText = elementData.email;
+                    elements.pType.passwordValue.innerText = elementData.userPassword;
 
-               console.log(elements);
 
+                    // set classes
+                    for(let p in elements.pType) {
+                         if(p.includes("Paragraph")) {
+                              elements.pType[p].classList.add("fieldName");
+                         
+                         } else {
+                              elements.pType[p].classList.add("fieldValue");
+                         }
+                    }
+               }
+
+
+               function setOthers() {
+                    elements.others.userDataSubtitle.innerText = "Dados";
+
+                    elements.others.acessAnchor.innerText = "Acessar";
+                    elements.others.closeButton.innerText = "Fechar";
+                    elements.others.closeButton.onclick = closeBox;
+
+                    elements.others.acessAnchor.setAttribute("href", coursesData[courseId].url);
+                    elements.others.acessAnchor.setAttribute("target", "_blank");
+
+
+                    for(let copybutton in elements.others) {
+                         if(copybutton.includes("Copy")) {
+                              elements.others[copybutton].classList.add("copyButton");
+                              elements.others[copybutton].onclick = copyData
+
+                         }
+                    }
+               }
+
+               
+               function allocateDivs() {
+                    allocateChildren();
+                    allocateFathers();
+
+
+                    function allocateChildren() {
+                         // allocate child divs
+                         for(let div in elements.divType) {
+                              let attributeName;
+
+                              // allocate child
+                              if(div.includes("Child")) {
+                                   // div name - DivChild
+                                   attributeName = div.substring(0, div.length - 8);
+
+                                   elements.divType[div].appendChild(elements.pType[`${attributeName}Paragraph`]);
+                                   elements.divType[div].appendChild(elements.pType[`${attributeName}Value`]);
+                              
+
+                              // allocate content divs(email and password)
+                              } else if(! div.includes("createdContent")) {
+                                   // div name - Div
+                                   attributeName = div.substring(0, div.length - 3);
+
+                                   elements.divType[div].appendChild(elements.divType[`${attributeName}DivChild`]);
+                                   elements.divType[div].appendChild(elements.others[`${attributeName}Copy`]);
+                              }
+                         }
+                    }
+
+
+                    function allocateFathers() {
+                         // append pode não funcionar em outros navegadores.
+                         elements.divType.createdContent.append(elements.others.userDataSubtitle, elements.divType.emailDiv, elements.divType.passwordDiv, elements.others.acessAnchor, elements.others.closeButton);
+
+                         elements.divType.createdContent.classList.add("createdContent");
+     
+                         courseBox.appendChild(elements.divType.createdContent);
+
+                    }
+               }
           }
      }
 }
+
+
+
+
+function closeBox(ev) {
+     let previouslyCreatedContent = ev.target.parentElement;
+     let courseBox = previouslyCreatedContent.parentElement;
+     
+     courseBox.classList.remove("open");
+     previouslyCreatedContent.remove();
+}
+
+
+
+
+function copyData(ev) {
+     let inputBox = ev.target.parentElement;
+     let inputValue = inputBox.children[0].children[1].innerText;
+
+     // exec command obsolete
+     navigator.clipboard.writeText(inputValue);
+}
+
 
 
 
@@ -155,7 +253,7 @@ async function obtainAllowedCoursesData(searchedContent) {
 
                // is there any data obtained?
                if(Object.entries(coursesData).length === 0) {
-                    noData("No courses were found.");     
+                    noData();     
                
                } else {
                     dataObtained();   
@@ -176,8 +274,7 @@ async function obtainAllowedCoursesData(searchedContent) {
           insertDataResult = true
 
      })
-     .catch((msg) => {
-          console.log(msg);
+     .catch(() => {
           insertDataResult = false
      })
 
@@ -213,7 +310,6 @@ function createCoursesBoxes() {
      let coursesArea =  document.querySelector("section#coursesA")
      coursesArea.innerHTML = "";
 
-
      Object.entries(coursesData).forEach((data) => {
           // var
           let courseId = data[0];
@@ -223,9 +319,8 @@ function createCoursesBoxes() {
           let courseProperties = {
                courseBox: document.createElement("div"), 
                title: document.createElement("h1"),
-               platform: document.createElement("h2")
+               platform: document.createElement("h2"),
           }
-
 
 
           // ids and event
@@ -233,17 +328,35 @@ function createCoursesBoxes() {
           courseProperties.courseBox.onclick = openBox;
 
 
+
           // set data
           courseProperties.title.innerText = courseValues.courseName;
           courseProperties.platform.innerText = `Plataforma:${courseValues.coursePlatform}`;
 
 
-          // remover nomes e subtitulos no objeto posteriormente, para agilizar o programa
+          // create elements -- continue
+          if(courseValues.img != undefined) {
+               courseProperties.courseBox.appendChild(createImg());
+          }
 
-          // create elements
           courseProperties.courseBox.appendChild(courseProperties.title);
-          courseProperties.courseBox.appendChild(courseProperties.platform);
+
+          if(courseValues.coursePlatform != undefined) {
+               courseProperties.courseBox.appendChild(courseProperties.platform);
+          }
+          
           coursesArea.appendChild(courseProperties.courseBox);
+
+          
+
+
+          // compl
+          function createImg() {
+               let img = document.createElement("img");
+               img.setAttribute("src", courseValues.img);
+
+               return img
+          }
      })
 
 }

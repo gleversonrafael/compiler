@@ -6,11 +6,10 @@
      margin-bottom: 50px;
 }
 
-/* .conPattern {
-     min-width: max-content;
-     width: max-content;
-     max-width: 800px;
-} */
+.conPattern {
+     width: 75vw;
+     max-width: 1015px;
+}
 
 
 
@@ -33,16 +32,17 @@
      
      width: 100%;
      max-width: 500px;
+     margin-bottom: 100px;
 }
 
 
 #searchB { /* search box*/
-     background-color: var(--grey);
+     border: 1px solid var(--uiSecondaryGrey);
 }
 
 #searchInp {
      padding-left: 20px;
-     width: calc(100% - 30px);
+     width: calc(100% - 40px);
 
      color: var(--white);
      background-color: transparent;
@@ -50,63 +50,86 @@
      border: none;
 }
 
+#searchInp:focus {
+     outline: none;
+}
+
+#searchB:has(#searchInp:focus) {
+     border: 1px solid var(--white);
+}
+
+
 #searchButton {
      margin-left: 5px;
      padding: 25px 30px;
 
-     background: var(--wood) url(../../../media/ico/mcourses/search.svg) center center no-repeat;
+     background: transparent url(../../../media/ico/mcourses/search.svg) center center no-repeat;
      background-size: 55%;
 
      border: none;
-
      cursor: pointer;
 }
 
-#searchButton:hover {
-     background-color: var(--black);
-}
 
 
 
 
 /* explore - courses area */
 #coursesA {
-     align-content: center;
-     gap: 15px;
+     align-content: start;
+     gap:10px;
 }
 
 
+/* courseBox == coursesA > div */
 #coursesA > div{     
-     height: fit-content;
+     height: auto;
 
-     min-width: 250px;
-     width: 40vw;
+     min-width: 240px;
+     width: 20vw;
      max-width: 500px;
+
      flex-grow: 1;
 
-     padding: 25px;
+     padding: 25px 35px;
+     margin-bottom: 5px;
      
-     opacity: 0.8;
+     opacity: 0.75;
 
-     background-color: var(--grey);
-     border: 1px solid var(--whiteT);
-     border-radius: 25px;
+     border: 1px solid var(--uiSecondaryGrey);
+     border-radius: 35px;
 }
 
+
+#coursesA > div > img {
+     float: left;
+
+     min-width: 20px;
+     width: 15vw;
+     max-width: 70px;
+
+     margin-right: 20px;
+
+     border-radius: 20px;
+}
+
+
 #coursesA > div > h1 {
-     color: var(--white);
-     font: 700 1.75em var(--rFont);
+     color: var(--uiPrimaryWhite);
+     font: 700 1.5em var(--rFont);
+     word-break: normal;
 }
 
 #coursesA > div > h2 {
-     color: var(--whiteT);
-     font: normal 1.25em var(--rFont);
+     color: var(--uiSecondaryGrey);
+     font: normal 1.15em var(--rFont);
+     margin-top: 5px;
 }
 
 #coursesA > div:hover {
      opacity: 1;
 
-     border: 1px solid var(--white);
+     border: 1px solid var(--uiPrimaryWhite);
      transition: all 300ms;
 
      cursor: pointer;
@@ -116,18 +139,21 @@
 /* open */
 #coursesA > div.open {
      opacity: 1;
-     background-color: var(--white);
+
+     background-color: var(--uiPrimaryBlack);
+     border: 1px solid var(--uiPrimaryWhite);
 
      cursor: default;
 }
 
 #coursesA > div.open > h1 {
-     color: var(--wood);
+     color: var(--uiPrimaryWhite);
 }
 
 #coursesA > div.open > h2 {
-     color: var(--grey);
+     color: var(--uiSecondaryWhite);
 }
+
 
 
 .createdContent {
@@ -135,18 +161,24 @@
 }
 
 .createdContent > h3 {
+     color: var(--uiSecondaryWhite);
      font: 700 1.25em var(--rFont);
      margin: 30px 0px 20px;
 }
 
+/* child div */
 .createdContent > div {
      display: flex;
      justify-content: space-between;
+     border-bottom: 1px solid var(--uiPrimaryGrey);
+
+     margin-bottom: 20px;
 }
 
-.createdContent button {
-     min-width: 50px;
-     height: 50px;
+
+.copyButton {
+     min-width: 40px;
+     height: 40px;
 
      margin-left: 20px;
 
@@ -157,7 +189,7 @@
      border: none;
 }
 
-.createdContent button:hover {
+.copyButton:hover {
      background-color: var(--aqua);
      cursor: copy;
      transition: all 300ms;
@@ -165,29 +197,31 @@
 
 
 .fieldName, .fieldValue {
+     color: var(--white);
      word-break: break-all;
+     font: 1em var(--rFont);
+
+     margin-bottom: 15px;
 }
 
 .fieldName {
-     font: normal 1em var(--rFont);
-     margin-bottom: 5px;
+     font-weight: 100;
+     color: var(--uiSecondaryWhite);
 }
 
 .fieldValue {
-     display: flex;
-
-     font: 700 1em var(--rFont);
-     margin-bottom: 20px;
+     color: var(--uiPrimaryWhite); 
 }
 
 
-#coursesA > div > a {
-     display: block;
+/* buttons */
+.createdContent > a, .createdContent > button {
+     display: inline-block;
 
-     width: 100%;
-     padding: 25px;
+     width: 49%;
+     padding: 10px;
 
-     margin-top: 20px;
+     margin-top: 40px;
 
      font: 700 1em var(--rFont);
      color: var(--black);
@@ -203,8 +237,32 @@
      cursor: pointer;
 }
 
-#coursesA > div > a:hover {
-     opacity: 0.75;
+.createdContent > a {
+     float: right;
+
+     color: var(--uiPrimaryBlack);
+     background-color: var(--uiPrimaryWhite);
+}
+
+.createdContent > a:Hover {
+     background-color: var(--aqua);
+}
+
+
+.createdContent > button {
+     color: var(--uiSecondaryGrey);
+     background-color: transparent;
+
+     border: 1px solid var(--uiSecondaryGrey);
+}
+
+.createdContent > button:hover {
+     color: var(--uiPrimaryWhite);
+     border-color: var(--uiPrimaryWhite);
+}
+
+
+.createdContent > a, .createdContent > button {
      transition: all 300ms;
 }
 
@@ -213,24 +271,3 @@
 
 
 
-
-
-/* media */
-@media screen and (min-width: 768px) {
-     /* title area */
-     #titleA {
-          text-align: left;
-     }
-
-
-     /* search area */
-     #searchA{
-          align-self: start;
-     }
-
-
-     /* explore area */
-     #coursesA > div > a {
-          padding: 15px;
-     }
-}
