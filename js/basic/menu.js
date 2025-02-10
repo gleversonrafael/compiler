@@ -104,7 +104,7 @@ function menuVisualState() {
      }
 
      function  loadMenuBoxEffect() {
-          let menuSections = ["dashboard", "mycourses", "managecourses", "allcourses", "manageusers"]
+          let menuSections = ["dashboard", "mycourses", "managecourses", "manageusers"]
 
           for(let elem in menuSections) {
                if(window.location.href.includes(menuSections[elem])) {
@@ -124,7 +124,6 @@ function menuVisualState() {
                          selMenuBox.style.borderBottom = "1px solid var(--razz)";
                          selMenuBox.style.color = "var(--razz)";
                     }
-     
      
      
                     imgChange.setAttribute("src", `../media/ico/menu/fill-${menuSections[elem]}.svg`);

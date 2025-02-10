@@ -35,13 +35,13 @@ async function showCourses(searchedContent) {
           createCoursesBoxes();
      
      } else {
-          let coursesA = document.getElementById("coursesA");
+          let coursesColumns = document.querySelectorAll(".coursesColumn");
+          
+          coursesColumns.forEach((column) => {
+               column.innerHTML = "";
 
-          coursesA.innerHTML = "";
-          // noDataObtained();
-
+          });
      }
-
 }
 
 
@@ -88,7 +88,7 @@ function openBox(event) {
                          emailDivChild: document.createElement("div"),
 
                          passwordDiv: document.createElement("div"),
-                         passwordDivChild: document.createElement("div")
+                         passwordDivChild: document.createElement("div"),
                     },
 
 
@@ -307,13 +307,17 @@ async function obtainAllowedCoursesData(searchedContent) {
 
 // third level
 function createCoursesBoxes() {
-     let coursesArea =  document.querySelector("section#coursesA")
-     coursesArea.innerHTML = "";
+     let coursesColumns = document.querySelectorAll("div.coursesColumn");
+     coursesColumns.forEach((column) => {
+          column.innerHTML = "";
+     })
+
 
      Object.entries(coursesData).forEach((data) => {
           // var
           let courseId = data[0];
           let courseValues = data[1];
+          let selectedColumn = coursesColumns[0].childElementCount > coursesColumns[1].childElementCount? coursesColumns[1]: coursesColumns[0];
 
 
           let courseProperties = {
@@ -345,7 +349,7 @@ function createCoursesBoxes() {
                courseProperties.courseBox.appendChild(courseProperties.platform);
           }
           
-          coursesArea.appendChild(courseProperties.courseBox);
+          selectedColumn.appendChild(courseProperties.courseBox);
 
           
 
@@ -360,3 +364,5 @@ function createCoursesBoxes() {
      })
 
 }
+
+
