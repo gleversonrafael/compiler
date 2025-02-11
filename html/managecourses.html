@@ -3,14 +3,17 @@
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Document</title>
+     <title> Gerenciar cursos</title>
 
      <link rel="shortcut icon" href="../media/ico/favicon.ico" type="image/x-icon">
 
      <link rel="stylesheet" href="../css/general.css">
      <link rel="stylesheet" href="../css/msitestructures.css">
+     <link rel="stylesheet" href="../css/msite/myc-managec/createmanage.css">
+     <link rel="stylesheet" href="../css/msite/myc-managec/managecourses.css">
 
 </head>
+
 <body>
      <!-- menu -->
      <header id="mHead" class="flex fAlignC fJustSB">
@@ -95,6 +98,76 @@
           </section>
 
      </section>
+
+     <!-- site's content -->
+     <main id="mCon" class="flex fJustC">
+          <div id="bgEff"></div>
+
+          <div class="conPattern flex flex-col">
+               <!-- title -->
+               <section id="titleA" class="flex-col">
+                    <h1 id="pageTitle"> Cursos gerenciados</h1>
+
+               </section>
+
+
+               <!-- search -->
+               <section id="searchA" class="flex-col">
+                    <label for="searchInp" class="subtitle"> Pesquisar</label>
+
+                    <div role="searchbox" id="searchB" class="flex fJustSB bAll sTrans">
+                         <input id="searchInp" type="text" class="bAll sTrans" placeholder="Insira o nome do curso que você quer buscar.">
+                         <button role="search" id="searchButton" class="bAll"></button>
+
+                    </div>
+
+
+               </section>
+
+
+               <!-- operations -->
+               <section id="operationsA" class="flex flex-col">
+                    <h3 class="subtitle"> Operações</h3>
+
+                    <div class="flex">
+                         <button id="addCourseButton" class="bAll dTrans"> Adicionar </button>
+                         <button id="deleteCourseButton" class="bAll dTrans"> Excluir </button>
+                    
+                    </div>
+
+               </section>
+
+
+               <!-- explore -->
+               <section id="exploreA" class="flex flex-col">
+                    <h3 class="subtitle">Meus</h3>
+
+                    <section id="coursesA" class="coursesArea">
+                         <div class="coursesColumn"></div>
+                         <div class="coursesColumn"></div>
+
+                    </section>
+
+
+                    <h3 class="subtitle"> Criados por outros administradores</h3>
+
+                    <section id="othersA" class="coursesArea">
+                         <div class="coursesColumn"></div>
+                         <div class="coursesColumn"></div>
+
+                    </section>
+
+               </section>
+
+
+          </div>
+
+     </main>
+
+
+     <!-- scripts -->
+     <script src="../js/final/mdependenciesf.js"></script>
+     <script src="../js/final/managecpf.js"></script>
      
 </body>
 </html>

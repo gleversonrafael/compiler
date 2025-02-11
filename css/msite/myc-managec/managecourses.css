@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+
+/* operations area */
+#operationsA {
+     align-self: center;
+
+     width: 100%;
+     max-width: 450px;
+
+     margin-bottom: 100px;
+}
+
+#operationsA > div {
+     gap: 10px;
+}
+
+#operationsA button {
+     width: 100%;
+
+     padding: 20px;
+     background-color: transparent;
+
+     cursor: pointer;
+}
+
+#addCourseButton {
+     color: var(--uiPrimaryWhite);
+     border: 1px solid var(--uiPrimaryWhite);
+}
+
+#deleteCourseButton {
+     color: var(--uiSecondaryWhite);
+     border: 1px solid var(--uiSecondaryWhite);
+
+}
+
+#operationsA button:hover {
+     color: var(--uiPrimaryBlack);
+     background-color: var(--uiPrimaryWhite);
+}
+
+
+@media screen and (min-width: 768px) {
+     #operationsA button {
+          width: calc(50% - 5px);
+          padding: 15px;
+     }
+
+}

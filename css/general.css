@@ -32,13 +32,13 @@
 
     /* ui - replace later versions */
     --uiPrimaryBlack: #151518;
-    --uiSecondaryBlack: #1C1C1F;
+    --uiSecondaryBlack: #1C1C22;
 
-    --uiPrimaryGrey: #38383D;
-    --uiSecondaryGrey: #636363;
+    --uiPrimaryGrey: #2A2A31;
+    --uiSecondaryGrey: #5D5D5D;
 
-    --uiPrimaryWhite: #FFFFFF;
-    --uiSecondaryWhite: #F1F1F7;
+    --uiPrimaryWhite: #E0E0E0;
+    --uiSecondaryWhite: #B7B7B7;
 
     /* fonts */
     --sFont: "Outfit", sans-serif;

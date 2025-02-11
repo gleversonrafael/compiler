@@ -23,8 +23,13 @@ module.exports = {
 
     mycoursesp: {
       dependOn: "mdependencies",
-      import: ["./js/basic/menu.js", "./js/basic/mycourses.js"]
+      import: ["./js/basic/menu.js", "./js/basic/manageandmycourses.js", "./js/basic/mycourses.js"]
 
+    },
+
+    managecp: {
+      dependOn: "mdependencies",
+      import: ["./js/basic/menu.js", "./js/basic/manageandmycourses.js", "./js/basic/managecourses.js"]
     },
 
     manageup: {
