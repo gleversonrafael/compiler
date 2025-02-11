@@ -24,7 +24,7 @@
 
 /* sign-in / out title  */
 #signTitle {
-    font: normal 500 2em var(--sFont);
+    font: normal 500 2em var(--rFont);
 }
 
 
@@ -37,7 +37,7 @@
 }
 
 .inpB input {    
-    font: normal 400 1em var(--sFont);
+    font: normal 400 1em var(--rFont);
 
     width: 100%;
     height: 50px;
@@ -74,7 +74,7 @@
 
     cursor: pointer;
     
-    font-family: var(--sFont);
+    font-family: var(--rFont);
     background-color: transparent;
     border-radius: 25px;
 }

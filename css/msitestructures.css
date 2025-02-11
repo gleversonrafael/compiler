@@ -57,7 +57,7 @@
 }
 
 .menuFont {
-     font: 100 0.75em var(--sFont);
+     font: 100 0.75em var(--rFont);
 }
 
 
@@ -209,7 +209,7 @@
 
 .subtitle {
      color: var(--whiteT);
-     font: 100 0.9em var(--sFont);
+     font: 100 0.9em var(--rFont);
      margin-bottom: 5px;
 }
 

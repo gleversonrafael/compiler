@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 * {
-    font-family: var(--sFont);
+    font-family: var(--rFont);
 }
 
 
@@ -76,11 +76,11 @@ main::after {
 }
 
 #mTitle-sec h1 {
-    font: normal 500 min(5em, 15vw) var(--sFont);
+    font: normal 500 min(5em, 15vw) var(--rFont);
 }
 
 #mTitle-sec h2 {
-    font: normal 100 min(1em, 3.5vw) var(--sFont);  
+    font: normal 100 min(1em, 3.5vw) var(--rFont);  
     color: var(--tiar);
 
     opacity: 0.9;

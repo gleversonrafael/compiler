@@ -99,9 +99,135 @@
 
      </section>
 
+
+
      <!-- site's content -->
      <main id="mCon" class="flex fJustC">
-          <div id="bgEff"></div>
+          <div id="bgEff">
+               <div id="createCourseBox" class="flex flex-col">         
+                    <!-- <button id="returnButton"></button>                 -->
+
+                    <div id="createCourseTitleBox" class="flex flex-col">
+                         <div class="flex flex-row fJustSB">
+                              <h1> Criar curso</h1>
+                              <button id="closeCreateBoxButton"> <img src="../media/ico/closeicon.png" alt=""></button>
+
+                         </div>
+
+                         <h2> Controle do acesso</h2>
+
+                    </div>
+
+                    <!-- createCourseForm --> <!-- 
+                    <form id="createCourseForm" class="flex">
+                         course data
+                         <fieldset class="flex flex-col">
+                              <h3> Dados do curso</h3>
+
+                              <label for="" class="bottomNspace"> Nome</label>
+                              <input type="text" name="" id="courseNameInp"class="dTrans" >
+
+                              <label for="" class="bottomNspace"> Plataforma</label>
+                              <input type="text" name="" id="coursePlatformInp" >
+
+                         </fieldset>
+
+
+                         user data
+                         <fieldset class="flex flex-col">
+                              <h3> Dados do usuário</h3>
+                              
+                              <label for="" class="bottomNspace"> E-mail</label>
+                              <input type="email" name="" id="emailInp"class="dTrans" >
+                         
+                              <label for="" class="bottomNspace"> Senha</label>
+                              <input type="text" name="" id="passwordInp"class="dTrans" >
+
+                         </fieldset>
+                         
+                         urls
+                         <fieldset class="flex flex-col">
+                              <h3> URLS</h3>
+
+                              <label for="" class="bottomNspace"> URL do curso</label>
+                              <input type="url" name="" id="" class="dTrans">
+
+                              <label for="" class="bottomNspace"> URL da imagem</label>
+                              <input type="url" name="" id="imageInp" class="bottomNspace dTrans">
+
+                         </fieldset>
+
+                         acess
+                         <button id="acessB" class="buttonPattern dTrans"> Editar acesso</button>
+
+
+                         final buttons
+                         <fieldset id="formButtonsField" class="flex flex-row">
+                              <input type="reset" value="Redefiinr" class="buttonPattern wrongButton">
+                              <input type="submit" value="Criar" class="buttonPattern correctButton">
+                              
+                         </fieldset>
+
+                    </form> -->
+
+                    <!-- searchBox -->
+                    <section id="searchUserBox" class="flex flex-col">
+                         <div id="searchUserArea" class="flex flex-row"> 
+                              <input type="search" name="searchUser" id="searchUserInp">
+                              <!-- search ico -->
+
+                         </div>
+
+                         <ul id="userList" class="flex">
+                              <li>
+                                   <p> Gleverson Rafael Rodrigues Nobre de Alencar</p>
+                                   <p> rafael@hotmail.com </p>
+
+                              </li>
+
+                              <li>
+                                   <p> Gleverson Rafael Rodrigues Nobre de Alencar</p>
+                                   <p> rafael@hotmail.com </p>
+
+                              </li>
+
+                              <li>
+                                   <p> Gleverson Rafael Rodrigues Nobre de Alencar</p>
+                                   <p> rafael@hotmail.com </p>
+
+                              </li>
+
+                              <li>
+                                   <p> Gleverson Rafael Rodrigues Nobre de Alencar</p>
+                                   <p> rafael@hotmail.com </p>
+
+                              </li>
+
+                              <li>
+                                   <p> Gleverson Rafael Rodrigues Nobre de Alencar</p>
+                                   <p> rafael@hotmail.com </p>
+
+                              </li>
+
+                              <li>
+                                   <p> Gleverson Rafael Rodrigues Nobre de Alencar</p>
+                                   <p> rafael@hotmail.com </p>
+
+                              </li>
+
+                         </ul>
+
+                         <div id="grantAcessButtons" class="flex flex-col">
+                              <button id="removeUserButton" class="changeAcessButton buttonPattern"> Remover</button>
+                              <button id="grantAcessButton" class="changeAcessButton buttonPattern"> Conceder</button>
+
+                         </div>
+
+                    </section>
+
+               </div>
+
+          </div>
 
           <div class="conPattern flex flex-col">
                <!-- title -->
@@ -130,7 +256,7 @@
                     <h3 class="subtitle"> Operações</h3>
 
                     <div class="flex">
-                         <button id="addCourseButton" class="bAll dTrans"> Adicionar </button>
+                         <button id="addCourseButton" class="bAll dTrans"> Criar </button>
                          <button id="deleteCourseButton" class="bAll dTrans"> Excluir </button>
                     
                     </div>
@@ -142,18 +268,18 @@
                <section id="exploreA" class="flex flex-col">
                     <h3 class="subtitle">Meus</h3>
 
-                    <section id="coursesA" class="coursesArea">
-                         <div class="coursesColumn"></div>
-                         <div class="coursesColumn"></div>
+                    <section id="coursesA" class="coursesArea flex flex-row">
+                         <div class="coursesColumn flex flex-col"></div>
+                         <div class="coursesColumn flex flex-col"></div>
 
                     </section>
 
 
                     <h3 class="subtitle"> Criados por outros administradores</h3>
 
-                    <section id="othersA" class="coursesArea">
-                         <div class="coursesColumn"></div>
-                         <div class="coursesColumn"></div>
+                    <section id="othersA" class="coursesArea flex flex-row">
+                         <div class="coursesColumn flex flex-col"></div>
+                         <div class="coursesColumn flex flex-col"></div>
 
                     </section>
 

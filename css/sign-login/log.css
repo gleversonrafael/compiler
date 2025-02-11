@@ -128,7 +128,7 @@ main {
 
 
 #msgT {
-    font: normal 4.5em var(--sFont);
+    font: normal 4.5em var(--rFont);
 }
 
 #msgT.inc {

@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
 /* fonts */
-@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 
 :root {
@@ -32,17 +33,16 @@
 
     /* ui - replace later versions */
     --uiPrimaryBlack: #151518;
-    --uiSecondaryBlack: #1C1C22;
+    --uiSecondaryBlack: #1c1c22;
 
-    --uiPrimaryGrey: #2A2A31;
-    --uiSecondaryGrey: #5D5D5D;
+    --uiPrimaryGrey: #2a2a31;
+    --uiSecondaryGrey: #5d5d5d;
 
-    --uiPrimaryWhite: #E0E0E0;
-    --uiSecondaryWhite: #B7B7B7;
+    --uiPrimaryWhite: #e0e0e0;
+    --uiSecondaryWhite: #b7b7b7;
 
     /* fonts */
-    --sFont: "Outfit", sans-serif;
-    --rFont: "Almarai", sans-serif;
+    --rFont: "Raleway", sans-serif;
 }
 
 
@@ -50,6 +50,8 @@
 
 /* doc */
 * {
+    font-family: var(--rFont);
+
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -132,7 +134,8 @@ a {
 
 
 /* spacement */
-.bottomNspace {
+/* bottom normal spacement */
+.bottomNspace { 
     margin-bottom: 5px;
 }
 
@@ -146,7 +149,13 @@ a {
     border-radius: 65px;
 }
 
+.buttonPattern {
+    border-radius: 25px;
+    padding: 15px;
+    cursor: pointer;
 
+    transition: all 500ms;
+}
 
 
 

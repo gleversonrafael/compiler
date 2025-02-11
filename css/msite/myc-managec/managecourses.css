@@ -7,7 +7,7 @@
 
      width: 100%;
      max-width: 450px;
-
+     
      margin-bottom: 100px;
 }
 
@@ -40,6 +40,229 @@
      background-color: var(--uiPrimaryWhite);
 }
 
+#bgEff {    
+     display: flex;
+     justify-content: center;
+
+     background-color: var(--uiSecondaryGrey);
+
+     overflow: scroll;
+}
+
+
+
+
+/* create course box */
+#createCourseBox {
+     display: block;
+
+     width: 80vw;
+     max-width: 1250px;
+     
+     height: fit-content;
+     
+     padding: 50px 50px;
+     margin: 50px min(10vw, 50px);
+
+     color: var(--uiSecondaryWhite);
+     background-color: var(--uiSecondaryBlack);
+
+     border-radius: 15px;
+}
+
+
+/* text */
+#createCourseTitleBox > div > h1 {
+     font: 600 min(7vw, 2.25em) var(--rFont);
+     color: var(--uiPrimaryWhite);
+}
+
+#createCourseTitleBox > h2 {
+     font: 200 1em var(--rFont);
+     margin-bottom: 40px;
+}
+
+#createCourseForm h3 {
+     color: var(--uiPrimaryWhite);
+     font-weight: 700;
+     margin-bottom: 20px;
+}
+
+
+/* form */
+#createCourseForm {
+     flex-flow: column wrap;
+     gap: 40px;
+}
+
+#createCourseForm fieldset {
+     border: none;
+}
+
+#formButtonsField {
+     height: fit-content;
+     padding: 0;
+}
+
+
+
+/* inputs */
+#formButtonsField > input {
+     width: 50%;
+}
+
+#createCourseForm label {
+     color: var(--uiPrimaryWhite);
+     font-weight: 300;
+}
+
+#createCourseForm input {  
+     width: 100%;
+
+     margin-bottom: 20px;
+     padding-bottom: 10px;
+
+     font: 500 1em var(--rFont);
+     color: var(--uiPrimaryWhite);
+
+     background-color: transparent;
+     border-color: transparent transparent var(--uiSecondaryGrey) transparent;
+}
+
+#createCourseForm input:focus {
+     outline: none;
+     border-bottom-color: var(--uiPrimaryWhite);
+}
+
+
+/* buttons */
+#closeCreateBoxButton {
+     background-color: transparent;
+     border: none;
+}
+
+#closeCreateBoxButton > img {
+     min-height: 10px;
+     height: 5vw;
+     max-height: 25px;
+}
+
+
+#formButtonsField {
+     gap: 10px;
+}
+
+#formButtonsField > input {
+     width: calc(50% - 5px);
+     
+     color: var(--uiPrimaryBlack);
+     border: none;
+}
+
+#formButtonsField > input[type=reset] {
+     background-color: var(--uiPrimaryWhite);
+}
+
+#formButtonsField > input[type=submit] {
+     background-color: var(--aqua);
+}
+
+
+#formButtonsField > input:hover {
+     opacity: 0.75;
+}
+
+
+#acessB {
+     background-color: transparent;
+     padding: 15px;
+
+     font-weight: 600;
+     color: var(--uiPrimaryWhite);
+     border: 1px solid var(--uiPrimaryWhite);
+}
+
+#acessB:hover {
+     color: var(--uiPrimaryBlack);
+     background-color: var(--uiPrimaryWhite);
+}
+
+
+
+
+/* search box */
+#searchuUserArea {
+     background-color: var(--uiPrimaryGrey);
+}
+
+/* user list */
+#userList {
+     flex-flow: column nowrap;
+
+     gap: 10px;
+
+     max-height: 400px;
+     width: 100%;
+
+     margin-bottom: 50px;
+
+     overflow: scroll;
+}
+
+#userList > li {
+     padding: 15px;
+     background-color: var(--uiPrimaryGrey);
+
+
+}
+
+#userList > li > p {
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+
+     width: 40vw;
+     max-width: 100%;
+}
+
+
+/* buttons */
+#grantAcessButtons {
+     gap: 10px;
+}
+
+.changeAcessButton {
+     background-color: transparent;
+     max-width: 500px;
+}
+
+#removeUserButton:hover, #grantAcessButton:hover {
+     font-weight: 600;
+     color: var(--uiPrimaryBlack);
+}
+
+#removeUserButton {
+     color: var(--razz);
+     border: 1px solid var(--razz);
+}
+
+#removeUserButton:hover {
+     background-color: var(--razz);
+}
+
+
+#grantAcessButton {
+     color: var(--aqua);
+     border: 1px solid var(--aqua);
+}
+
+#grantAcessButton:hover {
+     background-color: var(--aqua);
+}
+
+
+
+
 
 @media screen and (min-width: 768px) {
      #operationsA button {
@@ -47,4 +270,25 @@
           padding: 15px;
      }
 
+
+     /* create course box */
+     #createCourseBox {
+          margin-left: 250px;
+     }
+
+     #createCourseTitleBox > h1{
+          justify-self: center;
+     }
+
+     #createCourseForm {
+          flex-flow: row wrap;
+     }
+
+     #createCourseForm > fieldset {
+          background-color: var(--uiPrimaryGrey);
+
+          width: calc(50% - 40px);
+          padding: 25px;
+
+     }
 }

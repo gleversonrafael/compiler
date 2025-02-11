@@ -23,7 +23,7 @@
 }
 
 #msgB > p {
-    font: 500 1.25em var(--sFont);
+    font: 500 1.25em var(--rFont);
     color: var(--white);
 }
 
@@ -86,7 +86,7 @@
 /* sign title */
 #signTitle {
     color: var(--white);
-    font: normal 900 min(2em) var(--sFont);
+    font: normal 900 min(2em) var(--rFont);
     text-decoration: none;
 }
 
@@ -96,7 +96,7 @@
 /* subtopics */
 .stopic {
     color: var(--white);
-    font: 500 min(1.25em) var(--sFont);
+    font: 500 min(1.25em) var(--rFont);
     margin: 40px 0px 20px;
 }
 
@@ -134,7 +134,7 @@ input[type=radio] {
 }
 
 #regUserB, #admUserB {
-    font: 300 1em var(--sFont);
+    font: 300 1em var(--rFont);
 }
 
 

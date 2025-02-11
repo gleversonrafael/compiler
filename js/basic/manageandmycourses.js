@@ -63,20 +63,17 @@ function openBox(event) {
      // var
      let courseId = obtainClickedCourseId();
      let courseBox = document.getElementById(courseId);
-
-     changeCallPurposeViaOpenBox()
-
-     
-
-     let elementData = obtainDataSelected()[courseId];
-
+     let elementData;
 
      // process
-     if(courseBox != null && (!courseBox.classList.contains("open"))) {
-          showElements();
-     }
+     if(courseBox != null && ! courseBox.classList.contains("open")) {
+          changeCallPurposeViaOpenBox()
+          elementData = obtainDataSelected()[courseId];
 
+          showElements()
+     }
      
+
      // compl    
      function obtainClickedCourseId() {
           let clickedElement = event.target;
@@ -93,7 +90,6 @@ function openBox(event) {
      
      function changeCallPurposeViaOpenBox() {
           let coursesAreaSelected = courseBox.parentElement.parentElement.id;
-          console.log(coursesAreaSelected);
 
           if(coursesAreaSelected === "coursesA") {
                callPurpose = "my" 
