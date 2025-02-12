@@ -76,6 +76,10 @@ function openBox(event) {
 
      // compl    
      function obtainClickedCourseId() {
+          // fix with current target
+          // 
+          // 
+          // 
           let clickedElement = event.target;
 
           // div child clicked?

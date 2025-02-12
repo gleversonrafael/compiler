@@ -253,17 +253,22 @@
      max-width: 500px;
 }
 
-#removeUserButton:hover, #grantAcessButton:hover {
+.changeAcessButton:disabled {
+     opacity: 0.5;
+}
+
+
+#removeAcessButton:hover, #grantAcessButton:hover {
      font-weight: 600;
      color: var(--uiPrimaryBlack);
 }
 
-#removeUserButton {
+#removeAcessButton {
      color: var(--razz);
      border: 1px solid var(--razz);
 }
 
-#removeUserButton:hover {
+#removeAcessButton:hover {
      background-color: var(--razz);
 }
 
@@ -278,6 +283,8 @@
 }
 
 
+
+/* users boxes */
 #userList > .editableBox {
      border: 1px solid var(--uiPrimaryWhite);
      cursor: pointer;
@@ -285,6 +292,7 @@
 
 #userList > .acessGranted {
      background-color: var(--gree);
+     border: 1px solid var(--aqua);
 }
 
 
