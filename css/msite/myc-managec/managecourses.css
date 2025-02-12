@@ -41,11 +41,7 @@
 }
 
 #bgEff {    
-     display: flex;
      justify-content: center;
-
-     background-color: var(--uiSecondaryGrey);
-
      overflow: scroll;
 }
 
@@ -53,9 +49,11 @@
 
 
 /* create course box */
-#createCourseBox {
-     display: block;
+#createCourseBox, #createCourseForm, #searchUserBox {
+     display: none;
+}
 
+#createCourseBox {
      width: 80vw;
      max-width: 1250px;
      
@@ -69,6 +67,30 @@
 
      border-radius: 15px;
 }
+
+#closeCreateBoxButton {
+     background-color: transparent;
+     border: none;
+     cursor: pointer;
+}
+
+#closeCreateBoxButton > img {
+     min-height: 10px;
+     height: 5vw;
+     max-height: 25px;
+}
+
+#returnCreateCourse {
+     background-color: transparent;
+     border: none;
+     cursor: pointer;
+}
+
+#returnCreateCourse > img {
+     height: 25px;
+     width: 25px;
+}
+
 
 
 /* text */
@@ -135,19 +157,7 @@
 }
 
 
-/* buttons */
-#closeCreateBoxButton {
-     background-color: transparent;
-     border: none;
-}
-
-#closeCreateBoxButton > img {
-     min-height: 10px;
-     height: 5vw;
-     max-height: 25px;
-}
-
-
+/* form buttons */
 #formButtonsField {
      gap: 10px;
 }
@@ -201,7 +211,7 @@
 
      gap: 10px;
 
-     max-height: 400px;
+     height: 400px;
      width: 100%;
 
      margin-bottom: 50px;
@@ -212,8 +222,6 @@
 #userList > li {
      padding: 15px;
      background-color: var(--uiPrimaryGrey);
-
-
 }
 
 #userList > li > p {
@@ -225,8 +233,17 @@
      max-width: 100%;
 }
 
+#userList .username {
+     font-weight: 600;
+}
 
-/* buttons */
+#userList .useremail {
+     font-weight: 200;
+}
+
+
+
+/* list buttons */
 #grantAcessButtons {
      gap: 10px;
 }
@@ -261,6 +278,16 @@
 }
 
 
+#userList > .editableBox {
+     border: 1px solid var(--uiPrimaryWhite);
+     cursor: pointer;
+}
+
+#userList > .acessGranted {
+     background-color: var(--gree);
+}
+
+
 
 
 
@@ -274,13 +301,14 @@
      /* create course box */
      #createCourseBox {
           margin-left: 250px;
+          max-width: 500px;
      }
 
      #createCourseTitleBox > h1{
           justify-self: center;
      }
 
-     #createCourseForm {
+     /* #createCourseForm {
           flex-flow: row wrap;
      }
 
@@ -290,5 +318,5 @@
           width: calc(50% - 40px);
           padding: 25px;
 
-     }
+     } */
 }

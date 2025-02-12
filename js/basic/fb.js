@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -18,13 +18,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth();
+const usersCol = collection(db, "usersInfo");
+const coursesCol = collection(db, "courses");
 
 // exports
 export { firebaseConfig };
 export { app };
 export { db };
 export { auth };
+export { usersCol };
+export { coursesCol };
 
-console.log("Current version: 0502-01");
+console.log("Current version: 1202");
 
 

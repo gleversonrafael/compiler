@@ -1,8 +1,7 @@
 // imports
-import { initializeApp } from "firebase/app";
-import { addDoc, collection } from "firebase/firestore";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import { auth, db, firebaseConfig} from "./fb.js";
+import { addDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, usersCol } from "./fb.js";
 
 
 
@@ -10,7 +9,6 @@ import { auth, db, firebaseConfig} from "./fb.js";
 // gl variables
 // form
 const mForm = document.querySelector("#mForm"); 
-const usersCol = collection(db, "usersInfo");
 
 
 

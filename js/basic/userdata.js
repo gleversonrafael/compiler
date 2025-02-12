@@ -72,5 +72,3 @@ async function userDataProcess() {
 
 
 
-
-// s functions
