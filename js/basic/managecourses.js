@@ -1,6 +1,6 @@
 // firebase
-import { onSnapshot, query, where, addDoc } from "firebase/firestore";
-import { usersCol, coursesCol } from "./fb.js";
+import { onSnapshot, query, where, addDoc, doc, deleteDoc } from "firebase/firestore";
+import { db, usersCol, coursesCol } from "./fb.js";
 import { userData } from "./userdata.js"
 
 
@@ -26,7 +26,7 @@ let acessB = document.getElementById("acessB");
 // create course box events
 addCourseButton.addEventListener("click", toggleCreateCourseBox);
 
-document.getElementById("closeCreateBoxButton").addEventListener("click", toggleCreateCourseBox);
+document.getElementById("closeCreateCourseBox").addEventListener("click", toggleCreateCourseBox);
 
 
 document.getElementById("returnCreateCourse").addEventListener("click", changeCourseBoxPage);
@@ -96,10 +96,11 @@ function changeCourseBoxPage() {
 let canEditAcess;
 let userList = document.getElementById("userList");
 
-// events
 let grantAcessButton = document.getElementById("grantAcessButton");
 let removeAcessButton = document.getElementById("removeAcessButton");
 
+
+// events
 grantAcessButton.addEventListener("click", () => {
      canEditAcess = canEditAcess != true ? true : false
      editAcessState("grant");
@@ -255,21 +256,50 @@ function createCourse() {
 
 // delete course
 // var
+let deletedCourses = [];
+let deleteCourseBox = document.getElementById("deleteCourseBox");
 let deleteCourseButton = document.getElementById("deleteCourseButton");
+let submitExclusionButton = document.getElementById("confirmExclusion");
 
 
 // events
 deleteCourseButton.addEventListener("click", () => {
      if(deleteCourseState != true) {
           deleteCourseState = true;
-          selectCoursesThatWillBeDeleted()
+          selectCoursesThatWillBeDeleted();
 
      } else {
-          deleteSubmit()
-
+          openDeleteCourseBox();
      }
 
 });
+
+submitExclusionButton.addEventListener("click", deleteCourses);
+
+
+document.getElementById("cancelExclusion").addEventListener("click", () => {
+     if(deleteCourseState === true) {
+          closeDeleteBox(false);
+     }
+});
+
+document.getElementById("changeExclusion").addEventListener("click", () => {
+     if(deleteCourseState === true) {
+          closeDeleteBox(true);
+     }
+});
+
+
+// functions
+async function deleteCourses() {
+     for(let actualId = 0; actualId < deletedCourses.length; actualId++) {
+          let temporaryDoc = doc(db, "courses", deletedCourses[actualId]);
+
+          await deleteDoc(temporaryDoc)
+     }
+
+     closeDeleteBox(false);
+}
 
 
 function selectCoursesThatWillBeDeleted() {
@@ -298,19 +328,77 @@ function selectCoursesThatWillBeDeleted() {
                }
           } 
      }
+}
+
+function openDeleteCourseBox() {
+     // process
+     obtainDeletedCourses()
+     setErrorCounter()
+
+     backgroundEffect.style.display = "flex";
+     deleteCourseBox.style.display = "flex";
 
 
-     function addDeletedCourseState(ev) {
-          ev.currentTarget.classList.remove("canBeDeleted");
-          ev.currentTarget.classList.add("willBeDeleted");
+     function obtainDeletedCourses() {
+          let coursesSelected = document.querySelectorAll(".willBeDeleted");
+
+          coursesSelected.forEach((selectedCourse) => {
+               deletedCourses.push(selectedCourse.id);
+          })
+     }
+
+
+     function setErrorCounter() {
+          let deletedCoursesText = document.getElementById("deletedCoursesCounter");
+          
+          if(deletedCourses.length > 0) {
+               let courseComplement = deletedCourses.length > 1? "cursos" : "curso"
+
+               deletedCoursesText.innerText = `Deseja excluir ${deletedCourses.length} ${courseComplement}?`
+               submitExclusionButton.removeAttribute("disabled");
+          
+          } else {
+               deletedCoursesText.innerText = "Não há cursos a serem excluídos."
+               submitExclusionButton.setAttribute("disabled", "");
+          }
      }
 }
 
 
-function deleteSubmit() {
+function addDeletedCourseState(ev) {
+     let selectedBox = ev.currentTarget
 
+     if(selectedBox.classList.contains("canBeDeleted")) {
+          selectedBox.classList.remove("canBeDeleted");
+          selectedBox.classList.add("willBeDeleted");
 
+     } else {
+          selectedBox.classList.remove("willBeDeleted");
+          selectedBox.classList.add("canBeDeleted");
+     }
 }
+
+
+function closeDeleteBox(maintain) {
+     backgroundEffect.style.display = "none";
+     deleteCourseBox.style.display = "none";
+
+     if(maintain != true) {
+          addCourseButton.removeAttribute("disabled");   
+          deletedCourses = [];
+          deleteCourseState = false;
+
+          document.querySelectorAll(".canBeDeleted, .willBeDeleted").forEach((selectedElement) => {
+               selectedElement.removeAttribute("class");
+               selectedElement.removeEventListener("click", addDeletedCourseState);
+
+          })
+     } 
+}
+
+
+
+
 
 
 

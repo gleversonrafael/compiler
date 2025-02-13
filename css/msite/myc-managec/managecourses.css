@@ -48,11 +48,13 @@
 #bgEff {    
      justify-content: center;
      overflow: scroll;
+
+     z-index: 1;
 }
 
 
 /* create courses area */
-.coursesColumn > div.canBeDeleted {
+.coursesColumn > div.canBeDeleted, .coursesColumn > div.willBeDeleted {
      border-color: var(--razz);
 }
 
@@ -63,18 +65,18 @@
 
 
 /* create course box */
-#createCourseBox, #createCourseForm, #searchUserBox {
+.createdBox, #createCourseForm, #searchUserBox {
      display: none;
 }
 
-#createCourseBox {
+.createdBox {
      width: 80vw;
      max-width: 1250px;
      
      height: fit-content;
      
-     padding: 50px 50px;
-     margin: 50px min(10vw, 50px);
+     padding: 50px;
+     margin: 50px min(10vw, 50px) auto;
 
      color: var(--uiSecondaryWhite);
      background-color: var(--uiSecondaryBlack);
@@ -82,13 +84,18 @@
      border-radius: 15px;
 }
 
-#closeCreateBoxButton {
+#createCourseBox > .createdBoxTitle h1 {
+     color: var(--uiPrimaryWhite);
+     
+}
+
+.closeCreatedBox {
      background-color: transparent;
      border: none;
      cursor: pointer;
 }
 
-#closeCreateBoxButton > img {
+.closeCreatedBox > img {
      min-height: 10px;
      height: 5vw;
      max-height: 25px;
@@ -108,12 +115,12 @@
 
 
 /* text */
-#createCourseTitleBox > div > h1 {
+.createdBox > div > h1 {
      font: 600 min(7vw, 2.25em) var(--rFont);
      color: var(--uiPrimaryWhite);
 }
 
-#createCourseTitleBox > h2 {
+.createdBoxTitle > h2 {
      font: 200 1em var(--rFont);
      margin-bottom: 40px;
 }
@@ -135,18 +142,8 @@
      border: none;
 }
 
-#formButtonsField {
-     height: fit-content;
-     padding: 0;
-}
-
-
 
 /* inputs */
-#formButtonsField > input {
-     width: 50%;
-}
-
 #createCourseForm label {
      color: var(--uiPrimaryWhite);
      font-weight: 300;
@@ -172,31 +169,6 @@
 
 
 /* form buttons */
-#formButtonsField {
-     gap: 10px;
-}
-
-#formButtonsField > input {
-     width: calc(50% - 5px);
-     
-     color: var(--uiPrimaryBlack);
-     border: none;
-}
-
-#formButtonsField > input[type=reset] {
-     background-color: var(--uiPrimaryWhite);
-}
-
-#formButtonsField > input[type=submit] {
-     background-color: var(--aqua);
-}
-
-
-#formButtonsField > input:hover {
-     opacity: 0.75;
-}
-
-
 #acessB {
      background-color: transparent;
      padding: 15px;
@@ -215,7 +187,7 @@
 
 
 /* search box */
-#searchuUserArea {
+#searchUserArea {
      background-color: var(--uiPrimaryGrey);
 }
 
@@ -310,6 +282,97 @@
 }
 
 
+/* both delete and add box properties */
+/* buttons */
+.createdBoxButtons {
+     height: fit-content;
+     padding: 0;
+     gap: 10px;
+}
+
+.createdBoxButtons > button, .createdBoxButtons > input {
+     min-width: calc(50% - 5px);
+     max-width: 100%;
+     flex-grow: 1;
+
+     height: 55px;
+
+     cursor: pointer;
+     background-color: transparent;
+}
+
+.createdBoxButtons > input {
+     width: calc(50% - 5px);
+     
+     color: var(--uiPrimaryBlack);
+}
+
+.createdBoxButtons > input:hover {
+     opacity: 0.75;
+}
+
+
+.subButton {
+     color: var(--uiSecondaryWhite);
+     background-color: transparent;
+     border: 1px solid var(--uiSecondaryWhite);
+}
+
+.subButton:hover {
+     color: var(--uiPrimaryWhite);
+     border: 1px solid var(--uiPrimaryWhite);
+}
+
+
+/* delete course box */
+/* text */
+#deleteCourseBox {
+     margin-top: 100px;
+     max-width: 400px;
+}
+
+#deleteCourseBox > .createdBoxTitle > h1 {
+     color: var(--razz);
+     margin-bottom: 10px;
+}
+
+
+
+/* buttons */
+#deleteCourseBox > .createdBoxButtons {
+     margin-top: 50px;
+}
+
+#confirmExclusion {
+     color: var(--razz);
+     border: 1px solid var(--razz);
+}
+
+#confirmExclusion:hover {
+     color: var(--uiPrimaryWhite);
+     background-color: var(--razz);
+}
+
+#confirmExclusion:disabled {
+     opacity: 0.60;
+}
+
+#cancelExclusion {
+     margin-top: 10px;
+     
+     padding: 25px;
+
+     color: var(--uiPrimaryWhite);
+     background-color: var(--uiPrimaryGrey);
+     border: none;
+     cursor: pointer;
+}
+
+#cancelExclusion:hover {
+     background-color: var(--uiSecondaryGrey);
+}
+
+
 
 
 
@@ -319,16 +382,19 @@
           padding: 15px;
      }
 
-
      /* create course box */
-     #createCourseBox {
+     .createdBox {
           margin-left: 250px;
           max-width: 500px;
      }
 
-     #createCourseTitleBox > h1{
-          justify-self: center;
+     .createdBoxButtons > button, .createdBoxButtons > input {
+          height: 35px;
      }
+
+     #cancelExclusion {
+          padding: 15px;
+     } 
 
      /* #createCourseForm {
           flex-flow: row wrap;

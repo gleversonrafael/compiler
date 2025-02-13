@@ -104,7 +104,7 @@
      <!-- site's content -->
      <main id="mCon" class="flex fJustC">
           <div id="bgEff">
-               <div id="createCourseBox" class="flex flex-col">
+               <div id="createCourseBox" class="createdBox flex flex-col">
                     <!-- return icon  -->
                     <button id="returnCreateCourse">
                          <img src="../media/ico/returnico.svg" alt="">
@@ -113,10 +113,10 @@
                     
 
                     <!-- create title -->
-                    <div id="createCourseTitleBox" class="flex flex-col">
+                    <div class="createdBoxTitle flex flex-col">
                          <div class="flex flex-row fJustSB">
                               <h1> Criar curso</h1>
-                              <button id="closeCreateBoxButton"> <img src="../media/ico/closeicon.png" alt=""></button>
+                              <button id="closeCreateCourseBox" class="closeCreatedBox"> <img src="../media/ico/closeicon.png" alt=""></button>
 
                          </div>
 
@@ -168,9 +168,9 @@
 
 
                          <!-- final buttons -->
-                         <fieldset id="formButtonsField" class="flex flex-row">
-                              <input type="reset" value="Redefiinr" class="buttonPattern wrongButton">
-                              <input type="submit" value="Criar" class="buttonPattern correctButton">
+                         <fieldset id="formButtonsField" class="createdBoxButtons flex flex-row">
+                              <input type="reset" value="Redefinir" class="subButton bAll dTrans">
+                              <input type="submit" value="Criar" class="bAll dTrans">
                               
                          </fieldset>
 
@@ -195,12 +195,32 @@
                     </section>
 
                </div>
+          
+
+               <div id="deleteCourseBox" class="createdBox flex-col">
+                    <div class="createdBoxTitle flex flex-row fJustSB"> 
+                         <h1> Excluir cursos</h1>
+
+                    </div>
+
+                    <p id="deletedCoursesCounter"> null text</p>
+
+                    <div class="createdBoxButtons flex fJustSB">
+                         <button id="changeExclusion" class="flex fJustC fAlignC subButton dTrans bAll"> Alterar </button>
+                         <button id="confirmExclusion" class="flex fJustC fAlignC dTrans bAll"> Confirmar </button>
+
+                    </div>
+
+                    <button id="cancelExclusion" class="bAll dTrans "> Cancelar exclusão </button>
+
+               </div>
 
           </div>
 
 
 
           
+          <!-- site main content -->
           <div class="conPattern flex flex-col">
                <!-- title -->
                <section id="titleA" class="flex-col">
