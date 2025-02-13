@@ -2,6 +2,7 @@
 import { copyData } from "./mycourses.js"
 import { userData } from "./userdata.js"
 
+
 // firebase
 import { onSnapshot, collection, where, query } from "firebase/firestore";
 import { db } from "./fb.js";
@@ -13,7 +14,6 @@ let coursesData = {};
 let othersData = {};
 
 let callPurpose;
-
 
 let pageType = window.location.href.includes("mycourses") ? "myCourses" : "manageCourses"
 let searchInp = document.getElementById("searchInp");
@@ -57,40 +57,48 @@ async function showCourses(searchedContent) {
 }
 
 
-
-
 function openBox(event) {  
-     // var
-     let courseId = obtainClickedCourseId();
-     let courseBox = document.getElementById(courseId);
+     let courseId
+     let courseBox
      let elementData;
-
-     // process
-     if(courseBox != null && ! courseBox.classList.contains("open")) {
-          changeCallPurposeViaOpenBox()
-          elementData = obtainDataSelected()[courseId];
-
-          showElements()
-     }
      
+     if(! isInDeleteMode()) {
+          // var
+          courseId = obtainCourseId()
+          courseBox = document.getElementById(courseId);
 
-     // compl    
-     function obtainClickedCourseId() {
-          // fix with current target
-          // 
-          // 
-          // 
-          let clickedElement = event.target;
 
-          // div child clicked?
-          if(clickedElement.childElementCount == 0) {
-               return clickedElement.parentElement.id;
-          
-          } else {
-               return clickedElement.id;
+          // process
+          if(courseBox != null && ! courseBox.classList.contains("open")) {
+               changeCallPurposeViaOpenBox()
+               elementData = obtainDataSelected()[courseId];
+
+               showElements()
           }
      }
 
+
+
+
+     // compl   
+     function isInDeleteMode() {
+          let temporaryCourses = document.querySelectorAll(".coursesColumn > .canBeDeleted, .coursesColumn > .willBeDeleted").length;
+
+          if(temporaryCourses != 0) {
+               return true
+          } 
+     }
+
+
+     function obtainCourseId() {
+          if(event.target.tagName === "DIV") {
+               return event.target.id
+
+          } else {
+               return event.target.parentElement.id
+          }
+     }
+     
      
      function changeCallPurposeViaOpenBox() {
           let coursesAreaSelected = courseBox.parentElement.parentElement.id;
@@ -240,12 +248,15 @@ function openBox(event) {
 
 
 
+
+
 function closeBox(ev) {
-     let previouslyCreatedContent = ev.target.parentElement;
+     let previouslyCreatedContent = ev.currentTarget.parentElement;
      let courseBox = previouslyCreatedContent.parentElement;
-     
-     courseBox.classList.remove("open");
+
+
      previouslyCreatedContent.remove();
+     courseBox.classList.remove("open");
 }
 
 

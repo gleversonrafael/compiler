@@ -1,16 +1,20 @@
 // firebase
-import { onSnapshot, query, where, setDoc } from "firebase/firestore";
-import { usersCol } from "./fb.js";
+import { onSnapshot, query, where, addDoc } from "firebase/firestore";
+import { usersCol, coursesCol } from "./fb.js";
 import { userData } from "./userdata.js"
 
 
 // generalVars
 let createCourseForm = document.getElementById("createCourseForm");
+let deleteCourseState;
+let addCourseButton = document.getElementById("addCourseButton");
 
 
 
 
-// create course var
+
+
+// create course global var
 let backgroundEffect = document.getElementById("bgEff");
 let createCourseBox = document.getElementById("createCourseBox");
 let createCourseBoxPage;
@@ -20,7 +24,7 @@ let acessB = document.getElementById("acessB");
 
 
 // create course box events
-document.getElementById("addCourseButton").addEventListener("click", toggleCreateCourseBox);
+addCourseButton.addEventListener("click", toggleCreateCourseBox);
 
 document.getElementById("closeCreateBoxButton").addEventListener("click", toggleCreateCourseBox);
 
@@ -167,17 +171,13 @@ function editAcessState(typeOfCall) {
      function grantOrRemoveAcess(ev) {
           let li = ev.currentTarget;
 
-          if(typeOfCall === "grant") {
-               li.classList.remove("editableBox");
-               li.classList.add("acessGranted"); 
-     
-          } else {
-               li.classList.remove("acessGranted");
+          if(li.classList.contains("editableBox")) {
+               typeOfCall === "grant" ? li.classList.add("acessGranted") : li.classList.remove("acessGranted");
+
+               li.classList.remove("editableBox");   
           }
 
-          console.log("acess granted");
-
-          li.removeEventListener("click", grantOrRemoveAcess);
+          li.removeEventListener("click", grantOrRemoveAcess)
      }
 
 
@@ -187,23 +187,16 @@ function editAcessState(typeOfCall) {
 
           for(let li = 0; li < usersBoxes.length; li ++) {
                // unselect boxes - analyze if a button is disabled
-               if(grantAcessButton.hasAttribute("disabled") || removeAcessButton.hasAttribute("disabled")) {
-                    // emendar com and
-                    if(usersBoxes[li].classList.contains("editableBox")) {
-                         console.log("removed editable box")
+               if(usersBoxes[li].classList.contains("editableBox") && (grantAcessButton.hasAttribute("disabled") || removeAcessButton.hasAttribute("disabled"))) {
+                    usersBoxes[li].classList.remove("editableBox");
+                    // couldn"t directly remove event listener from here.
 
-                         usersBoxes[li].classList.remove("editableBox");
-                         usersBoxes[li].removeEventListener("click", grantOrRemoveAcess); 
-                    } 
-              
 
                // select boxes
                } else if(typeOfCall === "grant" && (! usersBoxes[li].classList.contains("acessGranted")) || (typeOfCall === "remove" && usersBoxes[li].classList.contains("acessGranted"))) {
 
-                    console.log("activated");
                     usersBoxes[li].classList.add("editableBox");
                     usersBoxes[li].addEventListener("click", grantOrRemoveAcess);
-               
                } 
           }
      
@@ -211,4 +204,116 @@ function editAcessState(typeOfCall) {
 }
 
 
+
+
 // createCourse
+createCourseForm.addEventListener("submit", (ev) => {
+     ev.preventDefault();
+     createCourse();
+} )
+
+
+function createCourse() {
+     //if(analyzeInputs()) {
+          uploadCourse()
+
+     //}
+
+
+     function uploadCourse() {
+          addDoc(coursesCol, {
+               courseName: document.getElementById("courseNameInp").value,
+               coursePlatform: document.getElementById("coursePlatformInp").value,
+               
+               email: document.getElementById("emailInp").value,
+               userPassword: document.getElementById("userPasswordInp").value,
+               
+               url: document.getElementById("urlInp").value,
+               img: document.getElementById("imgInp").value,
+
+               creator: userData.uid,
+               usersWithAcess: obtainUsers()
+          })
+     }
+
+
+     function obtainUsers() {
+          let usersWithAcess = [];
+          let usersIds = document.querySelectorAll("#userList > .acessGranted");
+
+          for(let iterator = 0; iterator < usersIds.length; iterator ++) {
+               usersWithAcess.push(usersIds[iterator].id);
+          }
+
+          return usersWithAcess;
+     }
+     
+}
+
+
+
+
+// delete course
+// var
+let deleteCourseButton = document.getElementById("deleteCourseButton");
+
+
+// events
+deleteCourseButton.addEventListener("click", () => {
+     if(deleteCourseState != true) {
+          deleteCourseState = true;
+          selectCoursesThatWillBeDeleted()
+
+     } else {
+          deleteSubmit()
+
+     }
+
+});
+
+
+function selectCoursesThatWillBeDeleted() {
+     selectCourses();
+
+     if(deleteCourseState === true) {
+          addCourseButton.setAttribute("disabled", "");
+     
+     } else {
+          addCourseButton.removeAttribute("disabled");
+     }  
+
+
+     // complementary
+     function selectCourses() {
+          let courses = document.querySelectorAll(".coursesColumn > div");
+
+          for(let i = 0; i < courses.length; i ++) {
+               if(deleteCourseState === true) {
+                    courses[i].classList.add("canBeDeleted");
+                    courses[i].addEventListener("click", addDeletedCourseState);
+
+               } else {
+                    courses[i].removeAttribute("class");
+                    courses[i].removeEventListener("click", addDeletedCourseState);
+               }
+          } 
+     }
+
+
+     function addDeletedCourseState(ev) {
+          ev.currentTarget.classList.remove("canBeDeleted");
+          ev.currentTarget.classList.add("willBeDeleted");
+     }
+}
+
+
+function deleteSubmit() {
+
+
+}
+
+
+
+
+
+

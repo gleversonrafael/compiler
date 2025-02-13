@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
 /* fonts */
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
 
 
 
@@ -13,7 +14,7 @@
     --euca: #08976f;
     --gree: #15342C;
 
-    --papr: #84082b;
+    --papr: #700b1359;
     --amar: #de0d48;
     --razz: #f32a63;
 
@@ -42,7 +43,7 @@
     --uiSecondaryWhite: #b7b7b7;
 
     /* fonts */
-    --rFont: "Raleway", sans-serif;
+    --rFont: "Instrument sans", sans-serif;
 }
 
 

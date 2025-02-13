@@ -25,9 +25,14 @@
 }
 
 #addCourseButton {
-     color: var(--uiPrimaryWhite);
-     border: 1px solid var(--uiPrimaryWhite);
+     color: var(--aqua);
+     border: 1px solid var(--aqua);
 }
+
+#addCourseButton:disabled {
+     opacity: 0.25;
+}
+
 
 #deleteCourseButton {
      color: var(--uiSecondaryWhite);
@@ -45,6 +50,15 @@
      overflow: scroll;
 }
 
+
+/* create courses area */
+.coursesColumn > div.canBeDeleted {
+     border-color: var(--razz);
+}
+
+.coursesColumn > div.willBeDeleted {
+     background-color: var(--papr);
+}
 
 
 
