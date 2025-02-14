@@ -28,9 +28,9 @@ searchInp.addEventListener("input", () => {
 });
 
 
-onSnapshot(coursesCol, ()=> {
-     pageType === "manageCourses" ? managerShowCourses() : showCourses();
-});
+// onSnapshot(coursesCol, ()=> {
+//      pageType === "manageCourses" ? managerShowCourses() : showCourses();
+// });
 
 
 
@@ -62,18 +62,18 @@ function openBox(event) {
      let courseBox
      let elementData;
      
-     if(! isInDeleteMode()) {
+     if(pageType === "myCourses" || ! isInDeleteMode()) {
           // var
-          courseId = obtainCourseId()
+          courseId = obtainCourseId();
           courseBox = document.getElementById(courseId);
 
 
           // process
           if(courseBox != null && ! courseBox.classList.contains("open")) {
-               changeCallPurposeViaOpenBox()
+               changeCallPurposeViaOpenBox();
                elementData = obtainDataSelected()[courseId];
 
-               showElements()
+               showElements(courseId);
           }
      }
 
@@ -112,134 +112,169 @@ function openBox(event) {
      }
 
 
-     function showElements() {
+     function showElements(courseId) {
+          let createdContent;
+          let currentPageTitle = document.createElement("h3");
+          let closeButton = document.createElement("button");
+          let specialButton;
+
           courseBox.classList.add("open");
 
-          createElements()
+          // if(changePage) {
+
+
+          // } else {
+               createElements();
+     
+          // }
+
+        
 
 
           // aside
           function createElements() {
-               // var
-               let elements = {
-                    divType: {
-                         createdContent: document.createElement("div"),
+               let elementProperties = [
+                    { email: "E-mail" },
 
-                         emailDiv: document.createElement("div"),
-                         emailDivChild: document.createElement("div"),
-
-                         passwordDiv: document.createElement("div"),
-                         passwordDivChild: document.createElement("div"),
-                    },
+                    { url: "URL" }, 
+                    { img: "URL" }
+               ];
 
 
-                    pType: {
-                         emailParagraph: document.createElement("p"),
-                         emailValue: document.createElement("p"),
+               if(pageType === "myCourses") {
+                    elementProperties.splice(1, 0, { userPassword: "Senha"});
+                    specialButton = document.createElement("a");
+                    specialButton.href = elementData.url;
+                    specialButton.target = "_blank";
+                    specialButton.innerText = "Acessar";
 
-                         passwordParagraph: document.createElement("p"),
-                         passwordValue: document.createElement("p")
-                    },
+                    createdContent = document.createElement("div");
 
+               } else {
+                    elementProperties.unshift(
+                         { courseName: "Título"}, { coursePlatform: "Plataforma"}, { password: "Senha"} 
+                    );
 
-                    others: {
-                         userDataSubtitle: document.createElement("h3"),
+                    specialButton = document.createElement("input");
+                    specialButton.type = "submit";
+                    specialButton.innerText = "Confirmar";
 
-                         acessAnchor: document.createElement("a"),
-                         closeButton: document.createElement("button"),
-
-                         emailCopy: document.createElement("button"),
-                         passwordCopy: document.createElement("button")
-                    }
+                    createdContent = document.createElement("form");
                }
 
 
-               setParagraphs()
-               setOthers()
-               allocateDivs()
+               createAndAllocatePages();
+
+               createdContent.classList.add("createdContent");
+               closeButton.classList.add("closeBoxButton");
+
+               closeButton.innerText = "Fechar";
+               closeButton.addEventListener("click", closeBox);
+
+               createdContent.appendChild(closeButton);
+               createdContent.appendChild(specialButton);
+
+               courseBox.appendChild(createdContent);
+
+               console.log(courseBox);
 
 
-               // compl
-               function setParagraphs() {                    
-                    elements.pType.emailParagraph.innerText = "E-mail";
-                    elements.pType.passwordParagraph.innerText = "Senha";
 
-                    elements.pType.emailValue.innerText = elementData.email;
-                    elements.pType.passwordValue.innerText = elementData.userPassword;
+               // complementary
+               function createAndAllocatePages() {
+                    let temporaryCreatedPages = [];
+                    let pageCounter = 0;
 
 
-                    // set classes
-                    for(let p in elements.pType) {
-                         if(p.includes("Paragraph")) {
-                              elements.pType[p].classList.add("fieldName");
+                    for(let elementCounter = 0; elementCounter < elementProperties.length; elementCounter++) {
+                         // increment pages
+                         if(elementCounter % 2 === 0) {
+                              pageCounter += 1
+
+                              let temporaryPage = document.createElement("div");
+
+                              temporaryPage.classList.add(`coursePage${pageCounter}`);
+                              temporaryCreatedPages.push(temporaryPage);
+
+                              createdContent.appendChild(temporaryCreatedPages[temporaryCreatedPages.length - 1]);
+                         }
+
+
+                         let createdField = createASingleElement(elementProperties[elementCounter]);
+
+
+                         // allocate pages
+                         temporaryCreatedPages[temporaryCreatedPages.length - 1].appendChild(createdField);
+                    }
+
+
+                    temporaryCreatedPages[0].style.display = "flex";
+               }
+
+
+
+               function createASingleElement(elementProperty) {
+                    // var
+                    let propertyString = Object.values(elementProperty);
+                    let propertyName = Object.keys(elementProperty);
+
+                    let temporaryName;
+                    let temporaryValue;
+                    let temporaryField;
+
+
+                    if(pageType === "myCourses") {
+                         temporaryField = document.createElement("div");
+
+                         temporaryName = document.createElement("p");
+                         temporaryValue = document.createElement("p");
+
+                         // name Properties
+                         temporaryValue.innerText = elementData[propertyName];
+
+
+                    } else {
+                         temporaryField = document.createElement("fieldset");  
+
+                         temporaryName = document.createElement("label"); 
+                         temporaryValue = document.createElement("input");  
+
+
+                         // nameProperties
+                         temporaryName.setAttribute("for", propertyName + courseId);
+
+
+                         // valueProperties
+                         temporaryValue.id =  propertyName + courseId
+                         temporaryValue.value = elementData[propertyName];
+                         temporaryValue.placeholder = elementData[propertyName];
+
+                         if(propertyName != "courseName" && propertyName != "coursePlatform" && propertyName != "img") {
+                              temporaryValue.type = propertyName;
                          
+                         } else if(propertyName == "img") {
+                              temporaryValue.type = "url";
+
                          } else {
-                              elements.pType[p].classList.add("fieldValue");
-                         }
-                    }
-               }
-
-
-               function setOthers() {
-                    elements.others.userDataSubtitle.innerText = "Dados";
-
-                    elements.others.acessAnchor.innerText = "Acessar";
-                    elements.others.closeButton.innerText = "Fechar";
-                    elements.others.closeButton.onclick = closeBox;
-
-                    elements.others.acessAnchor.setAttribute("href", elementData.url);
-                    elements.others.acessAnchor.setAttribute("target", "_blank");
-
-
-                    for(let copybutton in elements.others) {
-                         if(copybutton.includes("Copy")) {
-                              elements.others[copybutton].classList.add("copyButton");
-                              elements.others[copybutton].onclick = copyData
-                         }
-                    }
-               }
-
-               
-               function allocateDivs() {
-                    allocateChildren();
-                    allocateFathers();
-
-
-                    function allocateChildren() {
-                         // allocate child divs
-                         for(let div in elements.divType) {
-                              let attributeName;
-
-                              // allocate child
-                              if(div.includes("Child")) {
-                                   // div name - DivChild
-                                   attributeName = div.substring(0, div.length - 8);
-
-                                   elements.divType[div].appendChild(elements.pType[`${attributeName}Paragraph`]);
-                                   elements.divType[div].appendChild(elements.pType[`${attributeName}Value`]);
-                              
-
-                              // allocate content divs(email and password)
-                              } else if(! div.includes("createdContent")) {
-                                   // div name - Div
-                                   attributeName = div.substring(0, div.length - 3);
-
-                                   elements.divType[div].appendChild(elements.divType[`${attributeName}DivChild`]);
-                                   elements.divType[div].appendChild(elements.others[`${attributeName}Copy`]);
-                              }
+                              temporaryValue.type = "text";
                          }
                     }
 
 
-                    function allocateFathers() {
-                         // append pode não funcionar em outros navegadores.
-                         elements.divType.createdContent.append(elements.others.userDataSubtitle, elements.divType.emailDiv, elements.divType.passwordDiv, elements.others.acessAnchor, elements.others.closeButton);
+                    // nameProperties
+                    temporaryName.innerText = Object.values(propertyString);
 
-                         elements.divType.createdContent.classList.add("createdContent");
-     
-                         courseBox.appendChild(elements.divType.createdContent);
+                    // value Properties
+                    temporaryName.classList.add("fieldName");
+                    temporaryValue.classList.add("fieldValue");
 
-                    }
+
+                    // main process
+                    temporaryField.appendChild(temporaryName);
+                    temporaryField.appendChild(temporaryValue);
+
+
+                    return temporaryField
                }
           }
      }
@@ -449,5 +484,4 @@ function eraseColumns() {
 
      });
 }
-
 

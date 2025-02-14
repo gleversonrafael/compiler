@@ -53,6 +53,23 @@
 }
 
 
+/* edit courses box */
+.createdContent > input[type=submit]:hover {
+     color: var(--uiPrimaryBlack);
+     background-color: var(--uiPrimaryWhite);
+}
+
+.createdContent > div {
+     flex-flow: column wrap;
+}
+
+
+.createdContent > div > fieldset:has(.fieldValue:focus) {
+     border-bottom: 1px solid var(--uiPrimaryWhite);
+}
+
+
+
 /* create courses area */
 .coursesColumn > div.canBeDeleted, .coursesColumn > div.willBeDeleted {
      border-color: var(--razz);
