@@ -1,7 +1,8 @@
 // firebase
-import { onSnapshot, query, where, addDoc, doc, deleteDoc } from "firebase/firestore";
-import { db, usersCol, coursesCol } from "./fb.js";
+import { onSnapshot, query, where, getDocs, doc, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { db, usersCol } from "./fb.js";
 import { userData } from "./userdata.js"
+
 
 
 // generalVars
@@ -115,7 +116,7 @@ removeAcessButton.addEventListener("click", () => {
 
 // functions
 function loadUserList() {
-     let avoidPlayerQuery = query(usersCol, where("uid", "!=", userData.uid))
+     let avoidPlayerQuery = query(usersCol, where("uid", "!=", userData.uid));
 
      onSnapshot(avoidPlayerQuery, (dataState) => {
           dataState.forEach((userInfo) => {
@@ -215,28 +216,59 @@ createCourseForm.addEventListener("submit", (ev) => {
 
 
 function createCourse() {
-     //if(analyzeInputs()) {
+     //if(analyzeInputs() && analyzeExistanceOfAsameDocument) {
           uploadCourse()
 
      //}
 
 
      function uploadCourse() {
-          addDoc(coursesCol, {
-               courseName: document.getElementById("courseNameInp").value,
-               coursePlatform: document.getElementById("coursePlatformInp").value,
+          let courseNameValue = document.getElementById("courseNameInp").value;
+          let coursePlatformValue = document.getElementById("coursePlatformInp").value;
+          let imgValue = document.getElementById("imgInp").value;
+
+
+          setDoc(doc(db, "courses", createCourseId(courseNameValue, coursePlatformValue, imgValue)), {
+               courseName: courseNameValue,
+               coursePlatform: coursePlatformValue,
                
                email: document.getElementById("emailInp").value,
                userPassword: document.getElementById("userPasswordInp").value,
                
                url: document.getElementById("urlInp").value,
-               img: document.getElementById("imgInp").value,
+               img: imgValue,
 
                creator: userData.uid,
                usersWithAcess: obtainUsers()
           })
      }
 
+
+     function createCourseId(name, platform, img) {
+          let imgLetter;
+          let fourDigits = 0;
+
+          // consertar espaços
+          name = name.trim();
+          name = name.substring(0, 4);
+
+          platform = platform.substring(0, 4);
+
+          // fix whitespaces
+
+     
+          while(fourDigits < 1000 || fourDigits >= 10000) {
+               fourDigits = Math.floor(Math.random() * 10000);
+          }
+
+          // filled / empty
+          imgLetter = img ? "f" : "e" 
+
+
+          // c = course
+          // console.log(`c${imgLetter + fourDigits + name + platform}`)
+          return (`c${imgLetter + fourDigits + name + platform}`);
+     }
 
      function obtainUsers() {
           let usersWithAcess = [];
@@ -395,6 +427,147 @@ function closeDeleteBox(maintain) {
           })
      } 
 }
+
+
+
+
+// save course data
+async function saveCourseData(courseIdentifier, oldData) {
+     let obtainedNewData = obtainEditedCourseData();
+
+     if(Object.keys(obtainedNewData).length > 0) {
+          let docThatWillBeUpdated = doc(db, "courses", courseIdentifier);
+
+          await updateDoc(docThatWillBeUpdated, obtainedNewData);
+     }
+
+     
+     // complementary
+     function obtainEditedCourseData() {
+          let finalCourseData = {};
+
+          verifyAndPushEditedData();
+
+          return finalCourseData
+
+
+          // aside
+          function verifyAndPushEditedData() {
+               Object.entries(oldData).forEach((field) => {     
+                    let fieldName = field[0];
+                    let fieldValue = field[1];
+                    let analyzedElementValue;
+               
+                    
+                    // set analyzed element value
+                    if(fieldName != "usersWithAcess" && fieldName != "creator") {               
+                         analyzedElementValue = document.getElementById(fieldName + courseIdentifier).value;                    
+
+                    } else if(fieldName === "usersWithAcess") {
+                         // array from node list
+                         let usersWithAcessList = Array.from(document.querySelectorAll(`#${courseIdentifier} .acessEditToggled`));
+
+
+                         for(let i = 0; i < usersWithAcessList.length; i++) {
+                              // remove edit + course identifier to obtain user id
+                              usersWithAcessList[i] = usersWithAcessList[i].id.slice(courseIdentifier.length + 4);
+                         }
+
+                         analyzedElementValue = usersWithAcessList;
+                    } 
+
+                    
+                    // set changed values
+                    if(fieldName != "creator" && fieldValue != analyzedElementValue ) {                             
+                         Object.defineProperty(finalCourseData, fieldName, {
+                              value: analyzedElementValue,
+                              enumerable: true
+                         });
+                    }
+                    
+               })
+
+          }
+     
+          
+     }
+}
+
+
+
+// create acess control and user list on edit box
+async function createAcessControl(courseIdentifier, usersWithAcessInCourse) {
+     // var
+     let acessControl = document.createElement("div");
+     let acessList = document.createElement("ul");
+
+
+     // properties
+     acessControl.classList.add("acessControl", "coursePage4", "aCoursePage");
+     acessList.classList.add("thisCourseAcess");
+     
+     await createList();
+
+
+     if(usersWithAcessInCourse.length > 0) {
+          toggleUsersWithAcess();
+     }
+     
+
+
+     async function createList() {  
+          let createdContent;
+          let stepperGroup;
+
+          
+          await getDocs(usersCol)
+          .then((currentSnapshot) => {
+               currentSnapshot.forEach((user) => {
+                    let selectedUserData = user.data()
+                    let temporaryUserBox = document.createElement("li");
+
+                    temporaryUserBox.addEventListener("click", () => {
+                         changeThisUserAcess(temporaryUserBox);
+                    });
+
+                    temporaryUserBox.innerText = selectedUserData.email;
+                    temporaryUserBox.id = "edit" + courseIdentifier + selectedUserData.uid;
+               
+                    acessList.appendChild(temporaryUserBox);
+               })
+
+               createdContent = document.querySelector(`div#${courseIdentifier} > .createdContent`);
+
+               stepperGroup = document.querySelector(`div#${courseIdentifier} > .createdContent > .stepperGroup`);
+          })
+
+          .catch((errorMsg) => {
+               console.log(errorMsg);
+          })
+
+
+          acessControl.appendChild(acessList);
+          createdContent.insertBefore(acessControl, stepperGroup);
+     }
+     
+
+     function changeThisUserAcess(userBoxClicked) {
+          userBoxClicked.classList.contains("acessEditToggled") ? userBoxClicked.removeAttribute("class") : userBoxClicked.classList.add("acessEditToggled");
+     }
+
+
+     function toggleUsersWithAcess() {
+          for(let userWithAcess = 0; userWithAcess < usersWithAcessInCourse.length; userWithAcess ++) {
+               let selectedBoxId = `edit${courseIdentifier + usersWithAcessInCourse[userWithAcess]}`;
+               
+               document.getElementById(selectedBoxId).classList.add("acessEditToggled");
+          }
+
+     }
+}
+
+
+export { createAcessControl, saveCourseData };
 
 
 

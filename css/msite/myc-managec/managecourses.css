@@ -70,6 +70,90 @@
 
 
 
+
+/* field values */
+input.fieldValue {
+     width: 100%;     
+     margin-bottom: 0px;
+     padding-bottom: 15px;
+
+     background-color: transparent;
+     border: none;
+}
+
+
+
+
+/* steppers */
+div.stepperGroup {
+     display: flex;
+     flex-flow: row wrap;
+
+     justify-content: space-between;
+     margin-top: 50px;
+}
+
+.stepperGroup > input[type=reset] {
+     color: var(--razz);
+     padding: 0px 15px;
+}
+
+.steppers {
+     display: flex;
+     gap: 5px;
+}
+
+.stepperInput {
+     width: 50px;
+     text-align: center;
+}
+
+.steppers input[type=button] {
+     height: 25px;
+     width: 25px;
+
+     border: none;
+}
+
+.backwardStepper {
+     background-color: var(--razz);
+}
+
+.steppers input[type=button]:active {
+     background-color: aqua;
+}
+
+
+/* acess control */
+.acessControl {
+     color: var(--uiPrimaryWhite);
+}
+
+.thisCourseAcess {
+     gap: 10px;
+
+     max-height: 165.8px;
+     overflow: scroll;
+}
+
+.thisCourseAcess > li {
+     background-color: var(--uiPrimaryGrey);
+     border-radius: 15px;
+
+     margin: 10px 0px;
+     height: 40px;
+
+     padding: 10px;
+     cursor: pointer;
+}
+
+.thisCourseAcess > .acessEditToggled {
+     color: var(--aqua);
+     background-color: var(--gree);
+}
+
+
+
 /* create courses area */
 .coursesColumn > div.canBeDeleted, .coursesColumn > div.willBeDeleted {
      border-color: var(--razz);
@@ -388,6 +472,7 @@
 #cancelExclusion:hover {
      background-color: var(--uiSecondaryGrey);
 }
+
 
 
 

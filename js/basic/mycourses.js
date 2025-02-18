@@ -1,9 +1,8 @@
-function copyData(ev) {
-     let inputBox = ev.target.parentElement;
-     let inputValue = inputBox.children[0].children[1].innerText;
+console.log("myCourses acessado!");
 
-     // exec command obsolete
-     navigator.clipboard.writeText(inputValue);
+function copyData(ev) {
+     let fieldValue = ev.currentTarget.parentElement.children[1].innerText;
+     navigator.clipboard.writeText(fieldValue);
 }
 
 export { copyData }

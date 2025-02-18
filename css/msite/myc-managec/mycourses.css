@@ -4,11 +4,27 @@
      margin-bottom: 100px;
 }
 
-.copyButton {
-     min-width: 40px;
-     height: 40px;
 
-     margin-left: 20px;
+/* fields */
+.fieldValue {
+     vertical-align: bottom;
+     display: inline-block;
+}
+
+
+/* others */
+.createdContent > div > div {
+     width: 100%;
+}
+
+
+.copyButton {
+     float: right;
+
+     min-width: 30px;
+     min-height: 30px;
+
+     margin: 0px auto 10px 20px;
 
      background: var(--gall) url(../../../media/ico/mcourses/ccopy.svg) center center no-repeat;
      background-size: 70%;
