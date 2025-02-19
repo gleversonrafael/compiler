@@ -4,37 +4,37 @@ module.exports = {
   mode: "development",
 
   entry: {
-    mdependencies: ["./js/basic/fb.js", "./js/basic/perms.js", "./js/basic/userdata.js"],
+    maindependencies: ["./js/basic/general/jsfirebase.js", "./js/basic/general/jspermissions.js", "./js/basic/general/jsuserdata.js"],
 
-    logp: {
-      dependOn: "mdependencies",
-      import: "./js/basic/login.js"
+    login: {
+      dependOn: "maindependencies",
+      import: "./js/basic/loginsign/jslogin.js"
     },
 
-    signp: {
-      dependOn: "mdependencies",
-      import: ["./js/basic/menu.js", "./js/basic/sign.js"]
+    sign: {
+      dependOn: "maindependencies",
+      import: ["./js/basic/general/jsmenu.js", "./js/basic/loginsign/jssign.js"]
     },
 
-    dashbp: {
-      dependOn: "mdependencies",
-      import : ["./js/basic/menu.js", "./js/basic/dashb.js"]
+    dashboard: {
+      dependOn: "maindependencies",
+      import : ["./js/basic/general/jsmenu.js", "./js/basic/jsdashboard.js"]
     },
 
-    mycoursesp: {
-      dependOn: "mdependencies",
-      import: ["./js/basic/menu.js", "./js/basic/manageandmycourses.js", "./js/basic/mycourses.js"]
+    mycourses: {
+      dependOn: "maindependencies",
+      import: ["./js/basic/general/jsmenu.js", "./js/basic/managemycourses/jsmanageandmycourses.js", "./js/basic/managemycourses/jsmycourses.js"]
 
     },
 
-    managecp: {
-      dependOn: "mdependencies",
-      import: ["./js/basic/menu.js", "./js/basic/manageandmycourses.js", "./js/basic/managecourses.js"]
+    managecourses: {
+      dependOn: "maindependencies",
+      import: ["./js/basic/general/jsmenu.js", "./js/basic/managemycourses/jsmanageandmycourses.js", "./js/basic/managemycourses/jsmanagecourses.js"]
     },
 
-    manageup: {
-      dependOn: "mdependencies",
-      import: ["./js/basic/menu.js"]
+    manageusers: {
+      dependOn: "maindependencies",
+      import: ["./js/basic/general/jsmenu.js"]
 
     }
 
@@ -42,6 +42,6 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, "./js/final"),
-    filename: '[name]f.js',
+    filename: '[name]bundle.js',
   },
 };

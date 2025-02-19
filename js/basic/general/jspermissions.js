@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./fb.js";
-import { userData } from "./userdata.js"
+import { auth } from "./jsfirebase.js";
+import { userData } from "./jsuserdata.js"
 
 
 // redirect to the first page if there is no user

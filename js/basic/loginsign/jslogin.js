@@ -1,6 +1,6 @@
 // firebase
 import { signInWithEmailAndPassword} from "firebase/auth";
-import { auth } from "./fb.js";
+import { auth } from "../general/jsfirebase.js";
 
 
 // global var

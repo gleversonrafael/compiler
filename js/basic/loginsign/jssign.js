@@ -1,7 +1,7 @@
 // imports
 import { addDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, usersCol } from "./fb.js";
+import { auth, usersCol } from "../general/jsfirebase.js";
 
 
 

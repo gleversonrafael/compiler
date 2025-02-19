@@ -1,251 +1,243 @@
 // other js
-import { copyData } from "./mycourses.js"
-import { createAcessControl, saveCourseData } from "./managecourses.js"
-import { userData } from "./userdata.js"
+import { copyData } from "./jsmycourses.js"
+import { createAcessControl, saveCourseData } from "./jsmanagecourses.js"
+import { userData } from "../general/jsuserdata.js"
 
 
 // firebase
 import { onSnapshot, collection, where, query } from "firebase/firestore";
-import { db } from "./fb.js";
+import { db } from "../general/jsfirebase.js";
 
 
 
-// var
-const coursesCol = collection(db, "courses");
+// global var
 let coursesData = {};
 let othersData = {};
-
-let callPurpose;
-
 let pageType = window.location.href.includes("mycourses") ? "myCourses" : "manageCourses"
-let searchInp = document.getElementById("searchInp");
+
 
 
 
 
 
 // events
-searchInp.addEventListener("input", () => {
-     pageType === "manageCourses" ? managerShowCourses() : showCourses(searchInp.value);
+document.getElementById("searchInp").addEventListener("input", (inputEvent) => {
+     showCourses(inputEvent.currentTarget.value, "my");
+     // pageType === "manageCourses" ? managerShowCourses() : showCourses(inputEvent.currentTarget.value);
 });
 
 
-onSnapshot(coursesCol, ()=> {
-     pageType === "manageCourses" ? managerShowCourses() : showCourses();
+onSnapshot(collection(db, "courses"), ()=> {
+     showCourses(undefined, "my");
+     // pageType === "manageCourses" ? managerShowCourses() : showCourses();
 });
+
 
 
 
 // functions
-// showCourses
-async function managerShowCourses() {
-     callPurpose = "my";
-     await showCourses(searchInp.value);
-
-     if(pageType === "manageCourses") {
-          callPurpose = "others";
-          showCourses(searchInp.value);
-     }
-}
-
-async function showCourses(searchedContent) {
+async function showCourses(searchedContent, callPurpose) {
      if(await obtainAllowedCoursesData(searchedContent) === true) {
           createCoursesBoxes();
+
+          if(pageType === "manageCourses" && callPurpose === "my") {
+               showCourses(searchedContent, "others");
+          }
+          
      
      } else {
           eraseColumns()
      }
-}
 
 
-async function obtainAllowedCoursesData(searchedContent) {
-     callPurpose === "others" ? othersData = {} : coursesData = {}
-
-     // query process
-     let coursesQuery = createQuery();
-
-     let insertData = new Promise((dataObtained, noData) => {
-          onSnapshot(coursesQuery, (dataState) => {
-               // add value to coursesData and othersData
-               dataState.forEach((currentDocument)=> {
-                    Object.defineProperty(obtainDataSelected(), currentDocument.id, {
-                         value: currentDocument.data(),
-                         writable: true,
-                         configurable: true,
-                         enumerable: true,
+     // main functions
+     async function obtainAllowedCoursesData(searchedContent) {
+          callPurpose === "others" ? othersData = {} : coursesData = {}
      
-                    })
-               })
-
-
-               // is there any data obtained?
-               Object.entries(obtainDataSelected()).length === 0 ? noData() : dataObtained();
-          })
-     })
-
-
-
-     // process
-     let insertDataResult;
-
-
-     await insertData
-     .then(() => {
-          insertDataResult = true
-
-     })
-     .catch(() => {
-          insertDataResult = false
-     })
-
-     return insertDataResult
-
-
-
-     // complementary
-     function createQuery() {
-          let queryResult;
-          let whereType = obtainPageWhere();
-
-          if(searchedContent === undefined || searchedContent === "") {
-               queryResult = query(coursesCol, whereType);
-
-          } else {
-               queryResult = query(coursesCol, whereType, where("courseName", "==", searchedContent));
-          }
-
+          // query process
+          let coursesQuery = createQuery();
+     
+          let insertData = new Promise((dataObtained, noData) => {
+               onSnapshot(coursesQuery, (dataState) => {
+                    // add value to coursesData and othersData
+                    dataState.forEach((currentDocument)=> {
+                         Object.defineProperty(obtainDataSelected(callPurpose), currentDocument.id, {
+                              value: currentDocument.data(),
+                              writable: true,
+                              configurable: true,
+                              enumerable: true,
           
-          return queryResult
-
-
-          // compl
-          function obtainPageWhere() {
-               let whereResult;
-
-               if(pageType === "myCourses") {
-                    whereResult = where("usersWithAcess", "array-contains", userData.uid);
-
-               } else if(callPurpose != "others"){
-                    whereResult = where("creator", "==", userData.uid);
-               
-               } else {
-                    whereResult = where("creator", "!=", userData.uid);
-
-               }
-
-
-               return whereResult;
-          }    
-     }
-}
-
-
-function createCoursesBoxes() {
-     let coursesColumns = callPurpose != "others" ? document.querySelectorAll("#coursesA > .coursesColumn") : document.querySelectorAll("#othersA > .coursesColumn");
-
-
-     coursesColumns.forEach((column) => {
-          column.innerHTML = "";
-     })
-
-     createBoxes()
-
-
-     function createBoxes() {
-          Object.entries(obtainDataSelected()).forEach((data) => {
-               // var
-               let courseId = data[0];
-               let courseValues = data[1];
-               let selectedColumn = coursesColumns[0].childElementCount > coursesColumns[1].childElementCount? coursesColumns[1]: coursesColumns[0];
-
-
-               let courseProperties = {
-                    courseBox: document.createElement("div"), 
-                    title: document.createElement("h1"),
-                    platform: document.createElement("h2"),
-               }
-
-
-               // ids and event
-               courseProperties.courseBox.id = courseId;
-               courseProperties.courseBox.onclick = openBox;
-
-
-               // set data
-               courseProperties.title.innerText = courseValues.courseName;
-               courseProperties.platform.innerText = `Plataforma:${courseValues.coursePlatform}`;
-
-
-               // create elements -- continue
-               if(courseValues.img != undefined) {
-                    courseProperties.courseBox.appendChild(createImg());
-               }
-
-               courseProperties.courseBox.appendChild(courseProperties.title);
-
-               if(courseValues.coursePlatform != undefined) {
-                    courseProperties.courseBox.appendChild(courseProperties.platform);
-               }
-               
-               selectedColumn.appendChild(courseProperties.courseBox);
-
-
-               // compl
-               function createImg() {
-                    let img = document.createElement("img");
-                    img.setAttribute("src", courseValues.img);
-
-                    return img
-               }
+                         })
+                    })
+     
+     
+                    // is there any data obtained?
+                    Object.entries(obtainDataSelected(callPurpose)).length === 0 ? noData() : dataObtained();
+               })
           })
-     }  
-
-}
-
-
-
-function eraseColumns() {
-     let coursesColumns;
-
-     if(obtainDataSelected() === othersData) {
-          coursesColumns = document.querySelectorAll("#othersA > .coursesColumn");
-
-     } else {
-          coursesColumns = document.querySelectorAll("#coursesA > .coursesColumn");
+     
+     
+     
+          // process
+          let insertDataResult;
+     
+     
+          await insertData
+          .then(() => {
+               insertDataResult = true
+     
+          })
+          .catch(() => {
+               insertDataResult = false
+          })
+     
+          return insertDataResult
+     
+     
+          function createQuery() {
+               let queryResult;
+               let whereType = obtainPageWhere();
+     
+               if(searchedContent === undefined || searchedContent === "") {
+                    queryResult = query(collection(db, "courses"), whereType);
+     
+               } else {
+                    queryResult = query(collection(db, "courses"), whereType, where("courseName", "==", searchedContent));
+               }
+     
+               
+               return queryResult
+     
+     
+               // compl
+               function obtainPageWhere() {
+                    let whereResult;
+     
+                    if(pageType === "myCourses") {
+                         whereResult = where("usersWithAcess", "array-contains", userData.uid);
+     
+                    } else if(callPurpose != "others"){
+                         whereResult = where("creator", "==", userData.uid);
+                    
+                    } else {
+                         whereResult = where("creator", "!=", userData.uid);
+     
+                    }
+     
+     
+                    return whereResult;
+               }    
+          }
      }
- 
 
-     coursesColumns.forEach((column) => {
-          column.innerHTML = "";
 
-     });
+     function createCoursesBoxes() {
+          let coursesColumns = callPurpose != "others" ? document.querySelectorAll("#coursesA > .coursesColumn") : document.querySelectorAll("#othersA > .coursesColumn");
+     
+     
+          coursesColumns.forEach((column) => {
+               column.innerHTML = "";
+          })
+     
+          createBoxes()
+     
+
+     
+          function createBoxes() {
+               Object.entries(obtainDataSelected(callPurpose)).forEach((data) => {
+                    // var
+                    let courseId = data[0];
+                    let courseValues = data[1];
+                    let selectedColumn = coursesColumns[0].childElementCount > coursesColumns[1].childElementCount? coursesColumns[1]: coursesColumns[0];
+     
+     
+                    let courseProperties = {
+                         courseBox: document.createElement("div"), 
+                         title: document.createElement("h1"),
+                         platform: document.createElement("h2"),
+                    }
+     
+     
+                    // ids and event
+                    courseProperties.courseBox.id = courseId;
+                    courseProperties.courseBox.onclick = openBox;
+     
+     
+                    // set data
+                    courseProperties.title.innerText = courseValues.courseName;
+                    courseProperties.platform.innerText = `Plataforma:${courseValues.coursePlatform}`;
+     
+     
+                    // create elements -- continue
+                    if(courseValues.img != undefined) {
+                         courseProperties.courseBox.appendChild(createImg());
+                    }
+     
+                    courseProperties.courseBox.appendChild(courseProperties.title);
+     
+                    if(courseValues.coursePlatform != undefined) {
+                         courseProperties.courseBox.appendChild(courseProperties.platform);
+                    }
+                    
+                    selectedColumn.appendChild(courseProperties.courseBox);
+     
+     
+                    // compl
+                    function createImg() {
+                         let img = document.createElement("img");
+                         img.setAttribute("src", courseValues.img);
+     
+                         return img
+                    }
+               })
+          }  
+     
+     }
+
+
+     // erase columns
+     function eraseColumns() {
+          let coursesColumns;
+     
+          if(obtainDataSelected(callPurpose) === othersData) {
+               coursesColumns = document.querySelectorAll("#othersA > .coursesColumn");
+     
+          } else {
+               coursesColumns = document.querySelectorAll("#coursesA > .coursesColumn");
+          }
+      
+     
+          coursesColumns.forEach((column) => {
+               column.innerHTML = "";
+     
+          });
+     }
+     
 }
+
 
 
 
 // open box
 function openBox(event) {  
-     // FIX OPEN BOX ON OTHER ITEMS.
+     console.log("open");
+
+     let courseBox = event.currentTarget;
      let courseId;
-     let courseBox;
      let elementData;
+
+     if(! courseBox.classList.contains("open") && meetConditions(event.target)) {
+          let courseAreaClicked = courseBox.parentElement.parentElement.id;
+
+          courseId = courseBox.id;
      
-     if(pageType === "myCourses" || meetConditions(event.target.tagName)) {
-          // var
-          courseId = obtainCourseId();
-          courseBox = document.getElementById(courseId);
+          elementData = obtainDataSelected(courseAreaClicked === "coursesA" ? "my" : "others")[courseId];
 
 
-          // process
-          if(courseBox != null && ! courseBox.classList.contains("open")) {
-               changeCallPurposeViaOpenBox();
-               elementData = obtainDataSelected()[courseId];
-
-               showElements(courseId);
-          }
+          showElements(courseId);
      }
-
-
+     
+ 
 
 
      // complementary   
@@ -253,40 +245,16 @@ function openBox(event) {
           let temporaryDeletedCourses = document.querySelectorAll(".coursesColumn > .canBeDeleted, .coursesColumn > .willBeDeleted").length;
 
 
-          if(temporaryDeletedCourses != 0 || (clickedElement != "DIV" && clickedElement != "H1" && clickedElement != "H2")) {
-               return false
-          
-          } else {
+          if(temporaryDeletedCourses === 0 && ! clickedElement.classList.contains("closeBoxButton")) {
                return true
-          } 
-     }
-
-
-     function obtainCourseId() {
-          if(event.target.tagName === "DIV") {
-               return event.target.id
-
-          } else {
-               return event.target.parentElement.id
-          }
-     }
-     
-     
-     function changeCallPurposeViaOpenBox() {
-          let coursesAreaSelected = courseBox.parentElement.parentElement.id;
-
-          if(coursesAreaSelected === "coursesA") {
-               callPurpose = "my" 
           
           } else {
-               callPurpose = "others"
+               return false
           }
      }
 
 
      function showElements(courseId) {
-          console.log("data" + elementData);
-
           let createdContent;
           let currentPageTitle = document.createElement("h3");
           let closeButton = document.createElement("button");
@@ -594,9 +562,6 @@ function changePage(selectedPage, courseId) {
 
      selectedBox.classList.add("openPage")
      selectedBox.style.display = "flex";
-
-
-
 }
 
 
@@ -607,6 +572,8 @@ function closeBox(ev) {
      let previouslyCreatedContent = ev.currentTarget.parentElement;
      let courseBox = previouslyCreatedContent.parentElement;
 
+     console.log(previouslyCreatedContent);
+     console.log(courseBox);
 
      previouslyCreatedContent.remove();
      courseBox.classList.remove("open");
@@ -615,8 +582,7 @@ function closeBox(ev) {
 
 
 
-// aside
-function obtainDataSelected() {
+function obtainDataSelected(callPurpose) {
      if(callPurpose === "others") {
           return othersData
 

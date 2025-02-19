@@ -1,6 +1,6 @@
 import { collection, getDocs, query, where, limit } from "firebase/firestore"
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "./fb.js";
+import { auth, db } from "./jsfirebase.js";
 
 
 // var

@@ -1,6 +1,6 @@
 import { signOut, onAuthStateChanged } from "firebase/auth";
-import { auth } from "./fb.js"
-import { userData } from "./userdata.js";
+import { auth } from "./general/jsfirebase.js"
+import { userData } from "./general/jsuserdata.js";
 
 
 document.body.addEventListener("load", showUsername());
