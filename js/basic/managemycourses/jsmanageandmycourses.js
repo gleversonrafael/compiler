@@ -165,17 +165,22 @@ async function showCourses(searchedContent, callPurpose) {
      
                     // set data
                     courseProperties.title.innerText = courseValues.courseName;
-                    courseProperties.platform.innerText = `Plataforma:${courseValues.coursePlatform}`;
-     
+                    
      
                     // create elements -- continue
-                    if(courseValues.img != undefined) {
+                    if(courseValues.img.length > 1) {
                          courseProperties.courseBox.appendChild(createImg());
                     }
      
                     courseProperties.courseBox.appendChild(courseProperties.title);
      
-                    if(courseValues.coursePlatform != undefined) {
+                    if(courseValues.coursePlatform.length > 0) {
+                         Object.defineProperty(courseProperties, "platform", {
+                              value: document.createElement("h2"),
+                              configurable: true, writable: true
+                         });
+
+                         courseProperties.platform.innerText = `Plataforma:${courseValues.coursePlatform}`;
                          courseProperties.courseBox.appendChild(courseProperties.platform);
                     }
                     
@@ -434,7 +439,7 @@ function openBox(event) {
                               forwardStepper: document.createElement("input")
                          },
                          
-                         stepperInput: document.createElement("input"),
+                         stepperNumber: document.createElement("input"),
                     }     
 
                     setSettings()
@@ -449,17 +454,17 @@ function openBox(event) {
                          createdElements.resetForm.setAttribute("type", "reset");
                          createdElements.resetForm.setAttribute("value", "Redefinir");
      
-                         createdElements.stepperInput.setAttribute("type", "number");
-                         createdElements.stepperInput.setAttribute("value", 1);
-                         createdElements.stepperInput.setAttribute("min", 1);
-                         createdElements.stepperInput.setAttribute("max", 4);
+                         createdElements.stepperNumber.setAttribute("type", "number");
+                         createdElements.stepperNumber.setAttribute("value", 1);
+                         createdElements.stepperNumber.setAttribute("min", 1);
+                         createdElements.stepperNumber.setAttribute("max", 4);
 
-                         createdElements.stepperInput.classList.add("stepperInput");
+                         createdElements.stepperNumber.classList.add("stepperNumber");
                          
-                         createdElements.stepperInput.addEventListener("change", (ev) => {
+                         createdElements.stepperNumber.addEventListener("change", (ev) => {
                               let inputValue = ev.currentTarget.valueAsNumber
 
-                              if(inputValue > 1 && inputValue < 5) {
+                              if(inputValue >= 1 && inputValue < 5) {
                                    changePage(ev.currentTarget.valueAsNumber, courseId);
                               
                               } else {
@@ -479,7 +484,7 @@ function openBox(event) {
 
                               // changePage with steppers buttons
                               stepper[1].addEventListener("click", (ev) => {
-                                   let inputValue = createdElements.stepperInput.valueAsNumber;
+                                   let inputValue = createdElements.stepperNumber.valueAsNumber;
 
                                    if(inputValue < 4 && stepper[1].classList.contains("forwardStepper")) {
                                         inputValue += 1
@@ -489,7 +494,7 @@ function openBox(event) {
      
                                    }
 
-                                   createdElements.stepperInput.valueAsNumber = inputValue;
+                                   createdElements.stepperNumber.valueAsNumber = inputValue;
                                    changePage(inputValue, courseId);
                               })
                          })
@@ -497,7 +502,7 @@ function openBox(event) {
 
                     function insertElements() {
                          createdElements.steppers.appendChild(createdElements.stepButtons.backwardStepper);
-                         createdElements.steppers.appendChild(createdElements.stepperInput);
+                         createdElements.steppers.appendChild(createdElements.stepperNumber);
                          createdElements.steppers.appendChild(createdElements.stepButtons.forwardStepper);
      
                          createdElements.stepperGroup.appendChild(createdElements.resetForm);

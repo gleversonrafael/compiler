@@ -112,7 +112,7 @@
                     </button>       
                     
 
-                    <!-- create title -->
+                    <!-- create course box title -->
                     <div class="createdBoxTitle flex flex-col">
                          <div class="flex flex-row fJustSB">
                               <h1> Criar curso</h1>
@@ -127,40 +127,40 @@
                     
                     <form id="createCourseForm" class="flex" novalidate>
                          <!-- course data -->
-                         <fieldset class="flex flex-col">
+                         <fieldset class="contentFieldset flex flex-col">
                               <h3> Dados do curso</h3>
 
-                              <label for="" class="bottomNspace"> Nome</label>
-                              <input type="text" name="" id="courseNameInp"class="dTrans" >
+                              <label for="courseNameInp" class="requiredLabel bottomNspace"> Nome</label>
+                              <input type="text" name="name" id="courseNameInp" class="requiredInput dTrans" >
 
-                              <label for="" class="bottomNspace"> Plataforma</label>
-                              <input type="text" name="" id="coursePlatformInp" >
+                              <label for="coursePlatformInp" class="bottomNspace"> Plataforma</label>
+                              <input type="text" name="coursePlatform" id="coursePlatformInp" class="dTrans">
 
                          </fieldset>
 
 
                          <!-- user data -->
-                         <fieldset class="flex flex-col">
+                         <fieldset class="contentFieldset flex flex-col">
                               <h3> Dados do usuário</h3>
                               
-                              <label for="" class="bottomNspace"> E-mail</label>
-                              <input type="email" name="" id="emailInp"class="dTrans" >
+                              <label for="emailInp" class="requiredLabel bottomNspace"> E-mail</label>
+                              <input type="email" name="email" id="emailInp" class="requiredInput dTrans" >
                          
-                              <label for="" class="bottomNspace"> Senha</label>
-                              <input type="text" name="" id="userPasswordInp"class="dTrans" >
+                              <label for="userPasswordInp" class="requiredLabel bottomNspace"> Senha</label>
+                              <input type="text" name="password" id="userPasswordInp" class="requiredInput dTrans" >
 
                          </fieldset>
                          
                          
                          <!-- urls -->
-                         <fieldset class="flex flex-col">
+                         <fieldset class="contentFieldset flex flex-col">
                               <h3> URLS</h3>
 
-                              <label for="" class="bottomNspace"> URL do curso</label>
-                              <input type="url" name="url" id="urlInp" class="dTrans">
+                              <label for="urlInp" class="requiredLabel bottomNspace"> URL do curso</label>
+                              <input type="url" name="aUrl" id="urlInp" class="requiredInput dTrans">
 
-                              <label for="" class="bottomNspace"> URL da imagem</label>
-                              <input type="url" name="" id="imgInp" class="bottomNspace dTrans">
+                              <label for="imgInp" class="bottomNspace"> URL da imagem</label>
+                              <input type="url" name="aUrl" id="imgInp" class="bottomNspace dTrans">
 
                          </fieldset>
 
@@ -169,9 +169,9 @@
 
 
                          <!-- final buttons -->
-                         <fieldset id="formButtonsField" class="createdBoxButtons flex flex-row">
-                              <input type="reset" value="Redefinir" class="subButton bAll dTrans">
-                              <input type="submit" value="Criar" class="bAll dTrans">
+                         <fieldset class="createdBoxButtons flex flex-row fJustSB">
+                              <input type="reset" value="Redefinir" class="resetButtonStyle bAll dTrans">
+                              <input type="submit" value="Criar" class="confirmButtonStyle bAll dTrans">
                               
                          </fieldset>
 
@@ -206,8 +206,8 @@
 
                     <p id="deletedCoursesCounter"> null text</p>
 
-                    <div class="createdBoxButtons flex fJustSB">
-                         <button id="changeExclusion" class="flex fJustC fAlignC subButton dTrans bAll"> Alterar </button>
+                    <div class="createdBoxButtons flex flex-row">
+                         <button id="changeExclusion" class="resetButtonStyle flex fJustC fAlignC dTrans bAll"> Alterar </button>
                          <button id="confirmExclusion" class="flex fJustC fAlignC dTrans bAll"> Confirmar </button>
 
                     </div>
@@ -404,8 +404,6 @@
 
 
           </div>
-
-          <button id="clique"> CLique</button>
 
      </main>
 

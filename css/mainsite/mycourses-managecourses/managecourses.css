@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 /* operations area */
 #operationsA {
      align-self: center;
@@ -84,7 +83,7 @@ input.fieldValue {
 
 
 
-/* steppers */
+/* steppers and redefine button */
 div.stepperGroup {
      display: flex;
      flex-flow: row wrap;
@@ -94,34 +93,67 @@ div.stepperGroup {
 }
 
 .stepperGroup > input[type=reset] {
-     color: var(--razz);
-     padding: 0px 15px;
+     padding: 0px;
+
+     color: var(--secondaryOpposite);
+     background-color: transparent;
+
+     border: none;
+     
+     cursor: pointer;
+     transition: all 500ms;
 }
+
+.stepperGroup > input[type=reset]:hover {
+     color: var(--primaryOpposite);
+}
+
 
 .steppers {
      display: flex;
      gap: 5px;
+     align-items: center;
 }
 
-.stepperInput {
-     width: 50px;
+
+.stepperNumber {
+     width: 20px;
      text-align: center;
-}
 
-.steppers input[type=button] {
-     height: 25px;
-     width: 25px;
+     font-size: 2em;
 
+     color: var(--uiPrimaryWhite);
+     background-color: transparent;
      border: none;
 }
 
-.backwardStepper {
-     background-color: var(--razz);
+
+.stepperNumber:focus {
+     outline: none;
 }
 
-.steppers input[type=button]:active {
-     background-color: aqua;
+.steppers > input[type=button] {
+     width: 20px;
+
+     background-repeat: no-repeat;
+     background-size: contain;
+     background-color: transparent;
+
+     border: none;
+     border-radius: 0px;
+
+     cursor: pointer;
 }
+
+.forwardStepper {
+     background-image: url(../../../media/ico/mcourses/stepperforward.svg);
+     margin-left: 5px;
+}
+
+.backwardStepper {
+     background-image: url(../../../media/ico/mcourses/stepperbackward.svg);
+}
+
 
 
 /* acess control */
@@ -172,12 +204,12 @@ div.stepperGroup {
 
 .createdBox {
      width: 80vw;
-     max-width: 1250px;
+     max-width: 500px;
      
      height: fit-content;
      
      padding: 50px;
-     margin: 50px min(10vw, 50px) auto;
+     margin: 50px min(10vw, 50px);
 
      color: var(--uiSecondaryWhite);
      background-color: var(--uiSecondaryBlack);
@@ -250,7 +282,7 @@ div.stepperGroup {
      font-weight: 300;
 }
 
-#createCourseForm input {  
+.contentFieldset > input {  
      width: 100%;
 
      margin-bottom: 20px;
@@ -263,20 +295,44 @@ div.stepperGroup {
      border-color: transparent transparent var(--uiSecondaryGrey) transparent;
 }
 
-#createCourseForm input:focus {
+#createCourseForm > .contentFieldset input:focus {
      outline: none;
      border-bottom-color: var(--uiPrimaryWhite);
 }
 
 
+.requiredLabel:after {
+     content: "*";
+
+     color: var(--uiPrimaryWhite);
+     font: 300 1em var(--rFont);
+
+     margin-left: 5px;
+}
+
+
+/* correct input */
+#createCourseForm .correctInput {
+     color: var(--secondaryColor);
+     border-bottom-color: var(--tertiaryColor);
+}
+
+#createCourseForm label:has(+ .correctInput) {
+     color: var(--uiSecondaryWhite);
+}
+
+.requiredLabel:has(+ .correctInput)::after {
+     content: "";
+}
+
+
 /* form buttons */
 #acessB {
-     background-color: transparent;
+     background-color: var(--uiSecondaryWhite);
      padding: 15px;
 
+     border: none;
      font-weight: 600;
-     color: var(--uiPrimaryWhite);
-     border: 1px solid var(--uiPrimaryWhite);
 }
 
 #acessB:hover {
@@ -385,44 +441,54 @@ div.stepperGroup {
 
 /* both delete and add box properties */
 /* buttons */
-.createdBoxButtons {
-     height: fit-content;
-     padding: 0;
+.createdBoxButtons{
      gap: 10px;
 }
 
-.createdBoxButtons > button, .createdBoxButtons > input {
-     min-width: calc(50% - 5px);
-     max-width: 100%;
-     flex-grow: 1;
-
-     height: 55px;
+.createdBoxButtons > input, .createdBoxButtons > button {
+     /* gap = 10px -> gap for each: 5px */
+     width: calc(50% - 5px);
+     height: 50px;
 
      cursor: pointer;
-     background-color: transparent;
 }
 
-.createdBoxButtons > input {
-     width: calc(50% - 5px);
-     
-     color: var(--uiPrimaryBlack);
-}
-
-.createdBoxButtons > input:hover {
-     opacity: 0.75;
-}
-
-
-.subButton {
+.resetButtonStyle {
      color: var(--uiSecondaryWhite);
      background-color: transparent;
-     border: 1px solid var(--uiSecondaryWhite);
+     border: 1px solid var(--uiSecondaryGrey);
 }
 
-.subButton:hover {
+.resetButtonStyle:hover {
      color: var(--uiPrimaryWhite);
-     border: 1px solid var(--uiPrimaryWhite);
+     border-color: var(--uiSecondaryGrey);
 }
+
+.resetButtonStyle:active {
+     border-color: var(--uiPrimaryWhite);
+     transition: none 0s;
+}
+
+
+.confirmButtonStyle {
+     background-color: transparent;
+
+     color: var(--secondaryColor);
+     border: 1px solid var(--secondaryColor);
+}
+
+.confirmButtonStyle:hover {
+     color: var(--primaryColor);
+     border-color: var(--primaryColor);
+}
+
+.confirmButtonStyle:active {
+     color: var(--uiPrimaryBlack);
+     background-color: var(--primaryColor);
+     transition: none 0ms;
+}
+
+
 
 
 /* delete course box */
@@ -444,7 +510,9 @@ div.stepperGroup {
      margin-top: 50px;
 }
 
-#confirmExclusion {
+#confirmExclusion {     
+     background-color: transparent;
+
      color: var(--razz);
      border: 1px solid var(--razz);
 }
@@ -476,8 +544,65 @@ div.stepperGroup {
 
 
 
+/* may be moved to mainstructures */
+.messageBox {
+     display: grid;
+     justify-items: center;
+
+     position: fixed;
+     z-index: 2;
+     
+     padding: 25px 25px 10px 25px;
+
+     min-height: 50px;
+
+     min-width: 200px;
+     width: 80vw;
+     max-width: 400px;
+
+     text-align: center;
+     
+     font-size: 1.25em;
+     color: var(--uiPrimaryWhite);
+}
+
+.messageBox p > span {
+     font-weight: 700;
+}
 
 
+/* message box types */
+.messageBox.successMessage {
+     background-color: var(--tertiaryColor);
+}
+
+.messageBox.errorMessage {
+     background-color: var(--tertiaryOpposite);
+}
+
+.messageBox.strangeMessage {
+     background-color: var(--uiSecondaryGrey);
+}
+
+
+.closeMessageBox {
+     background: url(../../../media/ico/closeicon.png);
+     background-size: cover;
+
+     min-height: 25px;
+     width: 25px;
+
+     margin-top: 20px;
+
+     border: none;
+
+     cursor: pointer;
+}
+
+
+
+
+/* media */
 @media screen and (min-width: 768px) {
      #operationsA button {
           width: calc(50% - 5px);
@@ -487,26 +612,26 @@ div.stepperGroup {
      /* create course box */
      .createdBox {
           margin-left: 250px;
-          max-width: 500px;
-     }
-
-     .createdBoxButtons > button, .createdBoxButtons > input {
-          height: 35px;
      }
 
      #cancelExclusion {
           padding: 15px;
      } 
 
-     /* #createCourseForm {
-          flex-flow: row wrap;
+
+     /* message box */
+     .messageBox {
+          grid-template-columns: auto auto;
+          justify-content: space-between;
+          align-items: center;
+
+          padding: 0px 20px 0px 45px;
+
+          width: calc(80vw - 200px);
+          max-width: 700px;
      }
 
-     #createCourseForm > fieldset {
-          background-color: var(--uiPrimaryGrey);
-
-          width: calc(50% - 40px);
-          padding: 25px;
-
-     } */
+     .closeMessageBox {
+          margin-top: 0px;
+     }
 }

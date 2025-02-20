@@ -7,7 +7,17 @@
 
 
 :root {
-    /* colors */
+    /* new colors */
+    --primaryColor: #7cffbe;
+    --secondaryColor: #6edaa4;
+    --tertiaryColor: #3F805F;
+
+    --primaryOpposite: #d4565c;
+    --secondaryOpposite: #ad454a;
+    --tertiaryOpposite: #863438;
+
+
+    /* old */
     --aqua: #4df5c6;
     --aquaT: #4df5c500;
 
@@ -98,6 +108,13 @@ a {
     display: none;
 }
 
+
+
+
+/* input */
+input::-webkit-inner-spin-button {
+    display: none;
+}
 
 
 

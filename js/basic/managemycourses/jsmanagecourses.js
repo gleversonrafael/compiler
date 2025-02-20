@@ -9,6 +9,7 @@ if(document.location.href.includes("manage")) {
      courseBoxOperations("createEvents");
      acessOperations("createEvents");
      deleteCourses("createEvents");
+     validateFields("createEvents");
 
      // create course
      document.getElementById("createCourseForm").addEventListener("submit", (submitEvent) => {
@@ -237,12 +238,17 @@ function acessOperations(callReason) {
 
 
 
-// createCourse
-function createCourse() {
-     //if(analyzeInputs() && analyzeExistanceOfAsameDocument) {
-          uploadCourse()
 
-     //}
+function createCourse() {     
+     if(validateFields("multiple") === true) {   
+          uploadCourse();
+          showMessageBox("successMessage", "Curso criado!");
+     
+     } else {
+          showMessageBox("errorMessage", "Preencha corretamente todos os campos!");
+     } 
+
+     
 
 
      function uploadCourse() {
@@ -327,6 +333,8 @@ async function deleteCourses(callReason) {
 
                await deleteDoc(temporaryDoc);
           }
+
+          showMessageBox("successMessage", "Cursos deletados!");
      }
 
 
@@ -455,6 +463,87 @@ async function deleteCourses(callReason) {
                })
           } 
      }
+}
+
+
+
+
+// validate
+function validateFields(callParameter, selectedInput) {
+     switch(callParameter) {
+          case "createEvents": 
+               createEvents();
+               break
+
+          case "single":
+               validateSingleInput();
+               break
+
+          case ("multiple"):
+               return finishValidation() === true ? true : false
+
+          default:
+               console.log("Something unexpected on validating inputs ocurred. A wrong call was been received.")
+     }
+
+
+
+     function createEvents() {
+          let createFormFields = document.querySelectorAll("#createCourseForm > .contentFieldset > input");
+          createFormFields = Array.from(createFormFields);
+
+          for(let i = 0; i < createFormFields.length; i++) {
+               createFormFields[i].onchange = () => {
+                    validateFields("single", createFormFields[i]);
+               };
+          }
+     }
+
+
+     function validateSingleInput() {
+          let inputValue = selectedInput.value;
+          let regularExpression;
+
+          switch(selectedInput.name) {
+               case "name":
+                    regularExpression = /[\w]{2,}/;
+                    break;
+
+               case "email":
+                    regularExpression = /[\w]{2,}[@][a-z]{2,}[.][a-z]{2,}/;
+                    break;
+
+               case "password":
+                    regularExpression = /[\w\d]{4,}/;
+                    break;
+
+
+               case "aUrl":
+                    regularExpression = /https?:\/\/.+\..+/;
+                    break;
+
+               default: 
+                    regularExpression = /.{1,}/
+
+          }
+
+          if(regularExpression.test(inputValue) === true) {
+               selectedInput.classList.add("correctInput");
+
+          } else if(selectedInput.classList.contains("correctInput")) {
+               selectedInput.classList.remove("correctInput");
+          }
+     }
+
+
+     function finishValidation() {
+          let selectedArea = "#createCourseForm"
+          let filledInputs = document.querySelectorAll(`${selectedArea} .requiredInput.correctInput`);
+          let minLength = document.querySelectorAll(`${selectedArea} .requiredInput`).length;
+
+          return filledInputs.length === minLength ? true : false
+     }
+
 }
 
 
@@ -596,6 +685,58 @@ async function createAcessControl(courseIdentifier, usersWithAcessInCourse) {
 }
 
 
+
+
+// show message box
+function showMessageBox(messageType, message) {
+     let messageBox = document.querySelector(".messageBox");
+     let closeButton;
+
+     if(messageBox) {
+          messageBox.remove();
+     }
+
+
+     messageBox = createMessageBox();
+     defineCustomElements();
+
+
+     function createMessageBox() {
+          let mainSiteContent = document.getElementById("mCon");
+
+          let createdMessageBox = document.createElement("div");
+          createdMessageBox.classList.add("messageBox", "bAll");
+
+          closeButton = document.createElement("button");
+          closeButton.classList.add("closeMessageBox");
+
+
+          closeButton.addEventListener("click", () => {
+               createdMessageBox.remove();
+          });
+
+
+          createdMessageBox.appendChild(closeButton);
+          mainSiteContent.appendChild(createdMessageBox);
+
+
+          return  createdMessageBox;
+     }
+
+
+     function defineCustomElements() {
+          let messageParagraph = document.createElement("p");
+          messageParagraph.innerText = message;
+
+          messageBox.classList.add(messageType);
+          messageBox.insertBefore(messageParagraph, closeButton);
+     }
+
+
+}
+
+
+// exports
 export { createAcessControl, saveCourseData };
 
 
