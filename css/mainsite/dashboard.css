@@ -4,13 +4,13 @@
 #dashbMsg {
      margin-bottom: 50px;
 
-     font: 100 2em var(--rFont);
-     color: var(--white);
+     font: 300 1.75em var(--rFont);
+     color: var(--uiSecondaryWhite);
 }
 
 #userGreetings {
-     color: var(--aqua);
-     font-size: 2em;
+     color: var(--uiPrimaryWhite);
+     font: 300 2em var(--rFont);
 }
 
 
@@ -55,16 +55,14 @@
 
 
 
-/* dashb anchor active */
-.dashbAnchor:active {
-     background-color: var(--aqua);
-     border: none;
+/* dashb anchor pseudo classes  */
+.dashbAnchor:hover {
+     border-color: var(--uiPrimaryWhite);
 }
 
-
-.dashbAnchor:active > p {
-     font-weight: 700;
-     color: var(--wood);
+.dashbAnchor:active {
+     background-color: var(--uiSecondaryBlack);
+     border: 1px solid var(--uiPrimaryWhite);
 }
 
 .dashbAnchor:active::after {
@@ -79,6 +77,7 @@
 @media screen and (min-width: 768px) {
      /* dashb content */
      #dashbMsg {
+          line-height: 10px;
           margin-bottom: 50px;
      }
 
@@ -94,12 +93,10 @@
           flex-flow: column wrap;
 
           width: fit-content;
-          padding: 0;
+          padding: 15px 0px;
 
-          background-color: var(--grey);
-
-          border: none;
-          border-radius: 5px;
+          border: 1px solid var(--uiSecondaryGrey);
+          border-radius: 25px;
      }
 
      .dashbAnchor::after {
@@ -112,36 +109,21 @@
 
           height: 200px;
 
-          padding: 20px;
+          padding: 15px;
           margin: 20px;
      }
 
      .dashbAnchor > p {
           text-align: center;
 
-          color: var(--wood);
-          background-color: var(--white);
-
           padding: 10px;
           width: 100%;
      }
 
 
-     /* hover - "growing animation" */
-     .dashbAnchor:hover > img {
-          padding: 5px;
-          margin: 30px;
-     }
-
-     /* reg */
-     .regHover:hover > P, .regHover:hover {
-          background-color: var(--aqua);
-     }
-
-     /* adm */
-     .admHover:hover > p, .admHover:active, .admHover:hover {
-          color: var(--white);
-          background-color: var(--razz);
+     /* hover */
+     .dashbAnchor:hover {
+          border-color: var(--uiPrimaryWhite);
      }
 
 }

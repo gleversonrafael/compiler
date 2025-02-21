@@ -24,48 +24,56 @@
      </header>
 
      
-     <section role="menubar" id="mMenuB" class="flex fJustSB">
-          <menu id="mMenu">
+     <section role="menubar" id="mMenuB">
+          <div id="menuTopIcon"></div>
+
+          <img id="mIcon" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais">
+
+          <menu id="mMenu" class="flex flex-col">
                <!-- dashboard -->
                <li> 
-                    <a href="../html/dashboard.html" id="dashboard" class="mmBlock flex fAlignC dTrans onpage">
-                         <img src="../media/ico/menu/dashboard.svg" alt="Ícone de 3 pontos interligados simbolizando tanto um l quanto links">
+                    <a href="../html/dashboard.html" id="dashboard" class="selectedMenuBox mmBlock flex fAlignC dTrans">
+                         <img src="../media/ico/menu/dashboard.svg" alt="">
                          <p class="menuFont"> Painel</p>
                     </a>
 
                </li>
 
+
                <!-- my courses -->
                <li>
                     <a href="../html/mycourses.html" id="mycourses" class="mmBlock flex fAlignC dTrans">
-                         <img src="../media/ico/menu/mycourses.svg" alt="Ícone de duas notas de papel">
+                         <img src="../media/ico/menu/mycourses.svg" alt="">
                          <p class="menuFont"> Meus cursos</p>
                     </a>
 
                </li>
                
+
                <!-- manage courses -->
                <li>
-                    <a href="../html/managecourses.html" id="managecourses" class="mmBlock flex fAlignC dTrans">
-                         <img src="../media/ico/menu/managecourses.svg" alt="Ícone de uma caixa com uma engrenagem centralizada em seu interior.">
-                         <p class="menuFont"> Cursos gerenciados</p>
+                    <a href="../html/managecourses.html" id="managecourses" class="limitedAcess mmBlock flex fAlignC dTrans">
+                         <img src="../media/ico/menu/managecourses.svg" alt="">
+                         <p class="menuFont"> Gerir cursos</p>
                     </a>
 
                </li>
                
+
                <!-- manage users -->
                <li>
-                    <a href="../html/manageusers.html" id="manageusers" class="mmBlock flex fAlignC dTrans">
-                         <img src="../media/ico/menu/manageusers.svg" alt="Ícone de uma pessoa ao lado de uma engrenagem.">
-                         <p class="menuFont"> Gestão de usuários</p>
+                    <a href="../html/manageusers.html" id="manageusers" class="limitedAcess mmBlock flex fAlignC dTrans">
+                         <img src="../media/ico/menu/manageusers.svg" alt="">
+                         <p class="menuFont"> Usuários</p>
                     </a>
 
                </li>
 
+
                <!-- closeM -->
                <li>
-                    <button id="leaveM" class="flex fAlignC dTrans">
-                         <img src="../media/ico/menu/closem.svg" alt="Ícone de seta esquerda.">
+                    <button id="leaveM" class="mmBlock flex fAlignC dTrans">
+                         <img src="../media/ico/menu/closem.svg" alt="">
                          <p class="menuFont"> Fechar menu</p>
 
                     </button>
@@ -78,20 +86,20 @@
           <!-- user section -->
           <section id="userSec" class="flex flex-col">
                <div class="flex userMSpace">
-                    <img id="userIcon" src="../media/ico/menu/user.svg" alt="Ícone de seta esquerda">
+                    <img id="userIcon" src="../media/ico/menu/user.svg" alt="">
                     
                     <div id="userInfo" class="userMSpace">
                          <p id="userName" class="menuFont"> null </p>
                          <p id="userType" class="userMSpace menuFont"> null </p>
 
                          <button id="signoutB" class="userB menuFont dTrans"> Sair </button>
-                    
+                   
                     </div> 
 
                </div>    
 
                <a class="flex fAlignC fJustC userB menuFont dTrans" href=""> 
-                    <img src="../media/ico/menu/settings.svg" alt="Ícone de engrenagem.">
+                    <img src="../media/ico/menu/settings.svg" alt="">
                     Configurações 
                </a>
 
@@ -241,6 +249,12 @@
           </div>
 
      </main>
+
+
+     <aside>
+          <img id="wallpaperEffect" src="../media/img/wallpaperwaves.png" alt="Ondas abstratas">
+
+     </aside>
 
 
      <!-- scripts -->

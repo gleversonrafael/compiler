@@ -19,16 +19,19 @@
      <!-- menu -->
      <header id="mHead" class="flex fAlignC fJustSB">
           <img id="cllIcon" src="../media/ico/ico-comp.svg" alt="C e duas listras" >
-          <img id="mIcon" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais">
 
      </header>
 
 
-     <section role="menubar" id="mMenuB" class="flex fJustSB">
-          <menu id="mMenu">
+     <section role="menubar" id="mMenuB">
+          <div id="menuTopIcon"></div>
+
+          <img id="mIcon" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais">
+
+          <menu id="mMenu" class="flex flex-col">
                <!-- dashboard -->
                <li> 
-                    <a href="../html/dashboard.html" id="dashboard" class="mmBlock flex fAlignC dTrans onpage">
+                    <a href="../html/dashboard.html" id="dashboard" class="selectedMenuBox mmBlock flex fAlignC dTrans">
                          <img src="../media/ico/menu/dashboard.svg" alt="">
                          <p class="menuFont"> Painel</p>
                     </a>
@@ -50,7 +53,7 @@
                <li>
                     <a href="../html/managecourses.html" id="managecourses" class="limitedAcess mmBlock flex fAlignC dTrans">
                          <img src="../media/ico/menu/managecourses.svg" alt="">
-                         <p class="menuFont"> Cursos gerenciados</p>
+                         <p class="menuFont"> Gerir cursos</p>
                     </a>
 
                </li>
@@ -60,7 +63,7 @@
                <li>
                     <a href="../html/manageusers.html" id="manageusers" class="limitedAcess mmBlock flex fAlignC dTrans">
                          <img src="../media/ico/menu/manageusers.svg" alt="">
-                         <p class="menuFont"> Gestão de usuários</p>
+                         <p class="menuFont"> Usuários</p>
                     </a>
 
                </li>
@@ -68,7 +71,7 @@
 
                <!-- closeM -->
                <li>
-                    <button id="leaveM" class="flex fAlignC dTrans">
+                    <button id="leaveM" class="mmBlock flex fAlignC dTrans">
                          <img src="../media/ico/menu/closem.svg" alt="">
                          <p class="menuFont"> Fechar menu</p>
 
@@ -119,7 +122,7 @@
                     <ul>
                          <!-- my courses -->
                          <li> 
-                              <a class="dashbAnchor regHover flex bAll sTrans" href="mycourses.html"> 
+                              <a class="dashbAnchor flex bAll sTrans" href="mycourses.html"> 
                                    <img class="sTrans" src="../media/ico/menu/mycourses.svg" alt="">
 
                                    <p> Meus cursos </p>     
@@ -129,7 +132,7 @@
 
                          <!-- user area -->
                          <li > 
-                              <a class="dashbAnchor regHover flex bAll sTrans" href="myuser.html"> 
+                              <a class="dashbAnchor flex bAll sTrans" href="myuser.html"> 
                                    <img class="sTrans" src="../media/ico/menu/user.svg" alt="">
 
                                    <p> Meu usuário </p> 
@@ -139,7 +142,7 @@
 
                          <!-- courses managed -->
                          <li> 
-                              <a class="limitedAcess dashbAnchor admHover flex bAll sTrans" href="managecourses.html"> 
+                              <a class="limitedAcess dashbAnchor flex bAll sTrans" href="managecourses.html"> 
                                    <img class="sTrans" src="../media/ico/menu/managecourses.svg" alt="">
 
                                    <p> Gerenciar cursos </p> 
@@ -149,10 +152,10 @@
 
                          <!-- manage users -->
                          <li> 
-                              <a class="limitedAcess dashbAnchor admHover flex bAll sTrans" href="manageusers.html"> 
+                              <a class="limitedAcess dashbAnchor flex bAll sTrans" href="manageusers.html"> 
                                    <img class="sTrans" src="../media/ico/menu/manageusers.svg" alt="">
 
-                                   <p> Gerir usuários </p> 
+                                   <p> Usuários </p> 
                               </a> 
                          </li>                         
 
@@ -163,6 +166,11 @@
           </section>
 
      </main>
+
+     <aside>
+          <img id="wallpaperEffect" src="../media/img/wallpaperwaves.png" alt="Ondas abstratas">
+
+     </aside>
 
      <!-- scripts -->
      <script src="../js/final/maindependenciesbundle.js"></script>

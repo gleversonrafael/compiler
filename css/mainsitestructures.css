@@ -2,6 +2,7 @@
 
 /* header */
 #mHead {
+     display: none;
      position: sticky;
      top: 0;
      z-index: 3;
@@ -18,11 +19,17 @@
 }
 
 #mIcon {
+     display: none;
      margin-left: 10px;
      height: 80%;
      max-height: 40px;
 
      cursor: pointer;
+}
+
+#bgEff {
+     display: block;
+     opacity: 1;
 }
 
 #cllIcon {
@@ -34,76 +41,85 @@
 
 /* main menu box and its content*/
 #mMenuB {
-     display: none;
-     flex-flow: column nowrap;
+     display: grid;
+     grid-template-rows: 1fr 2fr 1fr;
 
      position: fixed;
-     top: 0px;
+     top: 0;
      z-index: 2;
 
-     background-color: var(--wood);
-     border-right: 1px solid var(--uiPrimaryGrey);
+     padding: 10px;
 
-     min-width: 150px;
+     min-width: 225px;
      width: 60vw;
-     max-width: fit-content;
+     max-width: 300px;
 
      height: 100vh;
      overflow: scroll;
+
+     background-color: var(--uiSecondaryBlack);
+     border-right: 1px solid var(--uiPrimaryGrey);
 }
+
+#menuTopIcon {
+     border: 1px solid var(--uiPrimaryGrey);
+
+     height: 40px;
+     width: 100px;
+
+     justify-self: center;
+     margin: 10px 10px 60px 10px; 
+}
+
 
 #mMenu {
-     margin-top: clamp(40px, 10vh, 60px);
-     width: 100%;
+     height: fit-content;
+     gap: 10px;
 }
 
+
 .menuFont {
-     font: 100 0.75em var(--rFont);
+     font: 200 0.75em var(--rFont);
 }
 
 
 /* mMenu boxes */
-.mmBlock, #leaveM {
-     height: 70px;
-}
-
-
 .mmBlock{
-     color: var(--white);
-}
-
-.mmBlock:hover {
-     border-bottom: 1px solid var(--white);
-}
-
-
-.mmBlock:hover, #leaveM:hover {
-     background-color: #000;
-}
-
-
-#leaveM {
+     height: 60px;
      width: 100%;
-     cursor: pointer;
 
+     padding: 0 5px;
+
+     color: var(--uiSecondaryWhite);
+     border: 1px solid var(--uiPrimaryGrey);
      background-color: transparent;
 
-     border: none;
-     border-bottom: 1px solid var(--razz);
+     border-radius: 15px;
 }
 
-#leaveM p {
-     color: var(--razz);
+
+.mmBlock:hover {
+     color: var(--uiPrimaryWhite);
+     cursor: pointer;
+}
+
+.selectedMenuBox {
+     color: var(--uiPrimaryWhite);
+     background-color: var(--uiPrimaryGrey);
+}
+
+.selectedMenuBox > p {
+     font-weight: 500;
 }
 
 
 #mMenu img {
      height: 50%;
 
-     margin: 0px 15px 0px 25px;
-     background-size: 50px 50px;
+     margin: 0px 25px;
+     background-size: 100%;
 
-     color: var(--white);
+     /* border: 1px solid red; */
 }
 
 #mMenu p {
@@ -116,7 +132,14 @@
 /* user section */
 #userSec {
      justify-self: center;
-     margin: 100px 20px 15px;
+     align-self: end;
+
+     height: fit-content;
+
+     width: 80%;
+     max-width: 225px;
+
+     margin: 100px 0px 0px;
 }
 
 #userIcon {
@@ -128,7 +151,7 @@
      padding: 15px;
 
      border-radius: 50px;
-     background-color: var(--grey);
+     background-color: var(--uiPrimaryGrey);
 }
 
 
@@ -141,11 +164,11 @@
 }
 
 #userName {
-     color: var(--aqua);
+     color: var(--uiPrimaryWhite);
 }
 
 #userType {
-     color: var(--razz);
+     color: var(--uiSecondaryWhite);
 }
 
 
@@ -153,17 +176,17 @@
      width: 100%;
      padding: 15px;
 
-     cursor: pointer;
-
      border: none;
      border-radius: 50px;
 
-     color: var(--white);
-     background-color: var(--grey);
+     color: var(--uiSecondaryWhite);
+     background-color: var(--uiPrimaryGrey);
+
+     cursor: pointer;
 }
 
 .userB:hover {
-     background-color: #000;
+     background-color: var(--uiSecondaryGrey);
 }
 
 #userSec a {
@@ -171,7 +194,7 @@
 }
 
 #signoutB:hover {
-     background-color: var(--amar);
+     background-color: var(--secondaryOpposite);
 }
 
 
@@ -188,13 +211,12 @@
      min-height: calc(100vh - 60px);
 
      /* border that forces mCon to unfollow it's first children position as the start height "counter" */
-     border: 1px solid var(--wood);
+     width: 100%;
 }
 
 
 .conPattern {
-     margin: 50px;
-          
+     margin: 50px;          
      height: fit-content;
      max-width: fit-content;
 }
@@ -233,6 +255,8 @@
 
 
 
+
+
 /* eff */
 #bgEff {
      display: none;
@@ -245,6 +269,21 @@
      width: 100%;
 
      background-color: var(--woodT);
+}
+
+
+#wallpaperEffect {
+     z-index: -1;
+
+     position: fixed;
+     bottom: 0;
+     left: 50%;
+     right: auto;
+
+     transform: translate(-50%);
+
+     min-width: 250px;
+     width: 70%;
 }
 
 
@@ -264,67 +303,43 @@
 
 /* pc / tablet media */
 @media screen and (min-width: 768px) {
-     /* main content */
-     #mCon {
-          margin-left: 191px;
-     }
-
-     .conPattern {
-          margin: 50px 80px;
-     }
-
-
      #pageTitle {
-          font-size: 3em;
+          font-size: 3.25em;
+
      }
 
+     .conPattern  {
+          margin: 80px;
+     }
 
-
-     /* mMenu */
      #mMenuB {
-          display: flex;
-     }
-
-     #mIcon {
-          display: none;
-     }
-
-
-     .mmBlock, #leaveM {
-          height: 50px;
+          position: sticky;
+          max-width: 225px;
      }
 
      .mmBlock {
           opacity: 0.75;
+
+          height: 50px;
+          border: none;
      }
 
-     .mmBlock:hover {
+     .mmBlock:hover, .selectedMenuBox {
           opacity: 1;
-     }
-
-
-     #leaveM {
-          display: none;
-     }
-
-
-
-
-     /* user info */
-     #userIcon {
-          padding: 10px;
-
-          width: 60px;
-          height: 60px;
+          background-color: var(--uiPrimaryGrey);
      }
 
      .userB {
-          opacity: 0.5;
           padding: 5px;
      }
 
-     .userB:hover {
-          opacity: 1;
+     #userIcon {
+          height: 60px;
+          width: 60px;
      }
 
+
+     #wallpaperEffect {
+          left: 55%;     
+     }
 }
