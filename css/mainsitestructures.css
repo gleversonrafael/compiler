@@ -1,67 +1,59 @@
 @charset "UTF-8";
 
-/* header */
-#mHead {
-     display: none;
-     position: sticky;
-     top: 0;
-     z-index: 3;
-
-     flex-flow: row-reverse wrap;
-
-     min-height: 40px;
-     height: 10vh;
-     max-height: 60px;
-
-     width: 100%;
-
-     background-color: var(--grey);
-}
-
-#mIcon {
-     display: none;
-     margin-left: 10px;
-     height: 80%;
-     max-height: 40px;
-
-     cursor: pointer;
-}
-
+/* general */
 #bgEff {
      display: block;
      opacity: 1;
-}
-
-#cllIcon {
-     height: 100%;
 }
 
 
 
 
 /* main menu box and its content*/
-#mMenuB {
-     display: grid;
-     grid-template-rows: 1fr 2fr 1fr;
+#menuIcon {
+     height: 30px;
+     margin: 10px;
+     
+     cursor: pointer;
+}
 
-     position: fixed;
+#mMenuB {
+     display: grid;     
+     position: sticky;
+     /* position: fixed; */
+
      top: 0;
      z-index: 2;
 
-     padding: 10px;
+     min-width: 50px;
+     height: 100vh;
+
+}
+
+#mMenuB.menuOpen {
+     position: fixed;
+     overflow: scroll;
+
+     grid-template-rows: 1fr 2fr 1fr;
 
      min-width: 225px;
      width: 60vw;
      max-width: 300px;
 
-     height: 100vh;
-     overflow: scroll;
+     padding: 10px;
 
      background-color: var(--uiSecondaryBlack);
-     border-right: 1px solid var(--uiPrimaryGrey);
 }
 
-#menuTopIcon {
+.menuChildClosed {
+     display: none;
+     /* border: 1px solid red; */
+}
+
+
+
+
+.brandIcon{
      border: 1px solid var(--uiPrimaryGrey);
 
      height: 40px;
@@ -208,19 +200,28 @@
 /* main content */
 #mCon {
      position: relative;
+
      min-height: calc(100vh - 60px);
+     min-width: calc(100% - 100px);
+
+     margin-right: 50px;
+
 
      /* border that forces mCon to unfollow it's first children position as the start height "counter" */
-     width: 100%;
+}
+
+#bgEff {
+     display: block;
+     background-color: var(--yellow);
 }
 
 
 .conPattern {
-     margin: 50px;          
+     margin: 50px 0px;
+     
      height: fit-content;
-     max-width: fit-content;
+     max-width: 100%;
 }
-
 
 #pageTitle {
      color: var(--white);
@@ -236,6 +237,7 @@
 }
 
 
+
 .genericButton {
      padding: 15px;
 
@@ -245,11 +247,6 @@
      background-color: var(--wood);
 
      border: 1px solid var(--white);
-}
-
-.limitedAcess {
-     display: none;
-
 }
 
 
@@ -305,22 +302,33 @@
 @media screen and (min-width: 768px) {
      #pageTitle {
           font-size: 3.25em;
+     }
 
+
+     /* main content */
+     #mCon {
+          min-width: calc(100% - 225px);
      }
 
      .conPattern  {
           margin: 80px;
      }
 
+
+     /* menu */
      #mMenuB {
           position: sticky;
           max-width: 225px;
      }
 
+     #mMenuB.menuOpen {
+          position: sticky;
+     }
+
      .mmBlock {
           opacity: 0.75;
 
-          height: 50px;
+          height: 40px;
           border: none;
      }
 

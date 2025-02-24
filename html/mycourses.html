@@ -15,26 +15,19 @@
 
 </head>
 
-<body>
-     <!-- menu -->
-     <header id="mHead" class="flex fAlignC fJustSB">
-          <img id="cllIcon" src="../media/ico/ico-comp.svg" alt="C e duas listras" >
-          <img id="mIcon" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais">
+<body>     
+     <section role="menubar" id="mMenuB" class="menuClosed">
+          <img id="menuIcon" class="menuChildOpen" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais brancas no sentido vertical"></div>
 
-     </header>
 
-     
-     <section role="menubar" id="mMenuB">
-          <div id="menuTopIcon"></div>
+          <div class="brandIcon menuChildClosed"></div>
 
-          <img id="mIcon" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais">
-
-          <menu id="mMenu" class="flex flex-col">
+          <menu id="mMenu" class="menuChildClosed flex flex-col">
                <!-- dashboard -->
                <li> 
-                    <a href="../html/dashboard.html" id="dashboard" class="selectedMenuBox mmBlock flex fAlignC dTrans">
-                         <img src="../media/ico/menu/dashboard.svg" alt="">
-                         <p class="menuFont"> Painel</p>
+                    <a href="../html/navigate.html" id="navigate" class="mmBlock flex fAlignC dTrans">
+                         <img src="../media/ico/menu/navigate.svg" alt="">
+                         <p class="menuFont"> Navegação </p>
                     </a>
 
                </li>
@@ -84,7 +77,7 @@
 
 
           <!-- user section -->
-          <section id="userSec" class="flex flex-col">
+          <section id="userSec" class="menuChildClosed flex flex-col">
                <div class="flex userMSpace">
                     <img id="userIcon" src="../media/ico/menu/user.svg" alt="">
                     

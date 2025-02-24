@@ -10,7 +10,7 @@
 
 #userGreetings {
      color: var(--uiPrimaryWhite);
-     font: 300 2em var(--rFont);
+     font: 300 1.5em var(--rFont);
 }
 
 
@@ -23,12 +23,14 @@
 
      min-height: 60px;
      padding: 15px 15px 15px 30px;
+
      width: 80vw;
+     max-width: 100%;
 
      margin-bottom: 15px;     
 
      text-decoration: none;
-     border: 1px solid var(--white);
+     border: 1px solid var(--uiPrimaryWhite);
 }
 
 .dashbAnchor::after {

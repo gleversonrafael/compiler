@@ -9,8 +9,11 @@
     width: 80vw;
     max-width: fit-content;
 
-    background-color: var(--wood);
-    border: 1px solid var(--whiteT);
+    padding: 10px;
+
+    background-color: var(--uiSecondaryBlack);
+    border-radius: 15px;
+
 }
 
 #mForm {
@@ -24,7 +27,7 @@
 
 /* sign-in / out title  */
 #signTitle {
-    font: normal 500 2em var(--rFont);
+    font: normal 500 1.5em var(--rFont);
 }
 
 
@@ -37,25 +40,35 @@
 }
 
 .inpB input {    
-    font: normal 400 1em var(--rFont);
-
     width: 100%;
     height: 50px;
     padding: 0px 10px 0px 25px;
 
     border-radius: 25px;
     box-shadow: 0.5px 0.5px 2px #18181823;
+    
+    font: normal 400 1em var(--rFont);
+
+    background-color: var(--uiPrimaryGrey);
+    color: var(--uiPrimaryWhite);
+
+    opacity: 0.5;
+    border: none;
+}
+
+.inpB input:focus {
+    opacity: 1;
+    outline: 1px solid var(--uiSecondaryGrey);
 }
 
 .valEff:valid {
     position: relative;
-    border: 2px solid var(--whiteT);
 }
 
 
 .inpB label, .inpB > div > p {
-    color: var(--white);
-    font: 100 0.9em var(--rFont);
+    color: var(--uiSecondaryWhite);
+    font: 200 0.9em var(--rFont);
 }
 
 
@@ -79,14 +92,6 @@
     border-radius: 25px;
 }
 
-
-
-
-/* visual div */
-#visualD {
-    width: 1vw;
-    max-width: 10px;
-}
 
 
 

@@ -47,15 +47,15 @@ function analyzeLogState(data) {
           // user is logged in and tries to acess start page / login (GITHUB COMPATIBILITY)
           if(data != null && ( window.location.href.includes("index") || window.location.href == "https://gleversonrafael.github.io/compiler/" || window.location.href.includes("log"))) {
                if(window.location.href.includes("github")) {
-                    window.location.href = "https://gleversonrafael.github.io/compiler/html/dashboard.html"
+                    window.location.href = "https://gleversonrafael.github.io/compiler/html/navigate.html"
 
 
                } else if(window.location.href.includes("log") && document.getElementById("passInp").value.length == 0 ){ /* suited for local server */
-                    window.location.href = "./dashboard.html"
+                    window.location.href = "./navigate.html"
 
 
                } else if(window.location.href.includes("index")) {
-                    window.location.href = "./html/dashboard.html"
+                    window.location.href = "./html/navigate.html"
 
                }
           
@@ -65,10 +65,11 @@ function analyzeLogState(data) {
 
 
 function showAdmContent() {
-     let admClasses = document.querySelectorAll(".limitedAcess");
+     console.log("jspermissions.js");
+     // let admClasses = document.querySelectorAll(".limitedAcess");
 
-     admClasses.forEach((analyzedElement) => {
-          analyzedElement.style.display = "flex";
+     // admClasses.forEach((analyzedElement) => {
+     //      analyzedElement.style.display = "flex";
 
-     })
+     // })
 }

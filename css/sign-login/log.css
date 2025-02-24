@@ -5,6 +5,7 @@ main {
     align-items: center;
     justify-content: center;
     
+    width: 100%;
     min-height: 100vh;
 }
 
@@ -21,18 +22,9 @@ main {
 }
 
 
-
-
-/* visual D*/
-#visualD {
-    background-color: var(--aqua);
-}
-
-
-
 /* login title box */
 #mForm h1 {
-    color: var(--white);
+    color: var(--uiPrimaryWhite);
     margin-bottom: 50px;
 }
 
@@ -44,14 +36,6 @@ main {
 /* input buttons */
 .inpB {
     gap: 20px;
-}
-
-.inpB input {
-    color: var(--aqua);
-    background-color: transparent;
-
-    border: 1px solid var(--white);
-
 }
 
 
@@ -67,32 +51,29 @@ main {
 
 /* final buttons */
 #lButton {
-    color: var(--aqua);
-    border: 1px solid var(--aqua);
+    background-color: var(--tertiaryColor);
 }
 
 #lButton:hover {
-    background-color: var(--aqua);
+    background-color: var(--primaryColor);
 }
 
 #rButton {
-    color: var(--razz);
-    border: 1px solid var(--razz);  
+    background-color: var(--uiSecondaryGrey);
 
     text-decoration: none;
     text-align: center;
 }
 
 #rButton:hover {
-    background-color: var(--razz);
+    background-color: var(--primaryOpposite);
 }
 
 
-/* all buttons */
-#lButton:hover, #rButton:hover {
-    color: var(--wood);
+#rButton, #lButton {
+    color: var(--uiPrimaryBlack);
+    border: none;
 }
-
 
 
 
@@ -142,7 +123,7 @@ main {
 
 
 #msgD {
-    color: var(--white);
+    color: var(--uiPrimaryWhite);
     font: 100 min(1.5em, 5vw) var(--rFont);
 }
 
@@ -214,7 +195,7 @@ main {
     }
 
     .inpB input {
-        font-size: min(25px, 2vw);
+        font-size: min(20px, 2vw);
         height: 60px;
     }
 
