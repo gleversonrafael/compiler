@@ -24,8 +24,8 @@
 }
 
 #addCourseButton {
-     color: var(--aqua);
-     border: 1px solid var(--aqua);
+     color: var(--primaryColor);
+     border: 1px solid var(--primaryColor);
 }
 
 #addCourseButton:disabled {
@@ -53,11 +53,6 @@
 
 
 /* edit courses box */
-.createdContent > input[type=submit]:hover {
-     color: var(--uiPrimaryBlack);
-     background-color: var(--uiPrimaryWhite);
-}
-
 .createdContent > div {
      flex-flow: column wrap;
 }
@@ -89,7 +84,7 @@ div.stepperGroup {
      flex-flow: row wrap;
 
      justify-content: space-between;
-     margin-top: 50px;
+     margin-top: 20px;
 }
 
 .stepperGroup > input[type=reset] {
@@ -158,41 +153,60 @@ div.stepperGroup {
 
 /* acess control */
 .acessControl {
-     color: var(--uiPrimaryWhite);
+     overflow: hidden;
 }
 
 .thisCourseAcess {
-     gap: 10px;
+     display: flex;
+     flex-flow: column nowrap;
 
-     max-height: 165.8px;
+     gap: 10px;
+     
+     max-height: 165px;
+
+     /* min-width === width e === 100%, para ocupar o tamanho de acess control e torná-lo intransponível, bem como conservar esse width (width: 100%) */
+     min-width: 100%;
+     width: 100%;
+     max-width: 50vw;
+
      overflow: scroll;
 }
 
 .thisCourseAcess > li {
-     background-color: var(--uiPrimaryGrey);
+     display: flex;
+     align-items: center;     
+
+     height: 40px;
+     padding: 20px 25px;
+
+     cursor: pointer;
+
+     color: var(--uiPrimaryWhite);
+
+     border: 1px solid var(--uiSecondaryGrey);
      border-radius: 15px;
 
-     margin: 10px 0px;
-     height: 40px;
-
-     padding: 10px;
-     cursor: pointer;
+     word-break: keep-all;
+     text-overflow: ellipsis;
+     overflow: hidden;
 }
 
 .thisCourseAcess > .acessEditToggled {
-     color: var(--aqua);
-     background-color: var(--gree);
+     color: var(--primaryColor);
+     border-color: var(--tertiaryColor);
 }
 
 
 
 /* create courses area */
 .coursesColumn > div.canBeDeleted, .coursesColumn > div.willBeDeleted {
-     border-color: var(--razz);
+     outline: 1px solid var(--primaryOpposite);
 }
 
 .coursesColumn > div.willBeDeleted {
-     background-color: var(--papr);
+     outline: none;
+     background-color: var(--quaternaryOpposite);
+     /* background-color: var(--tertiaryOpposite); */
 }
 
 
@@ -407,35 +421,34 @@ div.stepperGroup {
 }
 
 #removeAcessButton {
-     color: var(--razz);
-     border: 1px solid var(--razz);
+     color: var(--primaryOpposite);
+     border: 1px solid var(--primaryOpposite);
 }
 
 #removeAcessButton:hover {
-     background-color: var(--razz);
+     background-color: var(--primaryOpposite);
 }
 
 
 #grantAcessButton {
-     color: var(--aqua);
-     border: 1px solid var(--aqua);
+     color: var(--primaryColor);
+     border: 1px solid var(--primaryColor);
 }
 
 #grantAcessButton:hover {
-     background-color: var(--aqua);
+     background-color: var(--primaryColor);
 }
 
 
 
 /* users boxes */
 #userList > .editableBox {
-     border: 1px solid var(--uiPrimaryWhite);
+     outline: 1px solid var(--uiPrimaryWhite);
      cursor: pointer;
 }
 
 #userList > .acessGranted {
-     background-color: var(--gree);
-     border: 1px solid var(--aqua);
+     background-color: var(--quaternaryColor);
 }
 
 
@@ -499,7 +512,7 @@ div.stepperGroup {
 }
 
 #deleteCourseBox > .createdBoxTitle > h1 {
-     color: var(--razz);
+     color: var(--primaryOpposite);
      margin-bottom: 10px;
 }
 
@@ -513,13 +526,13 @@ div.stepperGroup {
 #confirmExclusion {     
      background-color: transparent;
 
-     color: var(--razz);
-     border: 1px solid var(--razz);
+     color: var(--primaryOpposite);
+     border: 1px solid var(--primaryOpposite);
 }
 
 #confirmExclusion:hover {
      color: var(--uiPrimaryWhite);
-     background-color: var(--razz);
+     background-color: var(--primaryOpposite);
 }
 
 #confirmExclusion:disabled {
@@ -550,6 +563,7 @@ div.stepperGroup {
      justify-items: center;
 
      position: fixed;
+     top: 20px;
      z-index: 2;
      
      padding: 25px 25px 10px 25px;

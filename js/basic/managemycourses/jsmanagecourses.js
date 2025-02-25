@@ -81,9 +81,12 @@ function courseBoxOperations(callReason) {
      function changeCourseBoxPage() {
           let searchUserBox = document.getElementById("searchUserBox");
           let createCourseForm = document.getElementById("createCourseForm");
+          let pageSubtitle = document.querySelector(".createdBoxSubtitle");
      
      
           if(createCourseBoxPage === 2) {
+               pageSubtitle.innerText = "Dados principais";
+
                returnCreateCourse.style.display = "none"
      
                searchUserBox.style.display = "none";
@@ -92,6 +95,8 @@ function courseBoxOperations(callReason) {
                createCourseBoxPage = 1;
           
           } else {
+               pageSubtitle.innerText = "Controle do acesso";
+
                returnCreateCourse.style.display = "flex"
      
                createCourseForm.style.display = "none";
@@ -623,9 +628,9 @@ async function createAcessControl(courseIdentifier, usersWithAcessInCourse) {
      // properties
      acessControl.classList.add("acessControl", "coursePage4", "aCoursePage");
      acessList.classList.add("thisCourseAcess");
+
      
      await createList();
-
 
      if(usersWithAcessInCourse.length > 0) {
           toggleUsersWithAcess();
@@ -636,6 +641,9 @@ async function createAcessControl(courseIdentifier, usersWithAcessInCourse) {
      async function createList() {  
           let createdContent;
           let stepperGroup;
+          
+          let acessControlPageTitle = document.createElement("h3");
+          acessControlPageTitle.innerText = "Usuários com acesso"
 
           
           await getDocs(usersCol)
@@ -654,6 +662,7 @@ async function createAcessControl(courseIdentifier, usersWithAcessInCourse) {
                     acessList.appendChild(temporaryUserBox);
                })
 
+
                createdContent = document.querySelector(`div#${courseIdentifier} > .createdContent`);
 
                stepperGroup = document.querySelector(`div#${courseIdentifier} > .createdContent > .stepperGroup`);
@@ -663,8 +672,9 @@ async function createAcessControl(courseIdentifier, usersWithAcessInCourse) {
                console.log(errorMsg);
           })
 
-
+          acessControl.appendChild(acessControlPageTitle)
           acessControl.appendChild(acessList);
+
           createdContent.insertBefore(acessControl, stepperGroup);
      }
      

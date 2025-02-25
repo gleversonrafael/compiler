@@ -36,6 +36,13 @@ module.exports = {
       dependOn: "maindependencies",
       import: ["./js/basic/general/jsmenu.js"]
 
+    }, 
+
+    myuser: {
+      dependOn: "maindependencies",
+      import: ["./js/basic/general/jsmenu.js"]
+    
+
     }
 
   },

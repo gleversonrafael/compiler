@@ -34,10 +34,7 @@ closeMB.addEventListener("click", hideMsgB);
 
 
 
-
-// functions
-// main level - independents
-// ---------------------------------
+// login attempt
 function fSubmit(ev) {
     ev.preventDefault();
     console.clear();
@@ -82,11 +79,6 @@ function fSubmit(ev) {
 
 }
 
-
-
-
-// secondary level
-// ---------------------------------
 function checkFields() {
     wrongC = 0;
 
@@ -149,9 +141,6 @@ function checkFields() {
 }
 
 
-
-// ---
-
 async function signAttempt() {
     let res;
 
@@ -192,14 +181,13 @@ async function signAttempt() {
 
 
 
-// ---
+
+// message box
 function hideMsgB() {
     msgB.style.display = "none";
 }
 
 
-
-// ---
 function generateDataErrorTxt(param) {
     console.log("Error: " + param);
     let txtP;
@@ -265,9 +253,6 @@ function generateDataErrorTxt(param) {
 
 
 
-
-
-// third level
 function showMsgB(msgT, content /* msg type == incorrect/correct*/ ) {
     createText()
 

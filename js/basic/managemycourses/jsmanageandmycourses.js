@@ -214,7 +214,6 @@ async function showCourses(searchedContent, callPurpose) {
      
           coursesColumns.forEach((column) => {
                column.innerHTML = "";
-     
           });
      }
      
@@ -261,11 +260,8 @@ function openBox(event) {
 
      function showElements(courseId) {
           let createdContent;
-          let currentPageTitle = document.createElement("h3");
           let closeButton = document.createElement("button");
           let specialButton;
-
-          let currentPage;
 
           courseBox.classList.add("open");
 
@@ -280,7 +276,7 @@ function openBox(event) {
           // complementary
           function createPages() {
                let elementProperties = [{ email: "E-mail" }, { userPassword: "Senha"}];
-               
+
 
                // main process
                setSettingsBeforeCreatingPages();
@@ -290,7 +286,7 @@ function openBox(event) {
 
                // complementary
                function setSettingsBeforeCreatingPages() {
-                    if(pageType === "myCourses") {     
+                    if(pageType === "myCourses") {    
                          specialButton = document.createElement("a");
                          specialButton.href = elementData.url;
                          specialButton.target = "_blank";
@@ -304,8 +300,9 @@ function openBox(event) {
                          elementProperties.push({ url: "URL"}, { img: "URL da imagem"})
      
                          specialButton = document.createElement("input");
-                         specialButton.type = "submit";
-                         specialButton.innerText = "Confirmar";
+                         specialButton.type = "submit";                         
+                         specialButton.value = "Alterar";
+     
      
                          createdContent = document.createElement("form");
                          createdContent.setAttribute("id", `form${courseId}`);
@@ -331,13 +328,16 @@ function openBox(event) {
                     for(let elementCounter = 0; elementCounter < elementProperties.length; elementCounter++) {
                          // increment pages -- each pair elememtCounter = new page (starting from 0)
                          if(elementCounter % 2 === 0) {
-                              let temporaryPage = document.createElement("div");
-                              temporaryPage.classList.add("flex-col")
-
                               pageCounter += 1
 
+                              let temporaryPage = document.createElement("div");
+
+                              temporaryPage.classList.add("flex-col");
                               temporaryPage.classList.add(`coursePage${pageCounter}`);
                               temporaryPage.classList.add("aCoursePage");
+
+                              temporaryPage.appendChild(createRegularPagesTitle(pageCounter));
+                         
 
                               temporaryCreatedPages.push(temporaryPage);
 
@@ -351,6 +351,31 @@ function openBox(event) {
                          // allocate pages
                          temporaryCreatedPages[temporaryCreatedPages.length - 1].appendChild(createdField);
                     }
+               }
+
+
+               function createRegularPagesTitle(pageCounter) {
+                    let pageTitle = document.createElement("h3");
+
+                    switch(pageCounter) {
+                         case 1:
+                              pageTitle.innerText = "Dados do curso";
+                              break;
+
+                         case 2:
+                              pageTitle.innerText = "Dados do usuário";
+                              break;
+
+                         case 3:
+                              pageTitle.innerText = "URLS";
+                              break;
+
+                         default: 
+                              pageTitle.innerText = "Página inexistente";
+                    }
+
+
+                    return pageTitle
                }
 
 

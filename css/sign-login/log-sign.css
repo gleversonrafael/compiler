@@ -18,7 +18,7 @@
 
 #mForm {
     flex-shrink: 1;
-    margin: 40px 35px;
+    margin: 35px;
     width: calc(80vw - 70px);
 }
 
@@ -27,7 +27,7 @@
 
 /* sign-in / out title  */
 #signTitle {
-    font: normal 500 1.5em var(--rFont);
+    font: normal 400 2em var(--rFont);
 }
 
 
@@ -36,7 +36,7 @@
 /* input sections */
 .inpB { /* input box */
     flex-flow: column wrap;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .inpB input {    

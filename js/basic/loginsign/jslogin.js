@@ -4,36 +4,17 @@ import { auth } from "../general/jsfirebase.js";
 
 
 // global var
-const mForm = document.getElementById("mForm");
 let loginResult;
-
 const msgCon = document.querySelector("#msgCon");
-const closeMsgButton = document.querySelector("closeMsgB");
 
 
 
+// login user
+document.getElementById("mForm").addEventListener("submit", loginP)
 
 
-// events
-mForm.addEventListener("submit", loginP)
-
-document.getElementById("closeMsgB").addEventListener("click", 
-  function closeMsg(){
-    msgCon.style.display = "none"
-
-    if(loginResult == "cor") {
-      window.location.href = "./dashboard.html"
-      console.log("redirect")
-    }
-
-  }
-)
-
-
-
-// functions
-// main level
 async function loginP(sEvent) {
+    let mForm = document.getElementById("mForm");
     sEvent.preventDefault();
 
     // user data
@@ -58,7 +39,10 @@ async function loginP(sEvent) {
 
 
 
-// sec level
+// show and close message box
+document.getElementById("closeMsgB").addEventListener("click", closeMsg);
+
+
 function showMsg(msgObtained) {
   // var
   const msgType = document.querySelector("h1#msgT");
@@ -78,9 +62,9 @@ function showMsg(msgObtained) {
   function loginCor() {
     setClass()
 
-    msgIcon.setAttribute("src", "../media/ico/ico-verify.svg");
+    msgIcon.setAttribute("src", "../media/ico/login/ico-verify.svg");
     
-    msgType.innerHTML = "Sucesso"
+    msgType.innerHTML = "Login concluído"
     msgData.textContent = "Feche essa tela para acessar sua conta."
 
     msgCon.style.display = "flex"
@@ -91,7 +75,7 @@ function showMsg(msgObtained) {
   function loginInc() {
     setClass()
 
-    msgIcon.setAttribute("src", "../media/ico/ico-wrong.svg");
+    msgIcon.setAttribute("src", "../media/ico/login/ico-error.svg");
    
     msgType.textContent = "Erro"
     msgData.textContent = "Dados incorretos"
@@ -115,3 +99,12 @@ function showMsg(msgObtained) {
   }
 }
 
+
+function closeMsg(){
+  msgCon.style.display = "none"
+
+  if(loginResult == "cor") {
+    window.location.href = "./navigate.html"
+  }
+
+}

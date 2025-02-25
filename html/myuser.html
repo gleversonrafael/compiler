@@ -6,104 +6,110 @@
      <title> Meu usuário</title>
 
      <link rel="stylesheet" href="../css/general.css">
+     <link rel="stylesheet" href="../css/mainsitestructures.css">
+
      <link rel="stylesheet" href="../css/mainsite/myuser.css">
 
 
 </head>
 
-<body>
-          <!-- menu -->
-          <header id="mHead" class="flex fAlignC fJustSB">
-               <img id="cllIcon" src="../media/ico/ico-comp.svg" alt="C e duas listras" >
-               <img id="mIcon" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais">
-     
-          </header>
-     
-     
-          <section role="menubar" id="mMenuB" class="flex fJustSB">
-               <menu id="mMenu">
-                    <!-- dashboard -->
-                    <li> 
-                         <a href="../html/dashboard.html" id="dashboard" class="mmBlock flex fAlignC dTrans onpage">
-                              <img src="../media/ico/menu/dashboard.svg" alt="">
-                              <p class="menuFont"> Painel</p>
-                         </a>
-     
-                    </li>
-     
-     
-                    <!-- my courses -->
-                    <li>
-                         <a href="../html/mycourses.html" id="mycourses" class="mmBlock flex fAlignC dTrans">
-                              <img src="../media/ico/menu/mycourses.svg" alt="">
-                              <p class="menuFont"> Meus cursos</p>
-                         </a>
-     
-                    </li>
-                    
-     
-                    <!-- manage courses -->
-                    <li>
-                         <a href="../html/managecourses.html" id="managecourses" class="limitedAcess mmBlock flex fAlignC dTrans">
-                              <img src="../media/ico/menu/managecourses.svg" alt="">
-                              <p class="menuFont"> Cursos gerenciados</p>
-                         </a>
-     
-                    </li>
-                    
-     
-                    <!-- manage users -->
-                    <li>
-                         <a href="../html/manageusers.html" id="manageusers" class="limitedAcess mmBlock flex fAlignC dTrans">
-                              <img src="../media/ico/menu/manageusers.svg" alt="">
-                              <p class="menuFont"> Gestão de usuários</p>
-                         </a>
-     
-                    </li>
-     
-     
-                    <!-- closeM -->
-                    <li>
-                         <button id="leaveM" class="flex fAlignC dTrans">
-                              <img src="../media/ico/menu/closem.svg" alt="">
-                              <p class="menuFont"> Fechar menu</p>
-     
-                         </button>
-     
-                    </li>               
-     
-               </menu>
-     
-     
-               <!-- user section -->
-               <section id="userSec" class="flex flex-col">
-                    <div class="flex userMSpace">
-                         <img id="userIcon" src="../media/ico/menu/user.svg" alt="">
-                         
-                         <div id="userInfo" class="userMSpace">
-                              <p id="userName" class="menuFont"> null </p>
-                              <p id="userType" class="userMSpace menuFont"> null </p>
-     
-                              <button id="signoutB" class="userB menuFont dTrans"> Sair </button>
-                        
-                         </div> 
-     
-                    </div>    
-     
-                    <a class="flex fAlignC fJustC userB menuFont dTrans" href=""> 
-                         <img src="../media/ico/menu/settings.svg" alt="">
-                         Configurações 
-                    </a>
-     
-               </section>
-     
-          </section>
+<body>    
+     <section role="menubar" id="mMenuB" class="menuClosed">
+          <img id="menuIcon" class="menuChildOpen" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais brancas no sentido vertical"></div>
 
-          <main>
+
+          <div class="brandIcon menuChildClosed"></div>
+
+          <menu id="mMenu" class="menuChildClosed flex flex-col">
+               <!-- dashboard -->
+               <li> 
+                    <a href="../html/navigate.html" id="navigate" class="mmBlock flex fAlignC dTrans">
+                         <img src="../media/ico/menu/navigate.svg" alt="">
+                         <p class="menuFont"> Navegação </p>
+                    </a>
+
+               </li>
+
+
+               <!-- my courses -->
+               <li>
+                    <a href="../html/mycourses.html" id="mycourses" class="mmBlock flex fAlignC dTrans">
+                         <img src="../media/ico/menu/mycourses.svg" alt="">
+                         <p class="menuFont"> Meus cursos</p>
+                    </a>
+
+               </li>
                
 
-          </main>
-     
+               <!-- manage courses -->
+               <li>
+                    <a href="../html/managecourses.html" id="managecourses" class="limitedAcess mmBlock flex fAlignC dTrans">
+                         <img src="../media/ico/menu/managecourses.svg" alt="">
+                         <p class="menuFont"> Gerir cursos</p>
+                    </a>
+
+               </li>
+               
+
+               <!-- manage users -->
+               <li>
+                    <a href="../html/manageusers.html" id="manageusers" class="limitedAcess mmBlock flex fAlignC dTrans">
+                         <img src="../media/ico/menu/manageusers.svg" alt="">
+                         <p class="menuFont"> Usuários</p>
+                    </a>
+
+               </li>
+
+
+               <!-- closeM -->
+               <li>
+                    <button id="leaveM" class="mmBlock flex fAlignC dTrans">
+                         <img src="../media/ico/menu/closem.svg" alt="">
+                         <p class="menuFont"> Fechar menu</p>
+
+                    </button>
+
+               </li>               
+
+          </menu>
+
+
+          <!-- user section -->
+          <section id="userSec" class="menuChildClosed flex flex-col">
+               <div class="flex userMSpace">
+                    <img id="userIcon" src="../media/ico/menu/user.svg" alt="">
+                    
+                    <div id="userInfo" class="userMSpace">
+                         <p id="userName" class="menuFont"> null </p>
+                         <p id="userType" class="userMSpace menuFont"> null </p>
+
+                         <button id="signoutB" class="userB menuFont dTrans"> Sair </button>
+                   
+                    </div> 
+
+               </div>    
+
+               <a class="flex fAlignC fJustC userB menuFont dTrans" href=""> 
+                    <img src="../media/ico/menu/settings.svg" alt="">
+                    Configurações 
+               </a>
+
+          </section>
+
+     </section>
+
+
+     <!-- main page -->
+     <main>
+          <button> Teste</button>
+
+     </main>
+
+     <script src="../js/final/maindependenciesbundle.js"></script>
+     <script src="../js/final/myuserbundle.js"></script>
+
+
+
 </body>
 
 </html>

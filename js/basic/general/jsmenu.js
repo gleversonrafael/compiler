@@ -14,10 +14,13 @@ document.getElementById("menuIcon").addEventListener("click", () => {
 
 window.addEventListener("resize", () => {
      let menuBox = document.getElementById("mMenuB");
+     let leaveMenuButton = document.getElementById("leaveM")
 
      if(window.innerWidth >= 768 && menuBox.classList.contains("menuClosed")) {
           toggleMenu(true, false);
      }
+
+     toggleLeaveMenuBox();
 
 })
 
@@ -42,7 +45,6 @@ function loadDefaults() {
      }
 
      menuVisualState();
-
 }
 
 
@@ -66,7 +68,6 @@ function toggleMenu(changeDisplay, changeBackground) {
                menuHamburgerIcon.classList.remove("menuChildOpen");
                menuHamburgerIcon.classList.add("menuChildClosed");
 
-
                menuChildClass = "menuChildOpen";
 
 
@@ -81,17 +82,26 @@ function toggleMenu(changeDisplay, changeBackground) {
                menuChildClass = "menuChildClosed";
           }
 
+          toggleLeaveMenuBox();
+
 
           // add and remove classes to menu items
           for(let item = 0;  item < selectedMenuItems.length;  item++) {
                menuChildClass === "menuChildOpen" ? selectedMenuItems[item].classList.remove("menuChildClosed") : selectedMenuItems[item].classList.remove("menuChildOpen");          
 
                selectedMenuItems[item].classList.add(menuChildClass);
-          }
-          
+          }   
      } 
-
 }
+
+
+function toggleLeaveMenuBox() {
+     let leaveMenuButton = document.getElementById("leaveM");
+
+     if(window.innerWidth >= 768 && leaveMenuButton.style.display != "none" || window.innerWidth < 768 && leaveMenuButton.style.display === "none") {
+          leaveMenuButton.style.display = leaveMenuButton.style.display != "none" ? "none" : "flex"
+     }
+}     
 
 
 
@@ -109,7 +119,7 @@ function menuVisualState() {
 
           userName.textContent = userData.name;
 
-          userType.textContent = userData.usertype == "regular"? "Usuário comum" : "Administrador";
+          userType.textContent = userData.usertype == "regular"? "Regular" : "Administrador";
      }
 
 
@@ -135,6 +145,7 @@ function menuVisualState() {
      }
 
 }
+
 
 
 

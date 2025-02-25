@@ -11,11 +11,12 @@
     --primaryColor: #7cffbe;
     --secondaryColor: #6edaa4;
     --tertiaryColor: #52a67c;
-    --quaternaryColor: #3f805f;
+    --quaternaryColor: #1D3B2C;
 
     --primaryOpposite: #d4565c;
     --secondaryOpposite: #ad454a;
     --tertiaryOpposite: #863438;
+    --quaternaryOpposite: #3d181a;
 
 
     /* old */
@@ -45,6 +46,7 @@
 
     /* ui - replace later versions */
     --uiPrimaryBlack: #151518;
+    --uiPrimaryBlackOpacity: #151518d0;
     --uiSecondaryBlack: #1c1c22;
 
     --uiPrimaryGrey: #2a2a31;
@@ -98,7 +100,7 @@ a {
 }
 
 ::-webkit-scrollbar-track-piece {
-    background-color: var(--wood);
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {

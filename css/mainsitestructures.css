@@ -1,14 +1,4 @@
 @charset "UTF-8";
-
-/* general */
-#bgEff {
-     display: block;
-     opacity: 1;
-}
-
-
-
-
 /* main menu box and its content*/
 #menuIcon {
      height: 30px;
@@ -26,6 +16,8 @@
      z-index: 2;
 
      min-width: 50px;
+     width: fit-content;
+
      height: 100vh;
 
 }
@@ -210,11 +202,6 @@
      /* border that forces mCon to unfollow it's first children position as the start height "counter" */
 }
 
-#bgEff {
-     display: block;
-     background-color: var(--yellow);
-}
-
 
 .conPattern {
      margin: 50px 0px;
@@ -254,9 +241,11 @@
 
 
 
-/* eff */
+/* effects */
 #bgEff {
      display: none;
+     background-color: var(--uiPrimaryBlackOpacity);
+
      position: fixed;
      left: 0;
 
@@ -265,7 +254,7 @@
      height: 100%;
      width: 100%;
 
-     background-color: var(--woodT);
+     /* background-color: var(--uiPrimaryBlack); */
 }
 
 
@@ -344,6 +333,7 @@
      #userIcon {
           height: 60px;
           width: 60px;
+          padding: 10px;
      }
 
 

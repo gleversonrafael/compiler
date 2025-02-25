@@ -12,7 +12,6 @@ main {
 
 #mSignStyle {    
     display: flex;
-    max-width: fit-content;
 
     margin: 40px 20px; 
 }
@@ -23,27 +22,15 @@ main {
 
 
 /* login title box */
-#mForm h1 {
+#signTitle  {
     color: var(--uiPrimaryWhite);
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
-
-#mForm > h1 span {
-    color: var(--aqua);
-}
-
-
-/* input buttons */
-.inpB {
-    gap: 20px;
-}
-
-
 
 
 /* final box */
 #finalBox {
-    margin: 25px 0px 0px;
+    margin: 45px 0px 0px;
 }
 
 
@@ -55,23 +42,24 @@ main {
 }
 
 #lButton:hover {
-    background-color: var(--primaryColor);
+    background-color: var(--secondaryColor);
 }
 
 #rButton {
-    background-color: var(--uiSecondaryGrey);
+    color: var(--primaryOpposite);
+    background-color: var(--uiPrimaryGrey);
 
     text-decoration: none;
     text-align: center;
 }
 
 #rButton:hover {
-    background-color: var(--primaryOpposite);
+    color: var(--uiPrimaryBlack);
+    background-color: var(--secondaryOpposite);
 }
 
 
 #rButton, #lButton {
-    color: var(--uiPrimaryBlack);
     border: none;
 }
 
@@ -109,22 +97,23 @@ main {
 
 
 #msgT {
-    font: normal 4.5em var(--rFont);
+    margin: 10px 0px;
+    font: normal min(8vw, 2em) var(--rFont);
 }
 
 #msgT.inc {
-    color: var(--razz);
+    color: var(--primaryOpposite);
 }
 
 #msgT.cor {
-    color: var(--aqua);
+    color: var(--primaryColor);
 }
 
 
 
 #msgD {
     color: var(--uiPrimaryWhite);
-    font: 100 min(1.5em, 5vw) var(--rFont);
+    font: 200 min(5vw, 1.5em) var(--rFont);
 }
 
 
@@ -133,16 +122,24 @@ main {
     padding: 10px;
 
     cursor: pointer;
-    margin-top: 5vh;
+    margin-top: 10vh;
 
     font: normal 2em var(--rFont);
-    background-color: var(--white);
+
+    
+    background-color: transparent;
+
+    color: var(--uiSecondaryWhite);
+    outline: 2px solid var(--uiSecondaryGrey);
+
+    border: none;
+    border-radius: 15px;
 }
 
 #closeMsgB:hover {
-    color: var(--white);
-    background-color: transparent;
-    border: 2px solid var(--white);
+    outline-color: var(--uiPrimaryWhite);
+    color: var(--uiPrimaryWhite);
+    /* outline: none; */
 }
 
 
@@ -152,7 +149,7 @@ main {
 @media screen and (min-width: 768px) {
     /* main content */
     #mForm {
-        margin: 60px 80px 60px 50px;
+        margin: 50px;
     }
     
     #finalBox {
@@ -166,11 +163,11 @@ main {
     /* main content */
     #mForm {
         margin: 70px;
-        max-width: 550px;
+        max-width: 500px;
     }
     
-    #mForm h1 {
-        font-size: min(64px, 3vw);
+    #signTitle {
+        font-size: min(2.5em, 3vw);
     }
     
     /* msg content -- bug fix*/
@@ -191,7 +188,8 @@ main {
     }
 
     .inpB label, .fButton {
-        font-size: min(25px, 2vw);
+        font: 300 min( 1.25em, 2vw) var(--rFont);
+        /* font-size: min(1.5em, 2vw); */
     }
 
     .inpB input {

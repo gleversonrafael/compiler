@@ -162,10 +162,9 @@
      margin-top: 50px;
 }
 
-.createdContent > h3 {
+.aCoursePage > h3 {
      color: var(--uiSecondaryWhite);
      font: 700 1.25em var(--rFont);
-     margin: 30px 0px 20px;
 }
 
 
@@ -176,7 +175,7 @@
 /* each page and each field*/
 .createdContent > div {
      display: none;
-     width: 100%;
+     max-width: 100%;
 
      flex-flow: column wrap;
      gap: 20px;
@@ -200,7 +199,7 @@
 .fieldName {
      display: block;
 
-     font: 100 1em var(--rFont);
+     font: 300 1em var(--rFont);
 
      color: var(--uiSecondaryWhite);
      margin-bottom: 15px;
@@ -224,16 +223,16 @@ input.fieldValue:focus {
 
 
 /* buttons */
-.createdContent > a, .createdContent > button, .createdContent > input[type=submit] {
+.createdContent > a, .closeBoxButton, .createdContent > input[type=submit] {
      display: inline-block;
 
      width: 49%;
      padding: 10px;
 
-     margin-top: 40px;
+     margin: 50px auto 15px;
 
      font: 700 1em var(--rFont);
-     color: var(--black);
+     color: var(--uiPrimaryBlack);
 
      text-decoration: none;
      text-align: center;
@@ -242,37 +241,30 @@ input.fieldValue:focus {
      border: none;
 
      cursor: pointer;
-}
-
-.createdContent > a {
-     float: right;
-
-     color: var(--uiPrimaryBlack);
-     background-color: var(--uiPrimaryWhite);
-}
-
-.createdContent > a:hover {
-     background-color: var(--aqua);
-}
-
-
-.createdContent > button, .createdContent > input[type=submit] {
-     color: var(--uiSecondaryGrey);
-     background-color: transparent;
-
-     border: 1px solid var(--uiSecondaryGrey);
-}
-
-.createdContent > button:hover, .createdContent > input[type=submit] {
-     color: var(--uiPrimaryWhite);
-     border-color: var(--uiPrimaryWhite);
-}
-
-
-.createdContent > a, .createdContent > button, .createdContent > input[type=submit] {
      transition: all 300ms;
 }
 
+
+.createdContent > a, .createdContent > input[type=submit] {
+     float: right;
+
+     color: var(--uiPrimaryBlack);
+     background-color: var(--tertiaryColor);
+}
+
+.createdContent > a:hover, .createdContent > input[type=submit]:hover {
+     background-color: var(--primaryColor);
+}
+
+
+/* close box */
+.closeBoxButton {
+     background-color: var(--uiSecondaryWhite);
+}
+
+.closeBoxButton:hover {
+     background-color: var(--uiPrimaryWhite);
+}
 
 
 /* media */
