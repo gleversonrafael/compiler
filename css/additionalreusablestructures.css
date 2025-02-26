@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+
+/* header */
+#mainHeader {
+     position: fixed;
+     width: 100%;
+     z-index: 2;
+}
+
+
+/* title area */
+#titleA {
+     text-align: center;
+}
+
+
+#pageTitle {
+     color: var(--uiPrimaryWhite);
+     font: normal 2em var(--rFont);
+
+     margin-bottom: 10px;
+}
+
+
+
+@media screen and (min-width: 768px) {
+     #pageTitle {
+          font-size: 3.25em;
+     }
+
+}

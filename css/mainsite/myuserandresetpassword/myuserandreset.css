@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+/* MR = My user / Reset password */
+
+/* main box */
+#mainUserContentBox {
+     height: fit-content;
+     width: fit-content;
+
+     padding: 25px;
+
+     border-radius: 15px;
+     background-color: var(--uiSecondaryBlack);
+}
+
+
+/* form */
+.labelPatternMR {
+     font: 200 1em var(--rFont);
+     color: var(--uiPrimaryWhite);
+}
+
+.inputPatternMR {
+     width: 100%;
+
+     padding: 10px;
+     
+     color: var(--uiPrimaryWhite);
+     background-color: var(--uiPrimaryGrey);
+     border: none;
+}
+
+.inputPatternMR:focus {
+     outline: none;
+}
+
+
+/* input buttons */
+.confirmButtonType {
+     padding: auto 30px;
+     width: 100%;
+     
+     border: none;
+}
+
+/* others */
+.underEmphasis {
+     color: var(--uiSecondaryGrey);
+     font: 300 0.8em var(--rFont);
+     margin: 5px 0px 10px;
+}

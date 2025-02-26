@@ -557,7 +557,7 @@ div.stepperGroup {
 
 
 
-/* may be moved to mainstructures */
+/* may be moved to mainstructures / otherstructures.css */
 .messageBox {
      display: grid;
      justify-items: center;

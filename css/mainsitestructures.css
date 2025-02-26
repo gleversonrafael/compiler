@@ -1,4 +1,6 @@
 @charset "UTF-8";
+
+
 /* main menu box and its content*/
 #menuIcon {
      height: 30px;
@@ -210,13 +212,6 @@
      max-width: 100%;
 }
 
-#pageTitle {
-     color: var(--white);
-     font: normal 2em var(--rFont);
-
-     margin-bottom: 10px;
-}
-
 .subtitle {
      color: var(--whiteT);
      font: 100 0.9em var(--rFont);
@@ -289,11 +284,6 @@
 
 /* pc / tablet media */
 @media screen and (min-width: 768px) {
-     #pageTitle {
-          font-size: 3.25em;
-     }
-
-
      /* main content */
      #mCon {
           min-width: calc(100% - 225px);

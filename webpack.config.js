@@ -40,8 +40,7 @@ module.exports = {
 
     myuser: {
       dependOn: "maindependencies",
-      import: ["./js/basic/general/jsmenu.js"]
-    
+      import: ["./js/basic/general/jsmenu.js", "./js/basic/myuser.js"]
 
     }
 

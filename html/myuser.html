@@ -7,13 +7,19 @@
 
      <link rel="stylesheet" href="../css/general.css">
      <link rel="stylesheet" href="../css/mainsitestructures.css">
+     <link rel="stylesheet" href="../css/additionalreusablestructures.css">
 
-     <link rel="stylesheet" href="../css/mainsite/myuser.css">
+     <link rel="stylesheet" href="../css/mainsite/myuserandresetpassword/myuserandreset.css">
+     <link rel="stylesheet" href="../css/mainsite/myuserandresetpassword/myuser.css">
 
 
 </head>
 
-<body>    
+<body>     
+     <header id="mainHeader" class="flex fJustC"></header>
+
+
+     <!-- menubar -->
      <section role="menubar" id="mMenuB" class="menuClosed">
           <img id="menuIcon" class="menuChildOpen" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais brancas no sentido vertical"></div>
 
@@ -100,8 +106,124 @@
 
 
      <!-- main page -->
-     <main>
-          <button> Teste</button>
+     <main id="mCon">
+          <section id="modalArea">
+               <!-- save modal -->
+               <div id="saveOwnUserData" class="modalMR flex flex-col">
+                    <h1> Salvar dados </h1>
+                    <p> Ao menos um dado sigiloso será alterado. Forneça os dados abaixo para prosseguir.</p>
+
+                    <form autocomplete="off" novalidate>
+                         <!-- current password -->
+                         <fieldset>
+                              <label for="newPasswordInput" class="labelPatternMR"> Senha atual</label>
+                              <input type="password" id="newPasswordInput" class="fillableInputJS inputPatternMR bAll">
+
+                         </fieldset>
+
+                         <!-- confirm password -->
+                         <fieldset>
+                              <label for="confirmNewPasswordInput" class="labelPatternMR"> Confirmar senha</label>
+                              <input type="password" id="confirmNewPasswordInput" class="fillableInputJS inputPatternMR bAll">
+
+                         </fieldset>
+
+
+                         <!-- buttons -->
+                         <input type="button" value="Cancelar" class="cancelModalButton">
+                         <input type="submit" value="Salvar" class="confirmButtonType">
+
+                    </form>
+
+               </div>
+
+
+               <!-- delete modal -->
+               <div id="deleteOwnUser" class="modalMR flex flex-col">
+                    <h1> Exclusão de conta </h1>
+                    <p> Você tem certeza de que deseja <span class="deleteEmphasis">excluir</span> sua conta?</p>
+
+                    <button class="cancelModalButton"> Cancelar</button>
+                    <button class="confirmButtonType"> Excluir </button>
+
+               </div>
+
+
+          </section>
+
+
+          <div class="conPattern flex flex-col fAlignC">
+               <div id="titleA">
+                    <h1 id="pageTitle"> Meu usuário</h1>
+
+               </div>
+
+
+               <div id="mainUserContentBox">
+                    <form id="changeOwnUserData" autocomplete="off" novalidate>
+                         <!-- inputs and image -->
+                         <div class="inputsArea">
+                              <fieldset class="flex flex-col">
+                                   <!-- name -->
+                                   <div>
+                                        <label for="userNameInput" class="labelPatternMR"> Nome</label>
+                                        <input type="text" id="userNameInput" name="name" class="fillableInputJS inputPatternMR bAll" autocomplete="off">
+                                   </div>
+                                   
+                                   <!-- last name -->
+                                   <div>
+                                        <label for="userTelephoneInput" class="labelPatternMR"> Telefone </label>
+                                        <input id="userTelephoneInput" type="tel" name="telephone" class="fillableInputJS inputPatternMR bAll">
+
+                                   </div>
+
+                              </fieldset>
+
+
+                              <img src="../media/ico/menu/user.svg" alt="Ícone do usuário">
+
+
+                              <!-- email / password -->
+                              <fieldset class="flex flex-col">
+                                   <!-- email -->
+                                   <div>
+                                        <label for="userEmailInput" class="labelPatternMR"> E-mail</label>
+                                        <input type="email" id="userEmailInput" name="email" class="fillableInputJS inputPatternMR bAll">
+
+                                   </div>
+
+                                   <!-- password -->
+                                   <div>
+                                        <label for="userPasswordInput" class="labelPatternMR"> Senha</label>
+                                        <input type="password" name="password" id="userPasswordInput" class="fillableInputJS inputPatternMR bAll">
+
+                                        <p class="underEmphasis"> Redefinir senha</p>
+
+                                   </div>
+                                    
+                              </fieldset>
+                              
+                         </div>
+
+
+                         <!-- buttons area -->
+                         <div>
+                              <fieldset class="buttonsArea flex flex-col fAlignC">
+                                   <p id="resetData" class="resetEmphasis"> Restaurar dados</p>
+                                   <p id="deleteAccount" class="deleteEmphasis"> Excluir conta</p>
+                              
+                                   <input type="submit" value="Salvar" class="confirmButtonType bAll">
+                              
+                              </fieldset>
+
+                         </div>
+
+                    </form>
+
+               </div>
+
+          </div>
+
 
      </main>
 

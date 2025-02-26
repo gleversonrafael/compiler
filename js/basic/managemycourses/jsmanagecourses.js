@@ -712,7 +712,7 @@ function showMessageBox(messageType, message) {
 
 
      function createMessageBox() {
-          let mainSiteContent = document.getElementById("mCon");
+          let mainHeader = document.getElementById("mainHeader");
 
           let createdMessageBox = document.createElement("div");
           createdMessageBox.classList.add("messageBox", "bAll");
@@ -727,10 +727,10 @@ function showMessageBox(messageType, message) {
 
 
           createdMessageBox.appendChild(closeButton);
-          mainSiteContent.appendChild(createdMessageBox);
+          mainHeader.appendChild(createdMessageBox);
 
 
-          return  createdMessageBox;
+          return createdMessageBox;
      }
 
 
