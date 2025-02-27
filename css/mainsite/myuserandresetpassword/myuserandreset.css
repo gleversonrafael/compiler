@@ -2,6 +2,30 @@
 
 /* MR = My user / Reset password */
 
+
+/* modals */
+.modalMR {
+     background-color: var(--uiSecondaryBlack);
+     padding: 35px;
+     border-radius: 15px;
+
+     margin-top: 15vh;
+}
+
+.modalMR > form {
+     gap: 15px;
+}
+
+.modalMR fieldset {
+     border: none;
+}
+
+.cancelModalButton {
+     border: 1px solid var(--uiPrimaryWhite);
+}
+
+
+
 /* main box */
 #mainUserContentBox {
      height: fit-content;
@@ -23,7 +47,7 @@
 .inputPatternMR {
      width: 100%;
 
-     padding: 10px;
+     padding: 10px 20px;
      
      color: var(--uiPrimaryWhite);
      background-color: var(--uiPrimaryGrey);
@@ -35,13 +59,29 @@
 }
 
 
+
+
+
+
 /* input buttons */
-.confirmButtonType {
+.inputButtonToggleMR {
+     text-align: left;
+     border: 1px solid var(--uiSecondaryGrey);
+     cursor: pointer;
+}
+
+.inputButtonToggleMR:hover {
+     border-color: var(--uiSecondaryWhite);
+}
+
+.confirmButtonTypeMR {
      padding: auto 30px;
      width: 100%;
      
      border: none;
 }
+
+
 
 /* others */
 .underEmphasis {

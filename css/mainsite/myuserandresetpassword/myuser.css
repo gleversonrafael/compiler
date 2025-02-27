@@ -35,7 +35,6 @@
      border: 1px solid #ff000069;
 }
 
-
 /* buttons area */
 .buttonsArea {
      margin-top: 50px;
@@ -56,7 +55,7 @@
 }
 
 
-form#changeOwnUserData .confirmButtonType {
+form#changeOwnUserData .confirmButtonTypeMR {
      margin-top: 10px;
      padding: 5px 30px;
      
@@ -66,7 +65,7 @@ form#changeOwnUserData .confirmButtonType {
      cursor: pointer;
 }
 
-form#changeOwnUserData .confirmButtonType:hover {
+form#changeOwnUserData .confirmButtonTypeMR:hover {
      background-color: var(--primaryColor);
 }
 
@@ -74,8 +73,55 @@ form#changeOwnUserData .confirmButtonType:hover {
 
 
 /* modals */
-div#saveOwnUserData, div#deleteOwnUser {
+div#changePasswordModal, div#deleteOwnUserModal {
      display: none;
+}
+
+.modalTitle {
+     font: 500 2em var(--rFont);
+}
+
+.modalSubtext {
+     color: var(--uiSecondaryWhite);
+     font: 300 1em var(--rFont);
+     margin-bottom: 40px;
+}
+
+
+/* modal buttons */
+.modalButtons {
+     margin-top: 40px;
+     gap: 10px;
+}
+
+.modalButtons > input {
+     text-align: left;
+     padding: 10px 20px;
+
+     cursor: pointer;
+}
+
+.cancelModalButton {
+     width: 50%;
+
+     background-color: transparent;
+     color: var(--uiSecondaryWhite);
+     border: 1px solid var(--uiSecondaryWhite);
+}
+
+.cancelModalButton:hover {
+     color: var(--uiPrimaryWhite);
+     border-color: var(--uiPrimaryWhite);
+}
+
+
+/* change password modal  */
+#changePasswordModal .modalTitle {
+     color: var(--uiPrimaryWhite);
+}
+
+#changePasswordModal .confirmButtonTypeMR {
+     background-color: var(--uiPrimaryWhite);
 }
 
 

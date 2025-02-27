@@ -9,6 +9,28 @@
 }
 
 
+/* modal area */
+#modalArea {
+     display: none;
+
+     align-items: center;
+     justify-content: start;
+
+     z-index: 1;
+     overflow: scroll;
+
+     position: fixed; 
+
+     width: 100%;
+     height: 100%;
+
+     background-color: var(--uiPrimaryBlackOpacity);
+     padding: 0px 40px;
+}
+
+
+
+
 /* title area */
 #titleA {
      text-align: center;
@@ -23,8 +45,20 @@
 }
 
 
+/* fix small screens  */
+/* @media screen and (max-height: 500px) {
+     #modalArea {
+          justify-content: start;
+     }
+} */
+
 
 @media screen and (min-width: 768px) {
+     #modalArea {
+          width: calc(100% - 225px);
+          right: 0;
+     }
+
      #pageTitle {
           font-size: 3.25em;
      }
