@@ -8,7 +8,7 @@ module.exports = {
 
     login: {
       dependOn: "maindependencies",
-      import: "./js/basic/loginsign/jslogin.js"
+      import: ["./js/basic/loginsign/jslogin.js", "./js/basic/general/jsreusablestructures.js"]
     },
 
     sign: {
@@ -29,7 +29,7 @@ module.exports = {
 
     managecourses: {
       dependOn: "maindependencies",
-      import: ["./js/basic/general/jsmenu.js", "./js/basic/managemycourses/jsmanageandmycourses.js", "./js/basic/managemycourses/jsmanagecourses.js"]
+      import: ["./js/basic/general/jsmenu.js", "./js/basic/managemycourses/jsmanageandmycourses.js", "./js/basic/managemycourses/jsmanagecourses.js", "./js/basic/general/jsreusablestructures.js"]
     },
 
     manageusers: {
@@ -40,7 +40,7 @@ module.exports = {
 
     myuser: {
       dependOn: "maindependencies",
-      import: ["./js/basic/general/jsmenu.js", "./js/basic/myuser.js"]
+      import: ["./js/basic/general/jsmenu.js", "./js/basic/myuser.js", "./js/basic/general/jsreusablestructures.js"]
 
     }
 

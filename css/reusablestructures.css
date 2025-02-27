@@ -1,0 +1,145 @@
+@charset "UTF-8";
+
+
+/* header */
+#mainHeader {
+     position: fixed;
+     width: 100%;
+     z-index: 2;
+}
+
+
+/* modal area */
+#modalArea {
+     display: none;
+
+     align-items: center;
+     justify-content: start;
+
+     z-index: 1;
+     overflow: scroll;
+
+     position: fixed; 
+
+     width: 100%;
+     height: 100%;
+
+     background-color: var(--uiPrimaryBlackOpacity);
+     padding: 0px 40px;
+}
+
+
+
+
+/* title area */
+#titleA {
+     text-align: center;
+}
+
+
+#pageTitle {
+     color: var(--uiPrimaryWhite);
+     font: normal 2em var(--rFont);
+
+     margin-bottom: 10px;
+}
+
+
+/* message box */
+.messageBox {
+     display: grid;
+     justify-items: center;
+
+     position: fixed;
+     top: 20px;
+     z-index: 2;
+     
+     padding: 30px 30px 10px;
+
+     min-height: 50px;
+
+     min-width: 250px;
+     width: 80vw;
+     max-width: 400px;
+
+     text-align: center;
+     
+     font-size: 1.25em;
+     color: var(--uiPrimaryWhite);
+}
+
+.messageBox p > span {
+     font-weight: 700;
+}
+
+
+/* message box types */
+.messageBox.successMessage {
+     background-color: var(--tertiaryColor);
+}
+
+.messageBox.errorMessage {
+     background-color: var(--tertiaryOpposite);
+}
+
+.messageBox.strangeMessage {
+     background-color: var(--uiSecondaryGrey);
+}
+
+
+.closeMessageBox {
+     background: url(../../../media/ico/closeicon.png);
+     background-size: cover;
+
+     min-height: 25px;
+     width: 25px;
+
+     margin-top: 20px;
+
+     border: none;
+
+     cursor: pointer;
+}
+
+
+/* fix small screens  */
+/* @media screen and (max-height: 500px) {
+     #modalArea {
+          justify-content: start;
+     }
+} */
+
+
+@media screen and (min-width: 768px) {
+     #modalArea {
+          width: calc(100% - 225px);
+          right: 0;
+     }
+
+     #pageTitle {
+          font-size: 3.25em;
+     }
+
+
+
+     /* message box */
+     .messageBox {
+          margin-left: 225px;
+     }
+
+     /* message box */
+     .messageBox {
+          grid-template-columns: auto auto;
+          justify-content: space-between;
+          align-items: center;
+
+          padding: 10px 20px 10px 45px;
+
+          width: calc(80vw - 200px);
+          max-width: 700px;
+     }
+
+     .closeMessageBox {
+          margin-top: 0px;
+     }
+}

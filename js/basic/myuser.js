@@ -1,4 +1,17 @@
-import { userData } from "./general/jsuserdata.js"
+import { userData } from "./general/jsuserdata.js";
+
+import { getDocs, query, where, limit } from "firebase/firestore";
+import { updatePassword } from "firebase/auth";
+import { auth } from "./general/jsfirebase.js";
+
+import { showMessageBox, userDataIsValid, checkPassword } from "./general/jsreusablestructures.js"
+
+
+import bcrypt from "bcryptjs";
+
+
+// global
+let newAssignedPassword;
 
 
 document.body.addEventListener("load", loadDefaults());
@@ -123,19 +136,33 @@ function toggleModal(selectedModalId) {
 
 
 // change user password
-function changeUserPassword() {
-     if(currentPasswordIsCorrect()) {
-          // setNewPassword()
+async function changeUserPassword() {
+     let oldPasswordAttempt = document.getElementById("changeCurrentPasswordInput").value;
+     let newPassword = document.getElementById("newPasswordInput").value;
+     let newPasswordObject = [{password: newPassword}];
 
+     const checkPasswordResult = await checkPassword(oldPasswordAttempt);
+
+
+     if(checkPasswordResult === true && userDataIsValid(newPasswordObject) === true) {
+          let resetedForm = document.querySelector("form#changePassword");
+
+          newAssignedPassword = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(5));
+          resetedForm.reset();
+
+          toggleModal("changePasswordModal")
+          showMessageBox("strangeMessage", "Salve seus dados para completar a redefinição de senha.");
+
+
+     } else if(checkPasswordResult === false) {
+          showMessageBox("errorMessage", "Senha atual incorreta!");
+
+     } else {
+          showMessageBox("errorMessage", "A nova senha inserida não se adequa aos padrões de uso.");
      }
-
-
-     function currentPasswordIsCorrect() {
-          let passwordAssigned = document.getElementById("currentPasswordInput");
-
-     }
-
 }
+
+
 
 
 // save user data
@@ -144,13 +171,16 @@ function saveUserDataProcess() {
      let newUserData = createNewUserDataArray();
      let changesResult = thereWasChanges();
 
-     console.log(newUserData);
 
-     if(changesResult && userDataIsValid(newUserData)) {
-          console.log("all true!");
+     if(changesResult && userDataIsValid(newUserData) && newAssignedPassword.length > 0) {
+          saveOwnUserData();
+          showMessageBox("successMessage", "Dados alterados!");
+
+     } else if(changesResult != true) {
+          showMessageBox("strangeMessage", "Nenhum dado foi alterado.");
 
      } else {
-          console.log("something went wrong.");
+          showMessageBox("errorMessage", "As informações credenciadas estão incorretas.");
      }
 
 
@@ -193,41 +223,13 @@ function saveUserDataProcess() {
 
           return newArray
      }
+
+
+     function saveOwnUserData() {
+
+
+     }
 }
 
-
-// reusable
-function userDataIsValid(analyzedData) {
-     // analyzedData = Array with objects ({ name: test}, {other: test})
-
-     let validateData = {
-          name: /[\w]{2,}/,
-          email: /[\w]{2,}@+[\w]{2,}.[\w]{2,}/ ,
-          password: /.{4,12}/,
-          telephone: /[\d]{12}/
-     }
-
-     let finalResult = true;
-
-
-     for(let key = 0; key < analyzedData.length; key++) {
-          let analyzedItem = Object.entries(analyzedData[key])[0];
-
-          console.log(analyzedItem[1]);
-          console.log(validateData[analyzedItem[0]]);
-          
-          // [0] = name
-          let regexTest = validateData[analyzedItem[0]].test(analyzedItem[1]);
-          
-          console.log(regexTest);
-
-          if(regexTest === false) {
-               finalResult = false
-               break
-          }
-     }
-
-     return finalResult
-}
 
 

@@ -2,6 +2,7 @@
 import { onSnapshot, query, where, getDocs, doc, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db, usersCol } from "../general/jsfirebase.js";
 import { userData } from "../general/jsuserdata.js";
+import { showMessageBox } from "../general/jsreusablestructures.js";
 
 
 // assign events
@@ -692,57 +693,6 @@ async function createAcessControl(courseIdentifier, usersWithAcessInCourse) {
           }
 
      }
-}
-
-
-
-
-// show message box
-function showMessageBox(messageType, message) {
-     let messageBox = document.querySelector(".messageBox");
-     let closeButton;
-
-     if(messageBox) {
-          messageBox.remove();
-     }
-
-
-     messageBox = createMessageBox();
-     defineCustomElements();
-
-
-     function createMessageBox() {
-          let mainHeader = document.getElementById("mainHeader");
-
-          let createdMessageBox = document.createElement("div");
-          createdMessageBox.classList.add("messageBox", "bAll");
-
-          closeButton = document.createElement("button");
-          closeButton.classList.add("closeMessageBox");
-
-
-          closeButton.addEventListener("click", () => {
-               createdMessageBox.remove();
-          });
-
-
-          createdMessageBox.appendChild(closeButton);
-          mainHeader.appendChild(createdMessageBox);
-
-
-          return createdMessageBox;
-     }
-
-
-     function defineCustomElements() {
-          let messageParagraph = document.createElement("p");
-          messageParagraph.innerText = message;
-
-          messageBox.classList.add(messageType);
-          messageBox.insertBefore(messageParagraph, closeButton);
-     }
-
-
 }
 
 

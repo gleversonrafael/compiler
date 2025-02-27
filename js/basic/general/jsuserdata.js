@@ -8,8 +8,6 @@ let userData;
 
 await userDataProcess();
 
-// onAuthStateChanged(auth, userDataProcess); ADAPTAR --------------
-
 export { userData };
 
 
@@ -65,10 +63,11 @@ async function userDataProcess() {
      
           userFindProcess.forEach((doc) => {
                userData = doc.data();
+               const {password, ...updatedUserData} = userData;
+
+               userData = updatedUserData;
+               console.log(userData);
           })
      
      }
 };
-
-
-

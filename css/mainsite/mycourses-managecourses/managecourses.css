@@ -557,65 +557,6 @@ div.stepperGroup {
 
 
 
-/* may be moved to mainstructures / otherstructures.css */
-.messageBox {
-     display: grid;
-     justify-items: center;
-
-     position: fixed;
-     top: 20px;
-     z-index: 2;
-     
-     padding: 25px 25px 10px 25px;
-
-     min-height: 50px;
-
-     min-width: 200px;
-     width: 80vw;
-     max-width: 400px;
-
-     text-align: center;
-     
-     font-size: 1.25em;
-     color: var(--uiPrimaryWhite);
-}
-
-.messageBox p > span {
-     font-weight: 700;
-}
-
-
-/* message box types */
-.messageBox.successMessage {
-     background-color: var(--tertiaryColor);
-}
-
-.messageBox.errorMessage {
-     background-color: var(--tertiaryOpposite);
-}
-
-.messageBox.strangeMessage {
-     background-color: var(--uiSecondaryGrey);
-}
-
-
-.closeMessageBox {
-     background: url(../../../media/ico/closeicon.png);
-     background-size: cover;
-
-     min-height: 25px;
-     width: 25px;
-
-     margin-top: 20px;
-
-     border: none;
-
-     cursor: pointer;
-}
-
-
-
-
 /* media */
 @media screen and (min-width: 768px) {
      #operationsA button {
@@ -632,20 +573,4 @@ div.stepperGroup {
           padding: 15px;
      } 
 
-
-     /* message box */
-     .messageBox {
-          grid-template-columns: auto auto;
-          justify-content: space-between;
-          align-items: center;
-
-          padding: 0px 20px 0px 45px;
-
-          width: calc(80vw - 200px);
-          max-width: 700px;
-     }
-
-     .closeMessageBox {
-          margin-top: 0px;
-     }
 }

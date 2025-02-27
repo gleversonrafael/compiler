@@ -2,8 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-// https://firebase.google.com/docs/web/setup#available-libraries
-
 const firebaseConfig = {
     apiKey: "AIzaSyAYOSSSxnsxVC15gTquoTsuMVT4IDhv9I0",
     authDomain: "compiler-d5a27.firebaseapp.com",
