@@ -66,7 +66,6 @@ async function userDataProcess() {
                const {password, ...updatedUserData} = userData;
 
                userData = updatedUserData;
-               console.log(userData);
           })
      
      }

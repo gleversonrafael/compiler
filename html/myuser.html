@@ -120,7 +120,7 @@
 
                     </fieldset>
 
-                    <!-- confirm password -->
+                    <!-- new password -->
                     <fieldset>
                          <label for="newPasswordInput" class="labelPatternMR"> Nova senha</label>
                          <input type="password" id="newPasswordInput" class="fillableInputJS inputPatternMR bAll">
@@ -132,6 +132,40 @@
                     <fieldset class="modalButtons flex flex-col">
                          <input type="button" value="Cancelar" class="cancelModalButton bAll">
                          <input type="submit" value="Alterar" class="confirmButtonTypeMR bAll">
+
+                    </fieldset>
+
+               </form>
+
+          </div>
+
+
+          <!-- confirm password -->
+          <div id="confirmPasswordModal" class="modalMR flex flex-col">
+               <h1 class="modalTitle"> Salvamento de dados </h1>
+               <p class="modalSubtext"> Ao menos um dado sigiloso que não corresponde à senha do usuário será alterado. Para confirmar a sua autenticidade, insira sua senho.</p>
+               
+
+               <form id="confirmPassword" class="flex flex-col" autocomplete="off" novalidate>
+                    <!-- current password -->
+                    <fieldset>
+                         <label for="verifyPasswordInput" class="labelPatternMR"> Senha</label>
+                         <input type="password" id="verifyPasswordInput" class="confirmJS fillableInputJS inputPatternMR bAll">
+
+                    </fieldset>
+
+                    <!-- confirm password -->
+                    <fieldset>
+                         <label for="confirmPasswordInput" class="labelPatternMR"> Confirmar senha</label>
+                         <input type="password" id="confirmPasswordInput" class="confirmJS fillableInputJS inputPatternMR bAll">
+
+                    </fieldset>
+
+
+                    <!-- buttons -->
+                    <fieldset class="modalButtons flex flex-col">
+                         <input type="button" value="Cancelar" class="cancelModalButton bAll">
+                         <input type="submit" value="Salvar" class="confirmButtonTypeMR bAll">
 
                     </fieldset>
 
@@ -156,6 +190,8 @@
 
      <!-- main page -->
      <main id="mCon">
+          <button id="testButton"> Hash</button>
+     
           <div class="conPattern flex flex-col fAlignC">
                <div id="titleA">
                     <h1 id="pageTitle"> Meu usuário</h1>

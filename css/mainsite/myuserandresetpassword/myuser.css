@@ -73,10 +73,6 @@ form#changeOwnUserData .confirmButtonTypeMR:hover {
 
 
 /* modals */
-div#changePasswordModal, div#deleteOwnUserModal {
-     display: none;
-}
-
 .modalTitle {
      font: 500 2em var(--rFont);
 }
@@ -124,6 +120,15 @@ div#changePasswordModal, div#deleteOwnUserModal {
      background-color: var(--uiPrimaryWhite);
 }
 
+
+/* confirm password modal */
+#confirmPasswordModal .modalTitle {
+     color: var(--tertiaryColor);
+}
+
+#confirmPasswordModal .confirmButtonTypeMR {
+     background-color: var(--tertiaryColor);
+}
 
 
 

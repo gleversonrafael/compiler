@@ -66,18 +66,13 @@ function userDataIsValid(analyzedData) {
 
      let finalResult = true;
 
-     console.log(analyzedData);
 
 
      for(let key = 0; key < analyzedData.length; key++) {
           let analyzedItem = Object.entries(analyzedData[key])[0];
-          console.log(analyzedItem);
-
-
-          console.log(analyzedItem[1]);
-          console.log(validateData[analyzedItem[0]]);
-          
           // [0] = name
+          // [1] = value
+
           let regexTest = validateData[analyzedItem[0]].test(analyzedItem[1]);
 
           if(regexTest === false) {
@@ -92,10 +87,11 @@ function userDataIsValid(analyzedData) {
 
 
 // check password
-async function checkPassword(passwordString) {
+async function checkUserPassword(passwordString) {
      let userPassword = await obtainUserPassword();
      let compareTest = bcrypt.compareSync(passwordString, userPassword);
 
+     
      return compareTest
 
 
@@ -118,4 +114,4 @@ async function checkPassword(passwordString) {
 }
 
 
-export { showMessageBox, userDataIsValid, checkPassword };
+export { showMessageBox, userDataIsValid, checkUserPassword };
