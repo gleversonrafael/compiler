@@ -1,25 +1,24 @@
+import bcrypt from "bcryptjs"
+
 import { userData } from "./general/jsuserdata.js";
-
-import { updateDoc, doc } from "firebase/firestore";
-import { EmailAuthProvider, updatePassword, updateEmail, reauthenticateWithCredential } from "firebase/auth";
-import { db, auth } from "./general/jsfirebase.js";
-
 import { showMessageBox, userDataIsValid, checkUserPassword } from "./general/jsreusablestructures.js"
 
+import { updateDoc, doc } from "firebase/firestore";
+import { EmailAuthProvider, updatePassword, updateEmail, reauthenticateWithCredential, signOut } from "firebase/auth";
+import { db, auth } from "./general/jsfirebase.js";
 
-import bcrypt from "bcryptjs"
 
 
 // global
 let newAssignedPassword;
 let oldPassword;
 
-
 document.body.addEventListener("load", loadDefaults());
+
 
 // load defaults
 function loadDefaults() {
-     fillFieldsWithUserData()
+     fillFieldsWithUserData();
      toggleEvents();
      saveUserDataProcess("setEvents");
 }
@@ -27,9 +26,21 @@ function loadDefaults() {
 
 // toggle events
 function toggleEvents() {
+     generalEvents();
      specificEvents();
      cancelModalEvent();
 
+
+     function generalEvents() {
+          // forms
+          let forms = document.querySelectorAll("form");
+
+          forms.forEach((form) => {
+               form.addEventListener("submit", (submitEvent) => {
+                    submitEvent.preventDefault();
+               });
+          })
+     };
 
      function specificEvents() {
           // change password
@@ -38,16 +49,24 @@ function toggleEvents() {
           });
 
           // save user data
-          document.getElementById("changeOwnUserData").addEventListener("submit", (submitEvent) => {
-               submitEvent.preventDefault();
+          document.getElementById("changeOwnUserData").addEventListener("submit", () => {
                saveUserDataProcess();
           });
 
           // change password
-          document.getElementById("changePassword").addEventListener("submit", (submitEvent) => {
-               submitEvent.preventDefault();
+          document.getElementById("changePassword").addEventListener("submit", () => {
                temporarilyChangeUserPassword();
           });
+
+
+          // ""delete""" account
+          document.getElementById("deleteAccount").addEventListener("click", () => {
+               toggleModal("deleteOwnUserModal");
+          })
+
+          document.querySelector("form#deleteOwnUser").addEventListener("submit", () => {
+               deleteOwnUser();
+          })
      }
 
 
@@ -167,7 +186,7 @@ async function temporarilyChangeUserPassword() {
 
 
 
-// save user data + confirm user password
+// save user data
 async function saveUserDataProcess(callType, canBeSaved) {
      let userInputs;
 
@@ -213,7 +232,7 @@ async function saveUserDataProcess(callType, canBeSaved) {
                          break
      
                     case "incorrectData":
-                         errorString = "Os novos dados não foram preenchidos corretamente."
+                         errorString = "Preencha corretamente seus dados!"
                          break
      
                     default:
@@ -230,9 +249,15 @@ async function saveUserDataProcess(callType, canBeSaved) {
      // complementary functions
      function setSaveEvents() {
           // confirm password
-          document.querySelector("form#confirmPassword").addEventListener("submit", (submitEvent) => {
+          document.querySelector("form#confirmPassword").addEventListener("submit", async (submitEvent) => {
                submitEvent.preventDefault();
-               confirmUserPassword();
+
+               if(await confirmUserPassword("confirmPassword") === true) {
+                    oldPassword = document.getElementById("verifyPasswordInput").value;
+
+                    toggleModal("confirmPasswordModal");
+                    saveUserDataProcess("", true);
+               };
           });
      }
 
@@ -312,91 +337,150 @@ async function saveUserDataProcess(callType, canBeSaved) {
 
 
 
-     async function confirmUserPassword() {
-          let analyzedValue = document.getElementById("verifyPasswordInput").value;
-          let selectedFields = document.querySelectorAll("form#confirmPassword .confirmJS");
-          selectedFields = Array.from(selectedFields);
+     // async function confirmUserPassword() {
+     //      let returnedValue = false;
+
+     //      let analyzedValue = document.getElementById("verifyPasswordInput").value;
+     //      let selectedFields = document.querySelectorAll("form#confirmPassword .confirmJS");
+     //      selectedFields = Array.from(selectedFields);
      
-          let confirmPasswordFields = confirmNFields(selectedFields, analyzedValue);
+     //      let confirmPasswordFields = confirmNFields(selectedFields, analyzedValue);
      
      
-          if(confirmPasswordFields === true && await checkUserPassword(analyzedValue) === true) {
-               toggleModal("confirmPasswordModal");
-               oldPassword = analyzedValue;
-               saveUserDataProcess("", true);
+     //      // process
+     //      if(confirmPasswordFields === true && await checkUserPassword(analyzedValue) === true) {
+     //           returnedValue = true;
+
+     //           toggleModal("confirmPasswordModal");
+               
+     //           oldPassword = analyzedValue;
+               
      
-          } else if(confirmPasswordFields === false) {
-               showMessageBox("errorMessage", "As senhas informadas se contradizem.")
+     //      } else if(confirmPasswordFields === false) {
+     //           showMessageBox("errorMessage", "As senhas informadas se contradizem.")
      
-          } else {
-               showMessageBox("errorMessage", "A senha informada não coincide com à do usuário")
-          }
-     }
+     //      } else {
+     //           showMessageBox("errorMessage", "A senha informada não coincide com à do usuário")
+     //      }
+
+
+     //      return returnedValue;
+     // }
 
 
 
      async function saveOwnUserDataAttempt(receivedDataType, receivedData) {
-          let userDoc = doc(db, "usersInfo", `u${userData.uid}`);
+          const userDoc = doc(db, "usersInfo", `u${userData.uid}`);
+          let userCredential;
 
-          // password / email
-          if(receivedDataType === "confidential") {
-               let userCredential = EmailAuthProvider.credential(userData.email, oldPassword);
-               let currentUser = auth.currentUser;
+          const currentUser = auth.currentUser;
 
-
-               await reauthenticateWithCredential(auth.currentUser, userCredential)
-               .then(() => {
-                    // update e-mail
-                    updateEmail(currentUser, receivedData.email)
-                    .then(() => {
-                         console.log("email updated");
-                    })
-
-                    .catch((err) => {
-                         console.log(err);
-                         console.log("didn't update e-mail");
-
-                    })
-
-
-                    // update password
-                    updatePassword(currentUser, receivedData.password)
-                    .then(() => {
-                         console.log("password updated");
-
-                         Object.defineProperty(receivedData, "password", {
-                              value: generatePasswordHash(receivedData.password),
-                              enumerable: true
-                         })
-                    })
-
-                    .catch(() => {
-                         console.log("couldn't update the password")
-                    });
-               })
-
-               .catch((errorMessage) => {
-                    console.log("Erro na autenticação");
-                    console.log(errorMessage);
-               })
-          }
+          let validatedConfidentialFields = {};
+          let validatedConfidentialFieldsValues;
+          let validatedFieldState;
           
 
-          // adicionar on event listener - bug fix
-          // fillFieldsWithUserData();
 
-          updateDoc(userDoc, receivedData);
+          // password / email on auth
+          if(receivedDataType === "confidential") {
+               userCredential = EmailAuthProvider.credential(userData.email, oldPassword);
+               let credentialObtained;
+
+               // main process
+               await reauthenticateWithCredential(currentUser, userCredential)
+               .then(() => { credentialObtained = true;})
+               .catch((errorMessage) => {
+                    credentialObtained = false
+                    console.log(`Erro ao obter acesso para salvar e-mail e/ou senha. CÓD: ${errorMessage.code}`);
+               })
+
+
+               if(credentialObtained === true) {
+                    if(receivedData.email) {
+                         await updateEmailSetup();
+                    }
+
+                    if(receivedData.password) {
+                         await updatePasswordSetup();
+                    }
+
+                    validatedConfidentialFieldsValues = Object.values(validatedConfidentialFields);
+               }
+          }
+
+
+          // update user document in firestore
+          if(receivedDataType === "safe" || confirmNFields(validatedConfidentialFieldsValues, true) === true) {
+               updateDoc(userDoc, receivedData);
+               showMessageBox("successMessage", "Dados atualizados!");
+               setTimeout(() => {window.location.reload()}, 1000);
+          }
+
+
+
+          // complementary
+          async function updateEmailSetup() {
+               await updateEmail(currentUser, receivedData.email)
+               .then(() => { validatedFieldState = true;})
+               .catch((errorMessage) => {
+                    console.log("ERRO: O e-mail do usuário não foi salvo. CÓD:" + errorMessage.code);
+                    validatedFieldState = false;
+               })
+
+
+               Object.defineProperty(validatedConfidentialFields, "email", { 
+                    value: validatedFieldState, enumerable: true 
+               });     
+          }
+
+
+          async function updatePasswordSetup() {
+               await updatePassword(currentUser, receivedData.password)
+               .then(() => {
+                    validatedFieldState = true;
+
+                    Object.defineProperty(receivedData, "password", {
+                         value: generatePasswordHash(receivedData.password),
+                         enumerable: true
+                    });
+
+                    // oldPassword = null
+                    // newAssignedPassword = null
+                    // user is logged out...
+               })
+               .catch(() => {
+                    console.log("ERRO: A senha do usuário não foi salva.");
+                    validatedFieldState = false;
+               });
+
+
+               Object.defineProperty(validatedConfidentialFields, "password", {
+                    value: validatedFieldState, enumerable: true
+               });
+          }
+
+
      }
 }
 
 
-document.getElementById("testButton").addEventListener("click", () => {
-     let optedString = "123456";
 
-     let generatedHash = generatePasswordHash(optedString);
-     console.log(generatedHash);
 
-})
+// ""delete"" user
+async function deleteOwnUser() {
+     if(await confirmUserPassword("deleteOwnUser") === true) {
+          console.log("deleted");
+          let userDocument = doc(db, "usersInfo", `u${userData.uid}`);
+          
+          updateDoc(userDocument, { deleted: true })
+          .then(() => {
+               toggleModal("deleteOwnUser");        
+               signOut();
+
+          })
+
+     };
+}
 
 
 // reusable
@@ -431,13 +515,43 @@ function confirmNFields(fieldsArray, wishedValue) {
      let confirmResult = true;
 
      for(let analyzedField = 0; analyzedField < fieldsArray.length; analyzedField++) {
-          if(fieldsArray[analyzedField].value != wishedValue) {
+          let fieldValue = fieldsArray[analyzedField].value != undefined ? fieldsArray[analyzedField].value : fieldsArray[analyzedField];
+     
+          if(fieldValue != wishedValue) {
                confirmResult = false;
                break
           } 
      }
 
      return confirmResult;
+}
+
+
+
+
+// confirm user both passwords 
+async function confirmUserPassword(formId) {
+     let returnedValue = false;
+
+     // obtain the .firstPasswordJS value and compare it to all values with .confirmJS
+     const analyzedValue = document.querySelector(`form#${formId} .firstPasswordJS`).value;
+     let selectedFields = document.querySelectorAll(`form#${formId} .confirmJS`);
+     selectedFields = Array.from(selectedFields);
+
+     let confirmPasswordFields = confirmNFields(selectedFields, analyzedValue);
+     
+     
+     if(confirmPasswordFields === true && await checkUserPassword(analyzedValue) === true) {
+          returnedValue = true;
+
+     } else if(confirmPasswordFields === false) {
+          showMessageBox("errorMessage", "As senhas informadas se contradizem.")
+
+     } else {
+          showMessageBox("errorMessage", "A senha informada não coincide com à do usuário")
+     }
+
+     return returnedValue;
 }
 
 

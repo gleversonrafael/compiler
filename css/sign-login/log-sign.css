@@ -58,6 +58,8 @@
 
 .inpB input:focus {
     opacity: 1;
+
+    /* outline: none; */
     outline: 1px solid var(--uiSecondaryGrey);
 }
 

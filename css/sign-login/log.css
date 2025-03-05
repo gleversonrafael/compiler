@@ -149,7 +149,7 @@ main {
 @media screen and (min-width: 768px) {
     /* main content */
     #mForm {
-        margin: 50px;
+        margin: 40px;
     }
     
     #finalBox {
@@ -162,7 +162,7 @@ main {
 @media screen and (min-width: 1366px) {
     /* main content */
     #mForm {
-        margin: 70px;
+        margin: 50px;
         max-width: 500px;
     }
     
