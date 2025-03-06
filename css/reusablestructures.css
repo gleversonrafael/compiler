@@ -102,15 +102,76 @@
 }
 
 
-/* fix small screens  */
-/* @media screen and (max-height: 500px) {
-     #modalArea {
-          justify-content: start;
-     }
-} */
+/* search */
+/* adapt search box for my courses and manage courses */
+.searchBox {
+     background-color: var(--uiPrimaryGrey);
+     padding: 10px 5px;
+
+     max-width: 450px;
+}
+
+.searchBox:has(.searchInput:hover) {
+     outline: 1px solid var(--uiSecondaryGrey);
+}
+
+.searchBox:has(.searchInput:focus) {
+     outline: 1px solid var(--uiSecondaryWhite);
+}
 
 
+.searchButton {
+     margin-left: 5px;
+
+     min-width: 50px;
+     min-height: 30px;
+
+     padding: 5px;
+
+     background: transparent url(../../../media/ico/mcourses/search.svg) center center no-repeat;
+     background-size: 55%;
+
+     border: none;
+     cursor: pointer;
+}
+
+.searchInput {
+     padding-left: 20px;
+     width: calc(100% - 40px);
+
+     color: var(--white);
+     background-color: transparent;
+
+     border: none;
+}
+
+.searchInput:focus {
+     outline: none;
+}
+
+
+/* aside */
+.roundButtonWithImage {
+     padding: 10px;
+
+     height: 100%;
+     min-width: 40px;
+     width: auto;
+
+     background: var(--uiPrimaryGrey) center center no-repeat;
+     background-size: 60%;
+
+     cursor: pointer;
+     border: none;
+
+     aspect-ratio: 1/1;
+}
+
+
+
+/* media */
 @media screen and (min-width: 768px) {
+     /* modal area */
      #modalArea {
           width: calc(100% - 225px);
           right: 0;
@@ -141,5 +202,12 @@
 
      .closeMessageBox {
           margin-top: 0px;
+     }
+
+
+     /* search */
+     .searchButton {
+          padding: 0px;
+          min-height: 15px;
      }
 }

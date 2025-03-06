@@ -150,9 +150,14 @@ input::-webkit-inner-spin-button {
     align-items: center;
 }
 
+.grid {
+    display: grid;
+}
+
 .abs {
     position: absolute;
 }
+
 
 
 /* spacement */

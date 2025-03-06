@@ -34,7 +34,7 @@ module.exports = {
 
     manageusers: {
       dependOn: "maindependencies",
-      import: ["./js/basic/general/jsmenu.js"]
+      import: ["./js/basic/general/jsmenu.js", "./js/basic/general/jsreusablestructures.js", "./js/basic/jsmanageusers.js"]
 
     }, 
 

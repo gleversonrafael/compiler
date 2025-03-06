@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+/* titles */
+#titleA {
+     margin-bottom: 50px;
+}
+
+
+/* operations zone */
+.operationsZone {
+     margin-bottom: 25px;
+     border: 1px solid red;
+}
+
+
+#userListOperations {
+     gap: 10px;
+}
+
+#userListOperations .searchBox {
+     flex-grow: 1;
+}
+
+
+.filterButton {
+     background-image: url(../../media/ico/reusablestructures/filter.svg);
+}
+
+.filterButton:hover {
+     outline: 1px solid var(--uiSecondaryGrey);
+}
+
+.filterButton.activeButton {
+     outline: 1px solid var(--uiPrimaryWhite);
+}
+
+
+
+/* general tables */
+.tablePatternCSS {
+     display: grid;
+     grid-auto-flow: row;
+     overflow: scroll;
+
+     gap: 10px;
+
+     grid-template-columns: auto;
+     grid-template-rows: auto auto;
+
+     overflow: scroll;
+     max-width: 100%;
+     max-height: 500px;
+
+     color: var(--uiPrimaryWhite);
+     background-color: var(--uiSecondaryBlack);
+
+     border: 0.5px solid #e6e6e6;
+     border-radius: 15px;
+}
+
+
+/* table head */
+.tableHeaderCSS {
+     display: grid;
+     grid-auto-flow: column;
+
+     padding: 10px;
+
+     background-color: var(--uiPrimaryGrey);
+     border: 1px solid blue;
+}
+
+.tableTitle {
+     font: normal 1em var(--rFont);
+}
+
+
+/* table body */
+.tableBodyCSS {
+     display: grid;
+     grid-auto-flow: row;
+}
+
+
+
+/* table row */
+.tableRowCSS {
+     display: grid;
+     grid-auto-flow: column;
+}
+
+
+.tableMainText {
+     color: var(--uiPrimaryWhite);
+     font: normal 1em var(--rFont);
+
+     overflow: hidden;
+}
+
+.tableSubtext, .tableEmphasisText {
+     font: 300 0.75em var(--rFont);
+}
+
+.tableSubtext {
+     color: var(--uiSecondaryWhite);
+}
+
+.tableBodyCSS > tr {
+     border: 1px solid red;
+}
+
+
+/* users table */
+/* #usersTable .tableBodyCSS > tr {
+     display: flex;
+} */
+
+
+.regularUser .tableEmphasisText {
+     color: var(--secondaryColor);
+}
+
+.adminUser .tableEmphasisText {
+     color: var(--secondaryOpposite);
+}
+
