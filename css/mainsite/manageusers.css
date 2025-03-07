@@ -9,11 +9,11 @@
 /* operations zone */
 .operationsZone {
      margin-bottom: 25px;
-     border: 1px solid red;
 }
 
 
 #userListOperations {
+     justify-content: start;
      gap: 10px;
 }
 
@@ -35,86 +35,14 @@
 }
 
 
-
-/* general tables */
-.tablePatternCSS {
-     display: grid;
-     grid-auto-flow: row;
-     overflow: scroll;
-
-     gap: 10px;
-
-     grid-template-columns: auto;
-     grid-template-rows: auto auto;
-
-     overflow: scroll;
-     max-width: 100%;
-     max-height: 500px;
-
-     color: var(--uiPrimaryWhite);
-     background-color: var(--uiSecondaryBlack);
-
-     border: 0.5px solid #e6e6e6;
-     border-radius: 15px;
-}
-
-
-/* table head */
-.tableHeaderCSS {
-     display: grid;
-     grid-auto-flow: column;
-
-     padding: 10px;
-
-     background-color: var(--uiPrimaryGrey);
-     border: 1px solid blue;
-}
-
-.tableTitle {
-     font: normal 1em var(--rFont);
-}
-
-
-/* table body */
-.tableBodyCSS {
-     display: grid;
-     grid-auto-flow: row;
-}
-
-
-
-/* table row */
-.tableRowCSS {
-     display: grid;
-     grid-auto-flow: column;
-}
-
-
-.tableMainText {
-     color: var(--uiPrimaryWhite);
-     font: normal 1em var(--rFont);
-
-     overflow: hidden;
-}
-
-.tableSubtext, .tableEmphasisText {
-     font: 300 0.75em var(--rFont);
-}
-
-.tableSubtext {
-     color: var(--uiSecondaryWhite);
-}
-
-.tableBodyCSS > tr {
-     border: 1px solid red;
-}
-
-
 /* users table */
-/* #usersTable .tableBodyCSS > tr {
-     display: flex;
-} */
+#usersTable {
+     max-width: 450px;
+}
 
+.inactiveUser {
+     opacity: 0.75;
+}
 
 .regularUser .tableEmphasisText {
      color: var(--secondaryColor);
@@ -124,3 +52,77 @@
      color: var(--secondaryOpposite);
 }
 
+
+/* user actions / buttons */
+.userActions {
+     display: flex;
+     flex-flow: row wrap;
+
+     justify-content: center;
+     align-items: center;
+
+     gap: clamp(5px, 2vw, 10px);
+
+     /* border: 1px solid #d400ff; */
+}
+
+.squareButtonWithImage {
+     width: calc(30% - 5px);
+}
+
+
+.activeUser .toggleUserInput {
+     background-image: url(../../media/ico/manageusers/turnon.svg);
+}
+
+.inactiveUser .toggleUserInput {
+     background-image: url(../../media/ico/manageusers/turnedoff.svg);
+}
+
+.editUserInput {
+     background-image: url(../../media/ico/manageusers/edit.svg);
+}
+
+.deleteUserInput {
+     background-image: url(../../media/ico/manageusers/delete.svg);
+}
+
+
+/* aside */
+.confirmButtonCSS {
+     text-align: left;
+}
+
+.hiddenByForce {
+     display: none;
+}
+
+
+
+
+@media screen and (min-width: 768px) {
+     #usersTable {
+          max-width: 700px;
+     }
+
+
+     /* columns alignment */
+     #usersTable .tableHeaderCSS > tr, #usersTable .tableRowCSS {
+          justify-content: space-between;
+     }
+
+
+     /* "dados" and "ações" alignment */
+     #usersTable .tableHeaderCSS th:first-child {
+          text-align: left;
+     }
+
+     #usersTable .tableHeaderCSS th:last-child {
+          text-align: right;
+     }
+
+     .userActions {
+          justify-content: end;
+     }
+
+}

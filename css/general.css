@@ -158,6 +158,10 @@ input::-webkit-inner-spin-button {
     position: absolute;
 }
 
+.textLeft {
+    text-align: left;
+}
+
 
 
 /* spacement */

@@ -150,7 +150,122 @@
 }
 
 
-/* aside */
+
+
+/* table  */
+/* general tables */
+.tablePatternCSS {
+     display: grid;
+
+     grid-auto-flow: row;
+     grid-template-columns: auto;
+     grid-template-rows: auto auto;
+
+     overflow: scroll;
+
+     gap: 10px;
+
+     max-width: max-content;
+     max-height: 500px;
+
+     color: var(--uiPrimaryWhite);
+     background-color: var(--uiSecondaryBlack);
+
+     /* border: 0.5px solid #e6e6e67a; */
+     border-radius: 15px;
+}
+
+
+
+
+/* table head */
+.tableHeaderCSS {
+     padding: 20px;
+     background-color: var(--uiPrimaryGrey);
+}
+
+.tableHeaderCSS > tr {
+     display: grid;
+     grid-auto-flow: column;
+     grid-auto-columns: minmax(0, 1fr);
+
+     column-gap: 10%;
+}
+
+.tableTitle {
+     font: normal 1em var(--rFont);
+}
+
+
+/* table body */
+.tableBody { 
+     display: grid;
+     grid-auto-flow: row;
+
+     row-gap: 5px;
+}
+
+
+
+/* table row */
+.tableRowCSS {
+     display: grid;
+     grid-auto-flow: column;
+     grid-auto-columns: minmax(0, 1fr);
+
+     background-color: var(--uiPrimaryGrey);
+     padding: 20px;
+
+     column-gap: 10%;
+}
+
+
+/* table cell */
+.tableMainText {
+     color: var(--uiPrimaryWhite);
+     font: normal 1em var(--rFont);
+}
+
+.tableSubtext, .tableEmphasisText {
+     font: 300 0.75em var(--rFont);
+}
+
+.tableSubtext {
+     color: var(--uiSecondaryWhite);
+}
+
+
+/* buttons */
+.buttonPatternCSS {
+     width: 100%;
+     padding: 10px 20px;
+
+     border-radius: 15px;
+
+     cursor: pointer;
+}
+
+.confirmButtonCSS {
+     font-weight: 500;
+     background-color: var(--tertiaryColor);
+}
+
+.confirmButtonCSS:hover {
+     background-color: var(--secondaryColor);
+}
+
+.confirmButtonCSS:active {
+     background-color: var(--primaryColor);
+}
+
+
+.roundButtonWithImage, .squareButtonWithImage {
+     background: center center no-repeat;
+
+     cursor: pointer;
+     border: none;
+}
+
 .roundButtonWithImage {
      padding: 10px;
 
@@ -158,13 +273,27 @@
      min-width: 40px;
      width: auto;
 
-     background: var(--uiPrimaryGrey) center center no-repeat;
+     background-color: var(--uiPrimaryGrey);
      background-size: 60%;
 
-     cursor: pointer;
-     border: none;
+     aspect-ratio: 1/1;
+}
+
+.squareButtonWithImage {
+     max-width: 30px;
 
      aspect-ratio: 1/1;
+
+     background-color: transparent;
+     background-size: cover;
+}
+
+
+/* aside */
+.textOverflowCSS {
+     overflow: hidden;
+     text-overflow: ellipsis;
+     text-wrap: nowrap;
 }
 
 
