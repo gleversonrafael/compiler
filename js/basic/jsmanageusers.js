@@ -11,6 +11,7 @@ function setManageUsersEvents() {
 
 
 onSnapshot(usersCol, (snapshotEvent) => {
+     document.querySelector("#usersTable .tableBody").innerHTML = "";
      fillTable("usersTable", snapshotEvent, "users");
 });
 
@@ -18,76 +19,164 @@ onSnapshot(usersCol, (snapshotEvent) => {
 
 
 async function fillTable(tableId, obtainedData, tableType) {
-     const tableBody = document.querySelector(`${tableId} .tableBody`);
+     const tableBody = document.querySelector(`#${tableId} .tableBody`);
      let dataArray = await obtainDocumentsArray(obtainedData);
 
 
      for(let currentItem = 0; currentItem < dataArray.length; currentItem++) {
-          let tableRow = document.createElement("tableRowCSS");
+          let tableRow = document.createElement("tr");
           tableRow.classList.add("tableRowCSS");
 
           if(tableType) {
-               setCustomTableProperties(tableType, tableRow, dataArray[currentItem]);
+               setCustomTableComponents(tableType, tableRow, dataArray[currentItem]);
           }
 
+          tableBody.appendChild(tableRow);
      }
 
 
-     function setCustomTableProperties(tableType, thisRow, rowData) {
+     // complement
+     function setCustomTableComponents(tableType, thisRow, rowData) {
           if(tableType === "users") {
+               const userId = rowData[0];
                const userObject = rowData[1];
 
-               thisRow.classList.add(`${userObject.usertype}User`);
-               thisRow.classList.add(userObject.active === true ? "activeUser" : "inactiveUser");
+               const userTypeFix = userObject.usertype === "admin" ? "Administrador" : "Usuário comum";
 
-               // if delete add delete class --- fix
-               // ----------------------------------
+               const textObject = {
+                    MainText: userObject.name, 
+                    Subtext: userObject.email,
+                    EmphasisText: userTypeFix 
+               }
 
-               createUsersCells()
+               
+               // this row classes and id
+               thisRow.id = `userIdentifier${userId}`;
+
+               thisRow.classList.add(
+                    `${userObject.usertype}User`, 
+                    userObject.active === true ? "activeUser" : "inactiveUser"
+               )
+
+               if(userObject.deleted === true) {
+                    thisRow.classList.add("deleted");
+               }
+
+
+               // creating fields
+               let userInfoCell = createTextCell(textObject, thisRow);
+               let buttonsCell = createUsersActions();
+
+               thisRow.appendChild(userInfoCell);
+               thisRow.appendChild(buttonsCell);
           }
 
 
+          // custom functions
+          function createUsersActions() {
+               let temporaryActionsCell = document.createElement("td");
 
-          function createUsersCells() {
-               let createdElements = {
-                    informationCell: document.createElement("td"),
-                    usersActions: document.createElement("td"),
-
-                    tableMainText: document.createElement("p"),
-                    tableSubtext: document.createElement("p"),
-                    tableEmphasisText: document.createElement("p"),
-
-                    toggleUserInput: document.createElement("input"),
-                    editUserInput: document.createElement("input"),
-                    deleteUserInput: document.createElement("input"),
-               }
-
-               let createdElementsArray = Object.entries(createdElements);
+               let createdButtonsClasses = ["toggleUserInput", "editUserInput", "deleteUserInput"];
 
 
-               // set classes and shared aspects
-               for(let element = 0; element < createdElementsArray.length; element++) {
-                    let propertyName = createdElementsArray[element][0];
-                    let thisElement = createdElements[propertyName];
+               temporaryActionsCell.classList.add("userActionsCell");
 
-                    if(propertyName.includes("text")) {
-                         thisElement.classList.add("");
+               createdButtonsClasses.forEach((property) => {
+                    if(! thisRow.classList.contains("deleted") || property.includes("deleteUserInput")) {
+                         let temporaryButton = document.createElement("input");
+                         temporaryButton.type = "button";
+     
+                         temporaryButton.classList.add(property, "squareButtonWithImage");
+     
+                         temporaryActionsCell.appendChild(temporaryButton);
+                    }
+               })
 
 
-                    } else if(propertyName.includes("input")) {
-                         thisElement.classList.add("");
-                         thisElement.setAttribute("type", "input");
 
-                    };
+               return temporaryActionsCell
+          };
+     }
 
-                    console.log(thisElement);
-               }
+
+     // complementary
+     function createTextCell(textObject) {            
+          let textCell = document.createElement("td");
+          textCell.classList.add("textCell");
+
+          forEachPropertyWithDo({
+               selectedObject: textObject,
+               functionsArray: [createParagraph]
+          });
+
+
+          return textCell;
+
+
+          // complementary
+          function createParagraph(textClass, textValue) {
+               let createdParagraph = `
+               <p class="table${textClass} textOverflowCSS"> ${textValue} </p>`
+               let elementParagraph = convertHtmlStringToElement(createdParagraph);
+          
+               textCell.appendChild(elementParagraph);
           }
      }
 }
 
 
 // reusable
+function forEachPropertyWithDo(parameterObject) {
+     // parameterObject = {selectedObject, parameterType, desiredValue, functionsArray}
+     let properties = Object.entries(parameterObject.selectedObject);
+
+
+     for(let selectedProperty = 0; selectedProperty < properties.length; selectedProperty++) {
+          const propertyName = properties[selectedProperty][0];
+          const propertyValue = properties[selectedProperty][1];
+          let parameter;
+
+
+          // generate comparison and set it on paramter
+          if(parameterObject.comparisonType) {
+               switch(parameterObject.comparisonType) {
+                    case "equal": 
+                         parameter = propertyValue === parameterObject.desiredValue ? true : false
+                         break
+                    
+                    default:
+               }
+          
+          } else {
+               parameter = propertyValue ? true : false
+          }
+
+
+          // execute functions on parameter success
+          if(parameter === true && parameterObject.functionsArray) {
+               let functionsArray = parameterObject.functionsArray;
+
+               for(let selectedFunction = 0; selectedFunction < functionsArray.length; selectedFunction++) {
+                    // por padrão: passo o nome e o valor da propriedade
+                    functionsArray[selectedFunction](propertyName, propertyValue);
+               };
+          
+          }
+     }
+}
+
+
+function convertHtmlStringToElement(htmlString) {
+     let temporaryTemplate = document.createElement("template");
+     htmlString = htmlString.trim();
+
+     temporaryTemplate.innerHTML = htmlString
+
+     return temporaryTemplate.content.firstElementChild;
+}
+
+
+
 async function obtainDocumentsArray(snapshotData) {
      // array pattern -> [0] = id | [1] = data
      let returnedArray = [];

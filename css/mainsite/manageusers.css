@@ -54,7 +54,7 @@
 
 
 /* user actions / buttons */
-.userActions {
+.userActionsCell {
      display: flex;
      flex-flow: row wrap;
 
@@ -121,7 +121,7 @@
           text-align: right;
      }
 
-     .userActions {
+     .userActionsCell {
           justify-content: end;
      }
 

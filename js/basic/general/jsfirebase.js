@@ -27,6 +27,4 @@ export { auth };
 export { usersCol };
 export { coursesCol };
 
-console.log("Current version: 1202");
-
 
