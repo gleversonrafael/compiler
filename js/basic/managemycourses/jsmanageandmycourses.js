@@ -16,10 +16,6 @@ let othersData = {};
 let pageType = window.location.href.includes("mycourses") ? "myCourses" : "manageCourses"
 
 
-
-
-
-
 // events
 document.getElementById("searchInp").addEventListener("input", (inputEvent) => {
      showCourses(inputEvent.currentTarget.value, "my");

@@ -18,7 +18,7 @@ module.exports = {
 
     mainpage: {
       dependOn: "maindependencies",
-      import : ["./js/basic/general/jsmenu.js", "./js/basic/jspagechange.js"]
+      import : ["./js/basic/general/jsmenu.js", "./js/basic/jspagechange.js", "./js/basic/general/jsreusablestructures.js"]
     },
 
     mycourses: {

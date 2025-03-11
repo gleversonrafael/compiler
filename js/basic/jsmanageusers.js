@@ -1,5 +1,6 @@
 import { onSnapshot } from "firebase/firestore";
-import { usersCol } from "./general/jsfirebase.js"
+import { usersCol } from "./general/jsfirebase.js";
+import { forEachPropertyWithDo } from "./general/jsreusablestructures.js"
 
 
 setManageUsersEvents();
@@ -124,46 +125,6 @@ async function fillTable(tableId, obtainedData, tableType) {
 
 
 // reusable
-function forEachPropertyWithDo(parameterObject) {
-     // parameterObject = {selectedObject, parameterType, desiredValue, functionsArray}
-     let properties = Object.entries(parameterObject.selectedObject);
-
-
-     for(let selectedProperty = 0; selectedProperty < properties.length; selectedProperty++) {
-          const propertyName = properties[selectedProperty][0];
-          const propertyValue = properties[selectedProperty][1];
-          let parameter;
-
-
-          // generate comparison and set it on paramter
-          if(parameterObject.comparisonType) {
-               switch(parameterObject.comparisonType) {
-                    case "equal": 
-                         parameter = propertyValue === parameterObject.desiredValue ? true : false
-                         break
-                    
-                    default:
-               }
-          
-          } else {
-               parameter = propertyValue ? true : false
-          }
-
-
-          // execute functions on parameter success
-          if(parameter === true && parameterObject.functionsArray) {
-               let functionsArray = parameterObject.functionsArray;
-
-               for(let selectedFunction = 0; selectedFunction < functionsArray.length; selectedFunction++) {
-                    // por padrão: passo o nome e o valor da propriedade
-                    functionsArray[selectedFunction](propertyName, propertyValue);
-               };
-          
-          }
-     }
-}
-
-
 function convertHtmlStringToElement(htmlString) {
      let temporaryTemplate = document.createElement("template");
      htmlString = htmlString.trim();

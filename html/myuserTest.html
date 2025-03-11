@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+     <link class="dynamicallyGeneratedCSS" rel="stylesheet" href="../css/mainsite/myuserandresetpassword/myuserandreset.css">
+     <link class="dynamicallyGeneratedCSS" rel="stylesheet" href="../css/mainsite/myuserandresetpassword/myuser.css">
+
+
+</head>
+
+<body>
+     <!-- modals -->
+     <section id="modalArea" class="flex-col">
+          <!-- change password modal -->
+          <div id="changePasswordModal" class="modalMR flex flex-col">
+               <h1 class="modalTitle"> Alteração de senha </h1>
+               <p class="modalSubtext"> Forneça os dados abaixo para alterar sua senha.</p>
+
+               <form id="changePassword" class="flex flex-col" autocomplete="off" novalidate>
+                    <!-- current password -->
+                    <fieldset>
+                         <label for="changeCurrentPasswordInput" class="labelPatternMR"> Senha atual</label>
+                         <input type="password" id="changeCurrentPasswordInput" class="fillableInputJS inputPatternMR bAll">
+
+                    </fieldset>
+
+                    <!-- new password -->
+                    <fieldset>
+                         <label for="newPasswordInput" class="labelPatternMR"> Nova senha</label>
+                         <input type="password" id="newPasswordInput" class="fillableInputJS inputPatternMR bAll">
+
+                    </fieldset>
+
+
+                    <!-- buttons -->
+                    <fieldset class="modalButtons flex flex-col">
+                         <input type="button" value="Cancelar" class="cancelModalButton bAll">
+                         <input type="submit" value="Alterar" class="confirmButtonTypeMR bAll">
+
+                    </fieldset>
+
+               </form>
+
+          </div>
+
+
+          <!-- confirm password -->
+          <div id="confirmPasswordModal" class="modalMR flex flex-col">
+               <h1 class="modalTitle"> Salvamento de dados </h1>
+               <p class="modalSubtext"> Ao menos um dado sigiloso que não corresponde à senha do usuário será alterado. Para confirmar a sua autenticidade, insira sua senho.</p>
+               
+
+               <form id="confirmPassword" class="flex flex-col" autocomplete="off" novalidate>
+                    <!-- current password -->
+                    <fieldset>
+                         <label for="verifyPasswordInput" class="labelPatternMR"> Senha</label>
+                         <input type="password" id="verifyPasswordInput" class="firstPasswordJS confirmJS fillableInputJS inputPatternMR bAll">
+
+                    </fieldset>
+
+
+                    <!-- confirm password -->
+                    <fieldset>
+                         <label for="confirmPasswordInput" class="labelPatternMR"> Confirmar senha</label>
+                         <input type="password" id="confirmPasswordInput" class="confirmJS fillableInputJS inputPatternMR bAll">
+
+                    </fieldset>
+
+
+                    <!-- buttons -->
+                    <fieldset class="modalButtons flex flex-col">
+                         <input type="button" value="Cancelar" class="cancelModalButton bAll">
+                         <input type="submit" value="Salvar" class="confirmButtonTypeMR bAll">
+
+                    </fieldset>
+
+               </form>
+
+          </div>
+
+
+          <!-- delete modal -->
+          <div id="deleteOwnUserModal" class="modalMR flex flex-col">
+               <h1 class="modalTitle"> Exclusão de conta </h1>
+               <p class="modalSubtext"> Preencha corretamente os dados abaixo para <span class="deleteEmphasis">excluir</span> sua conta.</p>
+               
+               
+               <form id="deleteOwnUser" autocomplete="off" novalidate class="flex flex-col">
+                    <!-- current password -->
+                    <fieldset>
+                         <label for="deleteVerifyPasswordInput" class="labelPatternMR"> Senha atual</label>
+                         <input type="password" id="deleteVerifyPasswordInput" class="firstPasswordJS confirmJS inputPatternMR fillableInputJS bAll">
+
+                    </fieldset>
+
+
+                    <!-- confirm password -->
+                    <fieldset>
+                         <label for="deleteConfirmPasswordInput" class="labelPatternMR"> Confirmar senha</label>
+                         <input type="password" id="deleteConfirmPasswordInput" class="confirmJS inputPatternMR fillableInputJS bAll">
+
+                    </fieldset>
+
+
+                    <!-- buttons -->
+                    <fieldset class="modalButtons flex flex-col">
+                         <input type="button" value="Cancelar" class="cancelModalButton bAll"></input>
+                         <input type="submit" value="Excluir conta" class="confirmButtonTypeMR bAll"></input>
+
+                    </fieldset>
+
+
+               </form>
+
+          </div>
+
+
+     </section>   
+     
+     
+     <!-- main content -->
+     <main id="mCon">
+          <button id="testButton"> Hash</button>
+     
+          <div id="pageMain" class="conPattern flex flex-col fAlignC">
+               <div id="titleA">
+                    <h1 id="pageTitle"> Meu usuário</h1>
+
+               </div>
+
+
+               <div id="mainUserContentBox">
+                    <form id="changeOwnUserData" autocomplete="off" novalidate>
+                         <!-- inputs and image -->
+                         <div class="inputsArea">
+                              <fieldset class="flex flex-col">
+                                   <!-- name -->
+                                   <div>
+                                        <label for="userNameInput" class="labelPatternMR"> Nome</label>
+                                        <input type="text" id="userNameInput" name="name" class="fillableInputJS inputPatternMR bAll" autocomplete="off">
+                                   </div>
+                                   
+                                   <!-- last name -->
+                                   <div>
+                                        <label for="userTelephoneInput" class="labelPatternMR"> Telefone </label>
+                                        <input id="userTelephoneInput" type="tel" name="telephone" class="fillableInputJS inputPatternMR bAll">
+
+                                   </div>
+
+                              </fieldset>
+
+
+                              <img src="../media/ico/menu/user.svg" alt="Ícone do usuário">
+
+
+                              <!-- email / password -->
+                              <fieldset class="flex flex-col">
+                                   <!-- email -->
+                                   <div>
+                                        <label for="userEmailInput" class="labelPatternMR"> E-mail</label>
+                                        <input type="email" id="userEmailInput" name="email" class="fillableInputJS inputPatternMR bAll" autocomplete="off">
+
+                                   </div>
+
+                                   <!-- password -->
+                                   <div>
+                                        <label for="changePasswordButton" class="labelPatternMR"> Senha</label>
+                                        <input type="button" id="changePasswordButton" class="inputButtonToggleMR inputPatternMR bAll" value="Alterar senha">
+
+                                        <p class="underEmphasis"> Esqueceu a senha?</p>
+
+                                   </div>
+                                    
+                              </fieldset>
+                              
+                         </div>
+
+
+                         <!-- buttons area -->
+                         <div>
+                              <fieldset class="buttonsArea flex flex-col fAlignC">
+                                   <!-- <p id="resetData" class="resetEmphasis"> Restaurar dados</p> -->
+                                   <p id="deleteAccount" class="deleteEmphasis"> Excluir conta</p>
+                              
+                                   <input type="submit" value="Salvar" class="confirmButtonTypeMR buttonType bAll">
+                              
+                              </fieldset>
+
+                         </div>
+
+                    </form>
+
+               </div>
+
+          </div>
+
+
+     </main>
+
+
+     <section id="scriptsSection">
+          <script class="dynamicallyGeneratedScript" src="../js/final/myuserbundle.js"></script>
+
+     </section>
+
+</body>
+
+</html>
