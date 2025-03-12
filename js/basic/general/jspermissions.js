@@ -47,15 +47,15 @@ function analyzeLogState(data) {
           // user is logged in and tries to acess start page / login (GITHUB COMPATIBILITY)
           if(data != null && ( window.location.href.includes("index") || window.location.href == "https://gleversonrafael.github.io/compiler/" || window.location.href.includes("log"))) {
                if(window.location.href.includes("github")) {
-                    window.location.href = "https://gleversonrafael.github.io/compiler/html/navigate.html"
+                    window.location.href = "https://gleversonrafael.github.io/compiler/html/main.html"
 
 
                } else if(window.location.href.includes("log") && document.getElementById("passInp").value.length == 0 ){ /* suited for local server */
-                    window.location.href = "./navigate.html"
+                    window.location.href = "./main.html"
 
 
                } else if(window.location.href.includes("index")) {
-                    window.location.href = "./html/navigate.html"
+                    window.location.href = "./html/main.html"
                }
           
           }
