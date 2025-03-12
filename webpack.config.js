@@ -16,9 +16,9 @@ module.exports = {
       import: ["./js/basic/general/jsmenu.js", "./js/basic/loginsign/jssign.js"]
     },
 
-    dashboard: {
+    mainpage: {
       dependOn: "maindependencies",
-      import : ["./js/basic/general/jsmenu.js", "./js/basic/jsdashboard.js"]
+      import : ["./js/basic/general/jsmenu.js", "./js/basic/jspagechange.js"]
     },
 
     mycourses: {

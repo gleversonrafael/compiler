@@ -16,8 +16,6 @@ onSnapshot(usersCol, (snapshotEvent) => {
 });
 
 
-
-
 async function fillTable(tableId, obtainedData, tableType) {
      const tableBody = document.querySelector(`#${tableId} .tableBody`);
      let dataArray = await obtainDocumentsArray(obtainedData);
