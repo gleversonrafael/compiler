@@ -1,4 +1,4 @@
-import { forEachPropertyWithDo } from "./general/jsreusablestructures";
+import { forEachPropertyWithDo, showMessageBox } from "./general/jsreusablestructures";
 
 setPageChangeEvents();
 changePage("home");
@@ -176,6 +176,7 @@ async function getPageHtml(pageName) {
                return response.text();
 
           } else {
+               showMessageBox("errorMessage", "Essa página não pôde ser carregada.");
                console.log("couldn't get the page.");
                // show message...
           }
