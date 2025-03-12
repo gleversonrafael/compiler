@@ -403,8 +403,7 @@ eval("/* (ignored) */\n\n//# sourceURL=webpack://compiler/crypto_(ignored)?");
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	__webpack_require__("./js/basic/managemycourses/jsmanageandmycourses.js");
-/******/ 	__webpack_require__("./js/basic/managemycourses/jsmanagecourses.js");
-/******/ 	var __webpack_exports__ = __webpack_require__("./js/basic/general/jsreusablestructures.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./js/basic/managemycourses/jsmanagecourses.js");
 /******/ 	
 /******/ })()
 ;

@@ -1,283 +1,183 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title> Gerenciar cursos</title>
 
-     <link rel="shortcut icon" href="../media/ico/favicon.ico" type="image/x-icon">
-
-     <link rel="stylesheet" href="../css/general.css">
-     <link rel="stylesheet" href="../css/mainsitestructures.css">
-     <link rel="stylesheet" href="../css/reusablestructures.css">
-
-
-     <link rel="stylesheet" href="../css/mainsite/mycourses-managecourses/createandmanagecourses.css">
-     <link rel="stylesheet" href="../css/mainsite/mycourses-managecourses/managecourses.css">
+<head>    
+     <link class="dynamicallyGeneratedCSS" rel="stylesheet" href="../css/mainsite/mycourses-managecourses/createandmanagecourses.css">
+     <link class="dynamicallyGeneratedCSS" rel="stylesheet" href="../css/mainsite/mycourses-managecourses/managecourses.css">
 
 </head>
 
-<body>     
-     <!-- header -->
-     <header id="mainHeader" class="flex fJustC"></header>
+<body>
+     <!-- modal -->
+     <!-- id anterior = bg eff -->
+     <div id="modalArea">
+          <!-- create -->
+          <div id="createCourseBox" class="createdBox flex flex-col">
+               <!-- return icon  -->
+               <button id="returnCreateCourse">
+                    <img src="../media/ico/returnico.svg" alt="">
+
+               </button>       
 
 
-     <!-- menuBar -->
-     <section role="menubar" id="mMenuB" class="menuClosed">
-          <img id="menuIcon" class="menuChildOpen" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais brancas no sentido vertical"></div>
-
-
-          <div class="brandIcon menuChildClosed"></div>
-
-          <menu id="mMenu" class="menuChildClosed flex flex-col">
-               <!-- dashboard -->
-               <li> 
-                    <a href="../html/navigate.html" id="navigate" class="mmBlock flex fAlignC dTrans">
-                         <img src="../media/ico/menu/navigate.svg" alt="">
-                         <p class="menuFont"> Navegação </p>
-                    </a>
-
-               </li>
-
-
-               <!-- my courses -->
-               <li>
-                    <a href="../html/mycourses.html" id="mycourses" class="mmBlock flex fAlignC dTrans">
-                         <img src="../media/ico/menu/mycourses.svg" alt="">
-                         <p class="menuFont"> Meus cursos</p>
-                    </a>
-
-               </li>
-               
-
-               <!-- manage courses -->
-               <li>
-                    <a href="../html/managecourses.html" id="managecourses" class="limitedAcess mmBlock flex fAlignC dTrans">
-                         <img src="../media/ico/menu/managecourses.svg" alt="">
-                         <p class="menuFont"> Gerir cursos</p>
-                    </a>
-
-               </li>
-               
-
-               <!-- manage users -->
-               <li>
-                    <a href="../html/manageusers.html" id="manageusers" class="limitedAcess mmBlock flex fAlignC dTrans">
-                         <img src="../media/ico/menu/manageusers.svg" alt="">
-                         <p class="menuFont"> Usuários</p>
-                    </a>
-
-               </li>
-
-
-               <!-- closeM -->
-               <li>
-                    <button id="leaveM" class="mmBlock flex fAlignC dTrans">
-                         <img src="../media/ico/menu/closem.svg" alt="">
-                         <p class="menuFont"> Fechar menu</p>
-
-                    </button>
-
-               </li>               
-
-          </menu>
-
-
-          <!-- user section -->
-          <section id="userSec" class="menuChildClosed flex flex-col">
-               <div class="flex userMSpace">
-                    <img id="userIcon" src="../media/ico/menu/user.svg" alt="">
-                    
-                    <div id="userInfo" class="userMSpace">
-                         <p id="userName" class="menuFont"> null </p>
-                         <p id="userType" class="userMSpace menuFont"> null </p>
-
-                         <button id="signoutB" class="userB menuFont dTrans"> Sair </button>
-                   
-                    </div> 
-
-               </div>    
-
-               <a class="flex fAlignC fJustC userB menuFont dTrans" href=""> 
-                    <img src="../media/ico/menu/settings.svg" alt="">
-                    Configurações 
-               </a>
-
-          </section>
-
-     </section>
-
-
-
-     <!-- site's content -->
-     <main id="mCon" class="flex fJustC">
-          <div id="bgEff">
-               <div id="createCourseBox" class="createdBox flex flex-col">
-                    <!-- return icon  -->
-                    <button id="returnCreateCourse">
-                         <img src="../media/ico/returnico.svg" alt="">
-
-                    </button>       
-                    
-
-                    <!-- create course box title -->
-                    <div class="createdBoxTitle flex flex-col">
-                         <div class="flex flex-row fJustSB">
-                              <h1> Criar curso</h1>
-                              <button id="closeCreateCourseBox" class="closeCreatedBox"> <img src="../media/ico/closeicon.png" alt=""></button>
-
-                         </div>
-
-                         <h2 class="createdBoxSubtitle"> Dados</h2>
+               <!-- create course box title -->
+               <div class="createdBoxTitle flex flex-col">
+                    <div class="flex flex-row fJustSB">
+                         <h1> Criar curso</h1>
+                         <button id="closeCreateCourseBox" class="closeCreatedBox"> <img src="../media/ico/closeicon.png" alt=""></button>
 
                     </div>
 
-                    
-                    <form id="createCourseForm" class="flex" novalidate>
-                         <!-- course data -->
-                         <fieldset class="contentFieldset flex flex-col">
-                              <h3> Dados do curso</h3>
-
-                              <label for="courseNameInp" class="requiredLabel bottomNspace"> Nome</label>
-                              <input type="text" name="name" id="courseNameInp" class="requiredInput dTrans" >
-
-                              <label for="coursePlatformInp" class="bottomNspace"> Plataforma</label>
-                              <input type="text" name="coursePlatform" id="coursePlatformInp" class="dTrans">
-
-                         </fieldset>
-
-
-                         <!-- user data -->
-                         <fieldset class="contentFieldset flex flex-col">
-                              <h3> Dados do usuário</h3>
-                              
-                              <label for="emailInp" class="requiredLabel bottomNspace"> E-mail</label>
-                              <input type="email" name="email" id="emailInp" class="requiredInput dTrans" >
-                         
-                              <label for="userPasswordInp" class="requiredLabel bottomNspace"> Senha</label>
-                              <input type="text" name="password" id="userPasswordInp" class="requiredInput dTrans" >
-
-                         </fieldset>
-                         
-                         
-                         <!-- urls -->
-                         <fieldset class="contentFieldset flex flex-col">
-                              <h3> URLS</h3>
-
-                              <label for="urlInp" class="requiredLabel bottomNspace"> URL do curso</label>
-                              <input type="url" name="aUrl" id="urlInp" class="requiredInput dTrans">
-
-                              <label for="imgInp" class="bottomNspace"> URL da imagem</label>
-                              <input type="url" name="aUrl" id="imgInp" class="bottomNspace dTrans">
-
-                         </fieldset>
-
-                         <!-- acess -->
-                         <button id="acessB" class="buttonPattern dTrans"> Editar acesso</button>
-
-
-                         <!-- final buttons -->
-                         <fieldset class="createdBoxButtons flex flex-row fJustSB">
-                              <input type="reset" value="Redefinir" class="resetButtonStyle bAll dTrans">
-                              <input type="submit" value="Criar" class="confirmButtonStyle bAll dTrans">
-                              
-                         </fieldset>
-
-                    </form>
-
-                    <!-- searchBox -->
-                    <section id="searchUserBox" class="flex-col">
-                         <!-- <div id="searchUserArea" class="flex flex-row"> 
-                              <input type="search" name="searchUser" id="searchUserInp">
-                              search ico
-
-                         </div> -->
-
-                         <ul id="userList" class="flex"></ul>
-
-                         <div id="grantAcessButtons" class="flex flex-col">
-                              <button id="removeAcessButton" class="changeAcessButton buttonPattern"> Remover</button>
-                              <button id="grantAcessButton" class="changeAcessButton buttonPattern"> Conceder</button>
-
-                         </div>
-
-                    </section>
+                    <h2 class="createdBoxSubtitle"> Dados</h2>
 
                </div>
-          
 
-               <div id="deleteCourseBox" class="createdBox flex-col">
-                    <div class="createdBoxTitle flex flex-row fJustSB"> 
-                         <h1> Excluir cursos</h1>
+               
+               <form id="createCourseForm" class="flex" novalidate>
+                    <!-- course data -->
+                    <fieldset class="contentFieldset flex flex-col">
+                         <h3> Dados do curso</h3>
+
+                         <label for="courseNameInp" class="requiredLabel bottomNspace"> Nome</label>
+                         <input type="text" name="name" id="courseNameInp" class="requiredInput dTrans" >
+
+                         <label for="coursePlatformInp" class="bottomNspace"> Plataforma</label>
+                         <input type="text" name="coursePlatform" id="coursePlatformInp" class="dTrans">
+
+                    </fieldset>
+
+
+                    <!-- user data -->
+                    <fieldset class="contentFieldset flex flex-col">
+                         <h3> Dados do usuário</h3>
+                         
+                         <label for="emailInp" class="requiredLabel bottomNspace"> E-mail</label>
+                         <input type="email" name="email" id="emailInp" class="requiredInput dTrans" >
+                    
+                         <label for="userPasswordInp" class="requiredLabel bottomNspace"> Senha</label>
+                         <input type="text" name="password" id="userPasswordInp" class="requiredInput dTrans" >
+
+                    </fieldset>
+                    
+                    
+                    <!-- urls -->
+                    <fieldset class="contentFieldset flex flex-col">
+                         <h3> URLS</h3>
+
+                         <label for="urlInp" class="requiredLabel bottomNspace"> URL do curso</label>
+                         <input type="url" name="aUrl" id="urlInp" class="requiredInput dTrans">
+
+                         <label for="imgInp" class="bottomNspace"> URL da imagem</label>
+                         <input type="url" name="aUrl" id="imgInp" class="bottomNspace dTrans">
+
+                    </fieldset>
+
+                    <!-- acess -->
+                    <button id="acessB" class="buttonPattern dTrans"> Editar acesso</button>
+
+
+                    <!-- final buttons -->
+                    <fieldset class="createdBoxButtons flex flex-row fJustSB">
+                         <input type="reset" value="Redefinir" class="resetButtonStyle bAll dTrans">
+                         <input type="submit" value="Criar" class="confirmButtonStyle bAll dTrans">
+                         
+                    </fieldset>
+
+               </form>
+
+               <!-- searchBox -->
+               <section id="searchUserBox" class="flex-col">
+                    <!-- <div id="searchUserArea" class="flex flex-row"> 
+                         <input type="search" name="searchUser" id="searchUserInp">
+                         search ico
+
+                    </div> -->
+
+                    <ul id="userList" class="flex"></ul>
+
+                    <div id="grantAcessButtons" class="flex flex-col">
+                         <button id="removeAcessButton" class="changeAcessButton buttonPattern"> Remover</button>
+                         <button id="grantAcessButton" class="changeAcessButton buttonPattern"> Conceder</button>
 
                     </div>
 
-                    <p id="deletedCoursesCounter"> null text</p>
+               </section>
 
-                    <div class="createdBoxButtons flex flex-row">
-                         <button id="changeExclusion" class="resetButtonStyle flex fJustC fAlignC dTrans bAll"> Alterar </button>
-                         <button id="confirmExclusion" class="flex fJustC fAlignC dTrans bAll"> Confirmar </button>
+          </div>
+     
 
-                    </div>
-
-                    <button id="cancelExclusion" class="bAll dTrans "> Cancelar exclusão </button>
+          <!-- delete -->
+          <div id="deleteCourseBox" class="createdBox flex-col">
+               <div class="createdBoxTitle flex flex-row fJustSB"> 
+                    <h1> Excluir cursos</h1>
 
                </div>
+
+               <p id="deletedCoursesCounter"> null text</p>
+
+               <div class="createdBoxButtons flex flex-row">
+                    <button id="changeExclusion" class="resetButtonStyle flex fJustC fAlignC dTrans bAll"> Alterar </button>
+                    <button id="confirmExclusion" class="flex fJustC fAlignC dTrans bAll"> Confirmar </button>
+
+               </div>
+
+               <button id="cancelExclusion" class="bAll dTrans "> Cancelar exclusão </button>
 
           </div>
 
+     </div>
 
 
-          
-          <!-- site main content -->
-          <div class="conPattern flex flex-col">
+     <!-- site content -->
+     <main id="mCon">
+          <div id="pageMain" class="conPattern flex flex-col">
                <!-- title -->
                <section id="titleA" class="flex-col">
                     <h1 id="pageTitle"> Cursos gerenciados</h1>
 
                </section>
-
-
+     
+     
                <!-- search -->
                <section id="searchA" class="flex-col">
                     <label for="searchInp" class="subtitle"> Pesquisar</label>
-
+     
                     <div role="searchbox" id="searchB" class="flex fJustSB bAll sTrans">
                          <input id="searchInp" type="text" class="bAll sTrans" placeholder="Insira o nome do curso que você quer buscar.">
                          <button role="search" id="searchButton" class="bAll"></button>
-
+     
                     </div>
-
-
+     
+     
                </section>
-
-
+     
+     
                <!-- operations -->
                <section id="operationsA" class="flex flex-col">
                     <h3 class="subtitle"> Operações</h3>
-
+     
                     <div class="flex">
                          <button id="addCourseButton" class="bAll dTrans"> Criar </button>
                          <button id="deleteCourseButton" class="bAll dTrans"> Excluir </button>
                     
                     </div>
-
+     
                </section>
-
-
+     
+     
                <!-- explore -->
                <section id="exploreA" class="flex flex-col">
                     <h3 class="subtitle">Meus</h3>
-
+     
                     <section id="coursesA" class="coursesArea flex flex-row">
                          <div class="coursesColumn flex flex-col"></div>
                          <div class="coursesColumn flex flex-col"></div>
-
+     
                     </section>
-
-
+     
+     
                     <h3 class="subtitle"> Criados por outros administradores</h3>
-
+     
                     <section id="othersA" class="coursesArea flex flex-row">
                          <div class="coursesColumn flex flex-col">
                               <div class="open">
@@ -294,57 +194,57 @@
                                              <fieldset style="border: 1px solid red">
                                                   <label class="fieldName"> Título </label>
                                                   <input class="fieldValue"></input>
-
+     
                                              </fieldset>
-
+     
                                              <!-- platform -->
                                              <fieldset>
                                                   <!-- p por label, p por input -->
                                                   <label class="fieldName"> Plataforma</label>
                                                   <input class="fieldValue"></input>
-
+     
                                              </fieldset>
-
+     
                                         </div>
      
-
+     
                                         <!-- page two -->
                                         <div class="pageTwo">
                                              <!-- email -->
                                              <fieldset>
                                                   <label class="fieldName"> Email</label>
                                                   <input class="fieldValue"> </input>
-
+     
                                              </fieldset>
-
+     
                                              <!-- password -->
                                              <fieldset>
                                                   <label class="fieldName"> Senha</label>
                                                   <input class="fieldValue"></input>
-
+     
                                              </fieldset>
-
+     
                                         </div>
-
-
+     
+     
                                         <!-- page three -->
                                         <div class="pageThree">
                                              <!-- url -->
                                              <fieldset>
                                                   <label class="fieldName"> URL</label>
                                                   <input class="fieldValue"></input>
-
+     
                                              </fieldset>
-
+     
                                              <!-- image url -->
                                              <fieldset>
                                                   <label class="fieldName"> URL da imagem</label>
                                                   <input class="fieldValue"></input>
-
+     
                                              </fieldset>
-
+     
                                         </div>
-
+     
                                         <div class="acessControl" style="display: flex;">
                                              <!-- search -->
                                              <ul class="thisCourseAcess">
@@ -363,62 +263,65 @@
                                                   <li> 3</li>
                                                   <li> 4</li>
                                                   <li> Cinco</li>
-
+     
                                              </ul>
-
+     
                                         </div>
-
+     
                                         
                                         <!-- final buttons -->
                                         <div class="stepperGroup">
                                              <input type="reset" value="Redefinir">
-
+     
                                              <div class="steppers">
                                                   <input type="button" class="backwardStepper"></input>
-
+     
                                                   <input class="stepperInput" type="number" name="" id="" value=""> 
-
+     
                                                   <input type="button" class="forwardStepper"> </input>
-
+     
                                              </div>
-
+     
                                         </div>
-
-
+     
+     
                                         <button class="closeBoxButton"> Fechar</button>
                                         <!-- <a href="" > Acessar</a> -->
-
+     
                                         <input type="submit" class="saveCourseButton" value="Teste" >
      
                                    </form>
      
                               </div>
-
-
+     
+     
                               <div>
                                    <img src="../materials/testjavascript.png" alt="">
                                    <h1> Curso de Javascript</h1>
                                    <h2> Plataforma: Alura</h2>
      
                               </div>
-
+     
                          </div>
-
+     
                          <div class="coursesColumn flex flex-col"></div>
-
+     
                     </section>
-
+     
                </section>
-
-
+     
           </div>
 
      </main>
+     
 
 
      <!-- scripts -->
-     <script src="../js/final/maindependenciesbundle.js"></script>
-     <script src="../js/final/managecoursesbundle.js"></script>
+     <section id="scriptsSection">
+          <script class="dynamicallyGeneratedScript" src="../js/final/managecoursesbundle.js"></script>
+
+     </section>
+
      
 </body>
 </html>

@@ -1,6 +1,7 @@
 import { forEachPropertyWithDo } from "./general/jsreusablestructures";
 
 setPageChangeEvents();
+changePage("home");
 
 function setPageChangeEvents() {
      let changePageItems = document.querySelectorAll(".changePageJS");
@@ -21,13 +22,47 @@ async function changePage(pageName) {
      let documentHTML = await getPageHtml(pageName);
 
      if(documentHTML) {
-          window.history.pushState({}, "", );
+          const pageTitle = document.querySelector("title");
+          pageTitle.innerText = formatPageString(pageName);
 
-          toggleElements("reset");
+          toggleElements("reset", documentHTML);
           toggleElements("create", documentHTML);
      }
 
 
+     function formatPageString(analyzedString) {
+          console.log(analyzedString);
+
+          let returnedString; 
+
+          switch(analyzedString) {
+               case "home":
+                    returnedString = "Início"
+                    break
+
+               case "mycourses":
+                    returnedString = "Meus cursos"
+                    break
+
+               case "managecourses":
+                    returnedString = "Gerir cursos"
+                    break
+
+               case "manageusers":
+                    returnedString = "Usuários"
+                    break
+
+               case "myuser":
+                    returnedString = "Meu usuário"
+                    break
+
+               default:
+          }
+
+          console.log(returnedString);
+
+          return returnedString
+     }
 
      function toggleElements(typeOfOperation, otherPageHTML) {
           const mCon = document.getElementById("mCon");
@@ -111,7 +146,7 @@ async function changePage(pageName) {
                     modalArea.innerHTML = "";
                }
 
-
+               
                // delete generated scripts and css
                let elementsCreatedBefore = {
                     generatedScripts: document.querySelectorAll("script.dynamicallyGeneratedScript"),
@@ -132,7 +167,7 @@ async function changePage(pageName) {
 
 
 async function getPageHtml(pageName) {
-     let selectedUrl = `../../html/${pageName}Test.html`
+     let selectedUrl = `../../html/${pageName}.html`
      let siteDocument = false;
 
      await fetch(selectedUrl)

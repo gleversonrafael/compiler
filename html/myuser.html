@@ -1,111 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title> Meu usuário</title>
-
-     <link rel="shortcut icon" href="../media/ico/ico-comp.svg" type="image/x-icon">
-
-     <link rel="stylesheet" href="../css/general.css">
-     <link rel="stylesheet" href="../css/mainsitestructures.css">
-     <link rel="stylesheet" href="../css/reusablestructures.css">
-
-     <link rel="stylesheet" href="../css/mainsite/myuserandresetpassword/myuserandreset.css">
-     <link rel="stylesheet" href="../css/mainsite/myuserandresetpassword/myuser.css">
+     <link class="dynamicallyGeneratedCSS" rel="stylesheet" href="../css/mainsite/myuserandresetpassword/myuserandreset.css">
+     <link class="dynamicallyGeneratedCSS" rel="stylesheet" href="../css/mainsite/myuserandresetpassword/myuser.css">
 
 
 </head>
 
-<body>     
-     <header id="mainHeader" class="flex fJustC"></header>
-
-
-     <!-- menubar -->
-     <section role="menubar" id="mMenuB" class="menuClosed">
-          <img id="menuIcon" class="menuChildOpen" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais brancas no sentido vertical"></div>
-
-          <div class="brandIcon menuChildClosed"></div>
-
-          <menu id="mMenu" class="menuChildClosed flex flex-col">
-               <!-- dashboard -->
-               <li> 
-                    <a href="../html/navigate.html" id="navigate" class="mmBlock flex fAlignC dTrans">
-                         <img src="../media/ico/menu/navigate.svg" alt="">
-                         <p class="menuFont"> Navegação </p>
-                    </a>
-
-               </li>
-
-
-               <!-- my courses -->
-               <li>
-                    <a href="../html/mycourses.html" id="mycourses" class="mmBlock flex fAlignC dTrans">
-                         <img src="../media/ico/menu/mycourses.svg" alt="">
-                         <p class="menuFont"> Meus cursos</p>
-                    </a>
-
-               </li>
-               
-
-               <!-- manage courses -->
-               <li>
-                    <a href="../html/managecourses.html" id="managecourses" class="limitedAcess mmBlock flex fAlignC dTrans">
-                         <img src="../media/ico/menu/managecourses.svg" alt="">
-                         <p class="menuFont"> Gerir cursos</p>
-                    </a>
-
-               </li>
-               
-
-               <!-- manage users -->
-               <li>
-                    <a href="../html/manageusers.html" id="manageusers" class="limitedAcess mmBlock flex fAlignC dTrans">
-                         <img src="../media/ico/menu/manageusers.svg" alt="">
-                         <p class="menuFont"> Usuários</p>
-                    </a>
-
-               </li>
-
-
-               <!-- closeM -->
-               <li>
-                    <button id="leaveM" class="mmBlock flex fAlignC dTrans">
-                         <img src="../media/ico/menu/closem.svg" alt="">
-                         <p class="menuFont"> Fechar menu</p>
-
-                    </button>
-
-               </li>               
-
-          </menu>
-
-
-          <!-- user section -->
-          <section id="userSec" class="menuChildClosed flex flex-col">
-               <div class="flex userMSpace">
-                    <img id="userIcon" src="../media/ico/menu/user.svg" alt="">
-                    
-                    <div id="userInfo" class="userMSpace">
-                         <p id="userName" class="menuFont"> null </p>
-                         <p id="userType" class="userMSpace menuFont"> null </p>
-
-                         <button id="signoutB" class="userB menuFont dTrans"> Sair </button>
-                   
-                    </div> 
-
-               </div>    
-
-               <a class="flex fAlignC fJustC userB menuFont dTrans" href=""> 
-                    <img src="../media/ico/menu/settings.svg" alt="">
-                    Configurações 
-               </a>
-
-          </section>
-
-     </section>
-
-     
+<body>
      <!-- modals -->
      <section id="modalArea" class="flex-col">
           <!-- change password modal -->
@@ -212,14 +115,14 @@
           </div>
 
 
-     </section>
-
-
-     <!-- main page -->
+     </section>   
+     
+     
+     <!-- main content -->
      <main id="mCon">
           <button id="testButton"> Hash</button>
      
-          <div class="conPattern flex flex-col fAlignC">
+          <div id="pageMain" class="conPattern flex flex-col fAlignC">
                <div id="titleA">
                     <h1 id="pageTitle"> Meu usuário</h1>
 
@@ -294,10 +197,11 @@
 
      </main>
 
-     <script src="../js/final/maindependenciesbundle.js"></script>
-     <script src="../js/final/myuserbundle.js"></script>
 
+     <section id="scriptsSection">
+          <script class="dynamicallyGeneratedScript" src="../js/final/myuserbundle.js"></script>
 
+     </section>
 
 </body>
 

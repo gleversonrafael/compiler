@@ -16,23 +16,23 @@ module.exports = {
       import : ["./js/basic/general/jsmenu.js", "./js/basic/jspagechange.js", "./js/basic/general/jsreusablestructures.js"]
     },
 
+    
+
     mycourses: {
       import: ["./js/basic/managemycourses/jsmanageandmycourses.js", "./js/basic/managemycourses/jsmycourses.js"]
 
     },
 
     managecourses: {
-      import: ["./js/basic/managemycourses/jsmanageandmycourses.js", "./js/basic/managemycourses/jsmanagecourses.js", "./js/basic/general/jsreusablestructures.js"]
+      import: ["./js/basic/managemycourses/jsmanageandmycourses.js", "./js/basic/managemycourses/jsmanagecourses.js"]
     },
 
-    manageusers: {
-      import: ["./js/basic/general/jsreusablestructures.js", "./js/basic/jsmanageusers.js"]
-
+    manageusers: { 
+      import: ["./js/basic/jsmanageusers.js"] 
     }, 
 
-    myuser: {
-      import: ["./js/basic/myuser.js", "./js/basic/general/jsreusablestructures.js"]
-
+    myuser: { 
+      import: ["./js/basic/myuser.js"] 
     }
 
   },

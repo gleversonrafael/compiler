@@ -10,7 +10,7 @@ const msgCon = document.querySelector("#msgCon");
 
 
 // login user
-document.getElementById("mForm").addEventListener("submit", loginP)
+document.getElementById("mForm").addEventListener("submit", loginP);
 
 
 async function loginP(sEvent) {
@@ -104,7 +104,7 @@ function closeMsg(){
   msgCon.style.display = "none"
 
   if(loginResult == "cor") {
-    window.location.href = "./navigate.html"
+    window.location.href = "./main.html"
   }
 
 }
