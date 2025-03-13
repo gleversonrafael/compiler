@@ -21,9 +21,10 @@ async function changePage(pageName) {
      let documentHTML = await getPageHtml(pageName);
 
      if(documentHTML) {
+          window.history.pushState({}, "", );
+
           toggleElements("reset");
           toggleElements("create", documentHTML);
-
      }
 
 
@@ -81,14 +82,15 @@ async function changePage(pageName) {
                                         // for some reason, the scripts obtaineds from the fetched html file doesn't load or, more reasonably, it loads before on the other document. The fix is creating another element like further
                                         if(selectedElement.id === "scriptsSection") {
                                              let generatedScript = document.createElement("script");
-                                             generatedScript.src = thisChild.src;
+
+                                             generatedScript.src = thisChild.src
                                              generatedScript.classList = thisChild.classList;  
                                                                                         
-                                             thisChild.onload = () => {
+                                             generatedScript.onload = () => {
                                                   console.log(`script ${generatedScript.src} carregado.`);
                                              }
-                                        
 
+                                             thisChild = generatedScript
                                         }
 
                                         insertOnElement.appendChild(thisChild);

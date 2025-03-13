@@ -9,7 +9,6 @@ import { onSnapshot, collection, where, query } from "firebase/firestore";
 import { db } from "../general/jsfirebase.js";
 
 
-
 // global var
 let coursesData = {};
 let othersData = {};
