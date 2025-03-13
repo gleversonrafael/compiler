@@ -92,18 +92,18 @@
 
 .modalPattern {
      display: none;
+
+     gap: 40px;
      
      background-color: var(--uiSecondaryBlack);
+     border: 1px solid var(--uiPrimaryGrey);
+
      padding: 35px;
      border-radius: 15px;
 
      max-width: 500px;
 
      margin-top: 15vh;
-}
-
-.modalPattern > form {
-     gap: 15px;
 }
 
 .modalPattern fieldset {
@@ -118,12 +118,11 @@
 .modalSubtext {
      color: var(--uiSecondaryWhite);
      font: 300 1em var(--rFont);
-     margin-bottom: 40px;
 }
 
 
 .labelPattern {
-     font: 300 0.75em var(--rFont);
+     font: 300 1em var(--rFont);
      color: var(--uiPrimaryWhite);
 }
 
@@ -139,10 +138,10 @@
 }
 
 .legendPattern {
-     font: 400 1em var(--rFont);
+     font: 400 1.25em var(--rFont);
      color: var(--uiPrimaryWhite);
 
-     margin-bottom: 10px;
+     margin-bottom: 20px;
 }
 
 
@@ -159,6 +158,11 @@
      padding: 10px 20px;
 
      cursor: pointer;
+}
+
+
+.confirmButtonCSS {
+     border: none;
 }
 
 .cancelModalButton {
@@ -424,6 +428,12 @@
           width: calc(100% - 225px);
           right: 0;
      }
+
+     .modalPattern {
+          min-width: 400px;
+
+     }
+
 
      #pageTitle {
           font-size: 3.25em;

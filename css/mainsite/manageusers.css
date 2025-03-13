@@ -8,6 +8,34 @@
 }
 
 
+/* unique */
+.radioLabel {
+     display: block;
+
+     width: 100%;    
+     padding: 10px 15px;
+
+     color: var(--uiSecondaryGrey);
+     outline: 1px solid var(--uiSecondaryGrey);
+
+     border-radius: 15px;
+
+     transition: all 0.3s 0s linear;
+
+     cursor: pointer;
+}
+
+.radioLabel + input {
+     display: none;
+}
+
+.radioLabel:has(+ input:checked) {
+     color: var(--uiPrimaryWhite);
+     outline-color: var(--uiSecondaryWhite);
+}
+
+
+
 /* reusar  // replace on manage courses when i replace its bgEff with modals (including script)*/ 
 /* MM = MANAGE COURSES / MANAGE USERS */
 .inputPatternMM {
@@ -16,7 +44,7 @@
      margin-bottom: 20px;
      padding-bottom: 10px;
 
-     font: 500 1em var(--rFont);
+     font: 300 1em var(--rFont);
      color: var(--uiPrimaryWhite);
 
      background-color: transparent;
@@ -26,6 +54,10 @@
 .inputPatternMM:focus {
      outline: none;
      border-bottom-color: var(--uiPrimaryWhite);
+}
+
+.modalFormMM {
+     gap: 40px;
 }
 
 

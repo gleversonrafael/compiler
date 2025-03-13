@@ -1,12 +1,21 @@
 import { onSnapshot } from "firebase/firestore";
 import { usersCol } from "./general/jsfirebase.js";
-import { forEachPropertyWithDo, toggleModal } from "./general/jsreusablestructures.js"
+import {setReusableEvents,  forEachPropertyWithDo, toggleModal } from "./general/jsreusablestructures.js"
 
 
+// events
 setManageUsersEvents();
+setReusableEvents([
+     "formsEvent", "cancelModalEvent"
+]);
 
 
+// create
 function setManageUsersEvents() {
+     document.getElementById("createUserForm").addEventListener("submit", () => {
+          createNewUser();
+     })
+
      document.getElementById("openSignModal").addEventListener("click", () => {
           toggleModal("signUsersModal");
      })
@@ -14,6 +23,14 @@ function setManageUsersEvents() {
 }
 
 
+// cancelar modal();
+// validação de dados() - incluindo regular / admin
+// criação de usuário() - firebase SDK
+
+
+
+
+// table
 onSnapshot(usersCol, (snapshotEvent) => {
      document.querySelector("#usersTable .tableBody").innerHTML = "";
      fillTable("usersTable", snapshotEvent, "users");
@@ -127,6 +144,14 @@ async function fillTable(tableId, obtainedData, tableType) {
 }
 
 
+function createNewUser() {
+     const createUserInputs = document.querySelector("#createUserForm .fillableInputJS");
+     let userData = createUserDataArray("create", createUserInputs);
+     
+
+}
+
+
 // reusable
 function convertHtmlStringToElement(htmlString) {
      let temporaryTemplate = document.createElement("template");
@@ -136,8 +161,6 @@ function convertHtmlStringToElement(htmlString) {
 
      return temporaryTemplate.content.firstElementChild;
 }
-
-
 
 async function obtainDocumentsArray(snapshotData) {
      // array pattern -> [0] = id | [1] = data

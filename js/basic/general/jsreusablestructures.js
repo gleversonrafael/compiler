@@ -4,6 +4,79 @@ import { getDocs, query, where, limit } from "firebase/firestore"
 import bcrypt from "bcryptjs"
 
 
+// reusable events
+function setReusableEvents(eventsArray) {
+     const functionsObject = {
+          formsEventCall : formsEvent,
+          cancelModalEventCall: cancelModalEvent
+     }
+
+
+     eventsArray.forEach((selectedEvent) => {
+          const executeFunction = functionsObject[`${selectedEvent}Call`];
+          executeFunction();
+     });
+
+
+
+     // events
+     function formsEvent() {
+          // forms
+          let forms = document.querySelectorAll("form");
+
+          forms.forEach((form) => {
+               form.addEventListener("submit", (submitEvent) => {
+                    submitEvent.preventDefault();
+               });
+          })
+     }
+
+     function cancelModalEvent() { 
+          let cancelModalButtons = document.querySelectorAll(".cancelModalButton");
+
+          cancelModalButtons.forEach((modalButton) => {
+               modalButton.addEventListener("click", (clickEvent) => {
+                    let canceledModalId = obtainFatherId(clickEvent.currentTarget, "modalPattern")
+                    
+                    if(canceledModalId === "noFather") {
+                         canceledModalId = "notAModal"
+                    }
+
+                    toggleModal(canceledModalId);
+               })
+          })
+
+     }
+
+}
+
+
+
+
+// obtain father id
+function obtainFatherId(clickedChild, fatherUniqueClass) {
+     let selectedParent = clickedChild.parentElement;
+     let errorResult;
+
+
+     for(let fathersCounter = 0; fathersCounter < 6; fathersCounter ++) {
+          // continue the loop while there is a father element without the class (max iterations: 6)
+          if(selectedParent.tagName.length > 0 && ! selectedParent.classList.contains(fatherUniqueClass)) {
+               selectedParent = selectedParent.parentElement;
+
+          } else {
+               errorResult = selectedParent.classList.contains(fatherUniqueClass) ? false : true
+               break
+          }
+
+     }
+
+     return errorResult === false ? selectedParent.id : "noFather"
+}
+
+
+
+
 // show message box
 function showMessageBox(messageType, message) {
      // success message / error message / strange message
@@ -84,6 +157,53 @@ function userDataIsValid(analyzedData) {
      return finalResult
 }
 
+
+
+
+// create new user data array
+function createUserDataArray(operatingMode, selectedData) {
+     let newArray = [];
+     
+     selectedData.forEach((data) => {
+          if(operatingMode === "create" || ("operatingMode" === "edit" && data.value !== data.placeholder)) {
+               let temporaryObject = {};
+
+               Object.defineProperty(temporaryObject, input.name, {
+                    value: input.value,
+                    enumerable: true,
+                    writable: true,
+               });
+
+               newArray.push(temporaryObject);
+          }
+     }) 
+
+
+     
+     return newArray
+}
+
+
+
+
+// conversion
+function convertSpecificArrayIntoObject(analyzedArray) {
+     // array type = [{property: value}, {property: value}];
+     let returnedObject = {};
+
+     for(let item = 0; item < analyzedArray.length; item++) {
+          let itemEntries = Object.entries(analyzedArray[item])[0];
+
+          Object.defineProperty(returnedObject, itemEntries[0], {
+               value: itemEntries[1],
+               configurable: true,
+               writable: true,
+               enumerable: true
+          })
+     }
+     
+     return returnedObject
+}
 
 
 // check password
@@ -178,8 +298,11 @@ function toggleModal(selectedModalId) {
 
 
 export { 
+     setReusableEvents,
+     obtainFatherId,
      showMessageBox, 
      userDataIsValid, checkUserPassword, 
+     createUserDataArray, convertSpecificArrayIntoObject,
      forEachPropertyWithDo,
      toggleModal
 };

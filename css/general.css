@@ -188,6 +188,10 @@ input::-webkit-inner-spin-button {
     transition: all 500ms;
 }
 
+.smallGapCSS {
+    gap: 10px;
+}
+
 
 
 

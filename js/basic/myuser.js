@@ -1,7 +1,13 @@
 import bcrypt from "bcryptjs"
 
 import { userData } from "./general/jsuserdata.js";
-import { showMessageBox, userDataIsValid, checkUserPassword, toggleModal } from "./general/jsreusablestructures.js"
+import { 
+     setReusableEvents, showMessageBox, 
+     userDataIsValid, checkUserPassword, 
+     createUserDataArray, convertSpecificArrayIntoObject, 
+     toggleModal,
+
+} from "./general/jsreusablestructures.js"
 
 import { updateDoc, doc } from "firebase/firestore";
 import { EmailAuthProvider, updatePassword, updateEmail, reauthenticateWithCredential, signOut } from "firebase/auth";
@@ -26,21 +32,9 @@ function loadDefaults() {
 
 // toggle events
 function toggleEvents() {
-     generalEvents();
+     setReusableEvents(["formsEvent", "cancelModalEvent"]);
      specificEvents();
-     cancelModalEvent();
 
-
-     function generalEvents() {
-          // forms
-          let forms = document.querySelectorAll("form");
-
-          forms.forEach((form) => {
-               form.addEventListener("submit", (submitEvent) => {
-                    submitEvent.preventDefault();
-               });
-          })
-     };
 
      function specificEvents() {
           // change password
@@ -68,49 +62,7 @@ function toggleEvents() {
                deleteOwnUser();
           })
      }
-
-
-     function cancelModalEvent() {
-          let cancelModalButtons = document.querySelectorAll(".cancelModalButton");
-
-          cancelModalButtons.forEach((modalButton) => {
-               modalButton.addEventListener("click", (clickEvent) => {
-                    let canceledModalId = obtainFatherId(clickEvent.currentTarget, "modalPattern")
-                    
-                    if(canceledModalId === "noFather") {
-                         canceledModalId = "notAModal"
-                    }
-
-                    toggleModal(canceledModalId);
-               })
-          })
-     }
 }
-
-
-// obtain father id - reusable 
-function obtainFatherId(clickedChild, fatherUniqueClass) {
-     let selectedParent = clickedChild.parentElement;
-     let errorResult;
-
-
-     for(let fathersCounter = 0; fathersCounter < 6; fathersCounter ++) {
-          // continue the loop while there is a father element without the class (max iterations: 6)
-          if(selectedParent.tagName.length > 0 && ! selectedParent.classList.contains(fatherUniqueClass)) {
-               selectedParent = selectedParent.parentElement;
-
-          } else {
-               errorResult = selectedParent.classList.contains(fatherUniqueClass) ? false : true
-               break
-          }
-
-     }
-
-
-     return errorResult === false ? selectedParent.id : "noFather"
-}
-
-
 
 // fill form fields with user data
 function fillFieldsWithUserData() {
@@ -133,7 +85,6 @@ function fillFieldsWithUserData() {
 
 
 // reusable
-
 // change user password
 async function temporarilyChangeUserPassword() {
      let oldPasswordAttempt = document.getElementById("changeCurrentPasswordInput").value;
@@ -181,7 +132,13 @@ async function saveUserDataProcess(callType, canBeSaved) {
           // array containing only the changed fields = [{name: test}, {test: test}]
           userInputs = document.querySelectorAll("form#changeOwnUserData .fillableInputJS");
 
-          newUserData = createNewUserDataArray();
+          newUserData = createUserDataArray("edit", userInputs);
+          
+          if(newAssignedPassword) {
+               newUserData.push({password: newAssignedPassword})
+               newAssignedPassword = null;
+          }
+
           newUserDataObject = convertSpecificArrayIntoObject(newUserData);
           analyzeResult = analyzeInputedData();
 
@@ -288,31 +245,31 @@ async function saveUserDataProcess(callType, canBeSaved) {
 
 
 
-     function createNewUserDataArray() {
-          let newArray = [];
+     // function createNewUserDataArray() {
+     //      let newArray = [];
           
-          userInputs.forEach((input) => {
-               if(input.value != input.placeholder) {
-                    let temporaryObject = {};
+     //      userInputs.forEach((input) => {
+     //           if(input.value != input.placeholder) {
+     //                let temporaryObject = {};
 
-                    Object.defineProperty(temporaryObject, input.name, {
-                         value: input.value,
-                         enumerable: true,
-                         writable: true,
-                    })
+     //                Object.defineProperty(temporaryObject, input.name, {
+     //                     value: input.value,
+     //                     enumerable: true,
+     //                     writable: true,
+     //                })
      
-                    newArray.push(temporaryObject);
-               }
-          }) 
+     //                newArray.push(temporaryObject);
+     //           }
+     //      }) 
 
 
-          if(newAssignedPassword) {
-               newArray.push({password: newAssignedPassword})
-               newAssignedPassword = null;
-          }
+     //      if(newAssignedPassword) {
+     //           newArray.push({password: newAssignedPassword})
+     //           newAssignedPassword = null;
+     //      }
           
-          return newArray
-     }
+     //      return newArray
+     // }
 
 
 
@@ -469,26 +426,6 @@ function generatePasswordHash(string) {
 
      return hash
 }
-
-
-function convertSpecificArrayIntoObject(analyzedArray) {
-     // array type = [{property: value}, {property: value}];
-     let returnedObject = {};
-
-     for(let item = 0; item < analyzedArray.length; item++) {
-          let itemEntries = Object.entries(analyzedArray[item])[0];
-
-          Object.defineProperty(returnedObject, itemEntries[0], {
-               value: itemEntries[1],
-               configurable: true,
-               writable: true,
-               enumerable: true
-          })
-     }
-     
-     return returnedObject
-}
-
 
 function confirmNFields(fieldsArray, wishedValue) {
      let confirmResult = true;

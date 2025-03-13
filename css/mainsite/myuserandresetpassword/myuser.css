@@ -73,6 +73,14 @@ form#changeOwnUserData .confirmButtonTypeMR:hover {
 
 
 
+/* modal */
+.modalPattern > form {
+     gap: 15px;
+}
+
+
+
+
 
 /* mobile custom media */
 @media screen and (max-width: 480px) {

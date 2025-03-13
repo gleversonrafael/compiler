@@ -10,21 +10,29 @@
      <!-- permanent -->
      <link class="dynamicallyGeneratedCSS" rel="stylesheet" href="../css/mainsite/manageusers.css">
 
+     <style>
+          /* removes menu */
+          #modalArea {
+               width: 100%;
+          }
+          
+     </style>
+
 </head>
 
 <body>
      <!-- modal -->
-     <section id="modalArea" class="defaultModalCSS flex flex-col">
-          <div id="signUsersModal" class="modalPattern flex flex-col">
+     <section id="modalArea" class="flex flex-col">
+          <div id="signUsersModal" class="confirmModalCSS modalPattern flex flex-col">
                <h1 class="modalTitle"> Criar usuário</h1>
 
-               <form id="createUserForm" class="flex flex-col" autocomplete="off" novalidate>
+               <form id="createUserForm" class="modalFormMM flex flex-col" autocomplete="off" novalidate>
                     <!-- safe -->
                     <fieldset class="flex flex-col">
                          <legend class="legendPattern"> Dados pessoais</legend>                         
 
                          <div class="flex flex-col">
-                              <label class="requiredLabel labelPattern" for="requiredLabel addUserNameInput"> Nome</label>
+                              <label class="requiredLabel labelPattern" for="addUserNameInput"> Nome</label>
                               <input id="addUserNameInput" class="inputPatternMM fillableInputJS" name="name" type="text" autocomplete="off">
 
                          </div>
@@ -43,7 +51,7 @@
                          <legend class="legendPattern"> Dados sigilosos</legend>      
 
                          <div class="flex flex-col">
-                              <label class="requiredLabel labelPattern" for="requiredLabel addEmailInput"> E-mail</label>
+                              <label class="requiredLabel labelPattern" for="addEmailInput"> E-mail</label>
                               <input  id="addEmailInput" class="inputPatternMM fillableInputJS" name="email" type="email" autocomplete="off">
 
                          </div>   
@@ -61,15 +69,16 @@
                     <fieldset class="flex flex-col">
                          <legend class="legendPattern"> Tipo de usuário</legend>
 
-                         <div>
-                              <label for=""> Bolinha </label>
-                              <input type="radio" name="" id="">
-                              
-                         </div>
+                         <div class="smallGapCSS flex flex-col">
+                              <div>
+                                   <label role="button" for="regularUserInput" class="radioLabel"> Regular </label>
+                                   <input id="regularUserInput" type="radio" name="usertype">
+                              </div>
 
-                         <div>
-                              <label for=""> Bolinha</label>
-                              <input type="radio" name="" id="">
+                              <div>
+                                   <label role="button" for="adminUserInput" class="radioLabel"> Administrador </label>
+                                   <input id="adminUserInput" type="radio" name="usertype">
+                              </div>
 
                          </div>
 
@@ -77,10 +86,9 @@
 
 
                     <!-- buttons -->
-                    <fieldset class="flex flex-col">
-
-                         <input class="cancelModalButton" type="button" value="Cancelar">
-                         <input class="confirmButtonCSS" type="submit" value="Criar">
+                    <fieldset class="modalButtons flex flex-col">
+                         <input class="cancelModalButton bAll" type="button" value="Cancelar">
+                         <input class="confirmButtonTypeMR confirmButtonCSS bAll" type="submit" value="Criar">
 
                     </fieldset>
 
