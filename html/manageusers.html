@@ -2,13 +2,94 @@
 <html lang="pt-br">
 
 <head>
+     <!-- for this page only -- ins't loaded on main -->
+     <link rel="stylesheet" href="../css/general.css">
+     <link rel="stylesheet" href="../css/mainsitestructures.css">
+     <link rel="stylesheet" href="../css/reusablestructures.css">
+
+     <!-- permanent -->
      <link class="dynamicallyGeneratedCSS" rel="stylesheet" href="../css/mainsite/manageusers.css">
 
 </head>
 
 <body>
      <!-- modal -->
-     <section id="modalArea" class="flex flex-col"></section>
+     <section id="modalArea" class="defaultModalCSS flex flex-col">
+          <div id="signUsersModal" class="modalPattern flex flex-col">
+               <h1 class="modalTitle"> Criar usuário</h1>
+
+               <form id="createUserForm" class="flex flex-col" autocomplete="off" novalidate>
+                    <!-- safe -->
+                    <fieldset class="flex flex-col">
+                         <legend class="legendPattern"> Dados pessoais</legend>                         
+
+                         <div class="flex flex-col">
+                              <label class="requiredLabel labelPattern" for="requiredLabel addUserNameInput"> Nome</label>
+                              <input id="addUserNameInput" class="inputPatternMM fillableInputJS" name="name" type="text" autocomplete="off">
+
+                         </div>
+
+                         <div class="flex flex-col">
+                              <label class="labelPattern" for="addTelephoneInput"> Telefone</label>
+                              <input id="addTelephoneInput" class="inputPatternMM fillableInputJS" type="tel" name="telephone">
+
+                         </div>
+
+                    </fieldset>
+                    
+
+                    <!-- confidential -->
+                    <fieldset class="flex flex-col">     
+                         <legend class="legendPattern"> Dados sigilosos</legend>      
+
+                         <div class="flex flex-col">
+                              <label class="requiredLabel labelPattern" for="requiredLabel addEmailInput"> E-mail</label>
+                              <input  id="addEmailInput" class="inputPatternMM fillableInputJS" name="email" type="email" autocomplete="off">
+
+                         </div>   
+
+                         <div class="flex flex-col">
+                              <label class="requiredLabel labelPattern" for="addPasswordInput"> Senha</label>
+                              <input id="addPasswordInput" class="inputPatternMM fillableInputJS" name="password" type="text" autocomplete="off">
+
+                         </div>
+
+                    </fieldset>
+
+
+                    <!-- user type -->
+                    <fieldset class="flex flex-col">
+                         <legend class="legendPattern"> Tipo de usuário</legend>
+
+                         <div>
+                              <label for=""> Bolinha </label>
+                              <input type="radio" name="" id="">
+                              
+                         </div>
+
+                         <div>
+                              <label for=""> Bolinha</label>
+                              <input type="radio" name="" id="">
+
+                         </div>
+
+                    </fieldset>
+
+
+                    <!-- buttons -->
+                    <fieldset class="flex flex-col">
+
+                         <input class="cancelModalButton" type="button" value="Cancelar">
+                         <input class="confirmButtonCSS" type="submit" value="Criar">
+
+                    </fieldset>
+
+
+               </form>
+          
+          </div>
+
+     </section>
 
      <!-- main content -->
      <main id="mCon">
@@ -22,7 +103,7 @@
                     <!-- search + filter -->
                     <div id="userListOperations" class="operationsZone flex">
                          <div role="searchbox" class="searchBox flex bAll dTrans">
-                              <input type="search" class="searchInput" placeholder="Insira o nome do usuário que será procurado.">
+                              <input id="searchUserBox" type="search" class="searchInput" placeholder="Insira o nome do usuário que será procurado.">
 
                               <input role="search" type="button" class="searchButton">
       
@@ -126,7 +207,12 @@
      
      <!-- scripts -->
      <section id="scriptsSection">
+          <!-- isn't loaded on main -->
+          <script src="../js/final/maindependenciesbundle.js"></script>
+
+          
           <script class="dynamicallyGeneratedScript" src="../js/final/manageusersbundle.js"></script>
+
 
      </section>
 

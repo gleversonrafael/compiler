@@ -12,21 +12,21 @@
      <!-- modals -->
      <section id="modalArea" class="flex-col fAlignC">
           <!-- change password modal -->
-          <div id="changePasswordModal" class="modalMR flex flex-col">
+          <div id="changePasswordModal" class="modalPattern defaultModalCSS flex flex-col">
                <h1 class="modalTitle"> Alteração de senha </h1>
                <p class="modalSubtext"> Forneça os dados abaixo para alterar sua senha.</p>
 
                <form id="changePassword" class="flex flex-col" autocomplete="off" novalidate>
                     <!-- current password -->
                     <fieldset>
-                         <label for="changeCurrentPasswordInput" class="labelPatternMR"> Senha atual</label>
+                         <label for="changeCurrentPasswordInput" class="labelPattern"> Senha atual</label>
                          <input type="password" id="changeCurrentPasswordInput" class="fillableInputJS inputPatternMR bAll">
 
                     </fieldset>
 
                     <!-- new password -->
                     <fieldset>
-                         <label for="newPasswordInput" class="labelPatternMR"> Nova senha</label>
+                         <label for="newPasswordInput" class="labelPattern"> Nova senha</label>
                          <input type="password" id="newPasswordInput" class="fillableInputJS inputPatternMR bAll">
 
                     </fieldset>
@@ -45,7 +45,7 @@
 
 
           <!-- confirm password -->
-          <div id="confirmPasswordModal" class="modalMR flex flex-col">
+          <div id="confirmPasswordModal" class="confirmModalCSS modalPattern flex flex-col">
                <h1 class="modalTitle"> Salvamento de dados </h1>
                <p class="modalSubtext"> Ao menos um dado sigiloso que não corresponde à senha do usuário será alterado. Para confirmar a sua autenticidade, insira sua senho.</p>
                
@@ -53,7 +53,7 @@
                <form id="confirmPassword" class="flex flex-col" autocomplete="off" novalidate>
                     <!-- current password -->
                     <fieldset>
-                         <label for="verifyPasswordInput" class="labelPatternMR"> Senha</label>
+                         <label for="verifyPasswordInput" class="labelPattern"> Senha</label>
                          <input type="password" id="verifyPasswordInput" class="firstPasswordJS confirmJS fillableInputJS inputPatternMR bAll">
 
                     </fieldset>
@@ -61,7 +61,7 @@
 
                     <!-- confirm password -->
                     <fieldset>
-                         <label for="confirmPasswordInput" class="labelPatternMR"> Confirmar senha</label>
+                         <label for="confirmPasswordInput" class="labelPattern"> Confirmar senha</label>
                          <input type="password" id="confirmPasswordInput" class="confirmJS fillableInputJS inputPatternMR bAll">
 
                     </fieldset>
@@ -80,7 +80,7 @@
 
 
           <!-- delete modal -->
-          <div id="deleteOwnUserModal" class="modalMR flex flex-col">
+          <div id="deleteOwnUserModal" class="refuseModalCSS modalPattern flex flex-col">
                <h1 class="modalTitle"> Exclusão de conta </h1>
                <p class="modalSubtext"> Preencha corretamente os dados abaixo para <span class="deleteEmphasis">excluir</span> sua conta.</p>
                
@@ -88,7 +88,7 @@
                <form id="deleteOwnUser" autocomplete="off" novalidate class="flex flex-col">
                     <!-- current password -->
                     <fieldset>
-                         <label for="deleteVerifyPasswordInput" class="labelPatternMR"> Senha atual</label>
+                         <label for="deleteVerifyPasswordInput" class="labelPattern"> Senha atual</label>
                          <input type="password" id="deleteVerifyPasswordInput" class="firstPasswordJS confirmJS inputPatternMR fillableInputJS bAll">
 
                     </fieldset>
@@ -96,7 +96,7 @@
 
                     <!-- confirm password -->
                     <fieldset>
-                         <label for="deleteConfirmPasswordInput" class="labelPatternMR"> Confirmar senha</label>
+                         <label for="deleteConfirmPasswordInput" class="labelPattern"> Confirmar senha</label>
                          <input type="password" id="deleteConfirmPasswordInput" class="confirmJS inputPatternMR fillableInputJS bAll">
 
                     </fieldset>
@@ -136,13 +136,13 @@
                               <fieldset class="flex flex-col">
                                    <!-- name -->
                                    <div>
-                                        <label for="userNameInput" class="labelPatternMR"> Nome</label>
+                                        <label for="userNameInput" class="labelPattern"> Nome</label>
                                         <input type="text" id="userNameInput" name="name" class="fillableInputJS inputPatternMR bAll" autocomplete="off">
                                    </div>
                                    
                                    <!-- last name -->
                                    <div>
-                                        <label for="userTelephoneInput" class="labelPatternMR"> Telefone </label>
+                                        <label for="userTelephoneInput" class="labelPattern"> Telefone </label>
                                         <input id="userTelephoneInput" type="tel" name="telephone" class="fillableInputJS inputPatternMR bAll">
 
                                    </div>
@@ -157,14 +157,14 @@
                               <fieldset class="flex flex-col">
                                    <!-- email -->
                                    <div>
-                                        <label for="userEmailInput" class="labelPatternMR"> E-mail</label>
+                                        <label for="userEmailInput" class="labelPattern"> E-mail</label>
                                         <input type="email" id="userEmailInput" name="email" class="fillableInputJS inputPatternMR bAll" autocomplete="off">
 
                                    </div>
 
                                    <!-- password -->
                                    <div>
-                                        <label for="changePasswordButton" class="labelPatternMR"> Senha</label>
+                                        <label for="changePasswordButton" class="labelPattern"> Senha</label>
                                         <input type="button" id="changePasswordButton" class="inputButtonToggleMR inputPatternMR bAll" value="Alterar senha">
 
                                         <p class="underEmphasis"> Esqueceu a senha?</p>

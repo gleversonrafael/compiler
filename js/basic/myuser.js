@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs"
 
 import { userData } from "./general/jsuserdata.js";
-import { showMessageBox, userDataIsValid, checkUserPassword } from "./general/jsreusablestructures.js"
+import { showMessageBox, userDataIsValid, checkUserPassword, toggleModal } from "./general/jsreusablestructures.js"
 
 import { updateDoc, doc } from "firebase/firestore";
 import { EmailAuthProvider, updatePassword, updateEmail, reauthenticateWithCredential, signOut } from "firebase/auth";
@@ -75,7 +75,7 @@ function toggleEvents() {
 
           cancelModalButtons.forEach((modalButton) => {
                modalButton.addEventListener("click", (clickEvent) => {
-                    let canceledModalId = obtainFatherId(clickEvent.currentTarget, "modalMR")
+                    let canceledModalId = obtainFatherId(clickEvent.currentTarget, "modalPattern")
                     
                     if(canceledModalId === "noFather") {
                          canceledModalId = "notAModal"
@@ -132,28 +132,7 @@ function fillFieldsWithUserData() {
 }
 
 
-// open modals
-// open modals can be converted to open element(advanced);
-function toggleModal(selectedModalId) {
-     if(selectedModalId != "notAModal") {
-          let modalArea = document.getElementById("modalArea");
-          let thisModal = document.getElementById(selectedModalId);
-
-          if(thisModal.style.display != "flex") {
-               modalArea.style.display = "flex";
-               thisModal.style.display = "flex";
-
-          } else {
-               modalArea.style.display = "none";
-               thisModal.style.display = "none";
-          }
-     
-     } else {
-          console.log("an attempt to toggle something that isn't a modal by using a modal button occurred.");
-     }
-}
-
-
+// reusable
 
 // change user password
 async function temporarilyChangeUserPassword() {

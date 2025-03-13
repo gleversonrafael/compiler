@@ -1,12 +1,15 @@
 import { onSnapshot } from "firebase/firestore";
 import { usersCol } from "./general/jsfirebase.js";
-import { forEachPropertyWithDo } from "./general/jsreusablestructures.js"
+import { forEachPropertyWithDo, toggleModal } from "./general/jsreusablestructures.js"
 
 
 setManageUsersEvents();
 
 
 function setManageUsersEvents() {
+     document.getElementById("openSignModal").addEventListener("click", () => {
+          toggleModal("signUsersModal");
+     })
      // events go here
 }
 

@@ -115,7 +115,7 @@ async function changePage(pageName) {
                                         let thisChild = selectedElementChildren[selectedChild];
                                         
                                         // for some reason, the scripts obtaineds from the fetched html file doesn't load or, more reasonably, it loads before on the other document. The fix is creating another element like further
-                                        if(selectedElement.id === "scriptsSection") {
+                                        if(thisChild.classList.contains("dynamicallyGeneratedScript")) {
                                              let generatedScript = document.createElement("script");
 
                                              generatedScript.src = thisChild.src
@@ -126,9 +126,17 @@ async function changePage(pageName) {
                                              }
 
                                              thisChild = generatedScript
+                                        
+                                        // avoid obtaining scripts without dynamicGeneratedScript class
+                                        } else if(selectedElement.id === "scriptsSection") {
+                                             thisChild = null;
                                         }
 
-                                        insertOnElement.appendChild(thisChild);
+
+                                        if(thisChild != null) {
+                                             insertOnElement.appendChild(thisChild);
+
+                                        }
                                    }
 
                               }
@@ -168,6 +176,8 @@ async function changePage(pageName) {
 
 async function getPageHtml(pageName) {
      let selectedUrl = `../../html/${pageName}.html`
+     
+
      let siteDocument = false;
 
      await fetch(selectedUrl)

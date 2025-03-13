@@ -315,16 +315,6 @@ div.stepperGroup {
 }
 
 
-.requiredLabel:after {
-     content: "*";
-
-     color: var(--uiPrimaryWhite);
-     font: 300 1em var(--rFont);
-
-     margin-left: 5px;
-}
-
-
 /* correct input */
 #createCourseForm .correctInput {
      color: var(--secondaryColor);
@@ -333,10 +323,6 @@ div.stepperGroup {
 
 #createCourseForm label:has(+ .correctInput) {
      color: var(--uiSecondaryWhite);
-}
-
-.requiredLabel:has(+ .correctInput)::after {
-     content: "";
 }
 
 

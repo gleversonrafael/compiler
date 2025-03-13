@@ -156,5 +156,30 @@ function forEachPropertyWithDo(parameterObject) {
 }
 
 
+// toggle Modal 
+function toggleModal(selectedModalId) {
+     if(selectedModalId != "notAModal") {
+          let modalArea = document.getElementById("modalArea");
+          let thisModal = document.getElementById(selectedModalId);
 
-export { showMessageBox, userDataIsValid, checkUserPassword, forEachPropertyWithDo };
+          if(thisModal.style.display != "flex") {
+               modalArea.style.display = "flex";
+               thisModal.style.display = "flex";
+
+          } else {
+               modalArea.style.display = "none";
+               thisModal.style.display = "none";
+          }
+     
+     } else {
+          console.log("an attempt to toggle something that isn't a modal by using a modal button occurred.");
+     }
+}
+
+
+export { 
+     showMessageBox, 
+     userDataIsValid, checkUserPassword, 
+     forEachPropertyWithDo,
+     toggleModal
+};
