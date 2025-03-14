@@ -12,7 +12,6 @@
 #mMenuB {
      display: grid;     
      position: sticky;
-     /* position: fixed; */
 
      top: 0;
      z-index: 2;
@@ -41,7 +40,6 @@
 
 .menuChildClosed {
      display: none;
-     /* border: 1px solid red; */
 }
 
 
@@ -86,6 +84,8 @@
 
 .mmBlock:hover {
      color: var(--uiPrimaryWhite);
+     outline: 1px solid var(--uiSecondaryGrey);
+
      cursor: pointer;
 }
 
@@ -172,7 +172,7 @@
 }
 
 .userB:hover {
-     background-color: var(--uiSecondaryGrey);
+     outline: 1px solid var(--uiSecondaryGrey);
 }
 
 #userSec a {
@@ -180,7 +180,7 @@
 }
 
 #signoutB:hover {
-     background-color: var(--secondaryOpposite);
+     background-color: var(--tertiaryOpposite);
 }
 
 
@@ -308,7 +308,6 @@
           opacity: 0.75;
 
           height: 40px;
-          border: none;
      }
 
      .mmBlock:hover, .selectedMenuBox {

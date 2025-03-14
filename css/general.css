@@ -196,15 +196,15 @@ input::-webkit-inner-spin-button {
 
 /* fast, default and slow transition */
 .fTrans {
-    transition: all 100ms;
+    transition: all 0.1s linear;
 }
 
 .dTrans {
-    transition: all 200ms;
+    transition: all 0.3s linear;
 }
 
 .sTrans {
-    transition: all 500ms;
+    transition: all 0.5s linear;
 }
 
 

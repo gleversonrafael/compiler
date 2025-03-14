@@ -30,7 +30,8 @@
      margin-bottom: 15px;     
 
      text-decoration: none;
-     border: 1px solid var(--uiPrimaryWhite);
+
+     background-color: var(--uiPrimaryGrey);
 }
 
 .dashbAnchor::after {
@@ -59,7 +60,7 @@
 
 /* dashb anchor pseudo classes  */
 .dashbAnchor:hover {
-     border-color: var(--uiPrimaryWhite);
+     outline: 1px solid var(--uiPrimaryWhite);
 }
 
 .dashbAnchor:active {
@@ -97,7 +98,6 @@
           width: fit-content;
           padding: 15px 0px;
 
-          border: 1px solid var(--uiSecondaryGrey);
           border-radius: 25px;
      }
 

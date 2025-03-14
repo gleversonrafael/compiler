@@ -27,7 +27,7 @@ module.exports = {
     },
 
     manageusers: { 
-      import: ["./js/adminfb.js", "./js/basic/jsmanageusers.js"] 
+      import: ["./js/basic/jsmanageusers.js"] 
     }, 
 
     myuser: { 
@@ -40,47 +40,6 @@ module.exports = {
     path: path.resolve(__dirname, "./js/final"),
     filename: '[name]bundle.js',
   },
-
-
-  resolve: {
-    fallback: {
-      fs: false, 
-      
-      // firebase sdk
-      util: false,
-      stream: false,
-      events: false,
-      process: false,
-
-      net: false,
-      tls: false,
-      http2: false,
-      child_process: false,
-
-
-      // others
-      assert: false,
-      buffer: false,
-      console: false,
-      constants: false,
-      crypto: false,
-      domain: false,
-      http: false,
-      https: false,
-      os: false,
-      path: false,
-      punycode: false,
-      querystring: false,
-      string_decoder: false,
-      sys: false,
-      timers: false,
-      tty: false,
-      url: false,
-      vm: false,
-      zlib: false,
-    }
-
-  }
 };
 
 

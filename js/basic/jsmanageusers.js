@@ -1,5 +1,5 @@
 import { onSnapshot } from "firebase/firestore";
-import { usersCol } from "./general/jsfirebase.js";
+import { firebaseConfig, usersCol } from "./general/jsfirebase.js";
 import { 
      setReusableEvents,  forEachPropertyWithDo, 
      showMessageBox, toggleModal, 
@@ -45,14 +45,14 @@ async function createNewUser() {
 
 
      if(userValidation && radioLabelValue) {
-          await signUser();
+          await signUser(userDataObject);
           messageType = "successMessage";
           message = "Dados salvos!"
 
      } else  { 
           messageType = "errorMessage";
 
-          message = ! userValidation ? "Preencha seus dados corretamente!" : "Preencha o tipo de usuário!"
+          message = ! userValidation ? "Preencha os dados do usuário corretamente!" : "Preencha o tipo de usuário!"
           
      } 
 
@@ -60,8 +60,8 @@ async function createNewUser() {
 
 
 
-     async function signUser() {
-
+     async function signUser(userDataObject) {
+          console.log(userDataObject);
 
      }
 }
