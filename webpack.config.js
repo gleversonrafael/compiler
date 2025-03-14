@@ -28,7 +28,7 @@ module.exports = {
     },
 
     manageusers: { 
-      import: ["./js/basic/jsmanageusers.js"] 
+      import: ["./js/basic/jsmanageusers.js", "./js/adminfb.js"] 
     }, 
 
     myuser: { 
