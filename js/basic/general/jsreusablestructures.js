@@ -160,26 +160,30 @@ function userDataIsValid(analyzedData) {
 
 
 
-// create new user data array
+// create user data array
 function createUserDataArray(operatingMode, selectedData) {
+     console.log(selectedData);
+
+     // data accepted -> inputs 
      let newArray = [];
      
      selectedData.forEach((data) => {
-          if(operatingMode === "create" || ("operatingMode" === "edit" && data.value !== data.placeholder)) {
+          if(operatingMode === "create" || ("operatingMode" === "edit" && data.value != userData[data.name])) {
                let temporaryObject = {};
 
-               Object.defineProperty(temporaryObject, input.name, {
-                    value: input.value,
+
+               Object.defineProperty(temporaryObject, data.name, {
+                    value: data.value,
                     enumerable: true,
                     writable: true,
                });
+
 
                newArray.push(temporaryObject);
           }
      }) 
 
 
-     
      return newArray
 }
 

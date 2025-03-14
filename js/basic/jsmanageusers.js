@@ -1,6 +1,11 @@
 import { onSnapshot } from "firebase/firestore";
 import { usersCol } from "./general/jsfirebase.js";
-import {setReusableEvents,  forEachPropertyWithDo, toggleModal } from "./general/jsreusablestructures.js"
+import { 
+     setReusableEvents,  forEachPropertyWithDo, 
+     showMessageBox, toggleModal, 
+     userDataIsValid, createUserDataArray, convertSpecificArrayIntoObject
+     
+} from "./general/jsreusablestructures.js"
 
 
 // events
@@ -8,6 +13,9 @@ setManageUsersEvents();
 setReusableEvents([
      "formsEvent", "cancelModalEvent"
 ]);
+
+
+
 
 
 // create
@@ -20,6 +28,42 @@ function setManageUsersEvents() {
           toggleModal("signUsersModal");
      })
      // events go here
+}
+
+
+async function createNewUser() {
+     const createUserInputs = document.querySelectorAll("#createUserForm .fillableInputJS");
+     
+     const userDataArray = createUserDataArray("create", createUserInputs);
+     const userDataObject = convertSpecificArrayIntoObject(userDataArray);
+
+     const userValidation = userDataIsValid(userDataArray);
+     const radioLabelValue = document.querySelector("#createUserForm .radioLabel:has(+ input:checked)");
+
+     let messageType;
+     let message;
+
+
+     if(userValidation && radioLabelValue) {
+          await signUser();
+          messageType = "successMessage";
+          message = "Dados salvos!"
+
+     } else  { 
+          messageType = "errorMessage";
+
+          message = ! userValidation ? "Preencha seus dados corretamente!" : "Preencha o tipo de usuário!"
+          
+     } 
+
+     showMessageBox(messageType, message)
+
+
+
+     async function signUser() {
+
+
+     }
 }
 
 
@@ -141,14 +185,6 @@ async function fillTable(tableId, obtainedData, tableType) {
                textCell.appendChild(elementParagraph);
           }
      }
-}
-
-
-function createNewUser() {
-     const createUserInputs = document.querySelector("#createUserForm .fillableInputJS");
-     let userData = createUserDataArray("create", createUserInputs);
-     
-
 }
 
 

@@ -16,7 +16,7 @@ import { db, auth } from "./general/jsfirebase.js";
 
 
 // global
-let newAssignedPassword;
+let newAssignedPassword = null;
 let oldPassword;
 
 document.body.addEventListener("load", loadDefaults());
@@ -131,13 +131,14 @@ async function saveUserDataProcess(callType, canBeSaved) {
      } else {
           // array containing only the changed fields = [{name: test}, {test: test}]
           userInputs = document.querySelectorAll("form#changeOwnUserData .fillableInputJS");
-
-          newUserData = createUserDataArray("edit", userInputs);
+          newUserData = createUserDataArray("edit", userInputs, currentUserData);
           
-          if(newAssignedPassword) {
+
+          if(newAssignedPassword != null) {
                newUserData.push({password: newAssignedPassword})
                newAssignedPassword = null;
           }
+
 
           newUserDataObject = convertSpecificArrayIntoObject(newUserData);
           analyzeResult = analyzeInputedData();
@@ -172,7 +173,7 @@ async function saveUserDataProcess(callType, canBeSaved) {
                          break
      
                     default:
-                         errorString = "Um erro fora dos padrões foi encontrado"
+                         errorString = "Um erro fora dos padrões foi encontrado."
                }
      
                showMessageBox("errorMessage", errorString);
