@@ -3,9 +3,20 @@
 
 /* modal */
 /* temporário */
-#modalArea, .modalPattern {
+#modalArea {
      display: flex;
 }
+
+#deleteUserModal {
+     display: flex;
+}
+
+#deleteUserModal .modalEmphasis {
+     margin-top: 15px;
+}
+
+/* can be reused */
+
 
 
 /* unique */

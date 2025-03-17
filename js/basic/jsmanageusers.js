@@ -1,5 +1,5 @@
-import { onSnapshot } from "firebase/firestore";
-import { firebaseConfig, usersCol } from "./general/jsfirebase.js";
+import { onSnapshot, doc, updateDoc } from "firebase/firestore";
+import { firebaseConfig, db, usersCol } from "./general/jsfirebase.js";
 import { 
      setReusableEvents,  forEachPropertyWithDo, 
      showMessageBox, toggleModal, 
@@ -17,8 +17,6 @@ setReusableEvents([
 
 
 
-
-// create
 function setManageUsersEvents() {
      document.getElementById("createUserForm").addEventListener("submit", () => {
           createNewUser();
@@ -27,10 +25,13 @@ function setManageUsersEvents() {
      document.getElementById("openSignModal").addEventListener("click", () => {
           toggleModal("signUsersModal");
      })
-     // events go here
+
+     document.querySelector("#deleteUserModal .confirmFormJS").addEventListener("click", () => {
+          deleteUserSubmit();
+     })
 }
 
-
+// create
 async function createNewUser() {
      const createUserInputs = document.querySelectorAll("#createUserForm .fillableInputJS");
      
@@ -62,14 +63,66 @@ async function createNewUser() {
 
      async function signUser(userDataObject) {
           console.log(userDataObject);
-
      }
 }
 
 
-// cancelar modal();
-// validação de dados() - incluindo regular / admin
-// criação de usuário() - firebase SDK
+// delete
+function deleteUserSubmit() {
+     const userUID = document.querySelector("#deleteUserModal").name;
+
+     customUpdateDocument({
+          documentId: userUID,
+          selectedCollection: "usersInfo",
+          newData: { deleted: true },
+          desiredMessage: "O usuário foi excluído da plataforma!",
+          errorMessage: "O usuário não foi excluído. Tente novamente."
+     });
+}
+
+
+function showDeleteBox(username) {
+     const deleteUserModal = document.querySelector("#deleteUserModal");
+
+     deleteUserModal.setAttribute("name", `delete${userUID}`);
+     const selectedUserDisplayName = document.querySelector("#deleteUserModal .displayTextJS");
+
+     selectedUserDisplayName.innerText = ""
+     toggleModal("deleteUserModal");
+
+}
+
+// CHANGES
+// ------------------------------
+// ------------------------------
+// ------------------------------
+// ------------------------------
+
+
+
+// reutilizável
+async function customUpdateDocument(receivedData) {
+     // received data object =
+     // { selectedCollection, documentId, newData, desiredMessage, errorMessage }
+     
+     const selectedUserDocument = doc(db, receivedData.selectedCollection, receivedData.documentId);
+
+     await updateDoc(selectedUserDocument, receivedData.newData)
+     .then(() => {
+          if(receivedData.desiredMessage) {
+               showMessageBox("successMessage", receivedData.desiredMessage);        
+          }
+
+     })
+     .catch((error) => {
+          showMessageBox("errorMessage",  receivedData.errorMessage);
+          console.log("ERROR:"+ error.code);
+     })
+}
+
+
+
+
 
 
 
@@ -141,25 +194,75 @@ async function fillTable(tableId, obtainedData, tableType) {
 
                let createdButtonsClasses = ["toggleUserInput", "editUserInput", "deleteUserInput"];
 
-
                temporaryActionsCell.classList.add("userActionsCell");
 
+
                createdButtonsClasses.forEach((property) => {
+                    // insert only delete on deleted state user 
                     if(! thisRow.classList.contains("deleted") || property.includes("deleteUserInput")) {
-                         let temporaryButton = document.createElement("input");
-                         temporaryButton.type = "button";
-     
-                         temporaryButton.classList.add(property, "squareButtonWithImage");
-     
+                         const temporaryButton = createActionButton(thisRow, property);     
                          temporaryActionsCell.appendChild(temporaryButton);
+
                     }
+
                })
 
 
-
                return temporaryActionsCell
+
+               
+               function createActionButton(thisRow, buttonClass) {
+                    const removedIdText = /userIdentifier/
+                    const userUID = thisRow.id.replace(removedIdText, "");
+                    
+                    let temporaryButton = document.createElement("input");
+                    let selectedAction;
+                    let actionParameters;
+
+                    temporaryButton.type = "button";
+                    temporaryButton.classList.add(buttonClass, "squareButtonWithImage");
+
+                    
+                    if(buttonClass.includes("delete")) {
+                         // are you sure?
+                         selectedAction = showDeleteBox;
+                         actionParameters = (userUID, );
+
+
+                    } else if(buttonClass.includes("edit")) {
+                         selectedAction = toggleModal;
+                         actionParameters = "editUserModal"
+
+
+                    // toggle
+                    } else {
+                         const newActiveState = thisRow.classList.contains("activeUser") ? false: true; 
+                         const unocurredActiveState = newActiveState === true ? false : true
+
+                         selectedAction = customUpdateDocument;
+                         actionParameters = { 
+                              selectedCollection: "usersInfo",
+                              documentId: userUID,
+                              newData: { active: newActiveState },
+                              errorMessage: `O usuário selecionado previamente não foi ${unocurredActiveState}`,
+                         }
+                    }
+
+
+
+                    temporaryButton.addEventListener("click", () => {
+                         selectedAction(actionParameters);
+                    });
+
+
+                    return temporaryButton;
+
+               }
           };
+
+
      }
+
 
 
      // complementary
@@ -186,7 +289,6 @@ async function fillTable(tableId, obtainedData, tableType) {
           }
      }
 }
-
 
 // reusable
 function convertHtmlStringToElement(htmlString) {
