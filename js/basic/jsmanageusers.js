@@ -1,12 +1,15 @@
 import { initializeApp } from "firebase/app"
-import { onSnapshot, setDoc, doc } from "firebase/firestore";
+import { onSnapshot, setDoc, doc, query, where } from "firebase/firestore";
 import { firebaseConfig, db, usersCol } from "./general/jsfirebase.js";
-import { createUserWithEmailAndPassword, signOut, getAuth } from "firebase/auth"
+import { createUserWithEmailAndPassword, signOut, getAuth } from "firebase/auth";
+
+import { userData } from "./general/jsuserdata.js";
 
 import { 
-     setReusableEvents,  forEachPropertyWithDo, 
-     showMessageBox, toggleModal, 
-     userDataIsValid, createUserDataArray, convertSpecificArrayIntoObject
+     setReusableEvents, forEachPropertyWithDo, 
+     showMessageBox, toggleModal, customUpdateDocument,
+     userDataIsValid, createUserDataArray, convertSpecificArrayIntoObject,
+     obtainFather
      
 } from "./general/jsreusablestructures.js"
 
@@ -30,7 +33,10 @@ function setManageUsersEvents() {
      document.getElementById("openSignModal").addEventListener("click", () => {
           toggleModal("signUsersModal");
      })
-     // events go here
+     
+     document.querySelector("#deleteUserModal .confirmFormJS").addEventListener("click", () => {
+          deleteUserSubmit();
+     })
 }
 
 
@@ -59,7 +65,7 @@ async function createNewUser() {
                })
                .catch((error) => {
                     messageType = "strangeMessage"
-                    message = "O usuário foi cadastrado no firebase authenticate, mas não no banco de dados."
+                    message = "A autenticiadde do usuário foi cadastrada, sem um local definido no banco de dados."
                
                     console.log(`ERROR: ${error.code}`);
                })
@@ -103,14 +109,14 @@ async function createNewUser() {
 
 
           // is user type filled
-          let radioLabelInput = document.querySelector("#createUserForm .userTypeInput:checked");
-     
-          if(! radioLabelInput) {
-               radioLabelInput = convertHtmlStringToElement(`<input type="radio" name="usertype" value="">`)
-          }
+          const userTypeInput = document.querySelector("#createUserForm .userTypeInput:checked");
 
-          returnedInputs.push(radioLabelInput);
-          
+          if(! userTypeInput) {
+               userType = convertHtmlStringToElement(`<input type="radio" name="usertype" value="">`)
+          } 
+
+          returnedInputs.push(userTypeInput);
+     
 
           return returnedInputs
      }
@@ -142,13 +148,51 @@ async function createNewUser() {
 }
 
 
+// delete
+async function deleteUserSubmit() {
+     const deleteUserModal = document.querySelector("#deleteUserModal");
+     const deleteString  = /[delete]]/
+     const userUID = deleteUserModal.dataset.selecteduseruid;
+
+     const deleteUserProcess = await customUpdateDocument({
+          documentId: userUID,
+          selectedCollection: "usersInfo",
+          newData: { deleted: true },
+          desiredMessage: "O usuário foi excluído da plataforma!",
+          errorMessage: "O usuário não foi excluído. Tente novamente."
+     })
+
+
+     if(deleteUserProcess.result === true) {
+          toggleModal("deleteUserModal");
+          deleteUserModal.removeAttribute("data-selecteduseruid");
+     }
+}
+
+
+function showUserDeleteBox(userInformationObject) {
+     // userInformationObject = { userName, userUID }
+
+     const deleteUserModal = document.querySelector("#deleteUserModal");
+     const selectedUserDisplayName = document.querySelector("#deleteUserModal .displayTextJS");
+
+     deleteUserModal.setAttribute("data-selecteduseruid", userInformationObject.userUID);
+     selectedUserDisplayName.innerText = userInformationObject.userName;
+
+     toggleModal("deleteUserModal");
+}
+
 
 
 // table
-onSnapshot(usersCol, (snapshotEvent) => {
-     document.querySelector("#usersTable .tableBody").innerHTML = "";
-     fillTable("usersTable", snapshotEvent, "users");
-});
+onSnapshot(
+     query(usersCol, where("id", "!=", userData.uid)), 
+
+     (snapshotEvent) => {
+          document.querySelector("#usersTable .tableBody").innerHTML = "";
+          fillTable("usersTable", snapshotEvent, "users");
+     }
+);
 
 
 async function fillTable(tableId, obtainedData, tableType) {
@@ -197,10 +241,10 @@ async function fillTable(tableId, obtainedData, tableType) {
 
 
                // creating fields
-               let userInfoCell = createTextCell(textObject, thisRow);
-               let buttonsCell = createUsersActions();
-
+               const userInfoCell = createTextCell(textObject, thisRow);
                thisRow.appendChild(userInfoCell);
+
+               const buttonsCell = createUsersActions();
                thisRow.appendChild(buttonsCell);
           }
 
@@ -208,26 +252,68 @@ async function fillTable(tableId, obtainedData, tableType) {
           // custom functions
           function createUsersActions() {
                let temporaryActionsCell = document.createElement("td");
-
                let createdButtonsClasses = ["toggleUserInput", "editUserInput", "deleteUserInput"];
-
 
                temporaryActionsCell.classList.add("userActionsCell");
 
-               createdButtonsClasses.forEach((property) => {
-                    if(! thisRow.classList.contains("deleted") || property.includes("deleteUserInput")) {
-                         let temporaryButton = document.createElement("input");
-                         temporaryButton.type = "button";
-     
-                         temporaryButton.classList.add(property, "squareButtonWithImage");
-     
-                         temporaryActionsCell.appendChild(temporaryButton);
-                    }
+               createdButtonsClasses.forEach((buttonClass) => {
+                    const temporaryButton = createActionButton(thisRow, buttonClass);     
+                    temporaryActionsCell.appendChild(temporaryButton);
                })
 
-
-
                return temporaryActionsCell
+
+
+               function createActionButton(thisRow, buttonClass) {
+                    const removedIdText = /userIdentifier/
+                    const userUID = thisRow.id.replace(removedIdText, "");
+                    
+                    let temporaryButton = document.createElement("input");
+                    let selectedAction;
+                    let actionParameters;
+
+                    temporaryButton.type = "button";
+                    temporaryButton.classList.add(buttonClass, "squareButtonWithImage");
+                    
+                    if(buttonClass.includes("delete")) {
+                         const displayedUserName = thisRow.querySelector(".tableMainText").innerText;
+
+                         // are you sure?
+                         selectedAction = showUserDeleteBox;
+                         actionParameters = { userName: displayedUserName, userUID: userUID}
+
+
+                    } else if(buttonClass.includes("edit")) {
+                         // selectedAction = toggleModal;
+                         // actionParameters = "editUserModal"
+                         selectedAction = showMessageBox;
+                         actionParameters = "strangeMessage"
+                    
+
+                    // toggle
+                    } else {
+                         const newActiveState = thisRow.classList.contains("activeUser") ? false: true; 
+                         const unocurredActiveState = newActiveState === true ? false : true
+
+                         selectedAction = customUpdateDocument;
+                         actionParameters = { 
+                              selectedCollection: "usersInfo",
+                              documentId: userUID,
+                              newData: { active: newActiveState },
+                              errorMessage: `O usuário selecionado previamente não foi ${unocurredActiveState}`,
+                         }
+                    }
+
+
+
+                    temporaryButton.addEventListener("click", () => {
+                         selectedAction(actionParameters);
+                    });
+
+
+                    return temporaryButton;
+
+               }
           };
      }
 

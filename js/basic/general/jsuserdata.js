@@ -1,13 +1,15 @@
-import { collection, getDocs, query, where, limit } from "firebase/firestore"
+import { getDoc, doc } from "firebase/firestore"
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./jsfirebase.js";
 
+
+
+// SISTEMA FUTURO - A DATA É RETORNADA EM VARIÁVEL E NÃO ARMAZENADA.
 
 // var
 let userData;
 
 await userDataProcess();
-
 export { userData };
 
 
@@ -25,13 +27,8 @@ async function userDataProcess() {
      async function obtainUID() {   
           // var
           let receiveUID = new Promise((correct, wrong) => {
-               onAuthStateChanged(auth, (uData) => {                        
-                    if(uData) {
-                         correct(uData.uid);
-                    
-                    } else {
-                         wrong("Null data.");
-                    } 
+               onAuthStateChanged(auth, (uData) => { 
+                    uData ? correct(`u${uData.uid}`) : wrong("Null data.");                    
                
                });
           })
@@ -57,15 +54,21 @@ async function userDataProcess() {
 
 
      async function obtainUserData() {
-          const uQuery = query(collection(db, "usersInfo"), where("uid", "==", uid), limit(1));
+          const userDataDocument = doc(db, "usersInfo", uid);
+          
+          await getDoc(userDataDocument)
+          .then((obtainedDataInstance) => {
+               const dataId = obtainedDataInstance.id;
 
-          const userFindProcess = await getDocs(uQuery);
-     
-          userFindProcess.forEach((doc) => {
-               userData = doc.data();
-               const {password, ...updatedUserData} = userData;
+               userData = obtainedDataInstance.data();
+               Object.defineProperty(userData, "uid", { value: dataId, enumerable: true});
 
-               userData = updatedUserData;
+               const { password, telephone, ...safeOwnUserData } = userData;
+               userData = safeOwnUserData
+
+          })
+          .catch((error) => {
+               console.log(`ERROR: USER COULDN'T BE OBTAINED. CODE: ${error.code}`);
           })
      
      }

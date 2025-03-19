@@ -36,7 +36,7 @@
 
                          <div class="flex flex-col">
                               <label class="requiredLabel labelPattern" for="addUserNameInput"> Nome</label>
-                              <input id="addUserNameInput" class="inputPatternMM fillableInputJS requiredInputJS" name="name" type="text" autocomplete="off">
+                              <input id="addUserNameInput" class="requiredJS inputPatternMM fillableInputJS" name="name" type="text" autocomplete="off" required>
 
                          </div>
 
@@ -55,13 +55,13 @@
 
                          <div class="flex flex-col">
                               <label class="requiredLabel labelPattern" for="addEmailInput"> E-mail</label>
-                              <input  id="addEmailInput" class="inputPatternMM fillableInputJS requiredInputJS" name="email" type="email" autocomplete="off">
+                              <input  id="addEmailInput" class="requiredJS inputPatternMM fillableInputJS" name="email" type="email" autocomplete="off" required>
 
                          </div>   
 
                          <div class="flex flex-col">
                               <label class="requiredLabel labelPattern" for="addPasswordInput"> Senha</label>
-                              <input id="addPasswordInput" class="inputPatternMM fillableInputJS requiredInputJS" name="password" type="text" autocomplete="off">
+                              <input id="addPasswordInput" class="requiredJS inputPatternMM fillableInputJS" name="password" type="text" autocomplete="off" required>
 
                          </div>
 
@@ -75,14 +75,12 @@
                          <div class="smallGapCSS flex flex-col">
                               <div>
                                    <label role="button" for="regularUserInput" class="radioLabel"> Regular </label>
-                                   <input id="regularUserInput" class="userTypeInput requiredInputJS" type="radio" name="usertype" value="regular">
-
+                                   <input id="regularUserInput" type="radio" name="usertype" class="userTypeInput" value="regular">
                               </div>
 
                               <div>
                                    <label role="button" for="adminUserInput" class="radioLabel"> Administrador </label>
-                                   <input id="adminUserInput" class="userTypeInput requiredInputJS" type="radio" name="usertype" value="admin">
-
+                                   <input id="adminUserInput" type="radio" name="usertype" class="userTypeInput" value="admin">
                               </div>
 
                          </div>

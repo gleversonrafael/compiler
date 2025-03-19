@@ -1,6 +1,7 @@
 import { userData } from "./jsuserdata.js";
 import { usersCol } from "./jsfirebase.js"
-import { getDocs, query, where, limit } from "firebase/firestore"
+import { getDocs, doc, updateDoc, query, where, limit } from "firebase/firestore"
+import { db } from "./jsfirebase.js"
 import bcrypt from "bcryptjs"
 
 
@@ -36,7 +37,7 @@ function setReusableEvents(eventsArray) {
 
           cancelModalButtons.forEach((modalButton) => {
                modalButton.addEventListener("click", (clickEvent) => {
-                    let canceledModalId = obtainFatherId(clickEvent.currentTarget, "modalPattern")
+                    let canceledModalId = obtainFather(clickEvent.currentTarget, "modalPattern").id;
                     
                     if(canceledModalId === "noFather") {
                          canceledModalId = "notAModal"
@@ -53,8 +54,8 @@ function setReusableEvents(eventsArray) {
 
 
 
-// obtain father id
-function obtainFatherId(clickedChild, fatherUniqueClass) {
+// obtain father by unique class
+function obtainFather(clickedChild, fatherUniqueClass) {
      let selectedParent = clickedChild.parentElement;
      let errorResult;
 
@@ -71,7 +72,7 @@ function obtainFatherId(clickedChild, fatherUniqueClass) {
 
      }
 
-     return errorResult === false ? selectedParent.id : "noFather"
+     return errorResult === false ? selectedParent : "noFather"
 }
 
 
@@ -144,16 +145,15 @@ function userDataIsValid(analyzedData) {
 
      for(let key = 0; key < analyzedData.length; key++) {
           const analyzedItem = Object.entries(analyzedData[key])[0];
-          console.log(analyzedItem);
-
           const selectedDataType = validateData[analyzedItem[0]];
-          console.log(selectedDataType);
-
           let regexTest;
 
           if(selectedDataType) {
                regexTest = selectedDataType.test(analyzedItem[1]);
           }
+
+          console.log(analyzedItem);
+          console.log(regexTest);
 
           if(regexTest === false) {
                finalResult = false
@@ -169,7 +169,7 @@ function userDataIsValid(analyzedData) {
 
 // create user data array
 function createUserDataArray(operatingMode, selectedData) {
-     // data accepted -> inputs 
+     // data accepted -> inputs with values and names
      let newArray = [];
 
      if(operatingMode === "create") {
@@ -310,12 +310,45 @@ function toggleModal(selectedModalId) {
 }
 
 
+// custom update document
+async function customUpdateDocument(receivedData) {
+     // received data object =
+     // { selectedCollection, documentId, newData, desiredMessage, errorMessage }
+
+     let updateObject = { result: false, returnedData: null }
+     const selectedDocument = doc(db, receivedData.selectedCollection, receivedData.documentId);
+
+     await updateDoc(selectedDocument, receivedData.newData)
+     .then((newDocumentData) => {
+          if(receivedData.desiredMessage) {
+               showMessageBox("successMessage", receivedData.desiredMessage);        
+          }
+
+          updateObject.result = true;
+          updateObject.returnedData = newDocumentData
+
+     })
+     .catch((error) => {
+          showMessageBox("errorMessage",  receivedData.errorMessage);
+          console.log("ERROR:"+ error.code);
+
+          updateObject.returnedData = error.code
+
+     })
+
+
+     return updateObject
+}
+
+
+
 export { 
      setReusableEvents,
-     obtainFatherId,
+     obtainFather,
      showMessageBox, 
      userDataIsValid, checkUserPassword, 
      createUserDataArray, convertSpecificArrayIntoObject,
      forEachPropertyWithDo,
-     toggleModal
+     toggleModal, 
+     customUpdateDocument,
 };
