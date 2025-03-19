@@ -12,9 +12,9 @@
 
      <style>
           /* removes menu */
-          #modalArea {
-               width: 100%;
-          }
+          /* #modalArea { */
+               /* width: 100%; */
+          /* } */
           
      </style>
 
@@ -25,6 +25,7 @@
 
      <!-- modal -->
      <section id="modalArea" class="flex flex-col">
+          <!-- sign -->
           <div id="signUsersModal" class="confirmModalCSS modalPattern flex flex-col">
                <h1 class="modalTitle"> Criar usuário</h1>
 
@@ -92,7 +93,7 @@
                     <!-- buttons -->
                     <fieldset class="modalButtons flex flex-col">
                          <input class="cancelModalButton bAll" type="button" value="Cancelar">
-                         <input class="confirmButtonTypeMR confirmButtonCSS bAll" type="submit" value="Criar">
+                         <input class="confirmFormJS confirmButtonTypeMR confirmButtonCSS bAll" type="submit" value="Criar">
 
                     </fieldset>
 
@@ -101,7 +102,26 @@
           
           </div>
 
+
+          <!-- delete -->
+          <div id="deleteUserModal" class="modalPattern refuseModalCSS flex flex-col">
+               <div>
+                    <h1 class="modalTitle"> Exclusão de conta</h1>
+                    <p class="modalEmphasis"> Tem certeza? </p>
+                    <p class="modalSubtext"> O usuário <span class="displayTextJS">Nome nome nom enom enom enome</span> será excluído da plataforma.</p>
+
+               </div>
+
+               <div class="modalButtons flex flex-col">
+                    <input class="cancelModalButton bAll" type="button" value="Cancelar">
+                    <input class="confirmFormJS confirmButtonCSS confirmButtonTypeMR bAll" type="submit" value="Prosseguir">
+
+               </div>
+
+          </div>
+
      </section>
+
 
      <!-- main content -->
      <main id="mCon">

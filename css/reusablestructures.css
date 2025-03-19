@@ -101,7 +101,8 @@
      padding: 35px;
      border-radius: 15px;
 
-     max-width: 500px;
+     width: 50vw;
+     max-width: 400px;
 
      margin-top: 15vh;
 }
@@ -118,6 +119,11 @@
 .modalSubtext {
      color: var(--uiSecondaryWhite);
      font: 300 1em var(--rFont);
+}
+
+.modalEmphasis {
+     font: 500 1.25em var(--rFont);
+     color: var(--uiPrimaryWhite);
 }
 
 
@@ -165,6 +171,10 @@
      border: none;
 }
 
+.confirmButtonCSS:active {
+     opacity: 0.8;
+}
+
 .cancelModalButton {
      width: 50%;
 
@@ -180,6 +190,7 @@
 
 
 /* modal specific styles */
+/* default / refuse / confirm */
 .defaultModalCSS .modalTitle {
      color: var(--uiPrimaryWhite);
 }
@@ -197,13 +208,26 @@
      background-color: var(--tertiaryColor);
 }
 
+.confirmModalCSS .confirmButtonCSS:hover {
+     background-color: var(--secondaryColor);
+}
+
 
 .refuseModalCSS .modalTitle {
      color: var(--primaryOpposite);
 }
 
 .refuseModalCSS .confirmButtonCSS {
+     background-color: var(--secondaryOpposite);
+}
+
+.refuseModalCSS .confirmButtonCSS:hover {
      background-color: var(--primaryOpposite);
+}
+
+
+#editUserModal {
+     border: 1px solid var(--uiPrimaryWhite);
 }
 
 
@@ -373,15 +397,6 @@
      background-color: var(--tertiaryColor);
 }
 
-.confirmButtonCSS:hover {
-     background-color: var(--secondaryColor);
-}
-
-.confirmButtonCSS:active {
-     background-color: var(--primaryColor);
-}
-
-
 .roundButtonWithImage, .squareButtonWithImage {
      background: center center no-repeat;
 
@@ -431,7 +446,6 @@
 
      .modalPattern {
           min-width: 400px;
-
      }
 
 
