@@ -134,7 +134,8 @@ function userDataIsValid(analyzedData) {
           name: /[\w]{2,}/,
           email: /[\w]{2,}@+[\w]{2,}.[\w]{2,}/ ,
           password: /.{4,12}/,
-          telephone: /[\d]{12}/
+          telephone: /[\d]{12}/,
+          usertype: /\w{1,}/
      }
 
      let finalResult = true;
@@ -142,11 +143,17 @@ function userDataIsValid(analyzedData) {
 
 
      for(let key = 0; key < analyzedData.length; key++) {
-          let analyzedItem = Object.entries(analyzedData[key])[0];
-          // [0] = name
-          // [1] = value
+          const analyzedItem = Object.entries(analyzedData[key])[0];
+          console.log(analyzedItem);
 
-          let regexTest = validateData[analyzedItem[0]].test(analyzedItem[1]);
+          const selectedDataType = validateData[analyzedItem[0]];
+          console.log(selectedDataType);
+
+          let regexTest;
+
+          if(selectedDataType) {
+               regexTest = selectedDataType.test(analyzedItem[1]);
+          }
 
           if(regexTest === false) {
                finalResult = false
@@ -162,15 +169,17 @@ function userDataIsValid(analyzedData) {
 
 // create user data array
 function createUserDataArray(operatingMode, selectedData) {
-     console.log(selectedData);
-
      // data accepted -> inputs 
      let newArray = [];
-     
+
+     if(operatingMode === "create") {
+          newArray.push({active: true}, {deleted: false});
+     }
+
+
      selectedData.forEach((data) => {
           if(operatingMode === "create" || ("operatingMode" === "edit" && data.value != userData[data.name])) {
                let temporaryObject = {};
-
 
                Object.defineProperty(temporaryObject, data.name, {
                     value: data.value,
@@ -181,7 +190,7 @@ function createUserDataArray(operatingMode, selectedData) {
 
                newArray.push(temporaryObject);
           }
-     }) 
+     })
 
 
      return newArray

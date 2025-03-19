@@ -1,5 +1,8 @@
-import { onSnapshot } from "firebase/firestore";
-import { firebaseConfig, usersCol } from "./general/jsfirebase.js";
+import { initializeApp } from "firebase/app"
+import { onSnapshot, setDoc, doc } from "firebase/firestore";
+import { firebaseConfig, db, usersCol } from "./general/jsfirebase.js";
+import { createUserWithEmailAndPassword, signOut, getAuth } from "firebase/auth"
+
 import { 
      setReusableEvents,  forEachPropertyWithDo, 
      showMessageBox, toggleModal, 
@@ -32,44 +35,111 @@ function setManageUsersEvents() {
 
 
 async function createNewUser() {
-     const createUserInputs = document.querySelectorAll("#createUserForm .fillableInputJS");
-     
-     const userDataArray = createUserDataArray("create", createUserInputs);
+     // user data creation
+     const createdUserInputs = createUserInputs();
+     const userDataArray = createUserDataArray("create", createdUserInputs);
      const userDataObject = convertSpecificArrayIntoObject(userDataArray);
-
      const userValidation = userDataIsValid(userDataArray);
-     const radioLabelValue = document.querySelector("#createUserForm .radioLabel:has(+ input:checked)");
 
-     let messageType;
+     let messageType = "errorMessage";
      let message;
 
 
-     if(userValidation && radioLabelValue) {
-          await signUser(userDataObject);
-          messageType = "successMessage";
-          message = "Dados salvos!"
+     if(userValidation) {
+          const signUserAttempt = await signUser(userDataObject);
+
+          if(signUserAttempt.result === true) {
+               const newUserDatabaseUID = `u${signUserAttempt.returnedUID}`
+
+               await setDoc(doc(db, "usersInfo", newUserDatabaseUID), userDataObject)
+               .then(() => {
+                    messageType = "successMessage";
+                    message = "O usuário foi criado com sucesso!"
+
+               })
+               .catch((error) => {
+                    messageType = "strangeMessage"
+                    message = "O usuário foi cadastrado no firebase authenticate, mas não no banco de dados."
+               
+                    console.log(`ERROR: ${error.code}`);
+               })
+          
+
+          } else {
+               let selectedErrorMessage;
+
+               switch(signUserAttempt.errorCode) {
+                    case "auth/email-already-in-use": 
+                         selectedErrorMessage = "Esse e-mail já está em uso!"
+                         break
+
+                    default:
+                         selectedErrorMessage = "Um erro desconhecido no cadastramento de usuário ocorreu."
+               }
+
+               message = selectedErrorMessage;
+          }       
 
      } else  { 
-          messageType = "errorMessage";
-
-          message = ! userValidation ? "Preencha os dados do usuário corretamente!" : "Preencha o tipo de usuário!"
-          
+          message = ! userValidation ? "Preencha os dados do usuário corretamente!" : "Selecione o tipo de usuário!"
      } 
+
 
      showMessageBox(messageType, message)
 
 
+     // complementary
+     function createUserInputs() {
+          let returnedInputs = [];
 
-     async function signUser(userDataObject) {
-          console.log(userDataObject);
+          // fill fillable inputs (string , telephone...)
+          const fillableInputs =  document.querySelectorAll("#createUserForm .fillableInputJS");
 
+          fillableInputs.forEach((selectedInput) => {
+               if(selectedInput.classList.contains("requiredInputJS") || selectedInput.value) {
+                    returnedInputs.push(selectedInput);
+               }
+          })
+
+
+          // is user type filled
+          let radioLabelInput = document.querySelector("#createUserForm .userTypeInput:checked");
+     
+          if(! radioLabelInput) {
+               radioLabelInput = convertHtmlStringToElement(`<input type="radio" name="usertype" value="">`)
+          }
+
+          returnedInputs.push(radioLabelInput);
+          
+
+          return returnedInputs
+     }
+
+
+     async function signUser(userData) {    
+          // creates a new instance that prevents current user from logging out
+          const signApp = initializeApp(firebaseConfig, "signApp");
+          const signAuth = getAuth(signApp);
+
+          let signResult = {result: false, returnedUID: null, errorCode: null}
+
+
+          await createUserWithEmailAndPassword(signAuth, userData.email, userData.password)
+          .then((newUserCredential) => {
+               signResult.returnedUID = `u${newUserCredential.user.uid}`;
+               signResult.result = true;
+
+          })
+          .catch((errorMessage) => {
+               signResult.errorCode = errorMessage.code
+          })
+
+
+          await signOut(signAuth);
+
+          return signResult;
      }
 }
-
-
-// cancelar modal();
-// validação de dados() - incluindo regular / admin
-// criação de usuário() - firebase SDK
 
 
 
