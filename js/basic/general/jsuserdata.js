@@ -3,58 +3,25 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./jsfirebase.js";
 
 
+let currentUserUID = obtainCurrentUID();
 
-// SISTEMA FUTURO - A DATA É RETORNADA EM VARIÁVEL E NÃO ARMAZENADA.
-
-// var
-let userData;
-
-await userDataProcess();
-export { userData };
+export { fetchOwnUserData, currentUserUID };
 
 
 // m function
-async function userDataProcess() {
-     let uid = await obtainUID();
+async function fetchOwnUserData() {
+     let userData;
 
-     if(uid != null) {
-          await obtainUserData();
-     }
+     const uid = await obtainCurrentUID();
+     userData = uid != null ? await obtainUserData() : "noDataObtained" 
+
+     return userData === "noUserFound" ? false : userData
     
 
-
      // complementary
-     async function obtainUID() {   
-          // var
-          let receiveUID = new Promise((correct, wrong) => {
-               onAuthStateChanged(auth, (uData) => { 
-                    uData ? correct(`u${uData.uid}`) : wrong("Null data.");                    
-               
-               });
-          })
-
-          let returnVal;
-
-
-          // m process
-          await receiveUID
-          .then((res) => {
-               returnVal = res;
-
-          })
-
-          .catch((errorMsg) => {
-               console.log(errorMsg);
-               returnVal = null;
-          });
-
-
-          return returnVal;
-     }
-
-
      async function obtainUserData() {
           const userDataDocument = doc(db, "usersInfo", uid);
+          let obtainedResult;
           
           await getDoc(userDataDocument)
           .then((obtainedDataInstance) => {
@@ -64,12 +31,47 @@ async function userDataProcess() {
                Object.defineProperty(userData, "uid", { value: dataId, enumerable: true});
 
                const { password, telephone, ...safeOwnUserData } = userData;
-               userData = safeOwnUserData
+
+               obtainedResult = safeOwnUserData;
 
           })
           .catch((error) => {
                console.log(`ERROR: USER COULDN'T BE OBTAINED. CODE: ${error.code}`);
+               obtainedResult = "noUserFound"
           })
-     
+
+
+          return obtainedResult
      }
 };
+
+
+
+
+async function obtainCurrentUID() {   
+     // var
+     let receiveUID = new Promise((correct, wrong) => {
+          onAuthStateChanged(auth, (uData) => { 
+               uData ? correct(`u${uData.uid}`) : wrong("Null data.");                    
+          
+          });
+     })
+
+     let returnVal;
+
+
+     // m process
+     await receiveUID
+     .then((res) => {
+          returnVal = res;
+
+     })
+
+     .catch((errorMsg) => {
+          console.log(errorMsg);
+          returnVal = null;
+     });
+
+
+     return returnVal;
+}

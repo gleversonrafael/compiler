@@ -24,9 +24,9 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /*!*******************************************!*\
   !*** ./js/basic/general/jspermissions.js ***!
   \*******************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var _jsfirebase_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./jsfirebase.js */ \"./js/basic/general/jsfirebase.js\");\n/* harmony import */ var _jsuserdata_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./jsuserdata.js */ \"./js/basic/general/jsuserdata.js\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_jsuserdata_js__WEBPACK_IMPORTED_MODULE_2__]);\n_jsuserdata_js__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];\n\r\n\r\n\r\n\r\n\r\n// redirect to the first page if there is no user\r\n(0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.onAuthStateChanged)(_jsfirebase_js__WEBPACK_IMPORTED_MODULE_1__.auth, (authData) => {\r\n     console.log(authData);\r\n     analyzeLogState(authData);     \r\n\r\n     if(_jsuserdata_js__WEBPACK_IMPORTED_MODULE_2__.userData.usertype === \"admin\") {\r\n          showAdmContent();\r\n     }\r\n})\r\n\r\ndocument.body.addEventListener(\"load\", () => {\r\n     if(_jsuserdata_js__WEBPACK_IMPORTED_MODULE_2__.userData.usertype === \"admin\") {\r\n          showAdmContent();\r\n     }\r\n})\r\n\r\n\r\n\r\n// // functions\r\n// m level\r\nfunction analyzeLogState(data) {\r\n     preventUnlogUser()\r\n     preventLogUser()\r\n\r\n\r\n     function preventUnlogUser() {\r\n          // user is not logged in, therefore he doesn't have acess to the site \r\n               if(data === null && !window.location.href.includes(\"index\") && !window.location.href.includes(\"log\") && window.location.href != \"https://gleversonrafael.github.io/compiler/\" ) {\r\n               // GITHUB COMPATIBILITY\r\n               if(window.location.href.includes(\"github\")) {\r\n                    window.location.href = \"https://gleversonrafael.github.io/compiler/\"\r\n\r\n               } else {\r\n                    window.location.href = \"./../index.html\";\r\n               }\r\n               \r\n          }\r\n     }\r\n\r\n\r\n     function preventLogUser() {\r\n          // user is logged in and tries to acess start page / login (GITHUB COMPATIBILITY)\r\n          if(data != null && ( window.location.href.includes(\"index\") || window.location.href == \"https://gleversonrafael.github.io/compiler/\" || window.location.href.includes(\"log\"))) {\r\n               if(window.location.href.includes(\"github\")) {\r\n                    window.location.href = \"https://gleversonrafael.github.io/compiler/html/main.html\"\r\n\r\n\r\n               } else if(window.location.href.includes(\"log\") && document.getElementById(\"passInp\").value.length == 0 ){ /* suited for local server */\r\n                    window.location.href = \"./main.html\"\r\n\r\n\r\n               } else if(window.location.href.includes(\"index\")) {\r\n                    window.location.href = \"./html/main.html\"\r\n               }\r\n          \r\n          }\r\n     }\r\n}\r\n\r\n\r\nfunction showAdmContent() {\r\n     console.log(\"jspermissions.js\");\r\n     // let admClasses = document.querySelectorAll(\".limitedAcess\");\r\n\r\n     // admClasses.forEach((analyzedElement) => {\r\n     //      analyzedElement.style.display = \"flex\";\r\n\r\n     // })\r\n}\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });\n\n//# sourceURL=webpack://compiler/./js/basic/general/jspermissions.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var _jsfirebase_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./jsfirebase.js */ \"./js/basic/general/jsfirebase.js\");\n/* harmony import */ var _jsuserdata_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./jsuserdata.js */ \"./js/basic/general/jsuserdata.js\");\n\r\n\r\n\r\n\r\n\r\n// redirect to the first page if there is no user\r\n(0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.onAuthStateChanged)(_jsfirebase_js__WEBPACK_IMPORTED_MODULE_1__.auth, (authData) => {\r\n     console.log(authData);\r\n     analyzeLogState(authData);     \r\n\r\n     if(_jsuserdata_js__WEBPACK_IMPORTED_MODULE_2__.userData.usertype === \"admin\") {\r\n          showAdmContent();\r\n     }\r\n})\r\n\r\ndocument.body.addEventListener(\"load\", () => {\r\n     if(_jsuserdata_js__WEBPACK_IMPORTED_MODULE_2__.userData.usertype === \"admin\") {\r\n          showAdmContent();\r\n     }\r\n})\r\n\r\n\r\n\r\n// // functions\r\n// m level\r\nfunction analyzeLogState(data) {\r\n     preventUnlogUser()\r\n     preventLogUser()\r\n\r\n\r\n     function preventUnlogUser() {\r\n          // user is not logged in, therefore he doesn't have acess to the site \r\n               if(data === null && !window.location.href.includes(\"index\") && !window.location.href.includes(\"log\") && window.location.href != \"https://gleversonrafael.github.io/compiler/\" ) {\r\n               // GITHUB COMPATIBILITY\r\n               if(window.location.href.includes(\"github\")) {\r\n                    window.location.href = \"https://gleversonrafael.github.io/compiler/\"\r\n\r\n               } else {\r\n                    window.location.href = \"./../index.html\";\r\n               }\r\n               \r\n          }\r\n     }\r\n\r\n\r\n     function preventLogUser() {\r\n          // user is logged in and tries to acess start page / login (GITHUB COMPATIBILITY)\r\n          if(data != null && ( window.location.href.includes(\"index\") || window.location.href == \"https://gleversonrafael.github.io/compiler/\" || window.location.href.includes(\"log\"))) {\r\n               if(window.location.href.includes(\"github\")) {\r\n                    window.location.href = \"https://gleversonrafael.github.io/compiler/html/main.html\"\r\n\r\n\r\n               } else if(window.location.href.includes(\"log\") && document.getElementById(\"passInp\").value.length == 0 ){ /* suited for local server */\r\n                    window.location.href = \"./main.html\"\r\n\r\n\r\n               } else if(window.location.href.includes(\"index\")) {\r\n                    window.location.href = \"./html/main.html\"\r\n               }\r\n          \r\n          }\r\n     }\r\n}\r\n\r\n\r\nfunction showAdmContent() {\r\n     console.log(\"jspermissions.js\");\r\n     // let admClasses = document.querySelectorAll(\".limitedAcess\");\r\n\r\n     // admClasses.forEach((analyzedElement) => {\r\n     //      analyzedElement.style.display = \"flex\";\r\n\r\n     // })\r\n}\n\n//# sourceURL=webpack://compiler/./js/basic/general/jspermissions.js?");
 
 /***/ }),
 
@@ -34,9 +34,9 @@ eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__
 /*!****************************************!*\
   !*** ./js/basic/general/jsuserdata.js ***!
   \****************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   userData: () => (/* binding */ userData)\n/* harmony export */ });\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var _jsfirebase_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./jsfirebase.js */ \"./js/basic/general/jsfirebase.js\");\n\r\n\r\n\r\n\r\n\r\n\r\n// SISTEMA FUTURO - A DATA É RETORNADA EM VARIÁVEL E NÃO ARMAZENADA.\r\n\r\n// var\r\nlet userData;\r\n\r\nawait userDataProcess();\r\n\r\n\r\n\r\n// m function\r\nasync function userDataProcess() {\r\n     let uid = await obtainUID();\r\n\r\n     if(uid != null) {\r\n          await obtainUserData();\r\n     }\r\n    \r\n\r\n\r\n     // complementary\r\n     async function obtainUID() {   \r\n          // var\r\n          let receiveUID = new Promise((correct, wrong) => {\r\n               (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.onAuthStateChanged)(_jsfirebase_js__WEBPACK_IMPORTED_MODULE_2__.auth, (uData) => { \r\n                    uData ? correct(`u${uData.uid}`) : wrong(\"Null data.\");                    \r\n               \r\n               });\r\n          })\r\n\r\n          let returnVal;\r\n\r\n\r\n          // m process\r\n          await receiveUID\r\n          .then((res) => {\r\n               returnVal = res;\r\n\r\n          })\r\n\r\n          .catch((errorMsg) => {\r\n               console.log(errorMsg);\r\n               returnVal = null;\r\n          });\r\n\r\n\r\n          return returnVal;\r\n     }\r\n\r\n\r\n     async function obtainUserData() {\r\n          const userDataDocument = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_0__.doc)(_jsfirebase_js__WEBPACK_IMPORTED_MODULE_2__.db, \"usersInfo\", uid);\r\n          \r\n          await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_0__.getDoc)(userDataDocument)\r\n          .then((obtainedDataInstance) => {\r\n               const dataId = obtainedDataInstance.id;\r\n\r\n               userData = obtainedDataInstance.data();\r\n               Object.defineProperty(userData, \"uid\", { value: dataId, enumerable: true});\r\n\r\n               const { password, telephone, ...safeOwnUserData } = userData;\r\n               userData = safeOwnUserData\r\n\r\n          })\r\n          .catch((error) => {\r\n               console.log(`ERROR: USER COULDN'T BE OBTAINED. CODE: ${error.code}`);\r\n          })\r\n     \r\n     }\r\n};\r\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } }, 1);\n\n//# sourceURL=webpack://compiler/./js/basic/general/jsuserdata.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   currentUserUID: () => (/* binding */ currentUserUID),\n/* harmony export */   fetchOwnUserData: () => (/* binding */ fetchOwnUserData)\n/* harmony export */ });\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var _jsfirebase_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./jsfirebase.js */ \"./js/basic/general/jsfirebase.js\");\n\r\n\r\n\r\n\r\n\r\nlet currentUserUID = obtainCurrentUID();\r\n\r\n\r\n\r\n\r\n// m function\r\nasync function fetchOwnUserData() {\r\n     let userData;\r\n\r\n     const uid = await obtainCurrentUID();\r\n     userData = uid != null ? await obtainUserData() : \"noDataObtained\" \r\n\r\n     return userData === \"noUserFound\" ? false : userData\r\n    \r\n\r\n     // complementary\r\n     async function obtainUserData() {\r\n          const userDataDocument = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_0__.doc)(_jsfirebase_js__WEBPACK_IMPORTED_MODULE_2__.db, \"usersInfo\", uid);\r\n          let obtainedResult;\r\n          \r\n          await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_0__.getDoc)(userDataDocument)\r\n          .then((obtainedDataInstance) => {\r\n               const dataId = obtainedDataInstance.id;\r\n\r\n               userData = obtainedDataInstance.data();\r\n               Object.defineProperty(userData, \"uid\", { value: dataId, enumerable: true});\r\n\r\n               const { password, telephone, ...safeOwnUserData } = userData;\r\n\r\n               obtainedResult = safeOwnUserData;\r\n\r\n          })\r\n          .catch((error) => {\r\n               console.log(`ERROR: USER COULDN'T BE OBTAINED. CODE: ${error.code}`);\r\n               obtainedResult = \"noUserFound\"\r\n          })\r\n\r\n\r\n          return obtainedResult\r\n     }\r\n};\r\n\r\n\r\n\r\n\r\nasync function obtainCurrentUID() {   \r\n     // var\r\n     let receiveUID = new Promise((correct, wrong) => {\r\n          (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.onAuthStateChanged)(_jsfirebase_js__WEBPACK_IMPORTED_MODULE_2__.auth, (uData) => { \r\n               uData ? correct(`u${uData.uid}`) : wrong(\"Null data.\");                    \r\n          \r\n          });\r\n     })\r\n\r\n     let returnVal;\r\n\r\n\r\n     // m process\r\n     await receiveUID\r\n     .then((res) => {\r\n          returnVal = res;\r\n\r\n     })\r\n\r\n     .catch((errorMsg) => {\r\n          console.log(errorMsg);\r\n          returnVal = null;\r\n     });\r\n\r\n\r\n     return returnVal;\r\n}\r\n\n\n//# sourceURL=webpack://compiler/./js/basic/general/jsuserdata.js?");
 
 /***/ }),
 
@@ -220,75 +220,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	__webpack_require__.m = __webpack_modules__;
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/async module */
-/******/ 	(() => {
-/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
-/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
-/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
-/******/ 		var resolveQueue = (queue) => {
-/******/ 			if(queue && queue.d < 1) {
-/******/ 				queue.d = 1;
-/******/ 				queue.forEach((fn) => (fn.r--));
-/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
-/******/ 			}
-/******/ 		}
-/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
-/******/ 			if(dep !== null && typeof dep === "object") {
-/******/ 				if(dep[webpackQueues]) return dep;
-/******/ 				if(dep.then) {
-/******/ 					var queue = [];
-/******/ 					queue.d = 0;
-/******/ 					dep.then((r) => {
-/******/ 						obj[webpackExports] = r;
-/******/ 						resolveQueue(queue);
-/******/ 					}, (e) => {
-/******/ 						obj[webpackError] = e;
-/******/ 						resolveQueue(queue);
-/******/ 					});
-/******/ 					var obj = {};
-/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
-/******/ 					return obj;
-/******/ 				}
-/******/ 			}
-/******/ 			var ret = {};
-/******/ 			ret[webpackQueues] = x => {};
-/******/ 			ret[webpackExports] = dep;
-/******/ 			return ret;
-/******/ 		}));
-/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
-/******/ 			var queue;
-/******/ 			hasAwait && ((queue = []).d = -1);
-/******/ 			var depQueues = new Set();
-/******/ 			var exports = module.exports;
-/******/ 			var currentDeps;
-/******/ 			var outerResolve;
-/******/ 			var reject;
-/******/ 			var promise = new Promise((resolve, rej) => {
-/******/ 				reject = rej;
-/******/ 				outerResolve = resolve;
-/******/ 			});
-/******/ 			promise[webpackExports] = exports;
-/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
-/******/ 			module.exports = promise;
-/******/ 			body((deps) => {
-/******/ 				currentDeps = wrapDeps(deps);
-/******/ 				var fn;
-/******/ 				var getResult = () => (currentDeps.map((d) => {
-/******/ 					if(d[webpackError]) throw d[webpackError];
-/******/ 					return d[webpackExports];
-/******/ 				}))
-/******/ 				var promise = new Promise((resolve) => {
-/******/ 					fn = () => (resolve(getResult));
-/******/ 					fn.r = 0;
-/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
-/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
-/******/ 				});
-/******/ 				return fn.r ? promise : getResult();
-/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
-/******/ 			queue && queue.d < 0 && (queue.d = 0);
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/chunk loaded */
 /******/ 	(() => {
 /******/ 		var deferred = [];

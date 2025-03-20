@@ -1,7 +1,73 @@
 @charset "UTF-8";
 
-#mainHeader, #mCon, #mMenuB {
-    display: none;
+/* animations + its components */
+.loadingSpiral {
+    margin-bottom: 15px;
+
+    animation: 0.75s loadingSpiral infinite normal;
+    animation-timing-function: linear;
+}
+
+@keyframes loadingSpiral {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 
+.loadingGroup {
+    position: fixed;
+    z-index: 5;
+
+    background-color: var(--uiPrimaryBlack);
+
+    justify-content: center;
+    align-items: center;
+
+    flex-flow: column wrap;
+    height: 100%;
+    width: 100%;
+}
+
+
+.loadingEmphasis {
+    font: 500 1.5em var(--rFont);
+    color: var(--uiPrimaryWhite);
+}
+
+.loadingParagraph {
+    font: 300 0.75em var(--rFont);
+    color: var(--uiSecondaryWhite);
+}
+
+
+/* loading skeleton */
+.loadingSkeleton {
+    position: relative;
+    
+    width: fit-content;
+    height: fit-content;
+}
+
+.loadingSkeleton:before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--uiSecondaryGrey);
+    border-radius: 25px;
+
+    animation: 0.5s loadingSkeletonCSS infinite normal;
+}
+
+
+
+
+@media screen and (min-width: 768px) {
+}

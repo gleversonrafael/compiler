@@ -3,7 +3,7 @@ import { onSnapshot, setDoc, doc, query, where } from "firebase/firestore";
 import { firebaseConfig, db, usersCol } from "./general/jsfirebase.js";
 import { createUserWithEmailAndPassword, signOut, getAuth } from "firebase/auth";
 
-import { userData } from "./general/jsuserdata.js";
+import { fetchOwnUserData } from "./general/jsuserdata.js";
 
 import { 
      setReusableEvents, forEachPropertyWithDo, 
@@ -184,9 +184,10 @@ function showUserDeleteBox(userInformationObject) {
 
 
 
+
 // table
 onSnapshot(
-     query(usersCol, where("id", "!=", userData.uid)), 
+     query(usersCol, where("id", "!=", currentUserUID)), 
 
      (snapshotEvent) => {
           document.querySelector("#usersTable .tableBody").innerHTML = "";

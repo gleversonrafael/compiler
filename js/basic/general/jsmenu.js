@@ -1,6 +1,6 @@
 import { signOut } from "firebase/auth"
 import { auth } from "../general/jsfirebase.js"
-import { userData } from "./jsuserdata.js"
+import { fetchOwnUserData } from "./jsuserdata.js"
 
 
 // load defaults
@@ -108,12 +108,14 @@ function toggleLeaveMenuBox() {
 
 
 // s level
-function menuVisualState() {
+async function menuVisualState() {
      loadMenuBoxEffect()
-     loadNameAndType()
+     await loadNameAndType()
 
 
-     function loadNameAndType() {
+     async function loadNameAndType() {
+          const userData = await fetchOwnUserData();
+
           let userName = document.getElementById("userName");
           let userType = document.getElementById("userType");
 

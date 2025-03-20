@@ -5,19 +5,21 @@ import { db } from "./jsfirebase.js"
 import bcrypt from "bcryptjs"
 
 
+
+
+
 // reusable events
 function setReusableEvents(eventsArray) {
      const functionsObject = {
           formsEventCall : formsEvent,
-          cancelModalEventCall: cancelModalEvent
-     }
+          cancelModalEventCall: cancelModalEvent,
 
+     }
 
      eventsArray.forEach((selectedEvent) => {
           const executeFunction = functionsObject[`${selectedEvent}Call`];
           executeFunction();
      });
-
 
 
      // events
@@ -31,6 +33,7 @@ function setReusableEvents(eventsArray) {
                });
           })
      }
+
 
      function cancelModalEvent() { 
           let cancelModalButtons = document.querySelectorAll(".cancelModalButton");
@@ -46,9 +49,7 @@ function setReusableEvents(eventsArray) {
                     toggleModal(canceledModalId);
                })
           })
-
      }
-
 }
 
 
@@ -69,7 +70,6 @@ function obtainFather(clickedChild, fatherUniqueClass) {
                errorResult = selectedParent.classList.contains(fatherUniqueClass) ? false : true
                break
           }
-
      }
 
      return errorResult === false ? selectedParent : "noFather"

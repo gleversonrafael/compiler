@@ -13,18 +13,15 @@
      <link rel="stylesheet" href="../css/mainsitestructures.css">
      <link rel="stylesheet" href="../css/reusablestructures.css">
 
+
+
 </head>
 
 
 <body>
-     
-     <div>
-          Loading block
-
-     </div>
-
      <!-- header -- messages -->
      <header id="mainHeader" class="flex fJustC"></header>
+
 
      <!-- menu -->
      <section role="menubar" id="mMenuB" class="menuClosed">
@@ -112,7 +109,17 @@
      </section>
 
 
+     <div class="loadingGroup loadingJS flex">
+          <img class="loadingSpiral" src="../media/ico/loadingspiral.svg" alt="Espiral">
+
+          <p class="loadingEmphasis"> Carregando plataforma </p>
+          <p class="loadingParagraph"> Esse processo pode demorar um pouco</p>
+
+     </div>
+
+
      <section id="modalArea" class="flex flex-col fJustC"> <!-- modals goes here --> </section>
+
 
      <!-- Page content ----------------->
      <main id="mCon" class="flex fJustC"></main>
@@ -126,8 +133,8 @@
 
      <!-- scripts -->
      <section id="scriptsSection">
-          <!-- <script src="../js/final/maindependenciesbundle.js"></script> -->
-          <!-- <script src="../js/final/mainpagebundle.js"></script> -->
+          <script src="../js/final/maindependenciesbundle.js"></script>
+          <script src="../js/final/mainpagebundle.js"></script>
 
      </section>
 
