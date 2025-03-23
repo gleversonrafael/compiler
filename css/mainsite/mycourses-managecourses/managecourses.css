@@ -18,14 +18,14 @@
      width: 100%;
 
      padding: 20px;
-     background-color: transparent;
+     background-color: var(--uiPrimaryGrey);
 
      cursor: pointer;
 }
 
 #addCourseButton {
+     border: none;
      color: var(--primaryColor);
-     border: 1px solid var(--primaryColor);
 }
 
 #addCourseButton:disabled {
@@ -34,15 +34,18 @@
 
 
 #deleteCourseButton {
-     color: var(--uiSecondaryWhite);
-     border: 1px solid var(--uiSecondaryWhite);
-
+     border: none;
+     color: var(--primaryOpposite);
 }
 
 #operationsA button:hover {
-     color: var(--uiPrimaryBlack);
-     background-color: var(--uiPrimaryWhite);
+     opacity: 0.75;
 }
+
+#operationsA button:active {
+     background-color: var(--uiSecondaryGrey);
+}
+
 
 #bgEff {    
      justify-content: center;
@@ -547,7 +550,7 @@ div.stepperGroup {
 @media screen and (min-width: 768px) {
      #operationsA button {
           width: calc(50% - 5px);
-          padding: 15px;
+          padding: 10px;
      }
 
      /* create course box */
