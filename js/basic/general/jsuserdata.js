@@ -2,10 +2,12 @@ import { getDoc, doc } from "firebase/firestore"
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./jsfirebase.js";
 
+let currentUserUID;
 
-let currentUserUID = obtainCurrentUID();
+await obtainCurrentUID()
+.then((returnedUserUID) => {currentUserUID = returnedUserUID});
 
-export { fetchOwnUserData, currentUserUID };
+export { fetchOwnUserData, currentUserUID};
 
 
 // m function
@@ -73,5 +75,5 @@ async function obtainCurrentUID() {
      });
 
 
-     return returnVal;
+     return returnVal
 }

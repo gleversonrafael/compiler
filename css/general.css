@@ -208,4 +208,9 @@ input::-webkit-inner-spin-button {
 }
 
 
+.loadingSkeleton .sTrans, .loadingSkeleton .dTrans, .loadingSkeleton .fTrans {
+    transition: none;
+}
+
+
 

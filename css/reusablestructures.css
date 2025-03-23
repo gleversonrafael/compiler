@@ -255,7 +255,7 @@
      background-color: var(--uiPrimaryGrey);
      padding: 10px 5px;
 
-     max-width: 450px;
+     /* max-width: 450px; */
 }
 
 .searchBox:has(.searchInput:hover) {

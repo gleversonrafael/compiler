@@ -1,15 +1,15 @@
 import { initializeApp } from "firebase/app"
-import { onSnapshot, setDoc, doc, query, where } from "firebase/firestore";
+import { getDocs, setDoc, doc, query, where } from "firebase/firestore";
 import { firebaseConfig, db, usersCol } from "./general/jsfirebase.js";
 import { createUserWithEmailAndPassword, signOut, getAuth } from "firebase/auth";
 
-import { fetchOwnUserData } from "./general/jsuserdata.js";
+import { currentUserUID } from "./general/jsuserdata.js";
+import { setFunctionsOnLoad, removeSkeletons } from "./general/jsload.js" 
 
 import { 
      setReusableEvents, forEachPropertyWithDo, 
      showMessageBox, toggleModal, customUpdateDocument,
      userDataIsValid, createUserDataArray, convertSpecificArrayIntoObject,
-     obtainFather
      
 } from "./general/jsreusablestructures.js"
 
@@ -22,184 +22,35 @@ setReusableEvents([
 
 
 
+// asyncronous
+await refreshTableWithNewData();
+setFunctionsOnLoad([removeSkeletons]);
 
 
-// create
-function setManageUsersEvents() {
-     document.getElementById("createUserForm").addEventListener("submit", () => {
-          createNewUser();
+async function refreshTableWithNewData() {
+     let usersArray;
+     let refreshSuccess;
+
+     await getDocs(query(usersCol, where, "uid", "!=", currentUserUID))
+     .then((receivedUsers) => {
+          usersArray = obtainDocumentsArray(receivedUsers);
+          fillTable("usersTable", usersArray, "users");
+          refreshSuccess = true;
+
+     })
+     .catch((error) => {
+          showMessageBox("errorMessage", "Não foi possível recarregar a tabela.");
+          console.log(error.code);
+          refreshSuccess = false;
      })
 
-     document.getElementById("openSignModal").addEventListener("click", () => {
-          toggleModal("signUsersModal");
-     })
-     
-     document.querySelector("#deleteUserModal .confirmFormJS").addEventListener("click", () => {
-          deleteUserSubmit();
-     })
+     return refreshSuccess;
 }
-
-
-async function createNewUser() {
-     // user data creation
-     const createdUserInputs = createUserInputs();
-     const userDataArray = createUserDataArray("create", createdUserInputs);
-     const userDataObject = convertSpecificArrayIntoObject(userDataArray);
-     const userValidation = userDataIsValid(userDataArray);
-
-     let messageType = "errorMessage";
-     let message;
-
-
-     if(userValidation) {
-          const signUserAttempt = await signUser(userDataObject);
-
-          if(signUserAttempt.result === true) {
-               const newUserDatabaseUID = `u${signUserAttempt.returnedUID}`
-
-               await setDoc(doc(db, "usersInfo", newUserDatabaseUID), userDataObject)
-               .then(() => {
-                    messageType = "successMessage";
-                    message = "O usuário foi criado com sucesso!"
-
-               })
-               .catch((error) => {
-                    messageType = "strangeMessage"
-                    message = "A autenticiadde do usuário foi cadastrada, sem um local definido no banco de dados."
-               
-                    console.log(`ERROR: ${error.code}`);
-               })
-          
-
-          } else {
-               let selectedErrorMessage;
-
-               switch(signUserAttempt.errorCode) {
-                    case "auth/email-already-in-use": 
-                         selectedErrorMessage = "Esse e-mail já está em uso!"
-                         break
-
-                    default:
-                         selectedErrorMessage = "Um erro desconhecido no cadastramento de usuário ocorreu."
-               }
-
-               message = selectedErrorMessage;
-          }       
-
-     } else  { 
-          message = ! userValidation ? "Preencha os dados do usuário corretamente!" : "Selecione o tipo de usuário!"
-     } 
-
-
-     showMessageBox(messageType, message)
-
-
-     // complementary
-     function createUserInputs() {
-          let returnedInputs = [];
-
-          // fill fillable inputs (string , telephone...)
-          const fillableInputs =  document.querySelectorAll("#createUserForm .fillableInputJS");
-
-          fillableInputs.forEach((selectedInput) => {
-               if(selectedInput.classList.contains("requiredInputJS") || selectedInput.value) {
-                    returnedInputs.push(selectedInput);
-               }
-          })
-
-
-          // is user type filled
-          const userTypeInput = document.querySelector("#createUserForm .userTypeInput:checked");
-
-          if(! userTypeInput) {
-               userType = convertHtmlStringToElement(`<input type="radio" name="usertype" value="">`)
-          } 
-
-          returnedInputs.push(userTypeInput);
-     
-
-          return returnedInputs
-     }
-
-
-     async function signUser(userData) {    
-          // creates a new instance that prevents current user from logging out
-          const signApp = initializeApp(firebaseConfig, "signApp");
-          const signAuth = getAuth(signApp);
-
-          let signResult = {result: false, returnedUID: null, errorCode: null}
-
-
-          await createUserWithEmailAndPassword(signAuth, userData.email, userData.password)
-          .then((newUserCredential) => {
-               signResult.returnedUID = `u${newUserCredential.user.uid}`;
-               signResult.result = true;
-
-          })
-          .catch((errorMessage) => {
-               signResult.errorCode = errorMessage.code
-          })
-
-
-          await signOut(signAuth);
-
-          return signResult;
-     }
-}
-
-
-// delete
-async function deleteUserSubmit() {
-     const deleteUserModal = document.querySelector("#deleteUserModal");
-     const deleteString  = /[delete]]/
-     const userUID = deleteUserModal.dataset.selecteduseruid;
-
-     const deleteUserProcess = await customUpdateDocument({
-          documentId: userUID,
-          selectedCollection: "usersInfo",
-          newData: { deleted: true },
-          desiredMessage: "O usuário foi excluído da plataforma!",
-          errorMessage: "O usuário não foi excluído. Tente novamente."
-     })
-
-
-     if(deleteUserProcess.result === true) {
-          toggleModal("deleteUserModal");
-          deleteUserModal.removeAttribute("data-selecteduseruid");
-     }
-}
-
-
-function showUserDeleteBox(userInformationObject) {
-     // userInformationObject = { userName, userUID }
-
-     const deleteUserModal = document.querySelector("#deleteUserModal");
-     const selectedUserDisplayName = document.querySelector("#deleteUserModal .displayTextJS");
-
-     deleteUserModal.setAttribute("data-selecteduseruid", userInformationObject.userUID);
-     selectedUserDisplayName.innerText = userInformationObject.userName;
-
-     toggleModal("deleteUserModal");
-}
-
-
 
 
 // table
-onSnapshot(
-     query(usersCol, where("id", "!=", currentUserUID)), 
-
-     (snapshotEvent) => {
-          document.querySelector("#usersTable .tableBody").innerHTML = "";
-          fillTable("usersTable", snapshotEvent, "users");
-     }
-);
-
-
-async function fillTable(tableId, obtainedData, tableType) {
+async function fillTable(tableId, dataArray, tableType) {
      const tableBody = document.querySelector(`#${tableId} .tableBody`);
-     let dataArray = await obtainDocumentsArray(obtainedData);
-
 
      for(let currentItem = 0; currentItem < dataArray.length; currentItem++) {
           let tableRow = document.createElement("tr");
@@ -343,6 +194,178 @@ async function fillTable(tableId, obtainedData, tableType) {
           }
      }
 }
+
+
+// create
+function setManageUsersEvents() {
+     document.getElementById("createUserForm").addEventListener("submit", () => {
+          createNewUser();
+     })
+
+     document.getElementById("openSignModal").addEventListener("click", () => {
+          toggleModal("signUsersModal");
+     })
+     
+     document.querySelector("#deleteUserModal .confirmFormJS").addEventListener("click", () => {
+          deleteUserSubmit();
+     })
+}
+
+
+async function createNewUser() {
+     // user data creation
+     const createdUserInputs = createUserInputs();
+     const userDataArray = createUserDataArray("create", createdUserInputs);
+     const userDataObject = convertSpecificArrayIntoObject(userDataArray);
+     const userValidation = userDataIsValid(userDataArray);
+
+     let messageType = "errorMessage";
+     let message;
+
+     await validateAndCreateUser();
+     showMessageBox(messageType, message)
+
+
+     // complementary
+     function createUserInputs() {
+          let returnedInputs = [];
+
+          // fill fillable inputs (string , telephone...)
+          const fillableInputs =  document.querySelectorAll("#createUserForm .fillableInputJS");
+
+          fillableInputs.forEach((selectedInput) => {
+               if(selectedInput.classList.contains("requiredInputJS") || selectedInput.value) {
+                    returnedInputs.push(selectedInput);
+               }
+          })
+
+
+          // is user type filled
+          const userTypeInput = document.querySelector("#createUserForm .userTypeInput:checked");
+
+          if(! userTypeInput) {
+               userType = convertHtmlStringToElement(`<input type="radio" name="usertype" value="">`)
+          } 
+
+          returnedInputs.push(userTypeInput);
+     
+
+          return returnedInputs
+     }
+
+
+     async function validateAndCreateUser() {
+          if(userValidation) {
+               const signUserAttempt = await signUser(userDataObject);
+     
+               if(signUserAttempt.result === true) {
+                    const newUserDatabaseUID = `u${signUserAttempt.returnedUID}`
+     
+                    Object.defineProperty(userDataObject, "uid", {
+                         value: newUserDatabaseUID,
+                         enumerable: true
+                    });
+     
+                    await addUserToDatabase(newUserDatabaseUID, userDataObject);          
+     
+               } else {
+                    let selectedErrorMessage;
+     
+                    switch(signUserAttempt.errorCode) {
+                         case "auth/email-already-in-use": 
+                              selectedErrorMessage = "Esse e-mail já está em uso!"
+                              break
+     
+                         default:
+                              selectedErrorMessage = "Um erro desconhecido no cadastramento de usuário ocorreu."
+                    }
+     
+                    message = selectedErrorMessage;
+               }       
+     
+          } else  { 
+               message = ! userValidation ? "Preencha os dados do usuário corretamente!" : "Selecione o tipo de usuário!"
+          }   
+     }
+
+
+     async function signUser(userData) {    
+          // creates a new instance that prevents current user from logging out
+          const signApp = initializeApp(firebaseConfig, "signApp");
+          const signAuth = getAuth(signApp);
+
+          let signResult = {result: false, returnedUID: null, errorCode: null}
+
+
+          await createUserWithEmailAndPassword(signAuth, userData.email, userData.password)
+          .then((newUserCredential) => {
+               signResult.returnedUID = `u${newUserCredential.user.uid}`;
+               signResult.result = true;
+
+          })
+          .catch((errorMessage) => {
+               signResult.errorCode = errorMessage.code
+          })
+
+
+          await signOut(signAuth);
+
+          return signResult;
+     }
+     
+
+     async function addUserToDatabase(userUID, userData,) {
+          // save data into database
+          await setDoc(doc(db, "usersInfo", userUID), userData)
+          .then(() => {
+               messageType = "successMessage";
+               message = "O usuário foi criado com sucesso!"
+
+          })
+          .catch((error) => {
+               messageType = "strangeMessage"
+               message = "A autenticiadde do usuário foi cadastrada, sem um local definido no banco de dados."
+               console.log(`ERROR: ${error.code}`);
+          })
+
+     }
+}
+
+
+// delete
+async function deleteUserSubmit() {
+     const deleteUserModal = document.querySelector("#deleteUserModal");
+     const deleteString  = /[delete]]/
+     const userUID = deleteUserModal.dataset.selecteduseruid;
+
+     const deleteUserProcess = await customUpdateDocument({
+          documentId: userUID,
+          selectedCollection: "usersInfo",
+          newData: { deleted: true },
+          desiredMessage: "O usuário foi excluído da plataforma!",
+          errorMessage: "O usuário não foi excluído. Tente novamente."
+     })
+
+
+     if(deleteUserProcess.result === true) {
+          toggleModal("deleteUserModal");
+          deleteUserModal.removeAttribute("data-selecteduseruid");
+     }
+}
+
+
+function showUserDeleteBox(userInformationObject) {
+     // userInformationObject = { userName, userUID }
+
+     const deleteUserModal = document.querySelector("#deleteUserModal");
+     const selectedUserDisplayName = document.querySelector("#deleteUserModal .displayTextJS");
+
+     deleteUserModal.setAttribute("data-selecteduseruid", userInformationObject.userUID);
+     selectedUserDisplayName.innerText = userInformationObject.userName;
+
+     toggleModal("deleteUserModal");
+}
+
 
 
 // reusable

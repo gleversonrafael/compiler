@@ -1,8 +1,8 @@
 import { fetchOwnUserData } from "./general/jsuserdata.js"
+import { setFunctionsOnLoad, removeSkeletons } from "./general/jsload.js"
 
-
-
-
+await setHomeDefaults();
+setFunctionsOnLoad([removeSkeletons]);
 
 
 async function setHomeDefaults() {
