@@ -21,7 +21,6 @@ async function removeSkeletons() {
      if(selectedSkeletons) {
           for(let thisSkeleton = 0; thisSkeleton < selectedSkeletons.length; thisSkeleton ++ ) {
                selectedSkeletons[thisSkeleton].classList.remove("loadingSkeleton");
-               console.log(selectedSkeletons[thisSkeleton] + "removed");
           }
      }
 }

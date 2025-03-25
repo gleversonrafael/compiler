@@ -1,29 +1,28 @@
-import { forEachPropertyWithDo, showMessageBox } from "./general/jsreusablestructures";
+import { forEachPropertyWithDo, showMessageBox } from "./jsreusablestructures";
 
-setPageChangeEvents();
-changePage("home");
 
 function setPageChangeEvents() {
-     let changePageItems = document.querySelectorAll(".changePageJS");
+     const changePageItems = document.querySelectorAll(`[data-changepagestate="possible"]`);
 
      changePageItems.forEach((item) => {
           item.addEventListener("click", async (event) => {
-               let selectedPageName = event.currentTarget.name;
-
+               const selectedItem = event.currentTarget;
                event.preventDefault();
-               await changePage(selectedPageName);
+               
+               await changePage(selectedItem.name, selectedItem.href);
+               selectedItem.dataset.changepagestate = "valid"
           });
-
      })
 }
 
 
-async function changePage(pageName) {
-     let documentHTML = await getPageHtml(pageName);
+async function changePage(pageName, pageUrl) {
+     let documentHTML = await getPageHtml(pageUrl);
 
      if(documentHTML) {
           const pageTitle = document.querySelector("title");
           pageTitle.innerText = formatPageString(pageName);
+          // history.pushState({},"" , pageUrl);
 
           toggleElements("reset", documentHTML);
           toggleElements("create", documentHTML);
@@ -31,8 +30,6 @@ async function changePage(pageName) {
 
 
      function formatPageString(analyzedString) {
-          console.log(analyzedString);
-
           let returnedString; 
 
           switch(analyzedString) {
@@ -58,12 +55,11 @@ async function changePage(pageName) {
 
                default:
           }
-
-          console.log(returnedString);
-
+          
           return returnedString
      }
 
+     
      function toggleElements(typeOfOperation, otherPageHTML) {
           const mCon = document.getElementById("mCon");
           const modalArea = document.getElementById("modalArea");
@@ -120,10 +116,6 @@ async function changePage(pageName) {
 
                                              generatedScript.src = thisChild.src
                                              generatedScript.classList = thisChild.classList;  
-                                                                                        
-                                             generatedScript.onload = () => {
-                                                  console.log(`script ${generatedScript.src} carregado.`);
-                                             }
 
                                              thisChild = generatedScript
                                         
@@ -174,10 +166,7 @@ async function changePage(pageName) {
 }
 
 
-async function getPageHtml(pageName) {
-     let selectedUrl = `../../html/${pageName}.html`
-     
-
+async function getPageHtml(selectedUrl) {
      let siteDocument = false;
 
      await fetch(selectedUrl)
@@ -208,9 +197,10 @@ function deleteElements(propertyName, propertyValue) {
      let elementsArray = Array.from(propertyValue);
 
      for(let selectedElement = 0; selectedElement < elementsArray.length; selectedElement++) {
-          console.log(elementsArray[selectedElement] + "deletado")
           elementsArray[selectedElement].remove();
      }
 }
 
+
+export { setPageChangeEvents, changePage };
 

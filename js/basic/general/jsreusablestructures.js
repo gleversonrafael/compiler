@@ -1,7 +1,8 @@
-import { userData } from "./jsuserdata.js";
+import { fetchOwnUserData, currentUserUID } from "./jsuserdata.js";
 import { usersCol } from "./jsfirebase.js"
 import { getDocs, doc, updateDoc, query, where, limit } from "firebase/firestore"
 import { db } from "./jsfirebase.js"
+
 import bcrypt from "bcryptjs"
 
 
@@ -151,10 +152,7 @@ function userDataIsValid(analyzedData) {
           if(selectedDataType) {
                regexTest = selectedDataType.test(analyzedItem[1]);
           }
-
-          console.log(analyzedItem);
-          console.log(regexTest);
-
+          
           if(regexTest === false) {
                finalResult = false
                break
@@ -168,25 +166,30 @@ function userDataIsValid(analyzedData) {
 
 
 // create user data array
-function createUserDataArray(operatingMode, selectedData) {
+async function createUserDataArray(operatingMode, selectedData) {
      // data accepted -> inputs with values and names
      let newArray = [];
+     let editedUser;
 
      if(operatingMode === "create") {
           newArray.push({active: true}, {deleted: false});
+
+     } else {
+          let {password, safeUserData } = await fetchOwnUserData();
+          editedUser = safeUserData;
      }
 
 
      selectedData.forEach((data) => {
-          if(operatingMode === "create" || ("operatingMode" === "edit" && data.value != userData[data.name])) {
+          if(operatingMode === "create" || (operatingMode === "edit" && data.value != safeUserData[data.name])) {
                let temporaryObject = {};
 
+               // data reference = input
                Object.defineProperty(temporaryObject, data.name, {
                     value: data.value,
                     enumerable: true,
                     writable: true,
                });
-
 
                newArray.push(temporaryObject);
           }
@@ -229,7 +232,7 @@ async function checkUserPassword(passwordString) {
 
 
      async function obtainUserPassword() {
-          let thisUserUid = userData.uid;
+          let thisUserUid = currentUserUID;
           let returnedPassword;
      
           await getDocs(query(usersCol, where("uid", "==", thisUserUid), limit(1)))

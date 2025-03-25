@@ -1,10 +1,13 @@
-import { signOut } from "firebase/auth"
-import { auth } from "../general/jsfirebase.js"
-import { fetchOwnUserData } from "./jsuserdata.js"
+import { signOut } from "firebase/auth";
+import { auth } from "../general/jsfirebase.js";
+import { fetchOwnUserData } from "./jsuserdata.js";
+import { setPageChangeEvents } from "../general/jspagechange.js";
 
 
 // load defaults
 document.body.addEventListener("load", loadDefaults());
+setPageChangeEvents();
+
 
 // toggle menu
 document.getElementById("menuIcon").addEventListener("click", () => { 
@@ -14,7 +17,7 @@ document.getElementById("menuIcon").addEventListener("click", () => {
 
 window.addEventListener("resize", () => {
      let menuBox = document.getElementById("mMenuB");
-     let leaveMenuButton = document.getElementById("leaveM")
+     let leaveMenuButton = document.getElementById("leaveM");
 
      if(window.innerWidth >= 768 && menuBox.classList.contains("menuClosed")) {
           toggleMenu(true, false);
@@ -134,8 +137,6 @@ async function menuVisualState() {
                     let selMenuBox = document.getElementById(menuSections[elem]);
                     let imgChange = document.querySelector(`a#${menuSections[elem]} > img`);
                     
-                    console.log(selMenuBox);
-                    console.log(menuSections[elem]);
      
                     // css - change box and img
                     selMenuBox.classList.add("selectedMenuBox")

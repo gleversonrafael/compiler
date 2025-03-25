@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs"
 
-import { userData } from "./general/jsuserdata.js";
+import { fetchOwnUserData, currentUserUID } from "./general/jsuserdata.js";
 import { 
      setReusableEvents, showMessageBox, 
      userDataIsValid, checkUserPassword, 
@@ -19,12 +19,12 @@ import { db, auth } from "./general/jsfirebase.js";
 let newAssignedPassword = null;
 let oldPassword;
 
-document.body.addEventListener("load", loadDefaults());
+document.body.addEventListener("load", await loadDefaults());
 
 
 // load defaults
-function loadDefaults() {
-     fillFieldsWithUserData();
+async function loadDefaults() {
+     await fillFieldsWithUserData();
      toggleEvents();
      saveUserDataProcess("setEvents");
 }
@@ -65,16 +65,17 @@ function toggleEvents() {
 }
 
 // fill form fields with user data
-function fillFieldsWithUserData() {
+async function fillFieldsWithUserData() {
+     const { password, ...safeUserData } = await fetchOwnUserData();
      let userInputs = document.querySelectorAll("#changeOwnUserData .fillableInputJS");
 
      for(let input = 0; input < userInputs.length; input++) {
           let fieldSearched = userInputs[input].name
 
-          if(userData[fieldSearched]) {
+          if(safeUserData[fieldSearched]) {
                if(fieldSearched != "password") {
-                    userInputs[input].placeholder = userData[fieldSearched];
-                    userInputs[input].value = userData[fieldSearched];
+                    userInputs[input].placeholder = safeUserData[fieldSearched];
+                    userInputs[input].value = safeUserData[fieldSearched];
                
                } else {
                     userInputs[input].placeholder = ""
@@ -117,7 +118,7 @@ async function temporarilyChangeUserPassword() {
 
 
 // save user data
-async function saveUserDataProcess(callType, canBeSaved) {
+async function saveUserDataProcess(callType, canBeSaved) {     
      let userInputs;
 
      let newUserData;
@@ -129,21 +130,21 @@ async function saveUserDataProcess(callType, canBeSaved) {
           setSaveEvents();
 
      } else {
+          const { password, ...currentUserData } =  await fetchOwnUserData();
+
           // array containing only the changed fields = [{name: test}, {test: test}]
           userInputs = document.querySelectorAll("form#changeOwnUserData .fillableInputJS");
-          newUserData = createUserDataArray("edit", userInputs, currentUserData);
-          
+          newUserData = createUserDataArray("edit", userInputs);
 
           if(newAssignedPassword != null) {
                newUserData.push({password: newAssignedPassword})
                newAssignedPassword = null;
           }
 
-
           newUserDataObject = convertSpecificArrayIntoObject(newUserData);
           analyzeResult = analyzeInputedData();
 
-          
+
           if(analyzeResult.correct === true) {
                // confirm password modal
                if(canBeSaved != true && analyzeResult.type === "confidential" && ! newUserDataObject.password) {
@@ -198,8 +199,6 @@ async function saveUserDataProcess(callType, canBeSaved) {
           });
      }
 
-
-
      function analyzeInputedData() {
           // analyzeResult = {correct: false, type: wrongInformation}
           let analyzeResult = {correct: false , type: false};
@@ -246,82 +245,81 @@ async function saveUserDataProcess(callType, canBeSaved) {
 
 
 
-     // function createNewUserDataArray() {
-     //      let newArray = [];
+     function createNewUserDataArray() {
+          let newArray = [];
           
-     //      userInputs.forEach((input) => {
-     //           if(input.value != input.placeholder) {
-     //                let temporaryObject = {};
+          userInputs.forEach((input) => {
+               if(input.value != input.placeholder) {
+                    let temporaryObject = {};
 
-     //                Object.defineProperty(temporaryObject, input.name, {
-     //                     value: input.value,
-     //                     enumerable: true,
-     //                     writable: true,
-     //                })
+                    Object.defineProperty(temporaryObject, input.name, {
+                         value: input.value,
+                         enumerable: true,
+                         writable: true,
+                    })
      
-     //                newArray.push(temporaryObject);
-     //           }
-     //      }) 
+                    newArray.push(temporaryObject);
+               }
+          }) 
 
 
-     //      if(newAssignedPassword) {
-     //           newArray.push({password: newAssignedPassword})
-     //           newAssignedPassword = null;
-     //      }
+          if(newAssignedPassword) {
+               newArray.push({password: newAssignedPassword})
+               newAssignedPassword = null;
+          }
           
-     //      return newArray
-     // }
+          return newArray
+     }
 
 
 
-     // async function confirmUserPassword() {
-     //      let returnedValue = false;
+     async function confirmUserPassword() {
+          let returnedValue = false;
 
-     //      let analyzedValue = document.getElementById("verifyPasswordInput").value;
-     //      let selectedFields = document.querySelectorAll("form#confirmPassword .confirmJS");
-     //      selectedFields = Array.from(selectedFields);
+          let analyzedValue = document.getElementById("verifyPasswordInput").value;
+          let selectedFields = document.querySelectorAll("form#confirmPassword .confirmJS");
+          selectedFields = Array.from(selectedFields);
      
-     //      let confirmPasswordFields = confirmNFields(selectedFields, analyzedValue);
+          let confirmPasswordFields = confirmNFields(selectedFields, analyzedValue);
      
      
-     //      // process
-     //      if(confirmPasswordFields === true && await checkUserPassword(analyzedValue) === true) {
-     //           returnedValue = true;
+          // process
+          if(confirmPasswordFields === true && await checkUserPassword(analyzedValue) === true) {
+               toggleModal("confirmPasswordModal");
 
-     //           toggleModal("confirmPasswordModal");
-               
-     //           oldPassword = analyzedValue;
-               
+               oldPassword = analyzedValue;
+               returnedValue = true;          
      
-     //      } else if(confirmPasswordFields === false) {
-     //           showMessageBox("errorMessage", "As senhas informadas se contradizem.")
+          } else if(confirmPasswordFields === false) {
+               showMessageBox("errorMessage", "As senhas informadas se contradizem.")
      
-     //      } else {
-     //           showMessageBox("errorMessage", "A senha informada não coincide com à do usuário")
-     //      }
+          } else {
+               showMessageBox("errorMessage", "A senha informada não coincide com à do usuário")
+          }
 
 
-     //      return returnedValue;
-     // }
+          return returnedValue;
+     }
 
 
 
      async function saveOwnUserDataAttempt(receivedDataType, receivedData) {
-          const userDoc = doc(db, "usersInfo", `u${userData.uid}`);
-          let userCredential;
+          const userDoc = doc(db, "usersInfo", `u${currentUserUID}`);
 
           const currentUser = auth.currentUser;
+          let userCredential;
 
           let validatedConfidentialFields = {};
           let validatedConfidentialFieldsValues;
           let validatedFieldState;
           
 
-
           // password / email on auth
           if(receivedDataType === "confidential") {
-               userCredential = EmailAuthProvider.credential(userData.email, oldPassword);
+               const {email} = await fetchOwnUserData();
                let credentialObtained;
+
+               userCredential = EmailAuthProvider.credential(email, oldPassword);
 
                // main process
                await reauthenticateWithCredential(currentUser, userCredential)
@@ -406,8 +404,7 @@ async function saveUserDataProcess(callType, canBeSaved) {
 // ""delete"" user
 async function deleteOwnUser() {
      if(await confirmUserPassword("deleteOwnUser") === true) {
-          console.log("deleted");
-          let userDocument = doc(db, "usersInfo", `u${userData.uid}`);
+          let userDocument = doc(db, "usersInfo", `u${ currentUserUID }`);
           
           updateDoc(userDocument, { deleted: true })
           .then(() => {

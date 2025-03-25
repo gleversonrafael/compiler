@@ -1,20 +1,14 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./jsfirebase.js";
-import { userData } from "./jsuserdata.js"
+import { fetchOwnUserData } from "./jsuserdata.js"
 
+const { usertype } = await fetchOwnUserData();
 
 // redirect to the first page if there is no user
 onAuthStateChanged(auth, (authData) => {
-     console.log(authData);
      analyzeLogState(authData);     
 
-     if(userData.usertype === "admin") {
-          showAdmContent();
-     }
-})
-
-document.body.addEventListener("load", () => {
-     if(userData.usertype === "admin") {
+     if(usertype=== "admin") {
           showAdmContent();
      }
 })
@@ -64,7 +58,6 @@ function analyzeLogState(data) {
 
 
 function showAdmContent() {
-     console.log("jspermissions.js");
      // let admClasses = document.querySelectorAll(".limitedAcess");
 
      // admClasses.forEach((analyzedElement) => {

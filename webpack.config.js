@@ -5,7 +5,7 @@ module.exports = {
   mode: "development",
 
   entry: {
-    maindependencies: ["./js/basic/general/jsfirebase.js", "./js/basic/general/jspermissions.js", "./js/basic/general/jsuserdata.js"],
+    maindependencies: ["./js/basic/general/jsfirebase.js", "./js/basic/general/jspermissions.js", "./js/basic/general/jsuserdata.js", "./js/basic/general/jspagechange.js"],
 
 
     login: {
@@ -15,7 +15,7 @@ module.exports = {
 
     mainpage: {
       dependOn: "maindependencies",
-      import : ["./js/basic/general/jsmenu.js", "./js/basic/jspagechange.js", "./js/basic/general/jsreusablestructures.js", "./js/basic/jsmain.js", "./js/basic/general/jsload.js"]
+      import : ["./js/basic/general/jsmenu.js","./js/basic/general/jsreusablestructures.js", "./js/basic/jsmain.js", "./js/basic/general/jsload.js"]
     },
 
     home: {
