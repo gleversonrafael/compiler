@@ -7,7 +7,6 @@ module.exports = {
   entry: {
     maindependencies: ["./js/basic/general/jsfirebase.js", "./js/basic/general/jspermissions.js", "./js/basic/general/jsuserdata.js", "./js/basic/general/jspagechange.js"],
 
-
     login: {
       dependOn: "maindependencies",
       import: ["./js/basic/loginsign/jslogin.js", "./js/basic/general/jsreusablestructures.js"]
@@ -46,50 +45,3 @@ module.exports = {
     filename: '[name]bundle.js',
   },
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// other way of doing -- target web for serveside
-// // server tecnologies
-// const serverSide = {
-//   mode: "development",
-//   target: "node",
-
-//   entry: {
-//     manageusers: {
-//       import: ["./js/adminfb.js"]
-
-//     }
-
-//   },
-
-//   output: {
-//     path: path.resolve(__dirname, "./js/final"),
-//     filename: "[name]serverside.js"
-  
-//   },
-
-//   resolve: {
-//     fallback: {
-//       fs: false,
-//       path: false
-
-//     }
-
-//   }
-// }

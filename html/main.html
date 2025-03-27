@@ -23,7 +23,7 @@
      <header id="mainHeader" class="flex fJustC"></header>
 
      <!-- menu -->
-     <section role="menubar" id="mMenuB" class="menuClosed">
+     <section data-loadState="false" role="menubar" id="mMenuB" class="menuClosed">
           <img id="menuIcon" class="menuChildOpen" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais brancas no sentido vertical"></div>
 
 
@@ -32,7 +32,7 @@
           <menu id="mMenu" class="menuChildClosed flex flex-col">
                <!-- dashboard -->
                <li> 
-                    <a data-changepagestate="possible" href="../html/home.html" name="home" id="navigate" class="mmBlock flex fAlignC sTrans">
+                    <a data-changepagestate="possible" href="../html/home.html" name="home" id="homeJS" class="mmBlock flex fAlignC">
                          <img src="../media/ico/menu/home.svg" alt="">
                          <p class="menuFont"> Home </p>
                     </a>
@@ -42,7 +42,7 @@
 
                <!-- my courses -->
                <li>
-                    <a data-changepagestate="possible" href="../html/mycourses.html" name="mycourses" id="mycourses" class="mmBlock flex fAlignC sTrans">
+                    <a data-changepagestate="possible" href="../html/mycourses.html" name="mycourses" id="mycoursesJS" class="mmBlock flex fAlignC">
                          <img src="../media/ico/menu/mycourses.svg" alt="">
                          <p class="menuFont"> Meus cursos</p>
                     </a>
@@ -52,7 +52,7 @@
 
                <!-- manage courses -->
                <li>
-                    <a data-changepagestate="possible" href="../html/managecourses.html" name="managecourses"  id="managecourses" class="limitedAcess mmBlock flex fAlignC sTrans">
+                    <a data-changepagestate="possible" href="../html/managecourses.html" name="managecoursesJS"  id="managecourses" class="limitedAcess mmBlock flex fAlignC">
                          <img src="../media/ico/menu/managecourses.svg" alt="">
                          <p class="menuFont"> Gerir cursos</p>
                     </a>
@@ -62,7 +62,7 @@
 
                <!-- manage users -->
                <li>
-                    <a data-changepagestate="possible" href="../html/manageusers.html" name="manageusers"  id="manageusers" class="limitedAcess mmBlock flex fAlignC sTrans">
+                    <a data-changepagestate="possible" href="../html/manageusers.html" name="manageusers"  id="manageusersJS" class="limitedAcess mmBlock flex fAlignC">
                          <img src="../media/ico/menu/manageusers.svg" alt="">
                          <p class="menuFont"> Usuários</p>
                     </a>

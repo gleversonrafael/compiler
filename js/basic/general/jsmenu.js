@@ -3,54 +3,54 @@ import { auth } from "../general/jsfirebase.js";
 import { fetchOwnUserData } from "./jsuserdata.js";
 import { setPageChangeEvents } from "../general/jspagechange.js";
 
+// asyncronous unique events - are loaded only when menu hasn't been loaded before.
+if(document.getElementById("mMenuB").dataset.loadState != "true") {
+     const mMenuB = document.getElementById("mMenuB");
 
-// load defaults
-document.body.addEventListener("load", loadDefaults());
-setPageChangeEvents();
+     await loadDefaults();
+     setPageChangeEvents();
 
-
-// toggle menu
-document.getElementById("menuIcon").addEventListener("click", () => { 
-     toggleMenu(true, true);
-})
-
-
-window.addEventListener("resize", () => {
-     let menuBox = document.getElementById("mMenuB");
-     let leaveMenuButton = document.getElementById("leaveM");
-
-     if(window.innerWidth >= 768 && menuBox.classList.contains("menuClosed")) {
-          toggleMenu(true, false);
-     }
-
-     toggleLeaveMenuBox();
-
-})
-
-
-// leave menu and signout
-document.getElementById("leaveM").addEventListener("click", () => {
-     toggleMenu(true, true);
-});
-
-document.getElementById("signoutB").addEventListener("click", () => {
-     signOut(auth);
-})
+     mMenuB.dataset.loadState = "true";
+}
 
 
 
-
-// functions
-// m level
-function loadDefaults() {
+async function loadDefaults() {
      if(window.innerWidth >= 768) {
           toggleMenu(true, false);
      }
 
-     menuVisualState();
+     setMenuEvents();
+     await loadNameAndType();
+     changeSelectedBoxStyle();
+}
+
+function setMenuEvents() {
+     document.getElementById("signoutB").onclick = () => {signOut(auth)};
+
+     // similar
+     document.getElementById("leaveM").addEventListener("click", () => {
+          toggleMenu(true, true);
+     });
+
+     document.getElementById("menuIcon").addEventListener("click", () => { 
+          toggleMenu(true, true);
+     })
+
+     // bug fix
+     window.addEventListener("resize", () => {
+          const menuBox = document.getElementById("mMenuB");
+
+          if(window.innerWidth >= 768 && menuBox.classList.contains("menuClosed")) {
+               toggleMenu(true, false);
+          }
+     
+          toggleLeaveMenuBox();
+     });
 }
 
 
+// open / close menu
 function toggleMenu(changeDisplay, changeBackground) {
      if(changeDisplay === true) {
           let menuHamburgerIcon  = document.getElementById("menuIcon");
@@ -97,7 +97,6 @@ function toggleMenu(changeDisplay, changeBackground) {
      } 
 }
 
-
 function toggleLeaveMenuBox() {
      let leaveMenuButton = document.getElementById("leaveM");
 
@@ -106,49 +105,51 @@ function toggleLeaveMenuBox() {
      }
 }     
 
+// user data 
+async function loadNameAndType() {
+     const userData = await fetchOwnUserData();
+     const userName = document.getElementById("userName");
+     const userType = document.getElementById("userType");
 
-
-
-
-// s level
-async function menuVisualState() {
-     loadMenuBoxEffect()
-     await loadNameAndType()
-
-
-     async function loadNameAndType() {
-          const userData = await fetchOwnUserData();
-
-          let userName = document.getElementById("userName");
-          let userType = document.getElementById("userType");
-
-          userName.textContent = userData.name;
-
-          userType.textContent = userData.usertype == "regular"? "Regular" : "Administrador";
-     }
-
-
-     function  loadMenuBoxEffect() {
-          let menuSections = ["navigate", "mycourses", "managecourses", "manageusers"]
-
-          for(let elem in menuSections) {
-               if(window.location.href.includes(menuSections[elem])) {
-                    // create var
-                    let selMenuBox = document.getElementById(menuSections[elem]);
-                    let imgChange = document.querySelector(`a#${menuSections[elem]} > img`);
-                    
-     
-                    // css - change box and img
-                    selMenuBox.classList.add("selectedMenuBox")
-     
-                    imgChange.setAttribute("src", `../media/ico/menu/fill-${menuSections[elem]}.svg`);
-               }
-     
-          }
-     }
-
+     userName.textContent = userData.name;
+     userType.textContent = userData.usertype == "regular"? "Regular" : "Administrador";
 }
 
+
+// reusable
+function  changeSelectedBoxStyle() {
+     const selectedBox = document.getElementsByClassName("selectedMenuBox").item(0);
+     const selectedIcon = document.querySelector(`#${selectedBox.id} > selectedIcon`);
+
+     if(selectedBox) {
+          selectedBox.dataset.changepagestate = "possible"
+          selectedBox.classList.remove("selectedMenuBox");
+     }
+
+     updateSelectedItem();
+
+
+     function updateSelectedItem() {
+          const menuPages = ["home", "mycourses", "managecourses", "manageusers"]
+
+          for(let selectedPage = 0; selectedPage < menuPages.length; selectedPage++) {
+               if(window.location.href.includes(menuPages[selectedPage])) {
+                    changeMenuBoxVisual(menuPages[selectedPage], `${menuPages[selectedPage]}JS`);
+               }
+          }
+
+          function changeMenuBoxVisual(pageName, menuBoxId) {
+               const selectedMenuBox = document.getElementById(menuBoxId);
+               const changedIcon = document.querySelector(`#${menuBoxId} img`);
+
+               selectedMenuBox.classList.add("selectedMenuBox");
+               changedIcon.setAttribute("src", `../media/ico/menu/fill-${pageName}.svg`);
+          }
+     }
+}
+
+
+export { changeSelectedBoxStyle }
 
 
 

@@ -75,9 +75,11 @@
      padding: 0 5px;
 
      color: var(--uiSecondaryWhite);
-     border: 1px solid var(--uiPrimaryGrey);
+     outline: 1px solid var(--uiSecondaryGrey);
+
      background-color: transparent;
 
+     border: none;
      border-radius: 15px;
 }
 
@@ -101,11 +103,8 @@
 
 #mMenu img {
      height: 50%;
-
      margin: 0px 25px;
      background-size: 100%;
-
-     /* border: 1px solid red; */
 }
 
 #mMenu p {
@@ -126,6 +125,7 @@
      max-width: 225px;
 
      margin: 100px 0px 0px;
+     outline: 1px solid red;
 }
 
 #userIcon {
@@ -306,13 +306,14 @@
 
      .mmBlock {
           opacity: 0.75;
-
+          outline: none;
           height: 40px;
      }
 
      .mmBlock:hover, .selectedMenuBox {
           opacity: 1;
           background-color: var(--uiPrimaryGrey);
+          outline: none;
      }
 
      .userB {

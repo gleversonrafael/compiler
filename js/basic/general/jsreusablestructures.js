@@ -14,7 +14,6 @@ function setReusableEvents(eventsArray) {
      const functionsObject = {
           formsEventCall : formsEvent,
           cancelModalEventCall: cancelModalEvent,
-
      }
 
      eventsArray.forEach((selectedEvent) => {
@@ -175,13 +174,13 @@ async function createUserDataArray(operatingMode, selectedData) {
           newArray.push({active: true}, {deleted: false});
 
      } else {
-          let {password, safeUserData } = await fetchOwnUserData();
+          let {password, ...safeUserData } = await fetchOwnUserData();
           editedUser = safeUserData;
      }
 
 
      selectedData.forEach((data) => {
-          if(operatingMode === "create" || (operatingMode === "edit" && data.value != safeUserData[data.name])) {
+          if(operatingMode === "create" || (operatingMode === "edit" && data.value != editedUser[data.name])) {
                let temporaryObject = {};
 
                // data reference = input

@@ -1,20 +1,27 @@
 import { forEachPropertyWithDo, showMessageBox } from "./jsreusablestructures";
-
+import { changeSelectedBoxStyle } from "./jsmenu.js";
 
 function setPageChangeEvents() {
      const changePageItems = document.querySelectorAll(`[data-changepagestate="possible"]`);
 
      changePageItems.forEach((item) => {
-          item.addEventListener("click", async (event) => {
-               const selectedItem = event.currentTarget;
-               event.preventDefault();
+          item.addEventListener("click", async(clickEvent) => {
+               clickEvent.preventDefault();
                
-               await changePage(selectedItem.name, selectedItem.href);
-               selectedItem.dataset.changepagestate = "valid"
+               await changePageFullProcess(item);
+               changeSelectedBoxStyle();
           });
      })
 }
 
+
+// change page
+async function changePageFullProcess(selectedItem) {
+     await changePage(selectedItem.name, selectedItem.href);
+     changeSelectedBoxStyle();
+
+     selectedItem.dataset.changepagestate = "valid";
+}
 
 async function changePage(pageName, pageUrl) {
      let documentHTML = await getPageHtml(pageUrl);
@@ -22,7 +29,11 @@ async function changePage(pageName, pageUrl) {
      if(documentHTML) {
           const pageTitle = document.querySelector("title");
           pageTitle.innerText = formatPageString(pageName);
-          // history.pushState({},"" , pageUrl);
+
+          const mainPageURL = "../html/main.html"
+          const historyUpdatedState = `${mainPageURL}?currentpage=${pageName}`
+
+          history.replaceState({},"" , historyUpdatedState);
 
           toggleElements("reset", documentHTML);
           toggleElements("create", documentHTML);
