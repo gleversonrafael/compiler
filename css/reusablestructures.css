@@ -233,71 +233,6 @@
 
 
 
-/* page's title area */
-#titleA {
-     text-align: center;
-}
-
-
-#pageTitle {
-     color: var(--uiPrimaryWhite);
-     font: normal 2em var(--rFont);
-
-     margin-bottom: 10px;
-}
-
-
-
-
-/* search */
-/* adapt search box for my courses and manage courses */
-.searchBox {
-     background-color: var(--uiPrimaryGrey);
-     padding: 10px 5px;
-
-     /* max-width: 450px; */
-}
-
-.searchBox:has(.searchInput:hover) {
-     outline: 1px solid var(--uiSecondaryGrey);
-}
-
-.searchBox:has(.searchInput:focus) {
-     outline: 1px solid var(--uiSecondaryWhite);
-}
-
-
-.searchButton {
-     margin-left: 5px;
-
-     min-width: 50px;
-     min-height: 30px;
-
-     padding: 5px;
-
-     background: transparent url(../../../media/ico/mcourses/search.svg) center center no-repeat;
-     background-size: 55%;
-
-     border: none;
-     cursor: pointer;
-}
-
-.searchInput {
-     padding-left: 20px;
-     width: calc(100% - 40px);
-
-     color: var(--white);
-     background-color: transparent;
-
-     border: none;
-}
-
-.searchInput:focus {
-     outline: none;
-}
-
-
-
 
 /* table  */
 /* general tables */
@@ -436,8 +371,81 @@
 
 
 
+/* page detail block */
+.pageDetailBlock {
+     display: flex;
+     flex-flow: column wrap;
+
+     width: 100%;
+     padding: 25px;
+
+     background-color: var(--uiSecondaryBlack);
+     border-radius: 25px;
+}
+
+.pageIconArea {
+     align-items: center;
+     width: 100%;
+}
+
+.pageIconArea img {
+     width: 30%;
+     aspect-ratio: 1;
+}
+
+
+/* page's title area */
+#titleA {
+     text-align: center;
+}
+
+#pageTitle {
+     color: var(--uiPrimaryWhite);
+     font: normal 1.5em var(--rFont);
+
+     margin-bottom: 10px;
+}
+
+
+
+
+
 /* media */
 @media screen and (min-width: 768px) {
+     /* page detail block */
+     .pageDetailBlock {
+          display: grid;
+
+          justify-items: start;
+
+          grid-template-columns: 1fr 1fr;
+          column-gap: 40px;
+          padding: 40px;
+     }
+
+     .pageIconArea {
+          align-items: start;
+     }
+
+     .pageIconArea img {
+          width: 100%;
+          max-height: 175px;
+     }
+
+
+     .pageInformationArea {
+          justify-self: center;
+     }
+
+     #titleA {
+          text-align: left;
+     }
+
+     #pageTitle {
+          font-size: 2em;
+     }
+
+
      /* modal area */
      #modalArea {
           width: calc(100% - 225px);
@@ -447,12 +455,6 @@
      .modalPattern {
           min-width: 400px;
      }
-
-
-     #pageTitle {
-          font-size: 3.25em;
-     }
-
 
 
      /* message box */
@@ -474,12 +476,5 @@
 
      .closeMessageBox {
           margin-top: 0px;
-     }
-
-
-     /* search */
-     .searchButton {
-          padding: 0px;
-          min-height: 15px;
      }
 }

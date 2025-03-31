@@ -1,23 +1,20 @@
 @charset "UTF-8";
 
-/* operations area */
+/* operations area / add + create courses */
 #operationsA {
+     flex-flow: column wrap;
      align-self: center;
 
-     width: 100%;
-     max-width: 450px;
-     
-     margin-bottom: 100px;
-}
-
-#operationsA > div {
      gap: 10px;
+     margin-bottom: 0px;
+
+     width: 100%;     
 }
 
 #operationsA button {
      width: 100%;
 
-     padding: 20px;
+     padding: 10px;
      background-color: var(--uiPrimaryGrey);
 
      cursor: pointer;
@@ -548,6 +545,11 @@ div.stepperGroup {
 
 /* media */
 @media screen and (min-width: 768px) {
+     #operationsA {
+          flex-flow: row wrap;
+          width: 100%;
+     }
+
      #operationsA button {
           width: calc(50% - 5px);
           padding: 10px;

@@ -119,9 +119,11 @@ async function loadNameAndType() {
 // reusable
 function  changeSelectedBoxStyle() {
      const selectedBox = document.getElementsByClassName("selectedMenuBox").item(0);
-     const selectedIcon = document.querySelector(`#${selectedBox.id} > selectedIcon`);
 
      if(selectedBox) {
+          const selectedIcon = document.querySelector(`#${selectedBox.id} img`);
+          selectedIcon.src = selectedIcon.src.replace(/fill-/, "");
+
           selectedBox.dataset.changepagestate = "possible"
           selectedBox.classList.remove("selectedMenuBox");
      }

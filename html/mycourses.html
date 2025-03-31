@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+     <link rel="stylesheet" href="../css/general.css">
+     <link rel="stylesheet" href="../css/mainsitestructures.css">
+     <link rel="stylesheet" href="../css/reusablestructures.css">
+
      <link class="dynamicallyGeneratedCSS" rel="stylesheet" href="../css/mainsite/mycourses-managecourses/createandmanagecourses.css">
      <link class="dynamicallyGeneratedCSS" rel="stylesheet" href="../css/mainsite/mycourses-managecourses/mycourses.css">
 
@@ -14,22 +18,21 @@
 
           <div id="pageMain" class="conPattern flex flex-col">
                <!-- title -->
-               <section id="titleA" class="flex-col">
-                    <h1 id="pageTitle"> Meus cursos</h1>
+               <section class="pageDetailBlock">
+                    <div class="pageInformationArea">
+                         <section id="titleA">
+                              <h1 id="pageTitle"> Meus cursos</h1>
+                              <p class="subtitle"> Visualize e acesse cursos que possui permissão aqui.</p>
 
-               </section>
-
-
-               <!-- search -->
-               <section id="searchA" class="flex-col">
-                    <label for="searchInp" class="subtitle"> Pesquisar</label>
-
-                    <div role="searchbox" id="searchB" class="flex fJustSB bAll sTrans">
-                         <input id="searchInp" type="search" class="bAll sTrans" placeholder="Insira o nome do curso que você quer buscar.">
-                         <button role="search" id="searchButton" class="bAll"></button>
+                         </section>
 
                     </div>
-        
+
+
+                    <div class="pageIconArea">
+                         <img src="../media/ico/menu/fill-mycourses.svg" alt="Ícone de notas sobrepostas">
+
+                    </div>
 
                </section>
 

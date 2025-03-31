@@ -12,67 +12,6 @@
 }
 
 
-
-
-/* title area */
-#titleA {
-     text-align: center;
-}
-
-
-
-
-/* search area */
-#searchA {
-     align-self: center;
-     
-     width: 100%;
-     max-width: 450px;
-}
-
-
-#searchB { /* search box*/
-     background-color: var(--uiPrimaryGrey);
-}
-
-#searchInp {
-     padding-left: 20px;
-     width: calc(100% - 40px);
-
-     color: var(--white);
-     background-color: transparent;
-
-     border: none;
-}
-
-#searchInp:focus {
-     outline: none;
-}
-
-#searchB:has(#searchInp:hover) {
-     outline: 1px solid var(--uiSecondaryGrey);
-}
-
-#searchB:has(#searchInp:focus) {
-     outline: 1px solid var(--uiSecondaryWhite);
-}
-
-
-#searchButton {
-     margin-left: 5px;
-     padding: 25px 30px;
-
-     background: transparent url(../../../media/ico/mcourses/search.svg) center center no-repeat;
-     background-size: 55%;
-
-     border: none;
-     cursor: pointer;
-}
-
-
-
-
-
 /* explore - courses area */
 .coursesArea, .coursesColumn {
      gap: 10px;
@@ -144,7 +83,7 @@
 .coursesColumn > div.open {
      opacity: 1;
 
-     background-color: var(--uiPrimaryGrey);
+     outline: 1px solid var(--uiSecondaryGrey);
      cursor: default;
 }
 

@@ -1,7 +1,7 @@
 // other js
 import { copyData } from "./jsmycourses.js"
 import { createAcessControl, saveCourseData } from "./jsmanagecourses.js"
-import { userData } from "../general/jsuserdata.js"
+import { fetchOwnUserData, currentUserUID } from "../general/jsuserdata.js"
 
 
 // firebase
@@ -16,12 +16,6 @@ let pageType = window.location.href.includes("mycourses") ? "myCourses" : "manag
 
 
 // events
-document.getElementById("searchInp").addEventListener("input", (inputEvent) => {
-     showCourses(inputEvent.currentTarget.value, "my");
-     // pageType === "manageCourses" ? managerShowCourses() : showCourses(inputEvent.currentTarget.value);
-});
-
-
 onSnapshot(collection(db, "courses"), ()=> {
      showCourses(undefined, "my");
      // pageType === "manageCourses" ? managerShowCourses() : showCourses();
@@ -109,14 +103,12 @@ async function showCourses(searchedContent, callPurpose) {
                     let whereResult;
      
                     if(pageType === "myCourses") {
-                         whereResult = where("usersWithAcess", "array-contains", userData.uid);
+                         whereResult = where("usersWithAcess", "array-contains", currentUserUID);
      
                     } else if(callPurpose != "others"){
-                         whereResult = where("creator", "==", userData.uid);
-                    
+                         whereResult = where("creator", "==", currentUserUID);
                     } else {
-                         whereResult = where("creator", "!=", userData.uid);
-     
+                         whereResult = where("creator", "!=", currentUserUID);
                     }
      
      
