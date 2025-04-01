@@ -211,8 +211,13 @@ div.stepperGroup {
 
 
 
-/* create course box */
-.createdBox, #createCourseForm, #searchUserBox {
+/* modals /////////////*/
+.manageCoursesModalPageCSS {
+     width: 100%;
+}
+
+/* create course box //*/
+.createdBox, #createCourseForm, .manageCoursesPageCSS {
      display: none;
 }
 
@@ -223,7 +228,8 @@ div.stepperGroup {
      height: fit-content;
      
      padding: 50px;
-     margin: 50px min(10vw, 50px);
+     /* margin: 50px min(10vw, 50px); */
+     margin-top: 50px;
 
      color: var(--uiSecondaryWhite);
      background-color: var(--uiSecondaryBlack);
@@ -231,45 +237,34 @@ div.stepperGroup {
      border-radius: 15px;
 }
 
-#createCourseBox > .createdBoxTitle h1 {
+#createCourseModal > .createdBoxTitle h1 {
      color: var(--uiPrimaryWhite);
      
 }
 
-.closeCreatedBox {
-     background-color: transparent;
-     border: none;
+
+#createCourseModal .cancelModalButton {
+     aspect-ratio: 1;
+     max-width: 25px;
+     height: fit-content;
+
+     /* border: none; */
      cursor: pointer;
-}
-
-.closeCreatedBox > img {
-     min-height: 10px;
-     height: 5vw;
-     max-height: 25px;
-}
-
-#returnCreateCourse {
-     background-color: transparent;
      border: none;
-     cursor: pointer;
-}
 
-#returnCreateCourse > img {
-     height: 25px;
-     width: 25px;
+     background: url(../../../media/ico/closeicon.png) no-repeat;
+     background-size: contain;
 }
-
 
 
 /* text */
-.createdBox > div > h1 {
+.createdBox div > h1 {
      font: 600 min(7vw, 2.25em) var(--rFont);
      color: var(--uiPrimaryWhite);
 }
 
-.createdBoxTitle > h2 {
+.createdBoxTitle .createdBoxSubtitle {
      font: 200 1em var(--rFont);
-     margin-bottom: 40px;
 }
 
 #createCourseForm h3 {
@@ -314,7 +309,6 @@ div.stepperGroup {
      border-bottom-color: var(--uiPrimaryWhite);
 }
 
-
 /* correct input */
 #createCourseForm .correctInput {
      color: var(--secondaryColor);
@@ -326,26 +320,19 @@ div.stepperGroup {
 }
 
 
-/* form buttons */
-#acessB {
+/* buttons */
+.modalPageChange {
      background-color: var(--uiSecondaryWhite);
      padding: 15px;
 
      border: none;
+     text-align: center;
      font-weight: 600;
 }
 
-#acessB:hover {
+.modalPageChange:hover {
      color: var(--uiPrimaryBlack);
      background-color: var(--uiPrimaryWhite);
-}
-
-
-
-
-/* search box */
-#searchUserArea {
-     background-color: var(--uiPrimaryGrey);
 }
 
 /* user list */
@@ -354,10 +341,12 @@ div.stepperGroup {
 
      gap: 10px;
 
-     height: 400px;
+     height: fit-content;
+     max-height: 400px;
      width: 100%;
 
      margin-bottom: 50px;
+     border: 1px solid blue;
 
      overflow: scroll;
 }
@@ -385,21 +374,20 @@ div.stepperGroup {
 }
 
 
-
 /* list buttons */
 #grantAcessButtons {
      gap: 10px;
+     margin-bottom: 20px;
 }
 
 .changeAcessButton {
      background-color: transparent;
-     max-width: 500px;
+     width: 100%;
 }
 
 .changeAcessButton:disabled {
      opacity: 0.5;
 }
-
 
 #removeAcessButton:hover, #grantAcessButton:hover {
      font-weight: 600;
@@ -492,12 +480,12 @@ div.stepperGroup {
 
 /* delete course box */
 /* text */
-#deleteCourseBox {
+#deleteCourseModal {
      margin-top: 100px;
      max-width: 400px;
 }
 
-#deleteCourseBox > .createdBoxTitle > h1 {
+#deleteCourseModal > .createdBoxTitle > h1 {
      color: var(--primaryOpposite);
      margin-bottom: 10px;
 }
@@ -505,7 +493,7 @@ div.stepperGroup {
 
 
 /* buttons */
-#deleteCourseBox > .createdBoxButtons {
+#deleteCourseModal > .createdBoxButtons {
      margin-top: 50px;
 }
 
@@ -553,11 +541,6 @@ div.stepperGroup {
      #operationsA button {
           width: calc(50% - 5px);
           padding: 10px;
-     }
-
-     /* create course box */
-     .createdBox {
-          margin-left: 250px;
      }
 
      #cancelExclusion {

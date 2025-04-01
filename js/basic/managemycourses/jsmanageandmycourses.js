@@ -2,6 +2,7 @@
 import { copyData } from "./jsmycourses.js"
 import { createAcessControl, saveCourseData } from "./jsmanagecourses.js"
 import { fetchOwnUserData, currentUserUID } from "../general/jsuserdata.js"
+import { removeSkeletons } from "./../general/jsload.js"
 
 
 // firebase
@@ -15,13 +16,9 @@ let othersData = {};
 let pageType = window.location.href.includes("mycourses") ? "myCourses" : "manageCourses"
 
 
-// events
-onSnapshot(collection(db, "courses"), ()=> {
-     showCourses(undefined, "my");
-     // pageType === "manageCourses" ? managerShowCourses() : showCourses();
-});
-
-
+// async events
+await showCourses(undefined, "my");
+removeSkeletons();
 
 
 // functions
@@ -32,7 +29,6 @@ async function showCourses(searchedContent, callPurpose) {
           if(pageType === "manageCourses" && callPurpose === "my") {
                showCourses(searchedContent, "others");
           }
-          
      
      } else {
           eraseColumns()

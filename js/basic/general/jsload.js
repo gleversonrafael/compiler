@@ -1,4 +1,4 @@
-// set events on load
+// set events on load - scope functions
 function setFunctionsOnLoad(functionsArray) {
      // functions must be on the same scope.
      for(let currentFunction = 0; currentFunction < functionsArray.length; currentFunction ++) {

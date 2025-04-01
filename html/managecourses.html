@@ -15,26 +15,18 @@
 
 <body>
      <!-- modal -->
-     <!-- id anterior = bg eff -->
      <div id="modalArea">
           <!-- create -->
-          <div id="createCourseBox" class="createdBox flex flex-col">
-               <!-- return icon  -->
-               <button id="returnCreateCourse">
-                    <img src="../media/ico/returnico.svg" alt="">
-
-               </button>       
-
-
+          <div id="createCourseModal" class="modalJS manageCoursesModalPageCSS createdBox flex flex-col">
                <!-- create course box title -->
-               <div class="createdBoxTitle flex flex-col">
-                    <div class="flex flex-row fJustSB">
+               <div class="createdBoxTitle flex fJustSB">
+                    <div class="flex flex-col">
                          <h1> Criar curso</h1>
-                         <button id="closeCreateCourseBox" class="closeCreatedBox"> <img src="../media/ico/closeicon.png" alt=""></button>
+                         <h2 class="createdBoxSubtitle"> Dados</h2>
 
                     </div>
 
-                    <h2 class="createdBoxSubtitle"> Dados</h2>
+                    <button id="closeCreateCourseBox" class="cancelModalButton"></button>
 
                </div>
 
@@ -76,36 +68,32 @@
                          <label for="imgInp" class="bottomNspace"> URL da imagem</label>
                          <input type="url" name="aUrl" id="imgInp" class="bottomNspace dTrans">
 
-                    </fieldset>
+                    </fieldset>  
 
-                    <!-- acess -->
-                    <button id="acessB" class="buttonPattern dTrans"> Editar acesso</button>
-
+                    <button id="acessB" class="buttonPattern modalPageChange dTrans"> Editar acesso</button>
 
                     <!-- final buttons -->
                     <fieldset class="createdBoxButtons flex flex-row fJustSB">
                          <input type="reset" value="Redefinir" class="resetButtonStyle bAll dTrans">
                          <input type="submit" value="Criar" class="confirmButtonStyle bAll dTrans">
+
                          
                     </fieldset>
 
                </form>
 
-               <!-- searchBox -->
-               <section id="searchUserBox" class="flex-col">
-                    <!-- <div id="searchUserArea" class="flex flex-row"> 
-                         <input type="search" name="searchUser" id="searchUserInp">
-                         search ico
-
-                    </div> -->
+               <section id="usersWithAcessPage" class="manageCoursesModalPageCSS flex-col">
+                    <p> Usuários</p>
 
                     <ul id="userList" class="flex"></ul>
 
-                    <div id="grantAcessButtons" class="flex flex-col">
+                    <div id="grantAcessButtons" class="flex fJustSB">
                          <button id="removeAcessButton" class="changeAcessButton buttonPattern"> Remover</button>
                          <button id="grantAcessButton" class="changeAcessButton buttonPattern"> Conceder</button>
 
                     </div>
+
+                    <button id="returnCreateCourse" class="buttonPattern modalPageChange dTrans">Retornar</button>
 
                </section>
 
@@ -113,7 +101,7 @@
      
 
           <!-- delete -->
-          <div id="deleteCourseBox" class="createdBox flex-col">
+          <div id="deleteCourseModal" class="modalJS createdBox flex-col" >
                <div class="createdBoxTitle flex flex-row fJustSB"> 
                     <h1> Excluir cursos</h1>
 
@@ -127,7 +115,7 @@
 
                </div>
 
-               <button id="cancelExclusion" class="bAll dTrans "> Cancelar exclusão </button>
+               <button id="cancelExclusion" class="bAll dTrans"> Cancelar exclusão </button>
 
           </div>
 
@@ -138,7 +126,7 @@
      <main id="mCon">
           <div id="pageMain" class="conPattern flex flex-col">
                <!-- page's display -->
-               <section class="pageDetailBlock">
+               <section class="loadingSkeleton pageDetailBlock">
                     <div class="pageIconArea flex fJustC">
                          <img src="../media/ico/menu/fill-managecourses.svg" alt="Caixa preenchida e com uma engrenagem centralizada em seu interior">
 
@@ -163,11 +151,16 @@
      
      
                <!-- explore -->
-               <section id="exploreA" class="flex flex-col">
-                    <h3 class="subtitle">Meus</h3>
+               <section id="exploreA" class="loadingSkeleton flex flex-col">
+                    <div class="loadingSkeleton flex smallGapCSS"> 
+                         <h3 class="subtitle"> Criados por mim</h3>
+                         <button class="refreshButtonCSS"></button>
+
+                    </div>
      
                     <section id="coursesA" class="coursesArea flex flex-row">
                          <div class="coursesColumn flex flex-col"></div>
+
                          <div class="coursesColumn flex flex-col"></div>
      
                     </section>
@@ -176,131 +169,8 @@
                     <h3 class="subtitle"> Criados por outros administradores</h3>
      
                     <section id="othersA" class="coursesArea flex flex-row">
-                         <div class="coursesColumn flex flex-col">
-                              <div class="open">
-                                   <img src="../materials/testjavascript.png" alt="">
-                                   <h1> Curso de Javascript</h1>
-                                   <h2> Plataforma: Alura</h2>
-     
-                                   <form class="createdContent">
-                                        <h3> Dados cadastrais </h3>
-     
-                                        <!-- page one -->
-                                        <div class="pageOne" style="display: flex;">
-                                             <!-- course title -->
-                                             <fieldset style="border: 1px solid red">
-                                                  <label class="fieldName"> Título </label>
-                                                  <input class="fieldValue"></input>
-     
-                                             </fieldset>
-     
-                                             <!-- platform -->
-                                             <fieldset>
-                                                  <!-- p por label, p por input -->
-                                                  <label class="fieldName"> Plataforma</label>
-                                                  <input class="fieldValue"></input>
-     
-                                             </fieldset>
-     
-                                        </div>
-     
-     
-                                        <!-- page two -->
-                                        <div class="pageTwo">
-                                             <!-- email -->
-                                             <fieldset>
-                                                  <label class="fieldName"> Email</label>
-                                                  <input class="fieldValue"> </input>
-     
-                                             </fieldset>
-     
-                                             <!-- password -->
-                                             <fieldset>
-                                                  <label class="fieldName"> Senha</label>
-                                                  <input class="fieldValue"></input>
-     
-                                             </fieldset>
-     
-                                        </div>
-     
-     
-                                        <!-- page three -->
-                                        <div class="pageThree">
-                                             <!-- url -->
-                                             <fieldset>
-                                                  <label class="fieldName"> URL</label>
-                                                  <input class="fieldValue"></input>
-     
-                                             </fieldset>
-     
-                                             <!-- image url -->
-                                             <fieldset>
-                                                  <label class="fieldName"> URL da imagem</label>
-                                                  <input class="fieldValue"></input>
-     
-                                             </fieldset>
-     
-                                        </div>
-     
-                                        <div class="acessControl" style="display: flex;">
-                                             <!-- search -->
-                                             <ul class="thisCourseAcess">
-                                                  <li> email@email.com</li>
-                                                  <li> Dois</li>
-                                                  <li> 3</li>
-                                                  <li> 4</li>
-                                                  <li> Cinco</li>
-                                                  <li> Um</li>
-                                                  <li> Dois</li>
-                                                  <li> 3</li>
-                                                  <li> 4</li>
-                                                  <li> Cinco</li>
-                                                  <li> Um</li>
-                                                  <li> Dois</li>
-                                                  <li> 3</li>
-                                                  <li> 4</li>
-                                                  <li> Cinco</li>
-     
-                                             </ul>
-     
-                                        </div>
-     
-                                        
-                                        <!-- final buttons -->
-                                        <div class="stepperGroup">
-                                             <input type="reset" value="Redefinir">
-     
-                                             <div class="steppers">
-                                                  <input type="button" class="backwardStepper"></input>
-     
-                                                  <input class="stepperInput" type="number" name="" id="" value=""> 
-     
-                                                  <input type="button" class="forwardStepper"> </input>
-     
-                                             </div>
-     
-                                        </div>
-     
-     
-                                        <button class="closeBoxButton"> Fechar</button>
-                                        <!-- <a href="" > Acessar</a> -->
-     
-                                        <input type="submit" class="saveCourseButton" value="Teste" >
-     
-                                   </form>
-     
-                              </div>
-     
-     
-                              <div>
-                                   <img src="../materials/testjavascript.png" alt="">
-                                   <h1> Curso de Javascript</h1>
-                                   <h2> Plataforma: Alura</h2>
-     
-                              </div>
-     
-                         </div>
-     
+                         <div class="coursesColumn flex flex-col"></div>
+
                          <div class="coursesColumn flex flex-col"></div>
      
                     </section>

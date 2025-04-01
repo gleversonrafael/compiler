@@ -1,114 +1,87 @@
 // firebase
 import { onSnapshot, query, where, getDocs, doc, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db, usersCol } from "../general/jsfirebase.js";
-import { userData } from "../general/jsuserdata.js";
-import { showMessageBox } from "../general/jsreusablestructures.js";
+
+import { fetchOwnUserData, currentUserUID } from "../general/jsuserdata.js";
+
+import { showMessageBox,toggleModal, setReusableEvents } from "../general/jsreusablestructures.js";
 
 
 // assign events
 if(document.location.href.includes("manage")) {
-     courseBoxOperations("createEvents");
-     acessOperations("createEvents");
-     deleteCourses("createEvents");
-     validateFields("createEvents");
-
-     // create course
-     document.getElementById("createCourseForm").addEventListener("submit", (submitEvent) => {
-          submitEvent.preventDefault();
-          createCourse();
-     });
+     createManageCoursesEvents();
 }
 
 
 // generalVars
-let createCourseBoxPage;
 let deleteCourseState;
 let deletedCourses = [];
 let canEditAcess; 
 
 
-// createCourseBox
-function courseBoxOperations(callReason) {
-     // var
-     let backgroundEffect = document.getElementById("bgEff");
-     let createCourseBox = document.getElementById("createCourseBox");
-     let returnCreateCourse = document.getElementById("returnCreateCourse");
+function createManageCoursesEvents() {
+     setReusableEvents(["formsEvent", "cancelModalEvent"]);
 
+     createCourseEvents();
+     acessOperations("createEvents");
+     deleteCourses("createEvents");
+     validateFields("createEvents");
 
-     if(callReason === "createEvents") {
-          createEvents();
-     }
-
-
-     // aside
-     function createEvents() {
-          document.getElementById("addCourseButton").addEventListener("click", toggleCreateCourseBox);
-
-          document.getElementById("closeCreateCourseBox").addEventListener("click", toggleCreateCourseBox);
-
-          document.getElementById("returnCreateCourse").addEventListener("click", changeCourseBoxPage);
-
-          document.getElementById("acessB").addEventListener("click", (ev) => {
-               ev.preventDefault();
-               changeCourseBoxPage();
+     function createCourseEvents() {
+          document.getElementById("addCourseButton").addEventListener("click", () => {
+               toggleModal("createCourseModal");
+               changeCourseBoxPage(1);
           });
-          
+     
+          document.getElementById("returnCreateCourse").addEventListener("click", () => {
+               changeCourseBoxPage(1);
+          });
+     
+          document.getElementById("acessB").addEventListener("click", (event) => {
+               event.preventDefault();
+               changeCourseBoxPage(2);
+          });
+
+          document.getElementById("createCourseForm").addEventListener("submit", (submitEvent) => {
+               submitEvent.preventDefault();
+               createCourse();
+          });
      }
+}
 
 
-     // main functions
-     function toggleCreateCourseBox() {     
-          if(createCourseBox.style.display != "block") {
-               showCreateCourseBox()
-     
-          } else {
-               createCourseBox.style.display = "none";
-               backgroundEffect.style.display = "none";
-          }
-     
-     
-          // main functions
-          function showCreateCourseBox() {
-               backgroundEffect.style.display = "flex";
-               createCourseBox.style.display = "block";
-     
-               createCourseBoxPage = 2
-          
-               changeCourseBoxPage()
-          }   
-     }
+function changeCourseBoxPage(newSelectedPage) {
+     const createCourseForm = document.getElementById("createCourseForm");
+     const usersWithAcess = document.getElementById("usersWithAcessPage");
 
+     const pageSubtitle = document.querySelector(".createdBoxSubtitle");
+     const returnCreateCourse = document.getElementById("returnCreateCourse");
 
-     function changeCourseBoxPage() {
-          let searchUserBox = document.getElementById("searchUserBox");
-          let createCourseForm = document.getElementById("createCourseForm");
-          let pageSubtitle = document.querySelector(".createdBoxSubtitle");
-     
-     
-          if(createCourseBoxPage === 2) {
+     switch(newSelectedPage){
+          case 1:
                pageSubtitle.innerText = "Dados principais";
+               returnCreateCourse.style.display = "none";
 
-               returnCreateCourse.style.display = "none"
-     
-               searchUserBox.style.display = "none";
                createCourseForm.style.display = "flex";
-          
-               createCourseBoxPage = 1;
-          
-          } else {
-               pageSubtitle.innerText = "Controle do acesso";
+               usersWithAcess.style.display = "none";
 
+               break
+          
+          case 2:
+               pageSubtitle.innerText = "Controle do acesso";
                returnCreateCourse.style.display = "flex"
-     
+
                createCourseForm.style.display = "none";
-               searchUserBox.style.display = "flex";
-     
-               createCourseBoxPage = 2;
-     
+               usersWithAcess.style.display = "flex";
+
                if(document.getElementById("userList").childElementCount == 0) {
                     loadUserList()
                }
-          }
+
+               break
+
+          default:
+               console.log("page Error");
      }
 }
 
@@ -121,15 +94,13 @@ function courseBoxOperations(callReason) {
 
 
 // userlist
-// var
 function loadUserList() {
-     let userList = document.getElementById("userList");
-     let avoidPlayerQuery = query(usersCol, where("uid", "!=", userData.uid));
-
+     const userList = document.getElementById("userList");
+     const avoidPlayerQuery = query(usersCol, where("uid", "!=", currentUserUID));
 
      onSnapshot(avoidPlayerQuery, (dataState) => {
           dataState.forEach((userInfo) => {
-               let requiredInfo = {
+               const requiredInfo = {
                     name: userInfo.data().name,
                     email: userInfo.data().email,
                     uid: userInfo.data().uid
@@ -142,11 +113,13 @@ function loadUserList() {
 
      // complementary
      function createUserSelectBox(aUserData) {
-          let data = { 
+          const data = { 
                usernameP:  document.createElement("p"),
                useremailP: document.createElement("p"),
                genericLi: document.createElement("li") 
           }
+
+          console.log(aUserData);
 
           data.usernameP.textContent = aUserData.name;
           data.useremailP.textContent = aUserData.email;
@@ -273,7 +246,7 @@ function createCourse() {
                url: document.getElementById("urlInp").value,
                img: imgValue,
 
-               creator: userData.uid,
+               creator: currentUserUID,
                usersWithAcess: obtainUsers()
           })
      }
@@ -324,10 +297,8 @@ function createCourse() {
 
 async function deleteCourses(callReason) {
      // var
-     let addCourseButton = document.getElementById("addCourseButton");
-     let deleteCourseBox = document.getElementById("deleteCourseBox");
-     let confirmExclusion = document.getElementById("confirmExclusion");
-
+     const addCourseButton = document.getElementById("addCourseButton");
+     const confirmExclusion = document.getElementById("confirmExclusion");
 
      if(callReason === "createEvents") {
           setEventListeners();    
@@ -336,7 +307,6 @@ async function deleteCourses(callReason) {
           // main delete process
           for(let actualId = 0; actualId < deletedCourses.length; actualId++) {
                let temporaryDoc = doc(db, "courses", deletedCourses[actualId]);
-
                await deleteDoc(temporaryDoc);
           }
 
@@ -422,10 +392,7 @@ async function deleteCourses(callReason) {
           // process
           obtainDeletedCourses();
           setDeletedCoursesCounter();
-
-     
-          document.getElementById("bgEff").style.display = "flex";
-          deleteCourseBox.style.display = "flex";
+          toggleModal("deleteCourseModal");
      
      
           function obtainDeletedCourses() {
@@ -455,8 +422,7 @@ async function deleteCourses(callReason) {
      }
      
      function closeDeleteBox(maintain) {
-          document.getElementById("bgEff").style.display = "none";
-          deleteCourseBox.style.display = "none";
+          toggleModal("deleteCourseModal");
      
           if(maintain != true) {
                addCourseButton.removeAttribute("disabled");   

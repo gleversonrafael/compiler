@@ -39,8 +39,10 @@ function setReusableEvents(eventsArray) {
           let cancelModalButtons = document.querySelectorAll(".cancelModalButton");
 
           cancelModalButtons.forEach((modalButton) => {
+               console.log(modalButton);
+               
                modalButton.addEventListener("click", (clickEvent) => {
-                    let canceledModalId = obtainFather(clickEvent.currentTarget, "modalPattern").id;
+                    let canceledModalId = obtainFather(clickEvent.currentTarget, "modalJS").id;
                     
                     if(canceledModalId === "noFather") {
                          canceledModalId = "notAModal"
@@ -294,8 +296,8 @@ function forEachPropertyWithDo(parameterObject) {
 // toggle Modal 
 function toggleModal(selectedModalId) {
      if(selectedModalId != "notAModal") {
-          let modalArea = document.getElementById("modalArea");
-          let thisModal = document.getElementById(selectedModalId);
+          const modalArea = document.getElementById("modalArea");
+          const thisModal = document.getElementById(selectedModalId);
 
           if(thisModal.style.display != "flex") {
                modalArea.style.display = "flex";
@@ -338,6 +340,7 @@ async function customUpdateDocument(receivedData) {
 
      })
 
+     console.log("Teste");
 
      return updateObject
 }

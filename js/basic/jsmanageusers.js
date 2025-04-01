@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { getDocs, setDoc, doc, query, where } from "firebase/firestore";
+import { getDocs, setDoc, doc, query, where, onSnapshot } from "firebase/firestore";
 import { firebaseConfig, db, usersCol } from "./general/jsfirebase.js";
 import { createUserWithEmailAndPassword, signOut, getAuth } from "firebase/auth";
 
@@ -27,20 +27,29 @@ await refreshTableWithNewData();
 setFunctionsOnLoad([removeSkeletons]);
 
 
+// always
+onSnapshot(usersCol, async() => {
+     await refreshTableWithNewData();
+});
+
+
 async function refreshTableWithNewData() {
+     console.log("teste");
      let usersArray;
      let refreshSuccess;
 
-     await getDocs(query(usersCol, where, "uid", "!=", currentUserUID))
+     await getDocs(query(usersCol, where("uid", "!=", currentUserUID), where("deleted", "==", "false")))
      .then((receivedUsers) => {
           usersArray = obtainDocumentsArray(receivedUsers);
           fillTable("usersTable", usersArray, "users");
+
           refreshSuccess = true;
 
      })
      .catch((error) => {
           showMessageBox("errorMessage", "Não foi possível recarregar a tabela.");
           console.log(error.code);
+
           refreshSuccess = false;
      })
 
@@ -51,6 +60,7 @@ async function refreshTableWithNewData() {
 // table
 async function fillTable(tableId, dataArray, tableType) {
      const tableBody = document.querySelector(`#${tableId} .tableBody`);
+     tableBody.innerHTML = ""
 
      for(let currentItem = 0; currentItem < dataArray.length; currentItem++) {
           let tableRow = document.createElement("tr");
@@ -378,7 +388,7 @@ function convertHtmlStringToElement(htmlString) {
      return temporaryTemplate.content.firstElementChild;
 }
 
-async function obtainDocumentsArray(snapshotData) {
+function obtainDocumentsArray(snapshotData) {
      // array pattern -> [0] = id | [1] = data
      let returnedArray = [];
 
@@ -390,7 +400,6 @@ async function obtainDocumentsArray(snapshotData) {
 
           returnedArray.push(contentArray);
      })
-
 
      return returnedArray
 }
