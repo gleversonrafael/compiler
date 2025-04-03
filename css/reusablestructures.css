@@ -32,7 +32,10 @@
      
      font-size: 1.25em;
      color: var(--uiPrimaryWhite);
+
+     animation: 200ms openMessageBoxANIM linear;
 }
+
 
 .messageBox p > span {
      font-weight: 700;
@@ -66,8 +69,6 @@
 
      cursor: pointer;
 }
-
-
 
 
 /* modals */
@@ -416,6 +417,15 @@
 
 
 
+/* animations */
+@keyframes openMessageBoxANIM {
+     from { top: 0;}
+}
+
+@keyframes hideMessageBoxANIM {
+     from { opacity: 1;}
+     to { opacity: 0;}
+}
 
 /* media */
 @media screen and (min-width: 768px) {

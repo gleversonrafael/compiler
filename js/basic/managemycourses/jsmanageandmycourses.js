@@ -141,10 +141,10 @@ async function showCourses(searchedContent, callPurpose) {
                     }
      
      
-                    // ids and event
+                    // ids, classes and events
                     courseProperties.courseBox.id = courseId;
                     courseProperties.courseBox.onclick = openBox;
-     
+                    courseProperties.courseBox.classList.add("closed");
      
                     // set data
                     courseProperties.title.innerText = courseValues.courseName;
@@ -207,8 +207,6 @@ async function showCourses(searchedContent, callPurpose) {
 
 // open box
 function openBox(event) {  
-     console.log("open");
-
      let courseBox = event.currentTarget;
      let courseId;
      let elementData;
@@ -217,6 +215,7 @@ function openBox(event) {
           let courseAreaClicked = courseBox.parentElement.parentElement.id;
 
           courseId = courseBox.id;
+          courseBox.classList.remove("closed");
      
           elementData = obtainDataSelected(courseAreaClicked === "coursesA" ? "my" : "others")[courseId];
 
@@ -585,11 +584,11 @@ function closeBox(ev) {
      let previouslyCreatedContent = ev.currentTarget.parentElement;
      let courseBox = previouslyCreatedContent.parentElement;
 
-     console.log(previouslyCreatedContent);
-     console.log(courseBox);
-
      previouslyCreatedContent.remove();
+
      courseBox.classList.remove("open");
+     courseBox.classList.add("closed");
+
 }
 
 

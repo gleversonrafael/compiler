@@ -88,38 +88,32 @@ function showMessageBox(messageType, message) {
 
      if(messageBox) {
           messageBox.remove();
-     }
-
+     } 
 
      messageBox = createMessageBox();
      defineCustomElements();
 
-
      function createMessageBox() {
           const mainHeader = document.getElementById("mainHeader");
-
           const createdMessageBox = document.createElement("div");
           createdMessageBox.classList.add("messageBox", "bAll");
 
           closeButton = document.createElement("button");
           closeButton.classList.add("closeMessageBox");
 
-
           closeButton.addEventListener("click", () => {
                createdMessageBox.remove();
           });
 
-
           createdMessageBox.appendChild(closeButton);
           mainHeader.appendChild(createdMessageBox);
-
 
           return createdMessageBox;
      }
 
 
      function defineCustomElements() {
-          let messageParagraph = document.createElement("p");
+          const messageParagraph = document.createElement("p");
           messageParagraph.innerText = message;
 
           messageBox.classList.add(messageType);
@@ -133,6 +127,7 @@ function showMessageBox(messageType, message) {
 // is user data valid
 function userDataIsValid(analyzedData) {
      // analyzedData = Array with objects ({ name: test}, {other: test})
+
      let validateData = {
           name: /[\w]{2,}/,
           email: /[\w]{2,}@+[\w]{2,}.[\w]{2,}/ ,
@@ -147,16 +142,17 @@ function userDataIsValid(analyzedData) {
 
      for(let key = 0; key < analyzedData.length; key++) {
           const analyzedItem = Object.entries(analyzedData[key])[0];
+          const itemValue = analyzedItem[1];
           const selectedDataType = validateData[analyzedItem[0]];
           let regexTest;
 
-          if(selectedDataType) {
+          if(selectedDataType && itemValue) {
                regexTest = selectedDataType.test(analyzedItem[1]);
-          }
-          
-          if(regexTest === false) {
-               finalResult = false
-               break
+
+               if(regexTest === false) {
+                    finalResult = false
+                    break
+               }
           }
      }
 

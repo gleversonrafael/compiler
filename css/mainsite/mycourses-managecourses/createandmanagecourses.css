@@ -85,6 +85,9 @@
 
      outline: 1px solid var(--uiSecondaryGrey);
      cursor: default;
+
+     animation: 0.25s openCourseBoxEffect 0 linear;
+     animation-iteration-count: 1;
 }
 
 .coursesColumn > div.open h1 {
@@ -203,6 +206,20 @@ input.fieldValue:focus {
 
 .closeBoxButton:hover {
      background-color: var(--uiPrimaryWhite);
+}
+
+
+.coursesColumn > div.closed {
+     animation: 0.5s closeCourseBoxEffect 0s linear;
+     animation-iteration-count: 1;
+     animation-direction: reverse;
+}
+
+
+/* animations */
+@keyframes openCourseBoxEffect {
+     from { height: 20%; overflow: hidden}
+     to { height: 100%; overflow: hidden}
 }
 
 

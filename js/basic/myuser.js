@@ -134,7 +134,7 @@ async function saveUserDataProcess(callType, canBeSaved) {
 
           // array containing only the changed fields = [{name: test}, {test: test}]
           userInputs = document.querySelectorAll("form#changeOwnUserData .fillableInputJS");
-          newUserData = createUserDataArray("edit", userInputs);
+          newUserData = await createUserDataArray("edit", userInputs);
 
           if(newAssignedPassword != null) {
                newUserData.push({password: newAssignedPassword})
@@ -215,15 +215,9 @@ async function saveUserDataProcess(callType, canBeSaved) {
                     typeOfResult = "safe"
                }
 
-
                Object.defineProperties(analyzeResult, {
                     correct: { value: true, writable: true },
-
-                    type: {
-                         value: typeOfResult,
-                         writable: true 
-                    }
-
+                    type: { value: typeOfResult, writable: true }
                })
 
 
@@ -245,10 +239,10 @@ async function saveUserDataProcess(callType, canBeSaved) {
 
 
 
-     function createNewUserDataArray() {
+     function createNewUserDataArray(receivedInputs) {
           let newArray = [];
           
-          userInputs.forEach((input) => {
+          receivedInputs.forEach((input) => {
                if(input.value != input.placeholder) {
                     let temporaryObject = {};
 
@@ -304,7 +298,7 @@ async function saveUserDataProcess(callType, canBeSaved) {
 
 
      async function saveOwnUserDataAttempt(receivedDataType, receivedData) {
-          const userDoc = doc(db, "usersInfo", `u${currentUserUID}`);
+          const userDoc = doc(db, "usersInfo", currentUserUID);
 
           const currentUser = auth.currentUser;
           let userCredential;
@@ -346,9 +340,12 @@ async function saveUserDataProcess(callType, canBeSaved) {
 
           // update user document in firestore
           if(receivedDataType === "safe" || confirmNFields(validatedConfidentialFieldsValues, true) === true) {
-               updateDoc(userDoc, receivedData);
-               showMessageBox("successMessage", "Dados atualizados!");
-               setTimeout(() => {window.location.reload()}, 1000);
+               await updateDoc(userDoc, receivedData)
+               .then(() => {window.location.reload()})
+               .catch((errorMessage) => {
+                    showMessageBox("Houve um erro na submissão dos dados");
+                    console.log("database" + errorMessage.code);
+               });
           }
 
 

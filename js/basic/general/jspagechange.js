@@ -186,7 +186,7 @@ async function getPageHtml(selectedUrl) {
                return response.text();
 
           } else {
-               showMessageBox("errorMessage", "Essa página não pôde ser carregada.");
+               showMessageBox("errorMessage", "Não foi possível inicializar a página selecionada.");
                console.log("couldn't get the page.");
                // show message...
           }

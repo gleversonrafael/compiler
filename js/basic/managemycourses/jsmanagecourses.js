@@ -119,8 +119,6 @@ function loadUserList() {
                genericLi: document.createElement("li") 
           }
 
-          console.log(aUserData);
-
           data.usernameP.textContent = aUserData.name;
           data.useremailP.textContent = aUserData.email;
 

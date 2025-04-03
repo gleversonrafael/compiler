@@ -10,7 +10,7 @@
 }
 
 #mMenuB {
-     display: grid;     
+     display: grid;
      position: sticky;
 
      top: 0;
@@ -20,7 +20,6 @@
      width: fit-content;
 
      height: 100vh;
-
 }
 
 #mMenuB.menuOpen {
@@ -29,20 +28,19 @@
 
      grid-template-rows: 1fr 2fr 1fr;
 
-     min-width: 225px;
-     width: 60vw;
-     max-width: 300px;
-
      padding: 10px;
 
      background-color: var(--uiSecondaryBlack);
+
+     animation: 300ms openMenuANIM 0 linear forwards;
+     animation-iteration-count: 1;
 }
 
+
+/* menu icon */
 .menuChildClosed {
      display: none;
 }
-
-
 
 
 .brandIcon{
@@ -75,7 +73,7 @@
      padding: 0 5px;
 
      color: var(--uiSecondaryWhite);
-     outline: 1px solid var(--uiSecondaryGrey);
+     outline: 1px solid var(--uiPrimaryGrey);
 
      background-color: transparent;
 
@@ -232,27 +230,6 @@
 }
 
 
-
-
-
-
-/* effects */
-#bgEff {
-     display: none;
-     background-color: var(--uiPrimaryBlackOpacity);
-
-     position: fixed;
-     left: 0;
-
-     z-index: 0;
-
-     height: 100%;
-     width: 100%;
-
-     /* background-color: var(--uiPrimaryBlack); */
-}
-
-
 #wallpaperEffect {
      z-index: -1;
 
@@ -279,7 +256,19 @@
 
 
 
+/* animations */
+@keyframes openMenuANIM {
+     from {
+          min-width: 0;
+          width: 0;
+     }
 
+     to {
+          min-width: 225px;
+          width: 60vw;
+          max-width: 300px;
+     }
+}
 
 
 /* pc / tablet media */

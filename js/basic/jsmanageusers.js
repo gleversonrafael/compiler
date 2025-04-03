@@ -34,17 +34,16 @@ onSnapshot(usersCol, async() => {
 
 
 async function refreshTableWithNewData() {
-     console.log("teste");
      let usersArray;
      let refreshSuccess;
+     const searchUserQuery = query(usersCol, where("uid", "!=", currentUserUID), where("deleted", "==", false));     
 
-     await getDocs(query(usersCol, where("uid", "!=", currentUserUID), where("deleted", "==", "false")))
+     await getDocs(searchUserQuery)
      .then((receivedUsers) => {
           usersArray = obtainDocumentsArray(receivedUsers);
           fillTable("usersTable", usersArray, "users");
 
           refreshSuccess = true;
-
      })
      .catch((error) => {
           showMessageBox("errorMessage", "Não foi possível recarregar a tabela.");
