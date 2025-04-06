@@ -38,9 +38,7 @@ function setReusableEvents(eventsArray) {
      function cancelModalEvent() { 
           let cancelModalButtons = document.querySelectorAll(".cancelModalButton");
 
-          cancelModalButtons.forEach((modalButton) => {
-               console.log(modalButton);
-               
+          cancelModalButtons.forEach((modalButton) => {               
                modalButton.addEventListener("click", (clickEvent) => {
                     let canceledModalId = obtainFather(clickEvent.currentTarget, "modalJS").id;
                     
@@ -126,33 +124,28 @@ function showMessageBox(messageType, message) {
 
 // is user data valid
 function userDataIsValid(analyzedData) {
-     // analyzedData = Array with objects ({ name: test}, {other: test})
+     console.log(analyzedData);
 
-     let validateData = {
+     // analyzedData = Array with objects ({ name: test}, {other: test})
+     const validateData = {
           name: /[\w]{2,}/,
           email: /[\w]{2,}@+[\w]{2,}.[\w]{2,}/ ,
           password: /.{4,12}/,
-          telephone: /[\d]{12}/,
-          usertype: /\w{1,}/
+          telephone: /|[\d]{12}/,
+          usertype: /regular|admin/,
      }
 
      let finalResult = true;
 
-
-
      for(let key = 0; key < analyzedData.length; key++) {
+          // [0] = name | [1] = value
           const analyzedItem = Object.entries(analyzedData[key])[0];
-          const itemValue = analyzedItem[1];
-          const selectedDataType = validateData[analyzedItem[0]];
-          let regexTest;
+          const selectedDataRegex = validateData[analyzedItem[0]];
 
-          if(selectedDataType && itemValue) {
-               regexTest = selectedDataType.test(analyzedItem[1]);
-
-               if(regexTest === false) {
-                    finalResult = false
-                    break
-               }
+          if(selectedDataRegex && selectedDataRegex.test(analyzedItem[1]) === false) {
+               console.log("break");
+               finalResult = false
+               break
           }
      }
 
@@ -163,22 +156,17 @@ function userDataIsValid(analyzedData) {
 
 
 // create user data array
-async function createUserDataArray(operatingMode, selectedData) {
-     // data accepted -> inputs with values and names
+async function createUserDataArray(operatingMode, selectedData, comparedData) {
+     console.log(selectedData);
+     // data accepted -> inputs array / node list with values and names
      let newArray = [];
-     let editedUser;
 
      if(operatingMode === "create") {
           newArray.push({active: true}, {deleted: false});
-
-     } else {
-          let {password, ...safeUserData } = await fetchOwnUserData();
-          editedUser = safeUserData;
      }
 
-
      selectedData.forEach((data) => {
-          if(operatingMode === "create" || (operatingMode === "edit" && data.value != editedUser[data.name])) {
+          if(operatingMode === "create" || (operatingMode === "edit" && data.value != comparedData[data.name])) {
                let temporaryObject = {};
 
                // data reference = input
@@ -191,7 +179,6 @@ async function createUserDataArray(operatingMode, selectedData) {
                newArray.push(temporaryObject);
           }
      })
-
 
      return newArray
 }
@@ -342,6 +329,17 @@ async function customUpdateDocument(receivedData) {
 }
 
 
+function obtainArrayFromInputs(formId) {
+     const fillableInputs =  document.querySelectorAll("#"+formId+" .fillableInputJS");
+     let returnedInputs = [];
+
+     fillableInputs.forEach((selectedInput) => {
+          returnedInputs.push(selectedInput);
+     })
+
+     return returnedInputs
+}
+
 
 export { 
      setReusableEvents,
@@ -349,7 +347,7 @@ export {
      showMessageBox, 
      userDataIsValid, checkUserPassword, 
      createUserDataArray, convertSpecificArrayIntoObject,
-     forEachPropertyWithDo,
+     forEachPropertyWithDo, obtainArrayFromInputs,
      toggleModal, 
      customUpdateDocument,
 };

@@ -9,12 +9,12 @@ import { removeSkeletons } from "./../general/jsload.js"
 import { onSnapshot, collection, where, query } from "firebase/firestore";
 import { db } from "../general/jsfirebase.js";
 
+console.log("managecourses");
 
 // global var
 let coursesData = {};
 let othersData = {};
 let pageType = window.location.href.includes("mycourses") ? "myCourses" : "manageCourses"
-
 
 // async events
 await showCourses(undefined, "my");

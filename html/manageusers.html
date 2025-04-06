@@ -36,13 +36,13 @@
 
                          <div class="flex flex-col">
                               <label class="requiredLabel labelPattern" for="addUserNameInput"> Nome</label>
-                              <input id="addUserNameInput" class="requiredJS inputPatternMM fillableInputJS" name="name" type="text" autocomplete="off" required>
+                              <input id="addUserNameInput" class="requiredInputJS inputPatternMM fillableInputJS" name="name" type="text" autocomplete="off" required placeholder="Insira no mínimo 2 letras">
 
                          </div>
 
                          <div class="flex flex-col">
                               <label class="labelPattern" for="addTelephoneInput"> Telefone</label>
-                              <input id="addTelephoneInput" class="inputPatternMM fillableInputJS" type="tel" name="telephone">
+                              <input id="addTelephoneInput" class="inputPatternMM fillableInputJS" type="tel" name="telephone" placeholder="Exemplo: xxyyzzzznnnn">
 
                          </div>
 
@@ -55,13 +55,13 @@
 
                          <div class="flex flex-col">
                               <label class="requiredLabel labelPattern" for="addEmailInput"> E-mail</label>
-                              <input  id="addEmailInput" class="requiredJS inputPatternMM fillableInputJS" name="email" type="email" autocomplete="off" required>
+                              <input  id="addEmailInput" class="requiredInputJS inputPatternMM fillableInputJS" name="email" type="email" autocomplete="off" required placeholder="Exemplo: abcdef@abcdef.com">
 
                          </div>   
 
                          <div class="flex flex-col">
                               <label class="requiredLabel labelPattern" for="addPasswordInput"> Senha</label>
-                              <input id="addPasswordInput" class="requiredJS inputPatternMM fillableInputJS" name="password" type="text" autocomplete="off" required>
+                              <input id="addPasswordInput" class="requiredInputJS inputPatternMM fillableInputJS" name="password" type="text" autocomplete="off" required placeholder="Mínimo: 4; Máximo: 12 caracteres">
 
                          </div>
 
@@ -142,7 +142,7 @@
 
                </section>
 
-               <section class="">
+               <section class="pageArea">
                     <!-- table -->
                     <table id="usersTable" class="loadingSkeleton tablePatternCSS">
                          <!-- thead -->
@@ -222,7 +222,7 @@
 
                     <!-- sign button -->
                     <div>
-                         <button id="openSignModal" class="buttonPatternCSS confirmButtonCSS dTrans"> Cadastrar usuário</button>
+                         <button id="openSignModal" class="buttonPatternCSS confirmButtonCSS dTrans loadingSkeleton"> Cadastrar usuário</button>
 
                     </div>
 

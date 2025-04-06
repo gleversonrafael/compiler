@@ -32,9 +32,7 @@ async function fetchOwnUserData() {
                userData = obtainedDataInstance.data();
                Object.defineProperty(userData, "uid", { value: dataId, enumerable: true});
 
-               const { password, telephone, ...safeOwnUserData } = userData;
-
-               obtainedResult = safeOwnUserData;
+               obtainedResult = userData;
 
           })
           .catch((error) => {

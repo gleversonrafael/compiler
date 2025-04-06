@@ -47,6 +47,7 @@
 /* loading skeleton */
 .loadingSkeleton {
     position: relative;
+    padding: 0px;
     
     width: fit-content;
     height: fit-content;
@@ -55,7 +56,7 @@
 .loadingSkeleton:before {
     content: "";
     position: absolute;
-    z-index: 0;
+    z-index: 1;
 
     width: 100%;
     height: 100%;

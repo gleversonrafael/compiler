@@ -5,6 +5,8 @@ function setPageChangeEvents() {
      const changePageItems = document.querySelectorAll(`[data-changepagestate="possible"]`);
 
      changePageItems.forEach((item) => {
+          item.dataset.changepagestate = "valid";
+     
           item.addEventListener("click", async(clickEvent) => {
                clickEvent.preventDefault();
                
@@ -19,8 +21,6 @@ function setPageChangeEvents() {
 async function changePageFullProcess(selectedItem) {
      await changePage(selectedItem.name, selectedItem.href);
      changeSelectedBoxStyle();
-
-     selectedItem.dataset.changepagestate = "valid";
 }
 
 async function changePage(pageName, pageUrl) {

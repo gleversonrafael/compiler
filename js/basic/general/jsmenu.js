@@ -123,8 +123,6 @@ function  changeSelectedBoxStyle() {
      if(selectedBox) {
           const selectedIcon = document.querySelector(`#${selectedBox.id} img`);
           selectedIcon.src = selectedIcon.src.replace(/fill-/, "");
-
-          selectedBox.dataset.changepagestate = "possible"
           selectedBox.classList.remove("selectedMenuBox");
      }
 

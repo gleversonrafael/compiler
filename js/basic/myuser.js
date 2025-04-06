@@ -4,16 +4,15 @@ import { fetchOwnUserData, currentUserUID } from "./general/jsuserdata.js";
 import { 
      setReusableEvents, showMessageBox, 
      userDataIsValid, checkUserPassword, 
-     createUserDataArray, convertSpecificArrayIntoObject, 
+     createUserDataArray, obtainArrayFromInputs, convertSpecificArrayIntoObject, 
      toggleModal,
 
 } from "./general/jsreusablestructures.js"
+import { removeSkeletons } from "./general/jsload.js"
 
 import { updateDoc, doc } from "firebase/firestore";
 import { EmailAuthProvider, updatePassword, updateEmail, reauthenticateWithCredential, signOut } from "firebase/auth";
 import { db, auth } from "./general/jsfirebase.js";
-
-
 
 // global
 let newAssignedPassword = null;
@@ -27,6 +26,7 @@ async function loadDefaults() {
      await fillFieldsWithUserData();
      toggleEvents();
      saveUserDataProcess("setEvents");
+     removeSkeletons();
 }
 
 
@@ -34,7 +34,6 @@ async function loadDefaults() {
 function toggleEvents() {
      setReusableEvents(["formsEvent", "cancelModalEvent"]);
      specificEvents();
-
 
      function specificEvents() {
           // change password
@@ -67,19 +66,14 @@ function toggleEvents() {
 // fill form fields with user data
 async function fillFieldsWithUserData() {
      const { password, ...safeUserData } = await fetchOwnUserData();
-     let userInputs = document.querySelectorAll("#changeOwnUserData .fillableInputJS");
+     const userInputs = document.querySelectorAll("#changeOwnUserData .fillableInputJS");
 
      for(let input = 0; input < userInputs.length; input++) {
           let fieldSearched = userInputs[input].name
 
           if(safeUserData[fieldSearched]) {
-               if(fieldSearched != "password") {
-                    userInputs[input].placeholder = safeUserData[fieldSearched];
-                    userInputs[input].value = safeUserData[fieldSearched];
-               
-               } else {
-                    userInputs[input].placeholder = ""
-               }              
+               userInputs[input].placeholder = safeUserData[fieldSearched];
+               userInputs[input].value = safeUserData[fieldSearched];
           }
      }
 }
@@ -119,31 +113,28 @@ async function temporarilyChangeUserPassword() {
 
 // save user data
 async function saveUserDataProcess(callType, canBeSaved) {     
-     let userInputs;
-
      let newUserData;
      let newUserDataObject;
      let analyzeResult;
-
 
      if(callType === "setEvents") {
           setSaveEvents();
 
      } else {
           const { password, ...currentUserData } =  await fetchOwnUserData();
+          const userInputs = obtainArrayFromInputs("changeOwnUserData");
 
           // array containing only the changed fields = [{name: test}, {test: test}]
-          userInputs = document.querySelectorAll("form#changeOwnUserData .fillableInputJS");
-          newUserData = await createUserDataArray("edit", userInputs);
+          newUserData = await createUserDataArray("edit", userInputs, currentUserData);
 
           if(newAssignedPassword != null) {
                newUserData.push({password: newAssignedPassword})
                newAssignedPassword = null;
           }
 
+          
           newUserDataObject = convertSpecificArrayIntoObject(newUserData);
           analyzeResult = analyzeInputedData();
-
 
           if(analyzeResult.correct === true) {
                // confirm password modal
@@ -153,7 +144,6 @@ async function saveUserDataProcess(callType, canBeSaved) {
                } else if(canBeSaved != true) {
                     canBeSaved = true
                } 
-
 
                // save user data
                if(canBeSaved === true) {
@@ -236,36 +226,6 @@ async function saveUserDataProcess(callType, canBeSaved) {
 
           return analyzeResult;
      }
-
-
-
-     function createNewUserDataArray(receivedInputs) {
-          let newArray = [];
-          
-          receivedInputs.forEach((input) => {
-               if(input.value != input.placeholder) {
-                    let temporaryObject = {};
-
-                    Object.defineProperty(temporaryObject, input.name, {
-                         value: input.value,
-                         enumerable: true,
-                         writable: true,
-                    })
-     
-                    newArray.push(temporaryObject);
-               }
-          }) 
-
-
-          if(newAssignedPassword) {
-               newArray.push({password: newAssignedPassword})
-               newAssignedPassword = null;
-          }
-          
-          return newArray
-     }
-
-
 
      async function confirmUserPassword() {
           let returnedValue = false;

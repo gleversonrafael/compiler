@@ -10,16 +10,17 @@ import {
      setReusableEvents, forEachPropertyWithDo, 
      showMessageBox, toggleModal, customUpdateDocument,
      userDataIsValid, createUserDataArray, convertSpecificArrayIntoObject,
+     obtainArrayFromInputs,
      
 } from "./general/jsreusablestructures.js"
 
+console.log("manageusers");
 
 // events
 setManageUsersEvents();
 setReusableEvents([
      "formsEvent", "cancelModalEvent"
 ]);
-
 
 
 // asyncronous
@@ -33,26 +34,40 @@ onSnapshot(usersCol, async() => {
 });
 
 
-async function refreshTableWithNewData() {
+async function refreshTableWithNewData(receivedData) {
      let usersArray;
-     let refreshSuccess;
-     const searchUserQuery = query(usersCol, where("uid", "!=", currentUserUID), where("deleted", "==", false));     
+     
+     if(! receivedData) {
+          receivedData = await obtainUsers();  
+     }
 
-     await getDocs(searchUserQuery)
-     .then((receivedUsers) => {
-          usersArray = obtainDocumentsArray(receivedUsers);
+     if(receivedData !== "ERROR") {
+          usersArray = obtainDocumentsArray(receivedData);
           fillTable("usersTable", usersArray, "users");
+     
+          return true;
 
-          refreshSuccess = true;
-     })
-     .catch((error) => {
-          showMessageBox("errorMessage", "Não foi possível recarregar a tabela.");
-          console.log(error.code);
+     } else {
+          return false;
+     }
 
-          refreshSuccess = false;
-     })
 
-     return refreshSuccess;
+     async function obtainUsers() {
+          const searchUserQuery = query(usersCol, where("uid", "!=", currentUserUID), where("deleted", "==", false));
+          let response;
+
+          await getDocs(searchUserQuery)
+          .then((receivedUsers) => {
+               response = receivedUsers;
+          })
+          .catch((error) => {
+               showMessageBox("errorMessage", "Não foi possível recarregar a tabela.");
+               console.log(error.code);
+               response = "ERROR"
+          })
+
+          return response
+     }
 }
 
 
@@ -207,8 +222,10 @@ async function fillTable(tableId, dataArray, tableType) {
 
 // create
 function setManageUsersEvents() {
-     document.getElementById("createUserForm").addEventListener("submit", () => {
-          createNewUser();
+     const createUserForm = document.getElementById("createUserForm");
+
+     createUserForm.addEventListener("submit", () => {
+          createNewUser(createUserForm);
      })
 
      document.getElementById("openSignModal").addEventListener("click", () => {
@@ -221,45 +238,39 @@ function setManageUsersEvents() {
 }
 
 
-async function createNewUser() {
+async function createNewUser(createForm) {
      // user data creation
      const createdUserInputs = createUserInputs();
-     const userDataArray = createUserDataArray("create", createdUserInputs);
+     const userDataArray = await createUserDataArray("create", createdUserInputs);
      const userDataObject = convertSpecificArrayIntoObject(userDataArray);
      const userValidation = userDataIsValid(userDataArray);
 
      let messageType = "errorMessage";
      let message;
+     let creationSucess;
 
      await validateAndCreateUser();
-     showMessageBox(messageType, message)
+     showMessageBox(messageType, message);
+
+     if(creationSucess === true) {
+          createForm.reset();
+     }
 
 
      // complementary
      function createUserInputs() {
-          let returnedInputs = [];
-
-          // fill fillable inputs (string , telephone...)
-          const fillableInputs =  document.querySelectorAll("#createUserForm .fillableInputJS");
-
-          fillableInputs.forEach((selectedInput) => {
-               if(selectedInput.classList.contains("requiredInputJS") || selectedInput.value) {
-                    returnedInputs.push(selectedInput);
-               }
-          })
-
+          let fillableInputs = obtainArrayFromInputs("createUserForm");
 
           // is user type filled
-          const userTypeInput = document.querySelector("#createUserForm .userTypeInput:checked");
+          let userTypeInput = document.querySelector("#createUserForm .userTypeInput:checked");
 
           if(! userTypeInput) {
-               userType = convertHtmlStringToElement(`<input type="radio" name="usertype" value="">`)
+               userTypeInput = convertHtmlStringToElement(`<input type="radio" name="usertype" value="null">`)
           } 
 
-          returnedInputs.push(userTypeInput);
+          fillableInputs.push(userTypeInput);
      
-
-          return returnedInputs
+          return fillableInputs
      }
 
 
@@ -271,11 +282,11 @@ async function createNewUser() {
                     const newUserDatabaseUID = `u${signUserAttempt.returnedUID}`
      
                     Object.defineProperty(userDataObject, "uid", {
-                         value: newUserDatabaseUID,
-                         enumerable: true
-                    });
+                         value: newUserDatabaseUID, enumerable: true}
+                    );
      
-                    await addUserToDatabase(newUserDatabaseUID, userDataObject);          
+                    await addUserToDatabase(newUserDatabaseUID, userDataObject)
+                    .then((response) => {creationSucess = response}); 
      
                } else {
                     let selectedErrorMessage;
@@ -308,7 +319,7 @@ async function createNewUser() {
 
           await createUserWithEmailAndPassword(signAuth, userData.email, userData.password)
           .then((newUserCredential) => {
-               signResult.returnedUID = `u${newUserCredential.user.uid}`;
+               signResult.returnedUID = newUserCredential.user.uid;
                signResult.result = true;
 
           })
@@ -324,19 +335,25 @@ async function createNewUser() {
      
 
      async function addUserToDatabase(userUID, userData,) {
+          let response;
+
           // save data into database
           await setDoc(doc(db, "usersInfo", userUID), userData)
           .then(() => {
                messageType = "successMessage";
                message = "O usuário foi criado com sucesso!"
+               response = true;
 
           })
           .catch((error) => {
                messageType = "strangeMessage"
                message = "A autenticiadde do usuário foi cadastrada, sem um local definido no banco de dados."
                console.log(`ERROR: ${error.code}`);
+
+               response = false;
           })
 
+          return response
      }
 }
 
