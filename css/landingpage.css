@@ -72,7 +72,7 @@ main::after {
 
 /* main title */
 #mTitle-sec {
-    color: var(--white);
+    color: var(--uiPrimaryWhite);
 }
 
 #mTitle-sec h1 {

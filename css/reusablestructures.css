@@ -78,8 +78,6 @@
      overflow: scroll;
 
      position: fixed; 
-
-     padding: 0px 40px;
      width: 100%;
 
      height: 100%;
@@ -100,6 +98,7 @@
      padding: 35px;
      border-radius: 15px;
 
+     min-width: 250px;
      width: 50vw;
      max-width: 400px;
 
@@ -319,9 +318,28 @@
      padding: 10px 20px;
 
      border-radius: 15px;
-
      cursor: pointer;
 }
+
+
+.genericButtonVisual {
+     background-color: var(--uiPrimaryGrey);
+     cursor: pointer;
+     border: none;
+}
+
+.genericButtonVisual:hover {
+     opacity: 0.75;
+}
+
+.genericButtonVisual:disabled {
+     opacity: 0.25;
+}
+
+.genericButtonVisual:active {
+     background-color: var(--uiSecondaryGrey);
+}
+
 
 .confirmButtonCSS {
      font-weight: 500;
@@ -407,8 +425,6 @@
 #pageTitle {
      color: var(--uiPrimaryWhite);
      font: normal 1.5em var(--rFont);
-
-     margin-bottom: 10px;
 }
 
 

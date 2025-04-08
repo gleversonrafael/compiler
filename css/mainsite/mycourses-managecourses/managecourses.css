@@ -7,17 +7,12 @@
 
      gap: 10px;
      margin-bottom: 0px;
-
-     width: 100%;     
+     width: 100%;
 }
 
 #operationsA button {
      width: 100%;
-
      padding: 10px;
-     background-color: var(--uiPrimaryGrey);
-
-     cursor: pointer;
 }
 
 #addCourseButton {
@@ -25,24 +20,10 @@
      color: var(--primaryColor);
 }
 
-#addCourseButton:disabled {
-     opacity: 0.25;
-}
-
-
 #deleteCourseButton {
      border: none;
      color: var(--primaryOpposite);
 }
-
-#operationsA button:hover {
-     opacity: 0.75;
-}
-
-#operationsA button:active {
-     background-color: var(--uiSecondaryGrey);
-}
-
 
 #bgEff {    
      justify-content: center;
@@ -162,7 +143,7 @@ div.stepperGroup {
 
      gap: 10px;
      
-     max-height: 165px;
+     max-height: 200px;
 
      /* min-width === width e === 100%, para ocupar o tamanho de acess control e torná-lo intransponível, bem como conservar esse width (width: 100%) */
      min-width: 100%;
@@ -177,13 +158,13 @@ div.stepperGroup {
      align-items: center;     
 
      height: 40px;
-     padding: 20px 25px;
+     padding: 25px;
 
      cursor: pointer;
 
-     color: var(--uiPrimaryWhite);
+     color: var(--uiSecondaryWhite);
+     background-color: var(--uiPrimaryGrey);
 
-     border: 1px solid var(--uiSecondaryGrey);
      border-radius: 15px;
 
      word-break: keep-all;
@@ -192,21 +173,20 @@ div.stepperGroup {
 }
 
 .thisCourseAcess > .acessEditToggled {
-     color: var(--primaryColor);
-     border-color: var(--tertiaryColor);
+     color: var(--uiPrimaryWhite);
+     background-color: var(--quaternaryColor);
 }
 
 
 
 /* create courses area */
-.coursesColumn > div.canBeDeleted, .coursesColumn > div.willBeDeleted {
-     outline: 1px solid var(--primaryOpposite);
+.coursesColumn > div.canBeDeleted {
+     outline: 1px solid var(--uiSecondaryGrey);
 }
 
 .coursesColumn > div.willBeDeleted {
      outline: none;
-     background-color: var(--quaternaryOpposite);
-     /* background-color: var(--tertiaryOpposite); */
+     outline: 1px solid var(--primaryOpposite);
 }
 
 
@@ -226,8 +206,8 @@ div.stepperGroup {
      max-width: 500px;
      
      height: fit-content;
-     
      padding: 50px;
+
      /* margin: 50px min(10vw, 50px); */
      margin-top: 50px;
 
@@ -239,16 +219,15 @@ div.stepperGroup {
 
 #createCourseModal > .createdBoxTitle h1 {
      color: var(--uiPrimaryWhite);
-     
 }
 
 
 #createCourseModal .cancelModalButton {
      aspect-ratio: 1;
-     max-width: 25px;
+     
+     width: 25px;
      height: fit-content;
 
-     /* border: none; */
      cursor: pointer;
      border: none;
 
@@ -261,6 +240,10 @@ div.stepperGroup {
 .createdBox div > h1 {
      font: 600 min(7vw, 2.25em) var(--rFont);
      color: var(--uiPrimaryWhite);
+}
+
+#createCourseModal .createdBoxTitle {
+     margin-bottom: 50px;
 }
 
 .createdBoxTitle .createdBoxSubtitle {
@@ -298,25 +281,24 @@ div.stepperGroup {
      padding-bottom: 10px;
 
      font: 500 1em var(--rFont);
-     color: var(--uiPrimaryWhite);
 
      background-color: transparent;
+
+     color: var(--uiSecondaryWhite);
      border-color: transparent transparent var(--uiSecondaryGrey) transparent;
 }
 
 #createCourseForm > .contentFieldset input:focus {
      outline: none;
+
+     color: var(--uiPrimaryWhite);
      border-bottom-color: var(--uiPrimaryWhite);
 }
 
 /* correct input */
-#createCourseForm .correctInput {
-     color: var(--secondaryColor);
-     border-bottom-color: var(--tertiaryColor);
-}
-
 #createCourseForm label:has(+ .correctInput) {
      color: var(--uiSecondaryWhite);
+     position: relative;
 }
 
 
@@ -339,14 +321,14 @@ div.stepperGroup {
 #userList {
      flex-flow: column nowrap;
 
+     margin-bottom: 15px;
      gap: 10px;
 
      height: fit-content;
      max-height: 400px;
      width: 100%;
 
-     margin-bottom: 50px;
-     border: 1px solid blue;
+     border-radius: 25px;
 
      overflow: scroll;
 }
@@ -376,53 +358,36 @@ div.stepperGroup {
 
 /* list buttons */
 #grantAcessButtons {
+     align-items: start;
+
      gap: 10px;
      margin-bottom: 20px;
 }
 
 .changeAcessButton {
-     background-color: transparent;
-     width: 100%;
-}
+     flex-grow: 1;
 
-.changeAcessButton:disabled {
-     opacity: 0.5;
-}
-
-#removeAcessButton:hover, #grantAcessButton:hover {
-     font-weight: 600;
-     color: var(--uiPrimaryBlack);
+     min-width: fit-content;
+     width: calc(50% - 10px);
 }
 
 #removeAcessButton {
      color: var(--primaryOpposite);
-     border: 1px solid var(--primaryOpposite);
 }
-
-#removeAcessButton:hover {
-     background-color: var(--primaryOpposite);
-}
-
 
 #grantAcessButton {
      color: var(--primaryColor);
-     border: 1px solid var(--primaryColor);
 }
-
-#grantAcessButton:hover {
-     background-color: var(--primaryColor);
-}
-
 
 
 /* users boxes */
 #userList > .editableBox {
-     outline: 1px solid var(--uiPrimaryWhite);
+     border-bottom: 1px solid var(--uiSecondaryGrey);
      cursor: pointer;
 }
 
 #userList > .acessGranted {
-     background-color: var(--quaternaryColor);
+     border-bottom: 1px solid var(--tertiaryColor);
 }
 
 
@@ -438,41 +403,29 @@ div.stepperGroup {
      height: 50px;
 
      cursor: pointer;
+     border: none;
 }
 
 .resetButtonStyle {
      color: var(--uiSecondaryWhite);
-     background-color: transparent;
-     border: 1px solid var(--uiSecondaryGrey);
-}
-
-.resetButtonStyle:hover {
-     color: var(--uiPrimaryWhite);
-     border-color: var(--uiSecondaryGrey);
 }
 
 .resetButtonStyle:active {
-     border-color: var(--uiPrimaryWhite);
      transition: none 0s;
 }
 
 
 .confirmButtonStyle {
-     background-color: transparent;
-
-     color: var(--secondaryColor);
-     border: 1px solid var(--secondaryColor);
-}
-
-.confirmButtonStyle:hover {
      color: var(--primaryColor);
-     border-color: var(--primaryColor);
 }
 
 .confirmButtonStyle:active {
-     color: var(--uiPrimaryBlack);
-     background-color: var(--primaryColor);
+     background-color: var(--tertiaryColor);
      transition: none 0ms;
+}
+
+#returnCreateCourse {
+     margin-top: 30px;
 }
 
 
@@ -498,14 +451,10 @@ div.stepperGroup {
 }
 
 #confirmExclusion {     
-     background-color: transparent;
-
-     color: var(--primaryOpposite);
-     border: 1px solid var(--primaryOpposite);
+     background-color: var(--secondaryOpposite);
 }
 
 #confirmExclusion:hover {
-     color: var(--uiPrimaryWhite);
      background-color: var(--primaryOpposite);
 }
 
@@ -521,6 +470,7 @@ div.stepperGroup {
      color: var(--uiPrimaryWhite);
      background-color: var(--uiPrimaryGrey);
      border: none;
+
      cursor: pointer;
 }
 

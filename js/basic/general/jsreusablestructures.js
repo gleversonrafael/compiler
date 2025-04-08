@@ -130,7 +130,7 @@ function userDataIsValid(analyzedData) {
      const validateData = {
           name: /[\w]{2,}/,
           email: /[\w]{2,}@+[\w]{2,}.[\w]{2,}/ ,
-          password: /.{4,12}/,
+          password: /.{4, 8}/,
           telephone: /|[\d]{12}/,
           usertype: /regular|admin/,
      }

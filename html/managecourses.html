@@ -74,8 +74,8 @@
 
                     <!-- final buttons -->
                     <fieldset class="createdBoxButtons flex flex-row fJustSB">
-                         <input type="reset" value="Redefinir" class="resetButtonStyle bAll dTrans">
-                         <input type="submit" value="Criar" class="confirmButtonStyle bAll dTrans">
+                         <input type="reset" value="Redefinir" class="genericButtonVisual resetButtonStyle bAll dTrans">
+                         <input type="submit" value="Criar" class="genericButtonVisual confirmButtonStyle bAll dTrans">
 
                          
                     </fieldset>
@@ -83,17 +83,15 @@
                </form>
 
                <section id="usersWithAcessPage" class="manageCoursesModalPageCSS flex-col">
-                    <p> Usuários</p>
-
                     <ul id="userList" class="flex"></ul>
 
-                    <div id="grantAcessButtons" class="flex fJustSB">
-                         <button id="removeAcessButton" class="changeAcessButton buttonPattern"> Remover</button>
-                         <button id="grantAcessButton" class="changeAcessButton buttonPattern"> Conceder</button>
+                    <div id="grantAcessButtons" class="flex flex-row">
+                         <button id="removeAcessButton" class="genericButtonVisual changeAcessButton buttonPattern"> Remover</button>
+                         <button id="grantAcessButton" class="genericButtonVisual changeAcessButton buttonPattern"> Conceder</button>
 
                     </div>
 
-                    <button id="returnCreateCourse" class="buttonPattern modalPageChange dTrans">Retornar</button>
+                    <button id="returnCreateCourse" class="buttonPattern modalPageChange dTrans fJustC">Retornar</button>
 
                </section>
 
@@ -110,7 +108,7 @@
                <p id="deletedCoursesCounter"> null text</p>
 
                <div class="createdBoxButtons flex flex-row">
-                    <button id="changeExclusion" class="resetButtonStyle flex fJustC fAlignC dTrans bAll"> Alterar </button>
+                    <button id="changeExclusion" class="genericButtonVisual resetButtonStyle flex fJustC fAlignC dTrans bAll"> Alterar </button>
                     <button id="confirmExclusion" class="flex fJustC fAlignC dTrans bAll"> Confirmar </button>
 
                </div>
@@ -140,8 +138,8 @@
                          </section>
 
                          <section id="operationsA" class="flex">
-                              <button id="addCourseButton" class="bAll dTrans"> Adicionar </button>
-                              <button id="deleteCourseButton" class="bAll dTrans"> Excluir </button>
+                              <button id="addCourseButton" class="genericButtonVisual bAll dTrans"> Adicionar </button>
+                              <button id="deleteCourseButton" class="genericButtonVisual bAll dTrans"> Excluir </button>
                               
                          </section>
 
@@ -154,13 +152,12 @@
                <section id="exploreA" class="loadingSkeleton flex flex-col">
                     <div class="loadingSkeleton flex smallGapCSS"> 
                          <h3 class="subtitle"> Criados por mim</h3>
-                         <button class="refreshButtonCSS"></button>
+                         <button class="refreshJS refreshButtonCSS"></button>
 
                     </div>
      
                     <section id="coursesA" class="coursesArea flex flex-row">
                          <div class="coursesColumn flex flex-col"></div>
-
                          <div class="coursesColumn flex flex-col"></div>
      
                     </section>
@@ -178,6 +175,9 @@
                </section>
      
           </div>
+
+
+
 
      </main>
      

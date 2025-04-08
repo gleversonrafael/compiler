@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-#searchA {
-     margin-bottom: 100px;
-}
-
 
 /* fields */
 .fieldValue {
@@ -13,6 +9,10 @@
 
 
 /* others */
+.coursePage1 {
+     margin-bottom: 20px;
+}
+
 .createdContent > div > div {
      width: 100%;
 }

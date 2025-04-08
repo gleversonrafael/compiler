@@ -49,7 +49,8 @@
 }
 
 
-.coursesColumn > div img {
+/* img */
+.coursesColumn > div .courseIcon, .courseIcon {
      float: left;
 
      min-width: 20px;
@@ -62,6 +63,15 @@
 
      margin-right: 20px;
      border-radius: 20px;
+}
+
+div.courseIcon {
+     background-color: var(--uiPrimaryGrey)
+}
+
+.courseIconParagraph {
+     font: normal 500 2em var(--rFont);
+     color: var(--uiSecondaryWhite);
 }
 
 
@@ -106,7 +116,7 @@
 
 .aCoursePage > h3 {
      color: var(--uiSecondaryWhite);
-     font: 700 1.25em var(--rFont);
+     font: 600 1.25em var(--rFont);
 }
 
 
@@ -133,26 +143,24 @@
 
 
 .fieldName, .fieldValue {
-     color: var(--white);
+     color: var(--uiSecondaryWhite);
      word-break: break-all;
-     
 }
 
 .fieldName {
      display: block;
 
      font: 300 1em var(--rFont);
-
-     color: var(--uiSecondaryWhite);
-     margin-bottom: 15px;
+     margin-bottom: 5px;
 }
 
 .fieldValue {
      font: normal 1.15em var(--rFont);
-     color: var(--uiPrimaryWhite); 
 }
 
+
 input.fieldValue:focus {
+     color: var(--uiPrimaryWhite);
      outline: none;
 }
 
@@ -217,10 +225,10 @@ input.fieldValue:focus {
 
 
 /* animations */
-@keyframes openCourseBoxEffect {
+/* @keyframes openCourseBoxEffect {
      from { height: 20%; overflow: hidden}
      to { height: 100%; overflow: hidden}
-}
+} */
 
 
 /* media */

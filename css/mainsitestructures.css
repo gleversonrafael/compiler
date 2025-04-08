@@ -211,7 +211,7 @@
 }
 
 .subtitle {
-     color: var(--whiteT);
+     color: var(--uiSecondaryWhite);
      font: 200 0.9em var(--rFont);
      margin-bottom: 5px;
 }
@@ -223,7 +223,7 @@
 
      font: 500 1em var(--rFont);
 
-     color: var(--white);
+     color: var(--uiPrimaryWhite);
      background-color: var(--wood);
 
      border: 1px solid var(--white);
@@ -295,14 +295,11 @@
 
      .mmBlock {
           opacity: 0.75;
-          outline: none;
           height: 40px;
      }
 
      .mmBlock:hover, .selectedMenuBox {
           opacity: 1;
-          background-color: var(--uiPrimaryGrey);
-          outline: none;
      }
 
      .userB {

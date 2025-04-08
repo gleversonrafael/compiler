@@ -24,7 +24,7 @@
 
 #msgB > p {
     font: 500 1.25em var(--rFont);
-    color: var(--white);
+    color: var(--uiPrimaryWhite);
 }
 
 #msgB a {
@@ -85,7 +85,7 @@
 
 /* sign title */
 #signTitle {
-    color: var(--white);
+    color: var(--uiPrimaryWhite);
     font: normal 900 min(2em) var(--rFont);
     text-decoration: none;
 }
@@ -95,7 +95,7 @@
 
 /* subtopics */
 .stopic {
-    color: var(--white);
+    color: var(--uiPrimaryWhite);
     font: 500 min(1.25em) var(--rFont);
     margin: 40px 0px 20px;
 }
@@ -122,11 +122,11 @@ input[type=radio] {
     padding: 20px 25px;
     margin: 5px 0px;
 
-    background-color: var(--whiteTT);
+    background-color: var(--uiPrimaryWhiteTT);
 }
 
 .userTyB:hover {
-    color: var(--white);
+    color: var(--uiPrimaryWhite);
     background-color: var(--grey);
     opacity: 0.9;
 
@@ -140,7 +140,7 @@ input[type=radio] {
 
 /* radio box checked? */
 #regUserInp:checked + #regUserB, #admUserInp:checked + #admUserB  {
-    color: var(--white);
+    color: var(--uiPrimaryWhite);
     background-color: var(--razz);
 }
 
@@ -153,15 +153,15 @@ input[type=radio] {
 }
 
 #eButton, #cButton {
-    color: var(--white);
+    color: var(--uiPrimaryWhite);
 }
 
 #eButton {
-    border: 1px solid var(--whiteT);
+    border: 1px solid var(--uiPrimaryWhiteT);
 }
 
 #eButton:hover {
-    background-color: var(--whiteTT);
+    background-color: var(--uiPrimaryWhiteTT);
 }
 
 

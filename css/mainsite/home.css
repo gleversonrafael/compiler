@@ -51,7 +51,7 @@
 
 
 .dashbAnchor > p {
-     color: var(--white);
+     color: var(--uiPrimaryWhite);
      font: 500 1.1em var(--rFont);
 }
 

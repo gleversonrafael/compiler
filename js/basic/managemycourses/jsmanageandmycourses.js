@@ -4,6 +4,9 @@ import { createAcessControl, saveCourseData } from "./jsmanagecourses.js"
 import { fetchOwnUserData, currentUserUID } from "../general/jsuserdata.js"
 import { removeSkeletons } from "./../general/jsload.js"
 
+// temporary
+import { showMessageBox } from "../general/jsreusablestructures.js"
+
 
 // firebase
 import { onSnapshot, collection, where, query } from "firebase/firestore";
@@ -19,6 +22,14 @@ let pageType = window.location.href.includes("mycourses") ? "myCourses" : "manag
 // async events
 await showCourses(undefined, "my");
 removeSkeletons();
+
+
+// adapt later
+document.querySelectorAll(".refreshJS")[0].addEventListener("click", async() => {
+     await showCourses(undefined, "my");
+     showMessageBox("successMessage", "Página atualizada.");
+});
+
 
 
 // functions
@@ -129,15 +140,13 @@ async function showCourses(searchedContent, callPurpose) {
           function createBoxes() {
                Object.entries(obtainDataSelected(callPurpose)).forEach((data) => {
                     // var
-                    let courseId = data[0];
-                    let courseValues = data[1];
+                    let courseId = data[0], courseValues = data[1];
                     let selectedColumn = coursesColumns[0].childElementCount > coursesColumns[1].childElementCount? coursesColumns[1]: coursesColumns[0];
      
      
                     let courseProperties = {
                          courseBox: document.createElement("div"), 
                          title: document.createElement("h1"),
-                         platform: document.createElement("h2"),
                     }
      
      
@@ -148,13 +157,10 @@ async function showCourses(searchedContent, callPurpose) {
      
                     // set data
                     courseProperties.title.innerText = courseValues.courseName;
+                    courseProperties.title.classList.add("textOverflowCSS");
                     
      
-                    // create elements -- continue
-                    if(courseValues.img.length > 1) {
-                         courseProperties.courseBox.appendChild(createImg());
-                    }
-     
+                    courseProperties.courseBox.appendChild(createImg());
                     courseProperties.courseBox.appendChild(courseProperties.title);
      
                     if(courseValues.coursePlatform.length > 0) {
@@ -164,6 +170,8 @@ async function showCourses(searchedContent, callPurpose) {
                          });
 
                          courseProperties.platform.innerText = `Plataforma:${courseValues.coursePlatform}`;
+                         courseProperties.platform.classList.add("textOverflowCSS");
+
                          courseProperties.courseBox.appendChild(courseProperties.platform);
                     }
                     
@@ -171,11 +179,36 @@ async function showCourses(searchedContent, callPurpose) {
      
      
                     // compl
-                    function createImg() {
-                         let img = document.createElement("img");
-                         img.setAttribute("src", courseValues.img);
+                    function createImg() {           
+                         let createdElement;
+
+                         if(courseValues.img) {
+                              createdElement = document.createElement("img");
+                              createdElement.setAttribute("src", courseValues.img);
+                              console.log("há imagem!");
+                         
+                         } else {
+                              createdElement = document.createElement("div");
+                              createdElement.classList.add("flex", "fAlignC", "fJustC");
+                              
+                              const createdCourseFirstLetter = appendTextToCreatedElement();
+                              createdElement.appendChild(createdCourseFirstLetter);
+                         }
+
+                         createdElement.classList.add("courseIcon");
      
-                         return img
+                         return createdElement
+
+
+                         function appendTextToCreatedElement() {
+                              const courseFirstLetter = courseValues.courseName.substr(0, 1);
+                              const createdText = document.createElement("p"), createdTextNode = document.createTextNode(courseFirstLetter);
+
+                              createdText.classList.add("courseIconParagraph");
+                              createdText.appendChild(createdTextNode);
+
+                              return createdText
+                         }
                     }
                })
           }  
@@ -580,15 +613,25 @@ function changePage(selectedPage, courseId) {
 
 
 // close box
-function closeBox(ev) {
-     let previouslyCreatedContent = ev.currentTarget.parentElement;
-     let courseBox = previouslyCreatedContent.parentElement;
+function closeBox(methodData, methodCallReason) {
+     let previouslyCreatedContent, courseBox; 
+
+     // click event call
+     if(! methodCallReason) {
+          // methodData = click event
+          previouslyCreatedContent = methodData.currentTarget.parentElement;
+          courseBox = previouslyCreatedContent.parentElement;
+
+
+     } else if(methodCallReason === "withTargetDefined") {
+          // method data === courseBoxId
+          courseBox = document.querySelector(`#${methodData}`);
+          previouslyCreatedContent = courseBox.querySelector(".createdContent");
+     }
 
      previouslyCreatedContent.remove();
-
      courseBox.classList.remove("open");
      courseBox.classList.add("closed");
-
 }
 
 
@@ -605,5 +648,6 @@ function obtainDataSelected(callPurpose) {
 }   
 
 
+export { closeBox }
 
 

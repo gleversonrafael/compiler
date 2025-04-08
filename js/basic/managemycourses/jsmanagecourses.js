@@ -2,15 +2,16 @@
 import { onSnapshot, query, where, getDocs, doc, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db, usersCol } from "../general/jsfirebase.js";
 
-import { fetchOwnUserData, currentUserUID } from "../general/jsuserdata.js";
-
-import { showMessageBox,toggleModal, setReusableEvents } from "../general/jsreusablestructures.js";
-
+import { currentUserUID } from "../general/jsuserdata.js";
+import { showMessageBox, toggleModal, setReusableEvents } from "../general/jsreusablestructures.js";
+import { closeBox } from "./jsmanageandmycourses.js"
 
 // assign events
 if(document.location.href.includes("manage")) {
      createManageCoursesEvents();
 }
+
+
 
 
 // generalVars
@@ -68,7 +69,7 @@ function changeCourseBoxPage(newSelectedPage) {
                break
           
           case 2:
-               pageSubtitle.innerText = "Controle do acesso";
+               pageSubtitle.innerText = "Usuários com permissão";
                returnCreateCourse.style.display = "flex"
 
                createCourseForm.style.display = "none";
@@ -521,12 +522,23 @@ function validateFields(callParameter, selectedInput) {
 
 // save course data
 async function saveCourseData(courseIdentifier, oldData) {
-     let obtainedNewData = obtainEditedCourseData();
+     console.log("action");
+
+     const obtainedNewData = obtainEditedCourseData();
 
      if(Object.keys(obtainedNewData).length > 0) {
           let docThatWillBeUpdated = doc(db, "courses", courseIdentifier);
 
-          await updateDoc(docThatWillBeUpdated, obtainedNewData);
+          await updateDoc(docThatWillBeUpdated, obtainedNewData)
+          .then(() => {
+               showMessageBox("successMessage", "Curso alterado! atualize para visualizar as mudanças. ");
+               closeBox(courseIdentifier, "withTargetDefined");
+
+          })
+          .catch((error) => {
+               showMessageBox("errorMessage", "Houve um erro ao salvar esse curso.");
+               console.log(error.code)
+          })
      }
 
      
