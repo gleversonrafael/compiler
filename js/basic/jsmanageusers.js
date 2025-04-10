@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { getDocs, setDoc, doc, query, where, onSnapshot } from "firebase/firestore";
+import { getDoc, getDocs, setDoc, doc, query, where, onSnapshot } from "firebase/firestore";
 import { firebaseConfig, db, usersCol } from "./general/jsfirebase.js";
 import { createUserWithEmailAndPassword, signOut, getAuth } from "firebase/auth";
 
@@ -7,14 +7,14 @@ import { currentUserUID } from "./general/jsuserdata.js";
 import { setFunctionsOnLoad, removeSkeletons } from "./general/jsload.js" 
 
 import { 
-     setReusableEvents, forEachPropertyWithDo, 
+     setReusableEvents, convertHtmlStringToElement,
      showMessageBox, toggleModal, customUpdateDocument,
-     userDataIsValid, createUserDataArray, convertSpecificArrayIntoObject,
-     obtainArrayFromInputs,
-     
+     userDataIsValid, obtainUserInputedData, createUserDataArray,
+     convertSpecificArrayIntoObject,
+     fillSelectedForm, forEachPropertyWithDo
+
 } from "./general/jsreusablestructures.js"
 
-console.log("manageusers");
 
 // events
 setManageUsersEvents();
@@ -160,10 +160,10 @@ async function fillTable(tableId, dataArray, tableType) {
 
 
                     } else if(buttonClass.includes("edit")) {
-                         // selectedAction = toggleModal;
-                         // actionParameters = "editUserModal"
-                         selectedAction = showMessageBox;
-                         actionParameters = "strangeMessage"
+                         const {password, ...userData} = rowData[1];
+
+                         selectedAction = showAndRestartEditUserBox;                         
+                         actionParameters = { userUID: userUID, userData: userData };
                     
 
                     // toggle
@@ -235,12 +235,23 @@ function setManageUsersEvents() {
      document.querySelector("#deleteUserModal .confirmFormJS").addEventListener("click", () => {
           deleteUserSubmit();
      })
+
+
+     document.querySelector("#editUserForm").addEventListener("submit", () => {
+          const editUserForm = document.querySelector("#editUserForm");
+     
+          submitUserSaveData(
+               {
+                    selectedForm: "editUserForm", oldDataDocumentId: editUserForm.dataset.selecteduseruid
+               } 
+          );
+     })
 }
 
 
 async function createNewUser(createForm) {
      // user data creation
-     const createdUserInputs = createUserInputs();
+     const createdUserInputs = obtainUserInputedData("createUserForm");
      const userDataArray = await createUserDataArray("create", createdUserInputs);
      const userDataObject = convertSpecificArrayIntoObject(userDataArray);
      const userValidation = userDataIsValid(userDataArray);
@@ -258,22 +269,6 @@ async function createNewUser(createForm) {
 
 
      // complementary
-     function createUserInputs() {
-          let fillableInputs = obtainArrayFromInputs("createUserForm");
-
-          // is user type filled
-          let userTypeInput = document.querySelector("#createUserForm .userTypeInput:checked");
-
-          if(! userTypeInput) {
-               userTypeInput = convertHtmlStringToElement(`<input type="radio" name="usertype" value="null">`)
-          } 
-
-          fillableInputs.push(userTypeInput);
-     
-          return fillableInputs
-     }
-
-
      async function validateAndCreateUser() {
           if(userValidation) {
                const signUserAttempt = await signUser(userDataObject);
@@ -342,8 +337,8 @@ async function createNewUser(createForm) {
           .then(() => {
                messageType = "successMessage";
                message = "O usuário foi criado com sucesso!"
-               response = true;
 
+               response = true;
           })
           .catch((error) => {
                messageType = "strangeMessage"
@@ -394,14 +389,79 @@ function showUserDeleteBox(userInformationObject) {
 
 
 
+// edit
+// can be adapted to submit data
+async function submitUserSaveData(submitedDataObject) {
+     // submitedDataObject = { selectedForm, oldDataDocumentId }
+     const oldData = await obtainDocumentFromId("usersCol", submitedDataObject.oldDataDocumentId);
+     const newData = obtainNewData();
+
+     console.log(oldData);
+     console.log(newData);
+
+     // p --- compare data 
+     // if(dataHasChanged() && userDataIsValid()) {
+     // }
+
+
+     function obtainNewData() {
+          let newData = obtainUserInputedData(submitedDataObject.selectedForm);
+          newData = createUserDataArray(userData);
+          newData = convertSpecificArrayIntoObject(userData);
+
+          return newData
+     }
+}
+
+
 // reusable
-function convertHtmlStringToElement(htmlString) {
-     let temporaryTemplate = document.createElement("template");
-     htmlString = htmlString.trim();
+async function obtainDocumentFromId(selectedCollection, documentId) {
+     let response;
+     let snapshot = await getDoc(db, selectedCollection, documentId);
 
-     temporaryTemplate.innerHTML = htmlString
+     if(snapshot.exists()) {
+          console.log(snapshot.data())
 
-     return temporaryTemplate.content.firstElementChild;
+     } else {
+          console.log("erro");
+     }
+
+     return response;
+}
+
+
+
+function showAndRestartEditUserBox(receivedDataObject) {
+     // receivedDataObject = { userUID, userData }
+     const editUserForm = document.querySelector(`form#editUserForm`),
+          userTypeRadio =  document.querySelector(`input[data-relatedfield=usertype-${receivedDataObject.userData.usertype}]`),
+          resetButton = document.querySelector("form#editUserForm .formResetJS"),
+          
+          restartDataPack = { formId: "editUserForm", newData: receivedDataObject.userData, radiosToFill: [userTypeRadio]}
+     ;
+
+
+     editUserForm.dataset.selecteduseruid = receivedDataObject.userUID;
+
+     resetButton.onclick = function resetEditForm(resetEvent) {
+          resetEvent.preventDefault();
+          restartForm(restartDataPack);
+     }
+
+     restartForm(restartDataPack);
+     toggleModal("editUserModal");
+
+}
+
+function restartForm(formInformation) {
+     // formInfo = {formId, newData, radiosToFill}
+     fillSelectedForm(
+          {selectedFormId: formInformation.formId, data: formInformation.newData}
+     );
+
+     for(let selectedRadio = 0; selectedRadio < formInformation.radiosToFill.length; selectedRadio++) {
+          formInformation.radiosToFill[selectedRadio].checked = true; 
+     }
 }
 
 function obtainDocumentsArray(snapshotData) {

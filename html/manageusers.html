@@ -26,17 +26,14 @@
                     <fieldset class="flex flex-col">
                          <legend class="legendPattern"> Dados pessoais</legend>                         
 
-                         <div class="flex flex-col">
-                              <label class="requiredLabel labelPattern" for="addUserNameInput"> Nome</label>
-                              <input id="addUserNameInput" class="requiredInputJS inputPatternMM fillableInputJS" name="name" type="text" autocomplete="off" required placeholder="Insira no mínimo 2 letras">
+                         <label class="requiredLabel labelPattern" for="addUserNameInput"> Nome</label>
+                         
+                         <input id="addUserNameInput" class="requiredInputJS inputPatternMM fillableInputJS" name="name" type="text" autocomplete="off" placeholder="Insira no mínimo 2 letras" required>
 
-                         </div>
 
-                         <div class="flex flex-col">
-                              <label class="labelPattern" for="addTelephoneInput"> Telefone</label>
-                              <input id="addTelephoneInput" class="inputPatternMM fillableInputJS" type="tel" name="telephone" placeholder="Exemplo: xxyyzzzznnnn">
-
-                         </div>
+                         <label class="labelPattern" for="addTelephoneInput"> Telefone</label>
+                         
+                         <input id="addTelephoneInput" class="inputPatternMM fillableInputJS" type="tel" name="telephone" placeholder="Exemplo: xxyyzzzznnnn">
 
                     </fieldset>
                     
@@ -45,17 +42,14 @@
                     <fieldset class="flex flex-col">     
                          <legend class="legendPattern"> Dados sigilosos</legend>      
 
-                         <div class="flex flex-col">
-                              <label class="requiredLabel labelPattern" for="addEmailInput"> E-mail</label>
-                              <input  id="addEmailInput" class="requiredInputJS inputPatternMM fillableInputJS" name="email" type="email" autocomplete="off" required placeholder="Exemplo: abcdef@abcdef.com">
+                         <label class="requiredLabel labelPattern" for="addEmailInput"> E-mail</label>
+                         
+                         <input  id="addEmailInput" class="requiredInputJS inputPatternMM fillableInputJS" name="email" type="email" autocomplete="off" placeholder="Exemplo: abcdef@abcdef.com" required>
 
-                         </div>   
 
-                         <div class="flex flex-col">
-                              <label class="requiredLabel labelPattern" for="addPasswordInput"> Senha</label>
-                              <input id="addPasswordInput" class="requiredInputJS inputPatternMM fillableInputJS" name="password" type="text" autocomplete="off" required placeholder="Mínimo: 4; Máximo: 12 caracteres">
-
-                         </div>
+                         <label class="requiredLabel labelPattern" for="addPasswordInput"> Senha</label>
+                         
+                         <input id="addPasswordInput" class="requiredInputJS inputPatternMM fillableInputJS" name="password" type="text" autocomplete="off" placeholder="Mínimo: 4; Máximo: 12 caracteres" required>
 
                     </fieldset>
 
@@ -66,13 +60,13 @@
 
                          <div class="smallGapCSS flex flex-col">
                               <div>
-                                   <label role="button" for="regularUserInput" class="radioLabel"> Regular </label>
-                                   <input id="regularUserInput" type="radio" name="usertype" class="userTypeInput" value="regular">
+                                   <label role="button" for="regularUserInputCreate" class="radioLabel"> Regular </label>
+                                   <input id="regularUserInputCreate" type="radio" name="usertype" class="userTypeInput" value="regular">
                               </div>
 
                               <div>
-                                   <label role="button" for="adminUserInput" class="radioLabel"> Administrador </label>
-                                   <input id="adminUserInput" type="radio" name="usertype" class="userTypeInput" value="admin">
+                                   <label role="button" for="adminUserInputCreate" class="radioLabel"> Administrador </label>
+                                   <input id="adminUserInputCreate" type="radio" name="usertype" class="userTypeInput" value="admin">
                               </div>
 
                          </div>
@@ -81,11 +75,11 @@
 
 
                     <!-- buttons -->
-                    <fieldset class="modalButtons flex flex-col">
+                    <div class="modalButtons flex flex-col">
                          <input class="cancelModalButton bAll" type="button" value="Cancelar">
                          <input class="confirmFormJS confirmButtonTypeMR confirmButtonCSS bAll" type="submit" value="Criar">
 
-                    </fieldset>
+                    </div>
 
 
                </form>
@@ -109,6 +103,54 @@
                </div>
 
           </div>
+
+          <!-- edit -->
+          <div id="editUserModal" class="modalJS modalPattern defaultModalCSS flex flex-col">
+               <h1 class="modalTitle"> Editar usuário</h1>
+
+               <form id="editUserForm" class="modalFormMM flex flex-col" novalidate>
+                    <fieldset>
+                         <legend class="legendPattern"> Dados</legend>
+
+                         <label for="editUserInput" class="requiredLabel labelPattern"> Nome</label>
+                         <input data-relatedfield="name" id="editUserNameInput" type="text" name="name"  class="inputPatternMM requiredInputJS" autocomplete="off" required>
+          
+                         <label for="editUserTelephoneInput" class="labelPattern"> Telefone</label>
+                         <input data-relatedfield="telephone" id="editUserTelephoneInput" type="tel" name="telephone"  class="inputPatternMM fillableInputJS" autocomplete="off">
+               
+                         <label for="editUserEmailInput" class="labelPattern disabledLabelCSS"> E-mail</label>
+                         <input data-relatedfield="email" id="editUserEmailInput" type="email" name="email" class="inputPatternMM" autocomplete="off" disabled>
+            
+                    </fieldset>
+
+                    <!-- user type -->
+                    <fieldset class="flex flex-col">
+                         <legend class="legendPattern"> Tipo de usuário</legend>
+
+                         <div class="smallGapCSS flex flex-col">
+                              <label role="button" for="regularUserInputEdit" class="radioLabel"> Regular </label>
+                              <input data-relatedfield="usertype-regular" id="regularUserInputEdit" type="radio" name="usertype" class="userTypeInput" value="regular">
+     
+                              <label role="button" for="adminUserInputEdit" class="radioLabel"> Administrador </label>
+                              <input data-relatedfield="usertype-admin" id="adminUserInputEdit" type="radio" name="usertype" class="userTypeInput" value="admin">
+
+                         </div>
+
+                    </fieldset>
+
+                    <!-- buttons -->
+                    <div class="modalButtons flex flex-col">
+                         <input class="formResetJS" type="reset" value="Restaurar dados">
+
+                         <input class="cancelModalButton bAll" type="button" value="Cancelar">
+                         <input class="confirmFormJS confirmButtonTypeMR confirmButtonCSS bAll" type="submit" value="Salvar alterações">
+
+                    </div>
+
+               </form>
+
+          </div>
+
 
      </section>
 

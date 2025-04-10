@@ -125,7 +125,7 @@ async function saveUserDataProcess(callType, canBeSaved) {
           const userInputs = obtainArrayFromInputs("changeOwnUserData");
 
           // array containing only the changed fields = [{name: test}, {test: test}]
-          newUserData = await createUserDataArray("edit", userInputs, currentUserData);
+          newUserData = await createUserDataArray("edit", userInputs,currentUserData);
 
           if(newAssignedPassword != null) {
                newUserData.push({password: newAssignedPassword})

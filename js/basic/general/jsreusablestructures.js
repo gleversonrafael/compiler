@@ -122,70 +122,6 @@ function showMessageBox(messageType, message) {
 
 
 
-// is user data valid
-function userDataIsValid(analyzedData) {
-     console.log(analyzedData);
-
-     // analyzedData = Array with objects ({ name: test}, {other: test})
-     const validateData = {
-          name: /[\w]{2,}/,
-          email: /[\w]{2,}@+[\w]{2,}.[\w]{2,}/ ,
-          password: /.{4, 8}/,
-          telephone: /|[\d]{12}/,
-          usertype: /regular|admin/,
-     }
-
-     let finalResult = true;
-
-     for(let key = 0; key < analyzedData.length; key++) {
-          // [0] = name | [1] = value
-          const analyzedItem = Object.entries(analyzedData[key])[0];
-          const selectedDataRegex = validateData[analyzedItem[0]];
-
-          if(selectedDataRegex && selectedDataRegex.test(analyzedItem[1]) === false) {
-               console.log("break");
-               finalResult = false
-               break
-          }
-     }
-
-     return finalResult
-}
-
-
-
-
-// create user data array
-async function createUserDataArray(operatingMode, selectedData, comparedData) {
-     console.log(selectedData);
-     // data accepted -> inputs array / node list with values and names
-     let newArray = [];
-
-     if(operatingMode === "create") {
-          newArray.push({active: true}, {deleted: false});
-     }
-
-     selectedData.forEach((data) => {
-          if(operatingMode === "create" || (operatingMode === "edit" && data.value != comparedData[data.name])) {
-               let temporaryObject = {};
-
-               // data reference = input
-               Object.defineProperty(temporaryObject, data.name, {
-                    value: data.value,
-                    enumerable: true,
-                    writable: true,
-               });
-
-               newArray.push(temporaryObject);
-          }
-     })
-
-     return newArray
-}
-
-
-
-
 // conversion
 function convertSpecificArrayIntoObject(analyzedArray) {
      // array type = [{property: value}, {property: value}];
@@ -206,32 +142,6 @@ function convertSpecificArrayIntoObject(analyzedArray) {
 }
 
 
-// check password
-async function checkUserPassword(passwordString) {
-     let userPassword = await obtainUserPassword();
-     let compareTest = bcrypt.compareSync(passwordString, userPassword);
-
-     
-     return compareTest
-
-
-     async function obtainUserPassword() {
-          let thisUserUid = currentUserUID;
-          let returnedPassword;
-     
-          await getDocs(query(usersCol, where("uid", "==", thisUserUid), limit(1)))
-          .then((obtainedSnapshot) => {
-               obtainedSnapshot.forEach((documentData) => {
-                    const {password} = documentData.data();
-                    returnedPassword = password
-
-               })
-          })
-
-
-          return returnedPassword
-     }
-}
 
 
 // for each property with, do
@@ -341,11 +251,149 @@ function obtainArrayFromInputs(formId) {
 }
 
 
+function fillSelectedForm(dataObject) {
+     // dataObject = { selectedFormId, data: {field: example}}
+     const dataArray = Object.entries(dataObject.data);
+
+     for(let currentField = 0; currentField < dataArray.length; currentField++) {
+          const fieldName = dataArray[currentField][0], 
+          fieldValue = dataArray[currentField][1];
+
+          const selectedHTMLInput = document.querySelector(
+               `#${dataObject.selectedFormId} [data-relatedfield=${fieldName}]`
+          );
+
+          if(selectedHTMLInput) {
+               selectedHTMLInput.value = fieldValue;
+               selectedHTMLInput.placeholder = fieldValue;
+          }
+     }
+}
+
+
+
+// others
+function convertHtmlStringToElement(htmlString) {
+     let temporaryTemplate = document.createElement("template");
+     htmlString = htmlString.trim();
+
+     temporaryTemplate.innerHTML = htmlString
+
+     return temporaryTemplate.content.firstElementChild;
+}
+
+
+
+////// user related
+// check password
+async function checkUserPassword(passwordString) {
+     let userPassword = await obtainUserPassword();
+     let compareTest = bcrypt.compareSync(passwordString, userPassword);
+
+     
+     return compareTest
+
+
+     async function obtainUserPassword() {
+          let thisUserUid = currentUserUID;
+          let returnedPassword;
+     
+          await getDocs(query(usersCol, where("uid", "==", thisUserUid), limit(1)))
+          .then((obtainedSnapshot) => {
+               obtainedSnapshot.forEach((documentData) => {
+                    const {password} = documentData.data();
+                    returnedPassword = password
+
+               })
+          })
+
+
+          return returnedPassword
+     }
+}
+
+
+// is user data valid
+function userDataIsValid(analyzedData) {
+     // analyzedData = Array with objects ({ name: test}, {other: test})
+     const validateData = {
+          name: /[\w]{2,}/,
+          email: /[\w]{2,}@+[\w]{2,}.[\w]{2,}/ ,
+          password: /.{4,12}/,
+          telephone: /|[\d]{12}/,
+          usertype: /regular|admin/,
+     }
+
+     let finalResult = true;
+
+     for(let key = 0; key < analyzedData.length; key++) {
+          // [0] = name | [1] = value
+          const analyzedItem = Object.entries(analyzedData[key])[0];
+          const selectedDataRegex = validateData[analyzedItem[0]];
+
+          if(selectedDataRegex && selectedDataRegex.test(analyzedItem[1]) === false) {
+               console.log("validation-break");
+
+               finalResult = false
+               break
+          }
+     }
+
+     return finalResult
+}
+
+
+function obtainUserInputedData(selectedFormId) {
+     let fillableInputs = obtainArrayFromInputs(selectedFormId);
+
+     // is user type filled
+     let userTypeInput = document.querySelector(`#${selectedFormId} .userTypeInput:checked`);
+
+
+     if(! userTypeInput) {
+          userTypeInput = convertHtmlStringToElement(`<input type="radio" name="usertype" value="null">`)
+     } 
+
+     fillableInputs.push(userTypeInput);
+
+     return fillableInputs
+} 
+
+// create user data array
+async function createUserDataArray(operatingMode, selectedData, comparedData) {
+     console.log(selectedData);
+     // selected data accepted -> inputs array / node list with values and names
+     let newArray = [];
+
+     if(operatingMode === "create") {
+          newArray.push({active: true}, {deleted: false});
+     }
+
+     selectedData.forEach((data) => {
+          if(operatingMode === "create" || (operatingMode === "edit" && data.value != comparedData[data.name])) {
+               let temporaryObject = {};
+
+               // data reference = input
+               Object.defineProperty(temporaryObject, data.name, {
+                    value: data.value,
+                    enumerable: true,
+                    writable: true,
+               });
+
+               newArray.push(temporaryObject);
+          }
+     })
+
+     return newArray
+}
+
+
+
 export { 
-     setReusableEvents,
-     obtainFather,
+     setReusableEvents, convertHtmlStringToElement,
+     obtainFather, fillSelectedForm,
      showMessageBox, 
-     userDataIsValid, checkUserPassword, 
+     userDataIsValid, checkUserPassword, obtainUserInputedData,
      createUserDataArray, convertSpecificArrayIntoObject,
      forEachPropertyWithDo, obtainArrayFromInputs,
      toggleModal, 
