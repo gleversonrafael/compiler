@@ -98,6 +98,13 @@
      margin: 15px 0px;
 }
 
+.tableHeaderCSS {
+     background-color: var(--uiPrimaryGrey);
+     border-radius: 15px 15px 0px 0px;
+
+     max-height: fit-content;
+}
+
 .tablePatternCSS {
      color: var(--uiPrimaryWhite);
      background-color: var(--uiSecondaryBlack);

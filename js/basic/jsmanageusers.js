@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { getDoc, getDocs, setDoc, doc, query, where, onSnapshot } from "firebase/firestore";
+import { getDoc, getDocs, setDoc, updateDoc, doc, query, where, onSnapshot } from "firebase/firestore";
 import { firebaseConfig, db, usersCol } from "./general/jsfirebase.js";
 import { createUserWithEmailAndPassword, signOut, getAuth } from "firebase/auth";
 
@@ -10,7 +10,7 @@ import {
      setReusableEvents, convertHtmlStringToElement,
      showMessageBox, toggleModal, customUpdateDocument,
      userDataIsValid, obtainUserInputedData, createUserDataArray,
-     convertSpecificArrayIntoObject,
+     convertSpecificArrayIntoObject, obtainFather,
      fillSelectedForm, forEachPropertyWithDo
 
 } from "./general/jsreusablestructures.js"
@@ -242,8 +242,8 @@ function setManageUsersEvents() {
      
           submitUserSaveData(
                {
-                    selectedForm: "editUserForm", oldDataDocumentId: editUserForm.dataset.selecteduseruid
-               } 
+                    selectedForm: "editUserForm", oldDataDocumentId: editUserForm.dataset.selecteduseruid, obtainDataTries: 0
+               }, 
           );
      })
 }
@@ -392,44 +392,70 @@ function showUserDeleteBox(userInformationObject) {
 // edit
 // can be adapted to submit data
 async function submitUserSaveData(submitedDataObject) {
-     // submitedDataObject = { selectedForm, oldDataDocumentId }
-     const oldData = await obtainDocumentFromId("usersCol", submitedDataObject.oldDataDocumentId);
-     const newData = obtainNewData();
+     // console.log("DATAOBJECT:");
+     // console.log(submitedDataObject);
+     // submitedDataObject = { selectedForm, oldDataDocumentId, obtainDataTries }
+     let newData, message, messageType, selectedModal, dataUpdateResult = false;
 
-     console.log(oldData);
-     console.log(newData);
+     const userDocumentId = submitedDataObject.oldDataDocumentId, 
+          userDocument = doc(db, "usersInfo", userDocumentId)
+     ;
 
-     // p --- compare data 
-     // if(dataHasChanged() && userDataIsValid()) {
-     // }
+     let oldData = await getDoc(userDocument);
+
+
+     if(oldData.exists()) {
+          oldData = oldData.data();
+          newData = obtainNewData();
+          const newDataArray = Object.entries(newData);
+
+          if(newDataArray.length > 0 && userDataIsValid(newData)) {
+               await submitUserData();
+               
+               if(dataUpdateResult === true) { await refreshTableWithNewData(); }     
+               toggleModal(selectedModal.id);
+          
+          } else {
+               messageType = "errorMessage"
+               message = newDataArray.length === 0 ? "Altere os dados desse usuário para salvar as alterações!" : "Preencha corretamente os dados do usuário!"
+          }
+
+          showMessageBox(messageType, message);
+
+     } else {
+          submitedDataObject.obtainDataTries += 1;
+          submitedDataObject.obtainDataTries < 3 ? submitUserSaveData(submitedDataObject) : showMessageBox("errorMessage", "Não foi possível obter os dados anteriores desse usuário e, portanto, atualizá-lo no momento.");
+
+          console.log("dataRequestFailure"+submitedDataObject.obtainDataTries);
+     }
+
 
 
      function obtainNewData() {
-          let newData = obtainUserInputedData(submitedDataObject.selectedForm);
-          newData = createUserDataArray(userData);
-          newData = convertSpecificArrayIntoObject(userData);
+          let returnedData = obtainUserInputedData(submitedDataObject.selectedForm);
+          returnedData = createUserDataArray("edit", returnedData, oldData);
+          returnedData = convertSpecificArrayIntoObject(returnedData);
 
-          return newData
-     }
-}
+          // OS RADIO BUTTONS NÃO SÃO CONSIDERADOS NO OLD DATA?
 
-
-// reusable
-async function obtainDocumentFromId(selectedCollection, documentId) {
-     let response;
-     let snapshot = await getDoc(db, selectedCollection, documentId);
-
-     if(snapshot.exists()) {
-          console.log(snapshot.data())
-
-     } else {
-          console.log("erro");
+          return returnedData
      }
 
-     return response;
+     async function submitUserData() {
+          await updateDoc(userDocument, newData)
+          .then(() => {
+               dataUpdateResult = true;
+               message = "Usuário alterado!";
+               selectedModal = obtainFather(document.getElementById(submitedDataObject.selectedForm), "modalJS");
+          })
+          .catch((error) => {
+               message = "Não foi possível salvar os dados do usuário.";
+               console.log(`ERROR${error.code}`);
+          });
+
+          messageType = dataUpdateResult === true ? "successMessage" : "errorMessage";
+     }
 }
-
-
 
 function showAndRestartEditUserBox(receivedDataObject) {
      // receivedDataObject = { userUID, userData }

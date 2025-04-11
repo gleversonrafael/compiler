@@ -360,9 +360,11 @@ function obtainUserInputedData(selectedFormId) {
 } 
 
 // create user data array
-async function createUserDataArray(operatingMode, selectedData, comparedData) {
-     console.log(selectedData);
-     // selected data accepted -> inputs array / node list with values and names
+function createUserDataArray(operatingMode, selectedData, comparedData) {
+     // console.log(selectedData);
+     // console.log(comparedData);
+
+     // selected data accepted == inputs array / node list with values and names
      let newArray = [];
 
      if(operatingMode === "create") {
