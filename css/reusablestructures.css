@@ -33,7 +33,7 @@
      font-size: 1.25em;
      color: var(--uiPrimaryWhite);
 
-     animation: 200ms openMessageBoxANIM linear;
+     animation: 50ms openMessageBoxANIM linear;
 }
 
 
@@ -93,7 +93,7 @@
      gap: 40px;
      
      background-color: var(--uiSecondaryBlack);
-     border: 1px solid var(--uiPrimaryGrey);
+     border: none;
 
      padding: 35px;
      border-radius: 15px;
@@ -224,13 +224,6 @@
 }
 
 
-#editUserModal {
-     border: 1px solid var(--uiPrimaryWhite);
-}
-
-
-
-
 
 /* table  */
 /* general tables */
@@ -240,14 +233,12 @@
      grid-auto-flow: row;
      grid-template-columns: auto;
      grid-template-rows: auto auto;
-
-     gap: 10px;
+     align-content: start;
 
      min-height: 200px;
      height: 50vh;
      max-height: 500px;
 
-     /* border: 0.5px solid #e6e6e67a; */
      border-radius: 15px;
 }
 
@@ -392,6 +383,10 @@
      text-wrap: nowrap;
 }
 
+.mediumOpacityActive:active {
+     opacity: 0.5;
+}
+
 
 
 /* page detail block */
@@ -432,12 +427,17 @@
 
 /* animations */
 @keyframes openMessageBoxANIM {
-     from { top: 0;}
+     from { opacity: 0.75; top: 0;}
+     to { opacity: 1;}
 }
 
 @keyframes hideMessageBoxANIM {
-     from { opacity: 1;}
      to { opacity: 0;}
+}
+
+@keyframes itemOpacityANIM {
+     from { opacity: 0; }
+     to { opacity: 1;}
 }
 
 /* media */

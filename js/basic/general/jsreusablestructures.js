@@ -81,16 +81,14 @@ function obtainFather(clickedChild, fatherUniqueClass) {
 // show message box
 function showMessageBox(messageType, message) {
      // success message / error message / strange message
-     let messageBox = document.querySelector(".messageBox");
-     let closeButton;
-
-     if(messageBox) {
-          messageBox.remove();
-     } 
-
+     let messageBox = document.querySelector(".messageBox"), closeButton;
+     if(messageBox) messageBox.remove(); 
+     
      messageBox = createMessageBox();
      defineCustomElements();
+     setTimeout(() => removeMessageBox(messageBox), 1000);
 
+     
      function createMessageBox() {
           const mainHeader = document.getElementById("mainHeader");
           const createdMessageBox = document.createElement("div");
@@ -99,9 +97,7 @@ function showMessageBox(messageType, message) {
           closeButton = document.createElement("button");
           closeButton.classList.add("closeMessageBox");
 
-          closeButton.addEventListener("click", () => {
-               createdMessageBox.remove();
-          });
+          closeButton.addEventListener("click", () => removeMessageBox(createdMessageBox));
 
           createdMessageBox.appendChild(closeButton);
           mainHeader.appendChild(createdMessageBox);
@@ -109,6 +105,12 @@ function showMessageBox(messageType, message) {
           return createdMessageBox;
      }
 
+     function removeMessageBox(selectedItem) {
+          selectedItem.style.animation = "100ms hideMessageBoxANIM linear";
+          selectedItem.style.animationFillMode = "forwards";
+
+          setTimeout(() => selectedItem.remove(), 2500);
+     }
 
      function defineCustomElements() {
           const messageParagraph = document.createElement("p");
@@ -192,14 +194,30 @@ function toggleModal(selectedModalId) {
           const modalArea = document.getElementById("modalArea");
           const thisModal = document.getElementById(selectedModalId);
 
+          thisModal.style.display.animationName = "none";
+          modalArea.style.display.animationName = "none";
+
+          thisModal.style.animation = "0.1s itemOpacityANIM linear";
+          modalArea.style.animation = "0.1s itemOpacityANIM linear";
+
+          if(thisModal.style.display === "flex") {
+               thisModal.style.animationDirection = "reverse";
+               thisModal.style.animationFillMode = "forwards";
+          };
+
+          console.log(thisModal.style.animation);
+
           if(thisModal.style.display != "flex") {
                modalArea.style.display = "flex";
                thisModal.style.display = "flex";
 
           } else {
-               modalArea.style.display = "none";
-               thisModal.style.display = "none";
+              setTimeout(() => { modalArea.style.display = "none";
+               thisModal.style.display = "none"; }, 2000)
           }
+
+          console.log(thisModal);
+
      
      } else {
           console.log("an attempt to toggle something that isn't a modal by using a modal button occurred.");

@@ -27,7 +27,8 @@
 
 .radioLabel:has(+ input:checked) {
      color: var(--uiPrimaryWhite);
-     outline-color: var(--uiSecondaryWhite);
+     background-color: var(--uiPrimaryGrey);
+     outline: 1px solid transparent;
 }
 
 
@@ -51,6 +52,11 @@
      outline: none;
      border-bottom-color: var(--uiPrimaryWhite);
 }
+
+.inputPatternMM:disabled, .disabledLabelCSS {
+     opacity: 0.25;
+}
+
 
 .modalFormMM {
      gap: 40px;
@@ -172,7 +178,22 @@
      display: none;
 }
 
+.resetButtonToTextCSS {   
+     /* text-align: right; */
+     padding: 0px;
+     width: fit-content;
+     align-self: end;
 
+     color: var(--uiSecondaryGrey);
+     background-color: transparent;
+     border: none;
+
+     cursor: pointer;
+}
+
+.resetButtonToTextCSS:hover {
+     color: var(--uiPrimaryWhite);
+}
 
 
 @media screen and (min-width: 768px) {

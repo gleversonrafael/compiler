@@ -118,7 +118,7 @@
                          <label for="editUserTelephoneInput" class="labelPattern"> Telefone</label>
                          <input data-relatedfield="telephone" id="editUserTelephoneInput" type="tel" name="telephone"  class="inputPatternMM fillableInputJS" autocomplete="off">
                
-                         <label for="editUserEmailInput" class="labelPattern disabledLabelCSS"> E-mail</label>
+                         <label for="editUserEmailInput" class="labelPattern disabledLabelCSS afterPattern"> E-mail</label>
                          <input data-relatedfield="email" id="editUserEmailInput" type="email" name="email" class="inputPatternMM" autocomplete="off" disabled>
             
                     </fieldset>
@@ -138,9 +138,11 @@
 
                     </fieldset>
 
+                    <input class="resetButtonToTextCSS formResetJS mediumOpacityActive dTrans" type="reset" value="Restaurar dados">
+
                     <!-- buttons -->
                     <div class="modalButtons flex flex-col">
-                         <input class="formResetJS" type="reset" value="Restaurar dados">
+
 
                          <input class="cancelModalButton bAll" type="button" value="Cancelar">
                          <input class="confirmFormJS confirmButtonTypeMR confirmButtonCSS bAll" type="submit" value="Salvar alterações">
