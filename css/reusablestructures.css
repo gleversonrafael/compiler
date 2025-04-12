@@ -435,8 +435,8 @@
      to { opacity: 0;}
 }
 
-@keyframes itemOpacityANIM {
-     from { opacity: 0; }
+@keyframes showItemANIM {
+     from { display: none; opacity: 0; }
      to { opacity: 1;}
 }
 

@@ -2,8 +2,6 @@ import { fetchOwnUserData } from "./general/jsuserdata.js"
 import { setFunctionsOnLoad, removeSkeletons } from "./general/jsload.js"
 import { setPageChangeEvents } from "./general/jspagechange.js"
 
-console.log("home");
-
 await setHomeDefaults();
 setFunctionsOnLoad([removeSkeletons]);
 setPageChangeEvents();

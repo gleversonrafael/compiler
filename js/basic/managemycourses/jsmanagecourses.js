@@ -6,11 +6,18 @@ import { currentUserUID } from "../general/jsuserdata.js";
 import { showMessageBox, toggleModal, setReusableEvents } from "../general/jsreusablestructures.js";
 import { closeBox } from "./jsmanageandmycourses.js"
 
+import { preventRegularUserFromAcessingAdminContent } from "../general/jspermissions.js"
+
+import { preventUserFromAcessingTheHTMLFile } from "../general/jspagechange.js";
+
+preventUserFromAcessingTheHTMLFile("managecourses");
+await preventRegularUserFromAcessingAdminContent();
+
+
 // assign events
 if(document.location.href.includes("manage")) {
      createManageCoursesEvents();
 }
-
 
 
 
@@ -29,8 +36,8 @@ function createManageCoursesEvents() {
      validateFields("createEvents");
 
      function createCourseEvents() {
-          document.getElementById("addCourseButton").addEventListener("click", () => {
-               toggleModal("createCourseModal");
+          document.getElementById("addCourseButton").addEventListener("click", async() => {
+               await toggleModal("createCourseModal");
                changeCourseBoxPage(1);
           });
      

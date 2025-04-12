@@ -1,4 +1,5 @@
 import { forEachPropertyWithDo, showMessageBox } from "./jsreusablestructures";
+import { fetchOwnUserData } from "./jsuserdata.js";
 import { changeSelectedBoxStyle } from "./jsmenu.js";
 
 function setPageChangeEvents() {
@@ -28,11 +29,10 @@ async function changePage(pageName, pageUrl) {
 
      if(documentHTML) {
           const pageTitle = document.querySelector("title");
-          pageTitle.innerText = formatPageString(pageName);
-
           const mainPageURL = "../html/main.html"
           const historyUpdatedState = `${mainPageURL}?currentpage=${pageName}`
 
+          pageTitle.innerText = formatPageString(pageName);
           history.replaceState({},"" , historyUpdatedState);
 
           toggleElements("reset", documentHTML);
@@ -178,26 +178,56 @@ async function changePage(pageName, pageUrl) {
 
 
 async function getPageHtml(selectedUrl) {
-     let siteDocument = false;
+     let siteDocument = undefined;
 
-     await fetch(selectedUrl)
-     .then(response => {
-          if(response.ok) {
-               return response.text();
+     if(await requestConditionsMatch()) {
+          await fetch(selectedUrl)
+          .then(response => {
+               if(response.ok) {
+                    return response.text();
 
-          } else {
-               showMessageBox("errorMessage", "Não foi possível inicializar a página selecionada.");
-               console.log("couldn't get the page.");
-               // show message...
-          }
-     })
-     .then(receivedHtml => {
-          const parseHtmlXml = new DOMParser();
-          siteDocument = parseHtmlXml.parseFromString(receivedHtml, "text/html");
-     });
+               } else {
+                    showMessageBox("errorMessage", "Não foi possível inicializar a página selecionada.");
+                    console.log("couldn't get the page.");
+               }
+          })
+          .then(receivedHtml => {
+               const parseHtmlXml = new DOMParser();
+               siteDocument = parseHtmlXml.parseFromString(receivedHtml, "text/html");
+          });
 
+     }
 
      return siteDocument
+
+     async function requestConditionsMatch() {
+          const adminPageIdentifier = "adb";
+          let response;
+
+          if(selectedUrl.includes(adminPageIdentifier)) {
+               const { usertype } = await fetchOwnUserData();
+               if(usertype === "admin") response = true;
+          
+          } else {
+               response = true
+          }
+
+          return response
+     }
+}
+
+
+function preventUserFromAcessingTheHTMLFile(pageName) {
+     document.addEventListener("readystatechange", redirectToSinglePageVersion())
+
+     function redirectToSinglePageVersion() {
+          if(!window.location.search) {
+               // melhorar -- impedir carregamento
+
+               const singlePageURL = `main.html?currentpage=${pageName}`
+               window.location.replace(singlePageURL);
+          }
+     }
 }
 
 
@@ -213,5 +243,5 @@ function deleteElements(propertyName, propertyValue) {
 }
 
 
-export { setPageChangeEvents, changePage };
+export { setPageChangeEvents, changePage, preventUserFromAcessingTheHTMLFile };
 

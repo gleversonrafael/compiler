@@ -10,7 +10,6 @@ await obtainCurrentUID()
 export { fetchOwnUserData, currentUserUID};
 
 
-// m function
 async function fetchOwnUserData() {
      let userData;
 
@@ -49,7 +48,6 @@ async function fetchOwnUserData() {
 
 
 async function obtainCurrentUID() {   
-     // var
      let receiveUID = new Promise((correct, wrong) => {
           onAuthStateChanged(auth, (uData) => { 
                uData ? correct(`u${uData.uid}`) : wrong("Null data.");                    
@@ -59,8 +57,6 @@ async function obtainCurrentUID() {
 
      let returnVal;
 
-
-     // m process
      await receiveUID
      .then((res) => {
           returnVal = res;

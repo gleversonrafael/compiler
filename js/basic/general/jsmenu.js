@@ -4,10 +4,9 @@ import { fetchOwnUserData } from "./jsuserdata.js";
 import { setPageChangeEvents } from "../general/jspagechange.js";
 
 // asyncronous unique events - are loaded only when menu hasn't been loaded before.
-if(document.getElementById("mMenuB").dataset.loadState != "true") {
-     const mMenuB = document.getElementById("mMenuB");
-
-     await loadDefaults();
+const mMenuB = document.getElementById("mMenuB");
+if(mMenuB && mMenuB.dataset.loadState != "true") {
+     await loadDefaults()
      setPageChangeEvents();
 
      mMenuB.dataset.loadState = "true";
@@ -31,7 +30,8 @@ function setMenuEvents() {
      // similar
      document.getElementById("leaveM").addEventListener("click", () => {
           toggleMenu(true, true);
-     });
+     const mMenuB = document.getElementById("mMenuB");
+});
 
      document.getElementById("menuIcon").addEventListener("click", () => { 
           toggleMenu(true, true);

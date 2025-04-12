@@ -104,7 +104,7 @@ function closeMsg(){
   msgCon.style.display = "none"
 
   if(loginResult == "cor") {
-    window.location.href = "./main.html"
+    window.location.href = "./main.html?currentpage=home"
   }
 
 }

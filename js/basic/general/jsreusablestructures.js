@@ -189,39 +189,62 @@ function forEachPropertyWithDo(parameterObject) {
 
 
 // toggle Modal 
-function toggleModal(selectedModalId) {
+// FINISH ANIMATION
+// FINISH
+// FINISH
+async function toggleModal(selectedModalId) {
      if(selectedModalId != "notAModal") {
-          const modalArea = document.getElementById("modalArea");
-          const thisModal = document.getElementById(selectedModalId);
+          const modalArea = document.getElementById("modalArea"), 
+               thisModal = document.getElementById(selectedModalId), 
+               showItemAnimation = "0.1s showItemANIM linear forwards"
+          ;
 
-          thisModal.style.display.animationName = "none";
-          modalArea.style.display.animationName = "none";
-
-          thisModal.style.animation = "0.1s itemOpacityANIM linear";
-          modalArea.style.animation = "0.1s itemOpacityANIM linear";
-
-          if(thisModal.style.display === "flex") {
-               thisModal.style.animationDirection = "reverse";
-               thisModal.style.animationFillMode = "forwards";
-          };
-
-          console.log(thisModal.style.animation);
+          thisModal.style.animation = showItemAnimation;
+          modalArea.style.animation = showItemAnimation; 
 
           if(thisModal.style.display != "flex") {
                modalArea.style.display = "flex";
                thisModal.style.display = "flex";
 
           } else {
-              setTimeout(() => { modalArea.style.display = "none";
-               thisModal.style.display = "none"; }, 2000)
+               await nullify();
+
+               thisModal.style.animation += showItemAnimation + " reverse"
+               modalArea.style.animation += showItemAnimation + " reverse"
+
+               // console.log("reverse animation");
+
+               await hide();
+
+               async function nullify() {
+                    setTimeout(() => {
+                         // console.log("nullify animation");
+                         thisModal.style.animation = "0s none none none";
+                         modalArea.style.animation = "0s none none none";
+          
+                    }, 0)
+               }
+          
+               async function hide() {
+                    setTimeout(() => {
+                         // console.log("hide");
+                         modalArea.style.display = "none";
+                         thisModal.style.display = "none";
+          
+                    }, 0)
+               }
+
           }
 
-          console.log(thisModal);
+          // console.log("final result");
 
-     
+          
      } else {
           console.log("an attempt to toggle something that isn't a modal by using a modal button occurred.");
      }
+
+
+
 }
 
 

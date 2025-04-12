@@ -1,9 +1,42 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./jsfirebase.js";
 import { fetchOwnUserData } from "./jsuserdata.js"
+import { changePage } from "./jspagechange.js" 
 
 const { usertype } = await fetchOwnUserData();
 
+
+async function preventRegularUserFromAcessingAdminContent() {
+     if(usertype !== "admin") {
+          console.log("userPreventedFromAcessingTheContent");
+          // window.location.replace("main.html?currentpage=notfound");
+     }
+}
+
+export { preventRegularUserFromAcessingAdminContent }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////// OLD
+////////////////////////////////////////////// OLD
+////////////////////////////////////////////// OLD
 // redirect to the first page if there is no user
 onAuthStateChanged(auth, (authData) => {
      analyzeLogState(authData);     
@@ -15,7 +48,7 @@ onAuthStateChanged(auth, (authData) => {
 
 
 
-// // functions
+// functions
 // m level
 function analyzeLogState(data) {
      preventUnlogUser()
