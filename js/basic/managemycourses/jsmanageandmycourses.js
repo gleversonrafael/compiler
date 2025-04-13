@@ -1,7 +1,7 @@
 // other js
 import { copyData } from "./jsmycourses.js"
 import { createAcessControl, saveCourseData } from "./jsmanagecourses.js"
-import { fetchOwnUserData, currentUserUID } from "../general/jsuserdata.js"
+import { fetchOwnUserData, currentUserBasicInformation } from "../general/jsuserdata.js"
 import { removeSkeletons } from "./../general/jsload.js"
 
 // temporary
@@ -110,12 +110,12 @@ async function showCourses(searchedContent, callPurpose) {
                     let whereResult;
      
                     if(pageType === "myCourses") {
-                         whereResult = where("usersWithAcess", "array-contains", currentUserUID);
+                         whereResult = where("usersWithAcess", "array-contains", currentUserBasicInformation.uid);
      
                     } else if(callPurpose != "others"){
-                         whereResult = where("creator", "==", currentUserUID);
+                         whereResult = where("creator", "==", currentUserBasicInformation.uid);
                     } else {
-                         whereResult = where("creator", "!=", currentUserUID);
+                         whereResult = where("creator", "!=", currentUserBasicInformation.uid);
                     }
      
      

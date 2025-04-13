@@ -1,4 +1,4 @@
-import { fetchOwnUserData, currentUserUID } from "./jsuserdata.js";
+import { fetchOwnUserData, currentUserBasicInformation } from "./jsuserdata.js";
 import { usersCol } from "./jsfirebase.js"
 import { getDocs, doc, updateDoc, query, where, limit } from "firebase/firestore"
 import { db } from "./jsfirebase.js"
@@ -336,7 +336,7 @@ async function checkUserPassword(passwordString) {
 
 
      async function obtainUserPassword() {
-          let thisUserUid = currentUserUID;
+          let thisUserUid = currentUserBasicInformation.uid;
           let returnedPassword;
      
           await getDocs(query(usersCol, where("uid", "==", thisUserUid), limit(1)))

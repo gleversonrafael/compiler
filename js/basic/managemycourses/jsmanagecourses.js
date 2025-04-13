@@ -2,16 +2,9 @@
 import { onSnapshot, query, where, getDocs, doc, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db, usersCol } from "../general/jsfirebase.js";
 
-import { currentUserUID } from "../general/jsuserdata.js";
+import { currentUserBasicInformation } from "../general/jsuserdata.js";
 import { showMessageBox, toggleModal, setReusableEvents } from "../general/jsreusablestructures.js";
 import { closeBox } from "./jsmanageandmycourses.js"
-
-import { preventRegularUserFromAcessingAdminContent } from "../general/jspermissions.js"
-
-import { preventUserFromAcessingTheHTMLFile } from "../general/jspagechange.js";
-
-preventUserFromAcessingTheHTMLFile("managecourses");
-await preventRegularUserFromAcessingAdminContent();
 
 
 // assign events
@@ -104,7 +97,7 @@ function changeCourseBoxPage(newSelectedPage) {
 // userlist
 function loadUserList() {
      const userList = document.getElementById("userList");
-     const avoidPlayerQuery = query(usersCol, where("uid", "!=", currentUserUID));
+     const avoidPlayerQuery = query(usersCol, where("uid", "!=", currentUserBasicInformation.uid));
 
      onSnapshot(avoidPlayerQuery, (dataState) => {
           dataState.forEach((userInfo) => {
@@ -252,7 +245,7 @@ function createCourse() {
                url: document.getElementById("urlInp").value,
                img: imgValue,
 
-               creator: currentUserUID,
+               creator: currentUserBasicInformation.uid,
                usersWithAcess: obtainUsers()
           })
      }

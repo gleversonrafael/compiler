@@ -3,7 +3,7 @@ import { getDoc, getDocs, setDoc, updateDoc, doc, query, where, onSnapshot } fro
 import { firebaseConfig, db, usersCol } from "./general/jsfirebase.js";
 import { createUserWithEmailAndPassword, signOut, getAuth } from "firebase/auth";
 
-import { currentUserUID } from "./general/jsuserdata.js";
+import { currentUserBasicInformation } from "./general/jsuserdata.js";
 import { setFunctionsOnLoad, removeSkeletons } from "./general/jsload.js" 
 
 import { 
@@ -53,7 +53,7 @@ async function refreshTableWithNewData(receivedData) {
 
 
      async function obtainUsers() {
-          const searchUserQuery = query(usersCol, where("uid", "!=", currentUserUID), where("deleted", "==", false));
+          const searchUserQuery = query(usersCol, where("uid", "!=", currentUserBasicInformation.uid), where("deleted", "==", false));
           let response;
 
           await getDocs(searchUserQuery)

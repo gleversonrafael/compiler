@@ -5,15 +5,20 @@ import { changePage } from "./jspagechange.js"
 
 const { usertype } = await fetchOwnUserData();
 
-
-async function preventRegularUserFromAcessingAdminContent() {
-     if(usertype !== "admin") {
-          console.log("userPreventedFromAcessingTheContent");
-          // window.location.replace("main.html?currentpage=notfound");
-     }
+if(usertype !== "admin") {
+     removeAdminElements();
 }
 
-export { preventRegularUserFromAcessingAdminContent }
+
+function removeAdminElements(selectedElements) {
+     if(!selectedElements) selectedElements = document.querySelectorAll(".adminAcessJS");
+     
+     if(selectedElements) {
+          selectedElements.forEach((element) => element.remove())
+     }  
+}
+
+export { removeAdminElements }
 
 
 

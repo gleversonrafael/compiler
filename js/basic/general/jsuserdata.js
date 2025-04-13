@@ -2,13 +2,29 @@ import { getDoc, doc } from "firebase/firestore"
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./jsfirebase.js";
 
-let currentUserUID;
 
-await obtainCurrentUID()
-.then((returnedUserUID) => {currentUserUID = returnedUserUID});
+// current user basic information
+const currentUserBasicInformation = await obtainCurrentUserBasicInformation();
+export { fetchOwnUserData, currentUserBasicInformation};
 
-export { fetchOwnUserData, currentUserUID};
 
+async function obtainCurrentUserBasicInformation() {
+     let data = {};
+
+     await obtainCurrentUID()
+     .then((returnedUserUID) => 
+          Object.defineProperty(data, "uid", {
+               value: returnedUserUID, enumerable: true,
+          })
+     );
+
+     const { usertype } = await fetchOwnUserData();
+     Object.defineProperty(data, "usertype", {
+          value: usertype, enumerable: true,
+     })
+
+     return data;
+}
 
 async function fetchOwnUserData() {
      let userData;

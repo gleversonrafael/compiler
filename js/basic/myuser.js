@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs"
 
-import { fetchOwnUserData, currentUserUID } from "./general/jsuserdata.js";
+import { fetchOwnUserData, currentUserBasicInformation } from "./general/jsuserdata.js";
 import { 
      setReusableEvents, showMessageBox, 
      userDataIsValid, checkUserPassword, 
@@ -258,7 +258,7 @@ async function saveUserDataProcess(callType, canBeSaved) {
 
 
      async function saveOwnUserDataAttempt(receivedDataType, receivedData) {
-          const userDoc = doc(db, "usersInfo", currentUserUID);
+          const userDoc = doc(db, "usersInfo", currentUserBasicInformation.uid);
 
           const currentUser = auth.currentUser;
           let userCredential;
@@ -361,7 +361,7 @@ async function saveUserDataProcess(callType, canBeSaved) {
 // ""delete"" user
 async function deleteOwnUser() {
      if(await confirmUserPassword("deleteOwnUser") === true) {
-          let userDocument = doc(db, "usersInfo", `u${ currentUserUID }`);
+          let userDocument = doc(db, "usersInfo", `u${ currentUserBasicInformation.uid }`);
           
           updateDoc(userDocument, { deleted: true })
           .then(() => {

@@ -1,5 +1,7 @@
 import { forEachPropertyWithDo, showMessageBox } from "./jsreusablestructures";
-import { fetchOwnUserData } from "./jsuserdata.js";
+import { fetchOwnUserData, currentUserBasicInformation } from "./jsuserdata.js";
+import { removeAdminElements } from "./jspermissions.js"
+
 import { changeSelectedBoxStyle } from "./jsmenu.js";
 
 function setPageChangeEvents() {
@@ -11,7 +13,7 @@ function setPageChangeEvents() {
           item.addEventListener("click", async(clickEvent) => {
                clickEvent.preventDefault();
                
-               await changePageFullProcess(item);
+               await changePageFullProcess(item.name, item.dataset.selectedurl);
                changeSelectedBoxStyle();
           });
      })
@@ -19,8 +21,8 @@ function setPageChangeEvents() {
 
 
 // change page
-async function changePageFullProcess(selectedItem) {
-     await changePage(selectedItem.name, selectedItem.href);
+async function changePageFullProcess(pageName, pageURL) {
+     await changePage(pageName, pageURL);
      changeSelectedBoxStyle();
 }
 
@@ -105,43 +107,45 @@ async function changePage(pageName, pageUrl) {
                     })
                }
 
+               // uses elements with common ids in both documents and inserts one of them on another
                function generateBodyContents() {
-                    let bodyElements = Array.from(otherPageHTML.body.children);
+                    const bodyElements = Array.from(otherPageHTML.body.children);
 
                     for(let currentElement = 0; currentElement < bodyElements.length; currentElement++) {
-                         const selectedElement = bodyElements[currentElement];
-                         const elementId = selectedElement.id;
+                         const selectedElement = bodyElements[currentElement], 
+                         elementId = selectedElement.id;
 
-                         // if -> prevents the loading of live server script
                          if(elementId) {
+                              const selectedElementChildren = Array.from(selectedElement.children);
                               const insertOnElement = document.getElementById(elementId);
-                              let selectedElementChildren = Array.from(selectedElement.children);
 
+                              // insert childrem
                               if(selectedElementChildren) {
                                    for(let selectedChild = 0; selectedChild < selectedElementChildren.length; selectedChild++) {
                                         let thisChild = selectedElementChildren[selectedChild];
                                         
-                                        // for some reason, the scripts obtaineds from the fetched html file doesn't load or, more reasonably, it loads before on the other document. The fix is creating another element like further
-                                        if(thisChild.classList.contains("dynamicallyGeneratedScript")) {
-                                             let generatedScript = document.createElement("script");
+                                        const adminElements = thisChild.querySelectorAll(".adminAcessJS");
+                                        if(adminElements.length > 0 && currentUserBasicInformation.usertype != "admin") {
+                                             removeAdminElements(adminElements);
+                                        }
 
+                                        // The scripts obtained from the fetched html only load on it and not on the current doucument. Fix:
+                                        if(thisChild.classList.contains("dynamicallyGeneratedScript")) {
+                                             const generatedScript = document.createElement("script");
                                              generatedScript.src = thisChild.src
                                              generatedScript.classList = thisChild.classList;  
 
                                              thisChild = generatedScript
                                         
-                                        // avoid obtaining scripts without dynamicGeneratedScript class
+                                        // avoid obtaining scripts without dynamicGeneratedScript class - dev only
                                         } else if(selectedElement.id === "scriptsSection") {
                                              thisChild = null;
                                         }
 
-
                                         if(thisChild != null) {
                                              insertOnElement.appendChild(thisChild);
-
                                         }
                                    }
-
                               }
                          }
                     }
@@ -180,7 +184,7 @@ async function changePage(pageName, pageUrl) {
 async function getPageHtml(selectedUrl) {
      let siteDocument = undefined;
 
-     if(await requestConditionsMatch()) {
+     if(requestConditionsMatch()) {
           await fetch(selectedUrl)
           .then(response => {
                if(response.ok) {
@@ -200,17 +204,14 @@ async function getPageHtml(selectedUrl) {
 
      return siteDocument
 
-     async function requestConditionsMatch() {
+     function requestConditionsMatch() {
+          const currentUserType = currentUserBasicInformation.usertype;
           const adminPageIdentifier = "adb";
-          let response;
+          let response = false;
 
-          if(selectedUrl.includes(adminPageIdentifier)) {
-               const { usertype } = await fetchOwnUserData();
-               if(usertype === "admin") response = true;
-          
-          } else {
-               response = true
-          }
+          if((selectedUrl.includes(adminPageIdentifier) && currentUserType === "admin") || !selectedUrl.includes(adminPageIdentifier)) {
+               response = true;
+          } 
 
           return response
      }
