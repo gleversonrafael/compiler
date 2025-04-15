@@ -274,8 +274,6 @@ async function customUpdateDocument(receivedData) {
 
      })
 
-     console.log("Teste");
-
      return updateObject
 }
 
@@ -371,9 +369,6 @@ function userDataIsValid(analyzedData) {
           // [0] = name | [1] = value
           const analyzedItem = Object.entries(analyzedData[key])[0];
           const selectedDataRegex = validateData[analyzedItem[0]];
-
-          console.log(analyzedItem);
-          console.log(selectedDataRegex);
 
           if(selectedDataRegex && selectedDataRegex.test(analyzedItem[1]) === false) {
                console.log("validation-break");

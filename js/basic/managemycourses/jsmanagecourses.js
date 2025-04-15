@@ -97,7 +97,7 @@ function changeCourseBoxPage(newSelectedPage) {
 // userlist
 function loadUserList() {
      const userList = document.getElementById("userList");
-     const avoidPlayerQuery = query(usersCol, where("uid", "!=", currentUserBasicInformation.uid));
+     const avoidPlayerQuery = query(usersCol, where("uid", "!=", currentUserBasicInformation.uid), where("deleted", "==", false));
 
      onSnapshot(avoidPlayerQuery, (dataState) => {
           dataState.forEach((userInfo) => {
@@ -218,9 +218,6 @@ function acessOperations(callReason) {
 
 
 function createCourse() {
-     let test = validateFields("multiple", "", "createCourseForm");
-     console.log(test);
-
      if(validateFields("multiple", "", "createCourseForm") === true) {   
           uploadCourse();
           showMessageBox("successMessage", "Curso criado!");
@@ -461,8 +458,6 @@ async function deleteCourses(callReason) {
 
 // validate
 function validateFields(callParameter, selectedInputArray, selectedFormId) {
-     console.log(selectedInputArray);
-
      switch(callParameter) {
           case "createEvents": 
                createEvents();
@@ -495,8 +490,6 @@ function validateFields(callParameter, selectedInputArray, selectedFormId) {
 
      function validateEachInput() {
           selectedInputArray.forEach(selectedInput => {
-               console.log("teste");
-
                const relatedField = selectedInput.dataset.relatedfield;
                const inputValue = selectedInput.value;
                const thisInputClasses =  selectedInput.classList
@@ -558,9 +551,6 @@ async function saveCourseData(courseIdentifier, oldData) {
           isThereNewData = Object.keys(obtainedNewData).length > 0, 
           inputsAreNotValidated = document.querySelectorAll(`#${courseIdentifier} .incorrectInput`).length === 0;
      ;
-
-
-     console.log(obtainedNewData);
 
      if(isThereNewData && inputsAreNotValidated) {
           const docThatWillBeUpdated = doc(db, "courses", courseIdentifier);

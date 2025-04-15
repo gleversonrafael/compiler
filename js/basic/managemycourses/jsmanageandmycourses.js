@@ -12,8 +12,6 @@ import { showMessageBox } from "../general/jsreusablestructures.js"
 import { onSnapshot, collection, where, query } from "firebase/firestore";
 import { db } from "../general/jsfirebase.js";
 
-console.log("managecourses");
-
 // global var
 let coursesData = {};
 let othersData = {};
