@@ -4,7 +4,7 @@ import { db, usersCol } from "../general/jsfirebase.js";
 
 import { currentUserBasicInformation } from "../general/jsuserdata.js";
 import { showMessageBox, toggleModal, setReusableEvents } from "../general/jsreusablestructures.js";
-import { closeBox } from "./jsmanageandmycourses.js"
+import { closeBox, showCourses } from "./jsmanageandmycourses.js"
 
 
 // assign events
@@ -217,10 +217,16 @@ function acessOperations(callReason) {
 
 
 
-function createCourse() {     
-     if(validateFields("multiple") === true) {   
+function createCourse() {
+     let test = validateFields("multiple", "", "createCourseForm");
+     console.log(test);
+
+     if(validateFields("multiple", "", "createCourseForm") === true) {   
           uploadCourse();
           showMessageBox("successMessage", "Curso criado!");
+
+          document.getElementById("createCourseForm").reset();
+          document.querySelectorAll("#createCourseForm .correctInput").forEach((input) => input.classList.remove("correctInput"));
      
      } else {
           showMessageBox("errorMessage", "Preencha corretamente todos os campos!");
@@ -303,13 +309,27 @@ async function deleteCourses(callReason) {
           setEventListeners();    
 
      } else {
+          let deleteCounter = 0, responseMessage, responseType;
+
           // main delete process
           for(let actualId = 0; actualId < deletedCourses.length; actualId++) {
                let temporaryDoc = doc(db, "courses", deletedCourses[actualId]);
                await deleteDoc(temporaryDoc);
+
+               deleteCounter += 1
           }
 
-          showMessageBox("successMessage", "Cursos deletados!");
+          if(deleteCounter === deletedCourses.length) {
+               responseMessage = "Todos os cursos selecionados foram apagados."
+               responseType = "successMessage"
+          
+          } else {
+               responseMessage = "Nenhum ou apenas alguns dos cursos selecionados foram apagados."
+               responseType = "errorMessage"
+          }
+
+          showMessageBox(responseType, responseMessage);
+          await showCourses(undefined, "my");          
      }
 
 
@@ -440,14 +460,16 @@ async function deleteCourses(callReason) {
 
 
 // validate
-function validateFields(callParameter, selectedInput) {
+function validateFields(callParameter, selectedInputArray, selectedFormId) {
+     console.log(selectedInputArray);
+
      switch(callParameter) {
           case "createEvents": 
                createEvents();
                break
 
           case "single":
-               validateSingleInput();
+               validateEachInput();
                break
 
           case ("multiple"):
@@ -465,54 +487,64 @@ function validateFields(callParameter, selectedInput) {
 
           for(let i = 0; i < createFormFields.length; i++) {
                createFormFields[i].onchange = () => {
-                    validateFields("single", createFormFields[i]);
+                    validateFields("single", [createFormFields[i]], "createCourseForm");
                };
           }
      }
 
 
-     function validateSingleInput() {
-          let inputValue = selectedInput.value;
-          let regularExpression;
+     function validateEachInput() {
+          selectedInputArray.forEach(selectedInput => {
+               console.log("teste");
 
-          switch(selectedInput.name) {
-               case "name":
-                    regularExpression = /[\w]{2,}/;
-                    break;
+               const relatedField = selectedInput.dataset.relatedfield;
+               const inputValue = selectedInput.value;
+               const thisInputClasses =  selectedInput.classList
 
-               case "email":
-                    regularExpression = /[\w]{2,}[@][a-z]{2,}[.][a-z]{2,}/;
-                    break;
+               let regularExpression;
 
-               case "password":
-                    regularExpression = /[\w\d]{4,}/;
-                    break;
+               switch(relatedField) {
+                    case "courseName":
+                         regularExpression = /[\w]{2,}/;
+                         break;
 
+                    case "email":
+                         regularExpression = /[\w]{2,}[@][a-z]{2,}[.][a-z]{2,}/;
+                         break;
 
-               case "aUrl":
-                    regularExpression = /https?:\/\/.+\..+/;
-                    break;
+                    case "userPassword":
+                         regularExpression = /[\w\d]{4,}/;
+                         break;
 
-               default: 
-                    regularExpression = /.{1,}/
+                    case "url":
+                         regularExpression = /https?:\/\/.+\..+/;
+                         break
 
-          }
+                    case "img":
+                         regularExpression = /^$|https?:\/\/.+\..+/
 
-          if(regularExpression.test(inputValue) === true) {
-               selectedInput.classList.add("correctInput");
+                    default:
+                         regularExpression = /^$|.{1,}/
+               }
 
-          } else if(selectedInput.classList.contains("correctInput")) {
-               selectedInput.classList.remove("correctInput");
-          }
+               if(regularExpression.test(inputValue) === true) {
+                    if(thisInputClasses.contains("incorrectInput")) thisInputClasses.remove("incorrectInput");
+                    thisInputClasses.add("correctInput");
+
+               } else if(selectedInput.classList.contains("correctInput")) {
+                    thisInputClasses.remove("correctInput");
+                    thisInputClasses.add("incorrectInput");
+               }
+     
+          })
      }
 
 
      function finishValidation() {
-          let selectedArea = "#createCourseForm"
-          let filledInputs = document.querySelectorAll(`${selectedArea} .requiredInput.correctInput`);
-          let minLength = document.querySelectorAll(`${selectedArea} .requiredInput`).length;
+          const filledInputs = document.querySelectorAll(`#${selectedFormId} .requiredInput.correctInput`);
+          const minimumLength = document.querySelectorAll(`#${selectedFormId} .requiredInput`).length;
 
-          return filledInputs.length === minLength ? true : false
+          return filledInputs.length === minimumLength
      }
 
 }
@@ -522,12 +554,16 @@ function validateFields(callParameter, selectedInput) {
 
 // save course data
 async function saveCourseData(courseIdentifier, oldData) {
-     console.log("action");
+     const obtainedNewData = obtainEditedCourseData(), 
+          isThereNewData = Object.keys(obtainedNewData).length > 0, 
+          inputsAreNotValidated = document.querySelectorAll(`#${courseIdentifier} .incorrectInput`).length === 0;
+     ;
 
-     const obtainedNewData = obtainEditedCourseData();
 
-     if(Object.keys(obtainedNewData).length > 0) {
-          let docThatWillBeUpdated = doc(db, "courses", courseIdentifier);
+     console.log(obtainedNewData);
+
+     if(isThereNewData && inputsAreNotValidated) {
+          const docThatWillBeUpdated = doc(db, "courses", courseIdentifier);
 
           await updateDoc(docThatWillBeUpdated, obtainedNewData)
           .then(() => {
@@ -539,7 +575,11 @@ async function saveCourseData(courseIdentifier, oldData) {
                showMessageBox("errorMessage", "Houve um erro ao salvar esse curso.");
                console.log(error.code)
           })
-     }
+
+     } else {
+          const errorMessage = isThereNewData ? "Preencha corretamente os dados do curso!" : "Nenhum dado do curso foi alterado.";
+          showMessageBox("errorMessage", errorMessage);
+     } 
 
      
      // complementary
@@ -553,20 +593,19 @@ async function saveCourseData(courseIdentifier, oldData) {
 
           // aside
           function verifyAndPushEditedData() {
-               Object.entries(oldData).forEach((field) => {     
-                    let fieldName = field[0];
-                    let fieldValue = field[1];
-                    let analyzedElementValue;
+               const oldDataObject = Object.entries(oldData);
+
+               oldDataObject.forEach((field) => {     
+                    let fieldName = field[0], fieldValue = field[1];
+                    let analyzedElementValue, analyzedComparedValue;
                
-                    
                     // set analyzed element value
                     if(fieldName != "usersWithAcess" && fieldName != "creator") {               
-                         analyzedElementValue = document.getElementById(fieldName + courseIdentifier).value;                    
+                         analyzedComparedValue = analyzedElementValue = document.getElementById(fieldName + courseIdentifier).value;               
 
                     } else if(fieldName === "usersWithAcess") {
                          // array from node list
-                         let usersWithAcessList = Array.from(document.querySelectorAll(`#${courseIdentifier} .acessEditToggled`));
-
+                         const usersWithAcessList = Array.from(document.querySelectorAll(`#${courseIdentifier} .acessEditToggled`));
 
                          for(let i = 0; i < usersWithAcessList.length; i++) {
                               // remove edit + course identifier to obtain user id
@@ -574,14 +613,16 @@ async function saveCourseData(courseIdentifier, oldData) {
                          }
 
                          analyzedElementValue = usersWithAcessList;
-                    } 
+
+                         analyzedComparedValue = JSON.stringify(analyzedElementValue);
+                         fieldValue = JSON.stringify(fieldValue); 
+                    }
 
                     
                     // set changed values
-                    if(fieldName != "creator" && fieldValue != analyzedElementValue ) {                             
+                    if(fieldName != "creator" && fieldValue !== analyzedComparedValue ) {                             
                          Object.defineProperty(finalCourseData, fieldName, {
-                              value: analyzedElementValue,
-                              enumerable: true
+                              value: analyzedElementValue, enumerable: true
                          });
                     }
                     
@@ -657,7 +698,10 @@ async function createAcessControl(courseIdentifier, usersWithAcessInCourse) {
      
 
      function changeThisUserAcess(userBoxClicked) {
-          userBoxClicked.classList.contains("acessEditToggled") ? userBoxClicked.removeAttribute("class") : userBoxClicked.classList.add("acessEditToggled");
+          const elementClasses = userBoxClicked.classList;
+
+          elementClasses.add("changedJS");
+          elementClasses.contains("acessEditToggled") ? elementClasses.remove("acessEditToggled") : elementClasses.add("acessEditToggled");
      }
 
 
@@ -673,7 +717,7 @@ async function createAcessControl(courseIdentifier, usersWithAcessInCourse) {
 
 
 // exports
-export { createAcessControl, saveCourseData };
+export { createAcessControl, saveCourseData, validateFields };
 
 
 

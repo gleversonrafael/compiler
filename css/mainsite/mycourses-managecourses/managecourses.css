@@ -43,6 +43,14 @@
      border-bottom: 1px solid var(--uiPrimaryWhite);
 }
 
+/* input that isn't correct */
+/* .createdContent fieldset:has(input:not(.correctInput)){
+     border-bottom: 1px solid var(--primaryOpposite);
+} */
+
+.createdContent fieldset:has(.incorrectInput) {
+     border-bottom: 1px solid var(--primaryOpposite);
+}
 
 
 

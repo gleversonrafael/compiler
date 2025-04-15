@@ -54,11 +54,11 @@ async function changePage(pageName, pageUrl) {
                     returnedString = "Meus cursos"
                     break
 
-               case "managecourses":
+               case "managecourses-adb":
                     returnedString = "Gerir cursos"
                     break
 
-               case "manageusers":
+               case "manageusers-adb":
                     returnedString = "Usuários"
                     break
 

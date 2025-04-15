@@ -13,17 +13,27 @@
 
 
 /* explore - courses area */
+#exploreA, .coursesColumn, .coursesArea {
+     width: 100%;
+}
+
+#exploreA {
+     border: 1px solid red;
+}
+
 .coursesArea, .coursesColumn {
      gap: 10px;
+     border: 1px solid yellow;
 }
 
 .coursesArea {
      min-width: 240px;
+     border: 1px solid blue;
 }
 
 .coursesColumn {
-     width: 100%;
      flex-grow: 1;
+     border: 1px solid green;
 }
 
 
@@ -109,6 +119,9 @@ div.courseIcon {
 }
 
 
+.courseInformation {
+     height: 70px;
+}
 
 .createdContent {
      margin-top: 50px;
@@ -230,19 +243,13 @@ input.fieldValue:focus {
      to { height: 100%; overflow: hidden}
 } */
 
-
 /* media */
 @media screen and (min-width: 768px) {
-     /* search */
-     #searchButton {
-          padding: 20px 25px;
-     }
-
-
-     /* courses */
      .coursesColumn {
           min-width: 400px;
           width: calc(50% - 10px);
+
+          flex-grow: 1;
      }
 }
 

@@ -11,7 +11,7 @@ import {
      showMessageBox, toggleModal, customUpdateDocument,
      userDataIsValid, obtainUserInputedData, createUserDataArray,
      convertSpecificArrayIntoObject, obtainFather,
-     fillSelectedForm, forEachPropertyWithDo
+     fillSelectedForm, forEachPropertyWithDo, generatePasswordHash
 
 } from "./general/jsreusablestructures.js"
 
@@ -97,9 +97,9 @@ async function fillTable(tableId, dataArray, tableType) {
                const userTypeFix = userObject.usertype === "admin" ? "Administrador" : "Usuário comum";
 
                const textObject = {
-                    MainText: userObject.name, 
+                    MainText: userObject.name,
                     Subtext: userObject.email,
-                    EmphasisText: userTypeFix 
+                    EmphasisText: userTypeFix
                }
 
                
@@ -252,7 +252,7 @@ function setManageUsersEvents() {
 async function createNewUser(createForm) {
      // user data creation
      const createdUserInputs = obtainUserInputedData("createUserForm");
-     const userDataArray = await createUserDataArray("create", createdUserInputs);
+     const userDataArray = createUserDataArray("create", createdUserInputs);
      const userDataObject = convertSpecificArrayIntoObject(userDataArray);
      const userValidation = userDataIsValid(userDataArray);
 
@@ -277,9 +277,12 @@ async function createNewUser(createForm) {
                     const newUserDatabaseUID = `u${signUserAttempt.returnedUID}`
      
                     Object.defineProperty(userDataObject, "uid", {
-                         value: newUserDatabaseUID, enumerable: true}
-                    );
-     
+                         value: newUserDatabaseUID, enumerable: true
+                    });
+
+                    userDataObject.password = generatePasswordHash(userDataObject.password);
+
+
                     await addUserToDatabase(newUserDatabaseUID, userDataObject)
                     .then((response) => {creationSucess = response}); 
      
@@ -392,8 +395,6 @@ function showUserDeleteBox(userInformationObject) {
 // edit
 // can be adapted to submit data
 async function submitUserSaveData(submitedDataObject) {
-     // console.log("DATAOBJECT:");
-     // console.log(submitedDataObject);
      // submitedDataObject = { selectedForm, oldDataDocumentId, obtainDataTries }
      let newData, message, messageType, selectedModal, dataUpdateResult = false;
 
@@ -407,17 +408,17 @@ async function submitUserSaveData(submitedDataObject) {
      if(oldData.exists()) {
           oldData = oldData.data();
           newData = obtainNewData();
-          const newDataArray = Object.entries(newData);
-
-          if(newDataArray.length > 0 && userDataIsValid(newData)) {
-               await submitUserData();
+          
+          if(newData.length > 0 && userDataIsValid(newData)) {
+               const newDataObject = convertSpecificArrayIntoObject(newData);
+               await submitUserData(newDataObject);
                
                if(dataUpdateResult === true) { await refreshTableWithNewData(); }     
                toggleModal(selectedModal.id);
           
           } else {
                messageType = "errorMessage"
-               message = newDataArray.length === 0 ? "Altere os dados desse usuário para salvar as alterações!" : "Preencha corretamente os dados do usuário!"
+               message = newData.length === 0 ? "Altere os dados desse usuário para salvar as alterações!" : "Preencha corretamente os dados do usuário!"
           }
 
           showMessageBox(messageType, message);
@@ -434,15 +435,13 @@ async function submitUserSaveData(submitedDataObject) {
      function obtainNewData() {
           let returnedData = obtainUserInputedData(submitedDataObject.selectedForm);
           returnedData = createUserDataArray("edit", returnedData, oldData);
-          returnedData = convertSpecificArrayIntoObject(returnedData);
-
           // OS RADIO BUTTONS NÃO SÃO CONSIDERADOS NO OLD DATA?
 
           return returnedData
      }
 
-     async function submitUserData() {
-          await updateDoc(userDocument, newData)
+     async function submitUserData(selectedData) {
+          await updateDoc(userDocument, selectedData)
           .then(() => {
                dataUpdateResult = true;
                message = "Usuário alterado!";

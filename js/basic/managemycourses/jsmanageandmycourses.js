@@ -1,6 +1,6 @@
 // other js
 import { copyData } from "./jsmycourses.js"
-import { createAcessControl, saveCourseData } from "./jsmanagecourses.js"
+import { createAcessControl, saveCourseData, validateFields } from "./jsmanagecourses.js"
 import { fetchOwnUserData, currentUserBasicInformation } from "../general/jsuserdata.js"
 import { removeSkeletons } from "./../general/jsload.js"
 
@@ -146,6 +146,7 @@ async function showCourses(searchedContent, callPurpose) {
      
                     let courseProperties = {
                          courseBox: document.createElement("div"), 
+                         courseInformation: document.createElement("div"),
                          title: document.createElement("h1"),
                     }
      
@@ -154,14 +155,15 @@ async function showCourses(searchedContent, callPurpose) {
                     courseProperties.courseBox.id = courseId;
                     courseProperties.courseBox.onclick = openBox;
                     courseProperties.courseBox.classList.add("closed");
-     
+                    courseProperties.courseInformation.classList.add("courseInformation");
+
                     // set data
                     courseProperties.title.innerText = courseValues.courseName;
                     courseProperties.title.classList.add("textOverflowCSS");
-                    
      
-                    courseProperties.courseBox.appendChild(createImg());
-                    courseProperties.courseBox.appendChild(courseProperties.title);
+                    courseProperties.courseInformation.appendChild(createImg());
+                    courseProperties.courseInformation.appendChild(courseProperties.title);
+               
      
                     if(courseValues.coursePlatform.length > 0) {
                          Object.defineProperty(courseProperties, "platform", {
@@ -172,9 +174,10 @@ async function showCourses(searchedContent, callPurpose) {
                          courseProperties.platform.innerText = `Plataforma:${courseValues.coursePlatform}`;
                          courseProperties.platform.classList.add("textOverflowCSS");
 
-                         courseProperties.courseBox.appendChild(courseProperties.platform);
-                    }
-                    
+                         courseProperties.courseInformation.appendChild(courseProperties.platform);
+                    } 
+
+                    courseProperties.courseBox.appendChild(courseProperties.courseInformation);
                     selectedColumn.appendChild(courseProperties.courseBox);
      
      
@@ -282,10 +285,6 @@ function openBox(event) {
 
           createPages();
           changePage(1, courseId);
-
-
-
-        
 
 
           // complementary
@@ -420,14 +419,17 @@ function openBox(event) {
                          temporaryName = document.createElement("label"); 
                          temporaryValue = document.createElement("input");  
 
-
                          // nameProperties
                          temporaryName.setAttribute("for", propertyName + courseId);
 
 
                          // valueProperties
                          temporaryValue.id =  propertyName + courseId;
-                         temporaryValue.name = propertyName
+                         temporaryValue.name = propertyName;
+                         temporaryValue.dataset.relatedfield = propertyName;
+                         temporaryValue.classList.add("correctInput");
+
+                         temporaryValue.onchange = () => validateFields("single", [temporaryValue], courseId);
 
                          temporaryValue.value = elementData[propertyName];
                          temporaryValue.placeholder = elementData[propertyName];
@@ -648,6 +650,6 @@ function obtainDataSelected(callPurpose) {
 }   
 
 
-export { closeBox }
+export { closeBox, showCourses }
 
 

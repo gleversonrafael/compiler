@@ -359,9 +359,9 @@ function userDataIsValid(analyzedData) {
      // analyzedData = Array with objects ({ name: test}, {other: test})
      const validateData = {
           name: /[\w]{2,}/,
-          email: /[\w]{2,}@+[\w]{2,}.[\w]{2,}/ ,
+          email: /[\w]{2,}@+[\w]{2,}.[\w]{2,}/,
           password: /.{4,12}/,
-          telephone: /|[\d]{12}/,
+          telephone: /^$|[\d]{12,13}/,
           usertype: /regular|admin/,
      }
 
@@ -371,6 +371,9 @@ function userDataIsValid(analyzedData) {
           // [0] = name | [1] = value
           const analyzedItem = Object.entries(analyzedData[key])[0];
           const selectedDataRegex = validateData[analyzedItem[0]];
+
+          console.log(analyzedItem);
+          console.log(selectedDataRegex);
 
           if(selectedDataRegex && selectedDataRegex.test(analyzedItem[1]) === false) {
                console.log("validation-break");
@@ -430,6 +433,13 @@ function createUserDataArray(operatingMode, selectedData, comparedData) {
      return newArray
 }
 
+function generatePasswordHash(string) {
+     let salt = bcrypt.genSaltSync(10);
+     let hash = bcrypt.hashSync(string, salt);
+
+     return hash
+}
+
 
 
 export { 
@@ -439,6 +449,6 @@ export {
      userDataIsValid, checkUserPassword, obtainUserInputedData,
      createUserDataArray, convertSpecificArrayIntoObject,
      forEachPropertyWithDo, obtainArrayFromInputs,
-     toggleModal, 
-     customUpdateDocument,
+     toggleModal,
+     customUpdateDocument, generatePasswordHash
 };

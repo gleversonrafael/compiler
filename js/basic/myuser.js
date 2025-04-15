@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs"
 import { fetchOwnUserData, currentUserBasicInformation } from "./general/jsuserdata.js";
 import { 
      setReusableEvents, showMessageBox, 
-     userDataIsValid, checkUserPassword, 
+     userDataIsValid, checkUserPassword, generatePasswordHash,
      createUserDataArray, obtainArrayFromInputs, convertSpecificArrayIntoObject, 
      toggleModal,
 
@@ -361,12 +361,12 @@ async function saveUserDataProcess(callType, canBeSaved) {
 // ""delete"" user
 async function deleteOwnUser() {
      if(await confirmUserPassword("deleteOwnUser") === true) {
-          let userDocument = doc(db, "usersInfo", `u${ currentUserBasicInformation.uid }`);
+          let userDocument = doc(db, "usersInfo", currentUserBasicInformation.uid);
           
           updateDoc(userDocument, { deleted: true })
           .then(() => {
                toggleModal("deleteOwnUser");        
-               signOut();
+               signOut(auth);
 
           })
 
@@ -374,14 +374,7 @@ async function deleteOwnUser() {
 }
 
 
-// reusable
-function generatePasswordHash(string) {
-     let salt = bcrypt.genSaltSync(10);
-     let hash = bcrypt.hashSync(string, salt);
-
-     return hash
-}
-
+// others
 function confirmNFields(fieldsArray, wishedValue) {
      let confirmResult = true;
 
