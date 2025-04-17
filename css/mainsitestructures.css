@@ -53,7 +53,6 @@
      margin: 10px 10px 60px 10px; 
 }
 
-
 #mMenu {
      height: fit-content;
      gap: 10px;
@@ -73,18 +72,17 @@
      padding: 0 5px;
 
      color: var(--uiSecondaryWhite);
-     outline: 1px solid var(--uiPrimaryGrey);
+     border: 1px solid var(--uiPrimaryGrey);
 
      background-color: transparent;
 
-     border: none;
      border-radius: 15px;
 }
 
 
 .mmBlock:hover {
      color: var(--uiPrimaryWhite);
-     outline: 1px solid var(--uiSecondaryGrey);
+     border-color: var(--uiSecondaryGrey);
 
      cursor: pointer;
 }
@@ -123,7 +121,6 @@
      max-width: 225px;
 
      margin: 100px 0px 0px;
-     outline: 1px solid red;
 }
 
 #userIcon {
@@ -160,25 +157,21 @@
      width: 100%;
      padding: 15px;
 
-     border: none;
      border-radius: 50px;
 
      color: var(--uiSecondaryWhite);
      background-color: var(--uiPrimaryGrey);
+     border: 1px solid var(--uiPrimaryGrey);
 
      cursor: pointer;
 }
 
 .userB:hover {
-     outline: 1px solid var(--uiSecondaryGrey);
+     border-color: var(--uiSecondaryGrey);
 }
 
 #userSec a {
      gap: 10px;
-}
-
-#signoutB:hover {
-     background-color: var(--tertiaryOpposite);
 }
 
 
@@ -224,9 +217,9 @@
      font: 500 1em var(--rFont);
 
      color: var(--uiPrimaryWhite);
-     background-color: var(--wood);
+     background-color: var(--uiSecondaryBlack);
 
-     border: 1px solid var(--white);
+     border: 1px solid var(--uiPrimaryWhite);
 }
 
 
@@ -246,11 +239,11 @@
 
 
 .regEff {
-     color: var(--aqua);
+     color: var(--primaryColor);
 }
 
 .admEff {
-     color: var(--razz);
+     color: var(--primaryOpposite);
 }
 
 

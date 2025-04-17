@@ -70,7 +70,7 @@ main {
     display: none;
     z-index: 1;
 
-    background-color: var(--woodT);
+    background-color: var(--uiPrimaryBlackOpacity);
     min-height: 600px;
     height: 100vh;
 
@@ -126,17 +126,16 @@ main {
 
     font: normal 2em var(--rFont);
 
-    
-    background-color: transparent;
-
+    background-color: var(--uiSecondaryBlack);
     color: var(--uiSecondaryWhite);
-    outline: 2px solid var(--uiSecondaryGrey);
-
+    
     border: none;
     border-radius: 15px;
 }
 
 #closeMsgB:hover {
+    background-color: var(--uiPrimaryGrey);
+
     outline-color: var(--uiPrimaryWhite);
     color: var(--uiPrimaryWhite);
     /* outline: none; */

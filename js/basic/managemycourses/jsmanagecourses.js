@@ -98,6 +98,7 @@ function changeCourseBoxPage(newSelectedPage) {
 function loadUserList() {
      const userList = document.getElementById("userList");
      const avoidPlayerQuery = query(usersCol, where("uid", "!=", currentUserBasicInformation.uid), where("deleted", "==", false));
+     
 
      onSnapshot(avoidPlayerQuery, (dataState) => {
           dataState.forEach((userInfo) => {
@@ -226,7 +227,7 @@ function createCourse() {
           document.querySelectorAll("#createCourseForm .correctInput").forEach((input) => input.classList.remove("correctInput"));
      
      } else {
-          showMessageBox("errorMessage", "Preencha corretamente todos os campos!");
+          showMessageBox("errorMessage", "Preencha corretamente os campos!");
      } 
 
      
@@ -639,22 +640,20 @@ async function createAcessControl(courseIdentifier, usersWithAcessInCourse) {
 
      
      await createList();
-
-     if(usersWithAcessInCourse.length > 0) {
-          toggleUsersWithAcess();
-     }
-     
+     if(usersWithAcessInCourse.length > 0) toggleUsersWithAcess();
 
 
      async function createList() {  
           let createdContent;
           let stepperGroup;
           
-          let acessControlPageTitle = document.createElement("h3");
+          const acessControlPageTitle = document.createElement("h3");
           acessControlPageTitle.innerText = "Usuários com acesso"
 
+          const selectedQuery = query(usersCol, where("uid", "!=", currentUserBasicInformation.uid), where("deleted", "==", false));
+
           
-          await getDocs(usersCol)
+          await getDocs(selectedQuery)
           .then((currentSnapshot) => {
                currentSnapshot.forEach((user) => {
                     let selectedUserData = user.data()
@@ -696,9 +695,8 @@ async function createAcessControl(courseIdentifier, usersWithAcessInCourse) {
 
 
      function toggleUsersWithAcess() {
-          for(let userWithAcess = 0; userWithAcess < usersWithAcessInCourse.length; userWithAcess ++) {
-               let selectedBoxId = `edit${courseIdentifier + usersWithAcessInCourse[userWithAcess]}`;
-               
+          for(let currentUser = 0; currentUser < usersWithAcessInCourse.length; currentUser ++) {
+               let selectedBoxId = `edit${courseIdentifier + usersWithAcessInCourse[currentUser]}`;
                document.getElementById(selectedBoxId).classList.add("acessEditToggled");
           }
 

@@ -9,7 +9,7 @@ module.exports = {
 
     login: {
       dependOn: "maindependencies",
-      import: ["./js/basic/loginsign/jslogin.js", "./js/basic/general/jsreusablestructures.js"]
+      import: ["./js/basic/jslogin.js", "./js/basic/general/jsreusablestructures.js"]
     },
 
     mainpage: {

@@ -17,23 +17,16 @@
      width: 100%;
 }
 
-#exploreA {
-     border: 1px solid red;
-}
-
 .coursesArea, .coursesColumn {
      gap: 10px;
-     border: 1px solid yellow;
 }
 
 .coursesArea {
      min-width: 240px;
-     border: 1px solid blue;
 }
 
 .coursesColumn {
      flex-grow: 1;
-     border: 1px solid green;
 }
 
 
@@ -85,10 +78,14 @@ div.courseIcon {
 }
 
 
+.coursesColumn > div .textOverflowCSS {
+     /* avoids this element increasing its parent width */
+     max-width: 50vw;
+}
+
 .coursesColumn > div h1 {
      color: var(--uiPrimaryWhite);
-     font: 700 1.5em var(--rFont);
-     word-break: normal;
+     font: 600 1.5em var(--rFont);
 }
 
 .coursesColumn > div h2 {
@@ -103,7 +100,6 @@ div.courseIcon {
 .coursesColumn > div.open {
      opacity: 1;
 
-     outline: 1px solid var(--uiSecondaryGrey);
      cursor: default;
 
      animation: 0.25s openCourseBoxEffect 0 linear;
@@ -129,7 +125,7 @@ div.courseIcon {
 
 .aCoursePage > h3 {
      color: var(--uiSecondaryWhite);
-     font: 600 1.25em var(--rFont);
+     font: 500 1.25em var(--rFont);
 }
 
 
@@ -148,9 +144,7 @@ div.courseIcon {
 
 .createdContent > div > fieldset, .createdContent > div > div:not(.steppers) {
      height: fit-content;
-
      border: none;
-     border-bottom: 1px solid var(--uiSecondaryGrey);
 }
 
 
@@ -177,12 +171,6 @@ input.fieldValue:focus {
      outline: none;
 }
 
-.createdContent > div > fieldset:has(.fieldValue:focus) {
-     border-bottom: 1px solid var(--uiPrimaryWhite);
-     transition: all 500ms;
-}
-
-
 
 
 /* buttons */
@@ -194,8 +182,8 @@ input.fieldValue:focus {
 
      margin: 50px auto 15px;
 
-     font: 700 1em var(--rFont);
-     color: var(--uiPrimaryBlack);
+     font: 600 1em var(--rFont);
+     color: var(--uiSecondaryGrey);
 
      text-decoration: none;
      text-align: center;
@@ -222,11 +210,12 @@ input.fieldValue:focus {
 
 /* close box */
 .closeBoxButton {
-     background-color: var(--uiSecondaryWhite);
+     background-color: var(--uiPrimaryGrey);
 }
 
 .closeBoxButton:hover {
-     background-color: var(--uiPrimaryWhite);
+     color: var(--uiPrimaryWhite);
+     opacity: 0.75;
 }
 
 
@@ -246,7 +235,7 @@ input.fieldValue:focus {
 /* media */
 @media screen and (min-width: 768px) {
      .coursesColumn {
-          min-width: 400px;
+          min-width: 300px;
           width: calc(50% - 10px);
 
           flex-grow: 1;

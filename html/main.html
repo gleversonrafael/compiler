@@ -5,7 +5,8 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title> Courseover </title>
      
-     <link rel="shortcut icon" href="../media/ico/favicon.ico" type="image/x-icon">
+     <link rel="shortcut icon" href="../media/ico/lightbrowserfavicon.png" type="image/x-icon" media="(prefers-color-scheme: light)">
+     <link rel="shortcut icon" href="../media/ico/darkbrowserfavicon.png" type="image/x-icon" media="(prefers-color-scheme: dark)">
 
      <link rel="stylesheet" href="../css/general.css">
      <link rel="stylesheet" href="../css/preload.css">
@@ -27,12 +28,15 @@
           <img id="menuIcon" class="menuChildOpen" src="../media/ico/menu/ico-menu.svg" alt="Três faixas horizontais brancas no sentido vertical"></div>
 
 
-          <div class="brandIcon menuChildClosed"></div>
+          <div class="brandIcon menuChildClosed">
+               <!-- <img src="../media/ico/menu/brandIcon.png" alt=""> -->
+
+          </div>
 
           <menu id="mMenu" class="menuChildClosed flex flex-col">
                <!-- dashboard -->
                <li> 
-                    <a data-changepagestate="possible" data-selectedurl="./home.html" href="../html/main.html?currentpage=home" name="home" id="homeJS" class="mmBlock flex fAlignC">
+                    <a data-changepagestate="possible" data-selectedurl="./home.html" href="../html/main.html?currentpage=home" name="home" id="homeJS" class="mmBlock flex fAlignC fTrans">
                          <img src="../media/ico/menu/home.svg" alt="">
                          <p class="menuFont"> Home </p>
                     </a>
@@ -42,7 +46,7 @@
 
                <!-- my courses -->
                <li>
-                    <a data-changepagestate="possible" data-selectedurl="./mycourses.html" href="../html/main.html?currentpage=mycourses" name="mycourses" id="mycoursesJS" class="mmBlock flex fAlignC">
+                    <a data-changepagestate="possible" data-selectedurl="./mycourses.html" href="../html/main.html?currentpage=mycourses" name="mycourses" id="mycoursesJS" class="mmBlock flex fAlignC fTrans">
                          <img src="../media/ico/menu/mycourses.svg" alt="">
                          <p class="menuFont"> Meus cursos</p>
                     </a>
@@ -52,7 +56,7 @@
 
                <!-- manage courses -->
                <li class="adminAcessJS">
-                    <a data-changepagestate="possible" data-selectedurl="./managecourses-adb.html" href="../html/main.html?currentpage=managecourses-adb" name="managecourses-adb"  id="managecoursesJS" class="mmBlock flex fAlignC">
+                    <a data-changepagestate="possible" data-selectedurl="./managecourses-adb.html" href="../html/main.html?currentpage=managecourses-adb" name="managecourses-adb"  id="managecoursesJS" class="mmBlock flex fAlignC fTrans">
                          <img src="../media/ico/menu/managecourses.svg" alt="">
                          <p class="menuFont"> Gerir cursos</p>
                     </a>
@@ -62,7 +66,7 @@
 
                <!-- manage users -->
                <li class="adminAcessJS">
-                    <a data-changepagestate="possible" data-selectedurl="./manageusers-adb.html" href="../html/main.html?currentpage=manageusers-adb" name="manageusers-adb"  id="manageusersJS" class="mmBlock flex fAlignC">
+                    <a data-changepagestate="possible" data-selectedurl="./manageusers-adb.html" href="../html/main.html?currentpage=manageusers-adb" name="manageusers-adb"  id="manageusersJS" class="mmBlock flex fAlignC fTrans">
                          <img src="../media/ico/menu/manageusers.svg" alt="">
                          <p class="menuFont"> Usuários</p>
                     </a>
@@ -72,7 +76,7 @@
 
                <!-- closeM -->
                <li>
-                    <button id="leaveM" class="mmBlock flex fAlignC dTrans">
+                    <button id="leaveM" class="mmBlock flex fAlignC dTrans fTrans">
                          <img src="../media/ico/menu/closem.svg" alt="">
                          <p class="menuFont"> Fechar menu</p>
 

@@ -45,7 +45,6 @@
     padding: 0px 10px 0px 25px;
 
     border-radius: 25px;
-    box-shadow: 0.5px 0.5px 2px #18181823;
     
     font: normal 400 1em var(--rFont);
 
@@ -58,9 +57,7 @@
 
 .inpB input:focus {
     opacity: 1;
-
-    /* outline: none; */
-    outline: 1px solid var(--uiSecondaryGrey);
+    outline: none;
 }
 
 .valEff:valid {

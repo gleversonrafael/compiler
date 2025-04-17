@@ -17,32 +17,6 @@
     --tertiaryOpposite: #863438;
     --quaternaryOpposite: #3d181a;
 
-
-    /* old */
-    --aqua: #4df5c6;
-    --aquaT: #4df5c500;
-
-    --euca: #08976f;
-    --gree: #15342C;
-
-    --papr: #700b1359;
-    --amar: #de0d48;
-    --razz: #f32a63;
-
-    --tiar: #bccece;
-    --gall: #eeeeee;
-    --white: #ffffff;
-    --whiteT: #ffffff62;
-    --whiteTT: #ffffff1c;
-    
-    --grey: #292929;
-    --shar: #1f1f1f;
-    --wood: #181818;
-    --woodT: #000000ad;
-
-    --black: #151518;
-
-
     /* ui - replace later versions */
     --uiPrimaryBlack: #151518;
     --uiPrimaryBlackOpacity: #151518d0;
@@ -53,6 +27,9 @@
 
     --uiPrimaryWhite: #e0e0e0;
     --uiSecondaryWhite: #b7b7b7;
+
+    --uiPrimaryWhiteOpacity: #ffffff1c;
+    --uiSecondaryWhiteOpacity: #ffffff62;
 
     /* fonts */
     --rFont: "Poppins", sans-serif;
@@ -103,7 +80,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--whiteTT);
+    background-color: var(--uiPrimaryWhiteOpacity);
     border-radius: 25px;
 }
 

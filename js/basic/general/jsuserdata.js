@@ -66,24 +66,20 @@ async function fetchOwnUserData() {
 async function obtainCurrentUID() {   
      let receiveUID = new Promise((correct, wrong) => {
           onAuthStateChanged(auth, (uData) => { 
-               uData ? correct(`u${uData.uid}`) : wrong("Null data.");                    
+               uData ? correct(`u${uData.uid}`) : wrong("");               
           
           });
      })
 
-     let returnVal;
+     let returnValue;
 
      await receiveUID
-     .then((res) => {
-          returnVal = res;
-
-     })
-
-     .catch((errorMsg) => {
-          console.log(errorMsg);
-          returnVal = null;
+     .then((response) => {returnValue = response;})
+     .catch((errorMessage) => { 
+          console.log(errorMessage); 
+          returnValue = null;
      });
 
 
-     return returnVal
+     return returnValue
 }

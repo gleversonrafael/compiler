@@ -38,19 +38,24 @@
      flex-flow: column wrap;
 }
 
-
-.createdContent > div > fieldset:has(.fieldValue:focus) {
-     border-bottom: 1px solid var(--uiPrimaryWhite);
-}
-
 /* input that isn't correct */
 /* .createdContent fieldset:has(input:not(.correctInput)){
      border-bottom: 1px solid var(--primaryOpposite);
 } */
 
+.createdContent > div > fieldset {
+     border-bottom: 1px solid var(--uiSecondaryGrey);
+}
+
 .createdContent fieldset:has(.incorrectInput) {
      border-bottom: 1px solid var(--primaryOpposite);
 }
+
+.createdContent > div > fieldset:has(.fieldValue:focus) {
+     border-bottom: 1px solid var(--uiPrimaryWhite);
+     transition: all 500ms;
+}
+
 
 
 
@@ -149,14 +154,16 @@ div.stepperGroup {
      display: flex;
      flex-flow: column nowrap;
 
-     gap: 10px;
-     
-     max-height: 200px;
+     gap: 5px;
+     height: 150px;
+
 
      /* min-width === width e === 100%, para ocupar o tamanho de acess control e torná-lo intransponível, bem como conservar esse width (width: 100%) */
      min-width: 100%;
      width: 100%;
      max-width: 50vw;
+
+     border-radius: 15px;
 
      overflow: scroll;
 }
@@ -172,8 +179,8 @@ div.stepperGroup {
 
      color: var(--uiSecondaryWhite);
      background-color: var(--uiPrimaryGrey);
+     border-bottom: 1px solid var(--uiSecondaryBlack);
 
-     border-radius: 15px;
 
      word-break: keep-all;
      text-overflow: ellipsis;

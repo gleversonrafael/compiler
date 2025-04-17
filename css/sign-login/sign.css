@@ -18,7 +18,7 @@
     padding: 15px 50px 15px;
     margin-top: 1vh;
 
-    background-color: var(--grey);
+    background-color: var(--uiPrimaryGrey);
     box-shadow: 2px 2px 2px #2222223d;
 }
 
@@ -29,27 +29,27 @@
 
 #msgB a {
     text-decoration: none;
-    color: var(--aqua);
+    color: var(--primaryColor);
 }
 
 
 
 /* msgB correct / incorrect */
 #msgB.cor {
-    border: 1px solid var(--euca);
+    border: 1px solid var(--secondaryColor);
 }
 
 #msgB.inc{
-    border: 1px solid var(--amar);
+    border: 1px solid var(--primaryOpposite);
 }
 
 
 #closeMsg.cor {
-    background-color: var(--euca);
+    background-color: var(--secondaryColor);
 }
 
 #closeMsg.inc {
-    background-color: var(--papr);
+    background-color: var(--tertiaryColor);
 }
 
 
@@ -127,7 +127,7 @@ input[type=radio] {
 
 .userTyB:hover {
     color: var(--uiPrimaryWhite);
-    background-color: var(--grey);
+    background-color: var(--uiPrimaryGrey);
     opacity: 0.9;
 
     cursor: pointer;
@@ -141,7 +141,7 @@ input[type=radio] {
 /* radio box checked? */
 #regUserInp:checked + #regUserB, #admUserInp:checked + #admUserB  {
     color: var(--uiPrimaryWhite);
-    background-color: var(--razz);
+    background-color: var(--primaryColor);
 }
 
 
@@ -166,11 +166,11 @@ input[type=radio] {
 
 
 #cButton {
-    border: 1px solid var(--amar);
+    border: 1px solid var(--primaryOpposite);
 }
 
 #cButton:hover {
-    background-color: var(--amar);
+    background-color: var(--primaryOpposite);
 }
 
 
@@ -178,7 +178,7 @@ input[type=radio] {
 
 /* visual div */
 #visualD {
-    background-color: var(--amar);
+    background-color: var(--primaryOpposites);
 }
 
 

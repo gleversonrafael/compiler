@@ -32,6 +32,7 @@
      text-decoration: none;
 
      background-color: var(--uiPrimaryGrey);
+     border: 1px solid var(--uiPrimaryGrey) ;
 }
 
 .dashbAnchor::after {
@@ -60,7 +61,7 @@
 
 /* dashb anchor pseudo classes  */
 .dashbAnchor:hover {
-     outline: 1px solid var(--uiPrimaryWhite);
+     border-color: var(--uiPrimaryWhite);
 }
 
 .dashbAnchor:active {
@@ -128,8 +129,14 @@
 
 
      /* hover */
+     /* select others dashbAnchors when one is hovered */
+     ul:has(.dashbAnchor:hover) .dashbAnchor:not(:hover) {
+          opacity: 0.5;
+     }
+
      .dashbAnchor:hover {
-          border-color: var(--uiSecondaryWhite);
+          opacity: 1;
+          border-color: var(--uiPrimaryGrey);
      }
 
 }

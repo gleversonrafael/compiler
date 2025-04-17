@@ -429,11 +429,33 @@ function createUserDataArray(operatingMode, selectedData, comparedData) {
 }
 
 function generatePasswordHash(string) {
-     let salt = bcrypt.genSaltSync(10);
-     let hash = bcrypt.hashSync(string, salt);
+     const salt = bcrypt.genSaltSync(10),
+          hash = bcrypt.hashSync(string, salt);
 
      return hash
 }
+
+async function obtainDocumentDataFromField(documentObject) {
+     // documentObject = { collectionVariable, fieldName, fieldValue}
+     const selectedDocumentQuery = query(documentObject.collectionVariable, where(documentObject.fieldName, "==", documentObject.fieldValue), limit(1));
+
+     let response;
+
+     await getDocs(selectedDocumentQuery)
+     .then((documentGroup) => {
+          documentGroup.forEach((document) => {
+               // undefined if no data is found
+               response = document.data()
+          })
+     })
+     .catch(undefinedResult => { response = "ERROR"});
+
+     return response;
+}
+
+
+
+
 
 
 
@@ -441,9 +463,9 @@ export {
      setReusableEvents, convertHtmlStringToElement,
      obtainFather, fillSelectedForm,
      showMessageBox, 
-     userDataIsValid, checkUserPassword, obtainUserInputedData,
+     userDataIsValid, checkUserPassword, obtainUserInputedData, generatePasswordHash,
      createUserDataArray, convertSpecificArrayIntoObject,
      forEachPropertyWithDo, obtainArrayFromInputs,
-     toggleModal,
-     customUpdateDocument, generatePasswordHash
+     toggleModal, 
+     customUpdateDocument, obtainDocumentDataFromField
 };

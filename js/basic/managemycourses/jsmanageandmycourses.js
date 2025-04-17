@@ -570,7 +570,10 @@ function openBox(event) {
                          fieldsThatCanBeCopied.forEach((selectedField) => {
                               let copyButton = document.createElement("button");
                               copyButton.classList.add("copyButton");
-                              copyButton.addEventListener("click", copyData);
+                              copyButton.addEventListener("click", (event) => {
+                                   copyData(event);
+                                   showMessageBox("successMessage", "Cópia bem sucedida!");
+                              });
 
                               selectedField.appendChild(copyButton);
                          })

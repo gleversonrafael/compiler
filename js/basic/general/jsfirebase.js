@@ -15,11 +15,7 @@ const db = getFirestore(app);
 const auth = getAuth();
 const usersCol = collection(db, "usersInfo");
 const coursesCol = collection(db, "courses");
-export { firebaseConfig };
-export { app };
-export { db };
-export { auth };
-export { usersCol };
-export { coursesCol };
+export { firebaseConfig, app, db, auth, usersCol, coursesCol };
+
 
 

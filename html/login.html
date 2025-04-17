@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Log-in CompIler</title>
-    <link rel="shortcut icon" href="../media/ico/favicon.ico" type="image/x-icon">
 
+    <link rel="shortcut icon" href="../media/ico/lightbrowserfavicon.png" type="image/x-icon" media="(prefers-color-scheme: light)">
+    <link rel="shortcut icon" href="../media/ico/darkbrowserfavicon.png" type="image/x-icon" media="(prefers-color-scheme: dark)">
+    
     <link rel="stylesheet" href="../css/general.css">
 
     <link rel="stylesheet" href="../css/sign-login/log-sign.css">
@@ -42,7 +44,7 @@
                 <!-- e-mail -->
                 <section class="inpB">
                     <label for="emailInp">E-mail</label>
-                    <input type="email" name="email" id="emailInp" class="sTrans valEff" required autocomplete="on">
+                    <input type="email" name="email" id="emailInp" class="fTrans valEff" required autocomplete="on">
 
                 </section>
 
@@ -50,7 +52,7 @@
                 <!-- password -->
                 <section class="inpB">
                     <label for="passInp">Senha</label>
-                    <input type="password" name="passw" id="passInp" class="sTrans valEff" required maxlength="8" autocomplete="off" value="">
+                    <input type="password" name="passw" id="passInp" class="fTrans valEff" required maxlength="8" autocomplete="off" value="">
 
                 </section>
 

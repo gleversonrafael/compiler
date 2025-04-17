@@ -26,7 +26,7 @@
 
      margin: 0px auto 10px 20px;
 
-     background: var(--gall) url(../../../media/ico/mcourses/ccopy.svg) center center no-repeat;
+     background: var(--uiSecondaryGrey) url(../../../media/ico/mcourses/ccopy.svg) center center no-repeat;
      background-size: 70%;
 
      border-radius: 25px;
@@ -34,7 +34,7 @@
 }
 
 .copyButton:hover {
-     background-color: var(--aqua);
-     cursor: copy;
+     background-color: var(--uiPrimaryWhite);
+     cursor: pointer;
      transition: all 300ms;
 }
