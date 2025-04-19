@@ -45,14 +45,12 @@
 
 
 /* loading skeleton */
-:has(.loadingSkeleton) {
+.loadingSkeleton, :has(.loadingSkeleton) {
     padding: 0px !important;
 }
 
 .loadingSkeleton {
-    position: relative;
-    padding: 0px !important;
-    
+    position: relative;    
     width: fit-content;
     height: fit-content;
 }
