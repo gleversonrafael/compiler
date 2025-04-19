@@ -83,7 +83,6 @@
      height: 100%;
 
      background-color: var(--uiPrimaryBlackOpacity);
-     border: 1px solid red;
 }
 
 
@@ -480,7 +479,6 @@
      #modalArea {
           max-width: calc(100% - 225px);
           right: 0;
-          border: 1px solid red;
      }
 
      .modalPattern {

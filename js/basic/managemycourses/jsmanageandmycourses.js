@@ -35,14 +35,14 @@ async function showCourses(searchedContent, callPurpose) {
      if(await obtainAllowedCoursesData(searchedContent) === true) {
           createCoursesBoxes();
 
-          if(pageType === "manageCourses" && callPurpose === "my") {
-               showCourses(searchedContent, "others");
-          }
-     
      } else {
           eraseColumns()
      }
 
+
+     if(pageType === "manageCourses" && callPurpose === "my") {
+          showCourses(searchedContent, "others");
+     }
 
      // main functions
      async function obtainAllowedCoursesData(searchedContent) {
@@ -51,7 +51,7 @@ async function showCourses(searchedContent, callPurpose) {
           // query process
           let coursesQuery = createQuery();
      
-          let insertData = new Promise((dataObtained, noData) => {
+          const insertData = new Promise((dataObtained, noData) => {
                onSnapshot(coursesQuery, (dataState) => {
                     // add value to coursesData and othersData
                     dataState.forEach((currentDocument)=> {
@@ -75,15 +75,9 @@ async function showCourses(searchedContent, callPurpose) {
           // process
           let insertDataResult;
      
-     
           await insertData
-          .then(() => {
-               insertDataResult = true
-     
-          })
-          .catch(() => {
-               insertDataResult = false
-          })
+          .then(() => { insertDataResult = true})
+          .catch(() => { insertDataResult = false})
      
           return insertDataResult
      
@@ -186,7 +180,6 @@ async function showCourses(searchedContent, callPurpose) {
                          if(courseValues.img) {
                               createdElement = document.createElement("img");
                               createdElement.setAttribute("src", courseValues.img);
-                              console.log("há imagem!");
                          
                          } else {
                               createdElement = document.createElement("div");
@@ -219,16 +212,11 @@ async function showCourses(searchedContent, callPurpose) {
 
      // erase columns
      function eraseColumns() {
-          let coursesColumns;
+          let coursesColumns, selectedAreaId;
      
-          if(obtainDataSelected(callPurpose) === othersData) {
-               coursesColumns = document.querySelectorAll("#othersA > .coursesColumn");
-     
-          } else {
-               coursesColumns = document.querySelectorAll("#coursesA > .coursesColumn");
-          }
+          selectedAreaId = callPurpose === "others" ? "othersA" : "coursesA";
+          coursesColumns = document.querySelectorAll(`#${selectedAreaId} > .coursesColumn`);
       
-     
           coursesColumns.forEach((column) => {
                column.innerHTML = "";
           });
@@ -431,7 +419,7 @@ function openBox(event) {
 
                          temporaryValue.value = elementData[propertyName];
                          temporaryValue.placeholder = elementData[propertyName];
-
+                         temporaryValue.autocomplete = "off"
 
                          // fix type
                          if(propertyName != "courseName" && propertyName != "coursePlatform" && propertyName != "img") {
@@ -495,6 +483,7 @@ function openBox(event) {
                          createdElements.resetForm.setAttribute("value", "Redefinir");
      
                          createdElements.stepperNumber.setAttribute("type", "number");
+                         createdElements.stepperNumber.setAttribute("name", "stepperNumber");
                          createdElements.stepperNumber.setAttribute("value", 1);
                          createdElements.stepperNumber.setAttribute("min", 1);
                          createdElements.stepperNumber.setAttribute("max", 4);

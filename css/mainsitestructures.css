@@ -44,7 +44,8 @@
 
 
 .brandIcon{
-     border: 1px solid var(--uiPrimaryGrey);
+     background: transparent url(../media/ico/lightfavicon.png) center center no-repeat;
+     background-size: contain;
 
      height: 40px;
      width: 100px;

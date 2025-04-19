@@ -124,7 +124,7 @@ function closeMsg(){
   messageContent.style.display = "none"
 
   if(loginResult == "cor") {
-    window.location.href = "./main.html?currentpage=home"
+    window.location.href = "./html/main.html?currentpage=home"
   }
 
 }

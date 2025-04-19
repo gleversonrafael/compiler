@@ -39,14 +39,14 @@
      margin-bottom: 5px;
 
      background-color: var(--uiSecondaryBlack);
-     border: none;
+     border: 1px solid var(--uiSecondaryBlack);
 
      border-radius: 35px;
 }
 
 .coursesColumn > div:hover {
-     transition: all 300ms;
-     outline: 1px solid var(--uiSecondaryGrey);
+     transition: all 0.3s;
+     border-color: var(--uiSecondaryGrey);
 
      cursor: pointer;
 }

@@ -158,6 +158,7 @@ async function changePage(pageName, pageUrl) {
                mCon.innerHTML = "";
 
                if(modalArea) {
+                    modalArea.style.display = "none";
                     modalArea.innerHTML = "";
                }
 
@@ -165,7 +166,6 @@ async function changePage(pageName, pageUrl) {
                // delete generated scripts and css
                let elementsCreatedBefore = {
                     generatedScripts: document.querySelectorAll("script.dynamicallyGeneratedScript"),
-
                     generatedCSS: document.querySelectorAll("link.dynamicallyGeneratedCSS")
                }
 
