@@ -60,7 +60,6 @@ function toggleMenu(changeDisplay, changeBackground) {
           let selectedMenuItems = [
                document.getElementById("mMenu"),
                document.getElementById("userSec"),
-               document.querySelector("#mMenuB .brandIcon")
           ];
 
 

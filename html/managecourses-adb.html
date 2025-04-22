@@ -17,7 +17,7 @@
      <!-- modal -->
      <div id="modalArea">
           <!-- create -->
-          <div id="createCourseModal" class="modalJS manageCoursesModalPageCSS createdBox flex flex-col">
+          <div id="createCourseModal" class="modalJS manageCoursesModalPageCSS createdBox flex flex-col testFlow">
                <!-- create course box title -->
                <div class="createdBoxTitle flex fJustSB">
                     <div class="flex flex-col">
@@ -31,7 +31,7 @@
                </div>
 
                
-               <form id="createCourseForm" class="flex" novalidate>
+               <form id="createCourseForm" novalidate>
                     <!-- course data -->
                     <fieldset class="contentFieldset flex flex-col">
                          <h3> Dados do curso</h3>
@@ -49,11 +49,11 @@
                     <fieldset class="contentFieldset flex flex-col">
                          <h3> Dados do usuário</h3>
                          
-                         <label for="emailInp" class="requiredLabel bottomNspace"> E-mail</label>
-                         <input data-relatedfield="email" type="email" name="email" id="emailInp" class="requiredInput dTrans" autocomplete="off">
+                         <label for="emailInp" class="bottomNspace"> E-mail</label>
+                         <input data-relatedfield="email" type="email" name="email" id="emailInp" class="dTrans" autocomplete="off">
                     
-                         <label for="userPasswordInp" class="requiredLabel bottomNspace"> Senha</label>
-                         <input data-relatedfield="userPassword" type="text" name="password" id="userPasswordInp" class="requiredInput dTrans" autocomplete="off">
+                         <label for="userPasswordInp" class="bottomNspace"> Senha</label>
+                         <input data-relatedfield="userPassword" type="text" name="password" id="userPasswordInp" class="dTrans" autocomplete="off">
 
                     </fieldset>
                     
@@ -70,7 +70,7 @@
 
                     </fieldset>  
 
-                    <button id="acessB" class="buttonPattern modalPageChange dTrans"> Editar acesso</button>
+                    <button id="acessB" class="buttonPattern modalPageChange dTrans"> Gerenciar acesso </button>
 
                     <!-- final buttons -->
                     <fieldset class="createdBoxButtons flex flex-row fJustSB">
@@ -132,7 +132,7 @@
 
                     <div class="pageInformationArea">
                          <section id="titleA" class="flex-col">
-                              <h1 id="pageTitle"> Gerenciar cursos</h1>
+                              <h1 id="pageTitle"> Gerir cursos</h1>
                               <p class="subtitle"> Aqui você pode criar, excluir e editar cursos.</p>
 
                          </section>

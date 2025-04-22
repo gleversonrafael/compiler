@@ -39,7 +39,6 @@ async function showCourses(searchedContent, callPurpose) {
           eraseColumns()
      }
 
-
      if(pageType === "manageCourses" && callPurpose === "my") {
           showCourses(searchedContent, "others");
      }
@@ -229,19 +228,16 @@ async function showCourses(searchedContent, callPurpose) {
 
 // open box
 function openBox(event) {  
-     let courseBox = event.currentTarget;
-     let courseId;
-     let elementData;
+     const courseBox = event.currentTarget;
+     let courseId, elementData;
 
      if(! courseBox.classList.contains("open") && meetConditions(event.target)) {
-          let courseAreaClicked = courseBox.parentElement.parentElement.id;
+          const courseAreaClicked = courseBox.parentElement.parentElement.id;
 
           courseId = courseBox.id;
           courseBox.classList.remove("closed");
      
           elementData = obtainDataSelected(courseAreaClicked === "coursesA" ? "my" : "others")[courseId];
-
-
           showElements(courseId);
      }
      
@@ -263,9 +259,8 @@ function openBox(event) {
 
 
      function showElements(courseId) {
-          let createdContent;
-          let closeButton = document.createElement("button");
-          let specialButton;
+          const closeButton = document.createElement("button");
+          let specialButton, createdContent;
 
           courseBox.classList.add("open");
 
@@ -275,8 +270,7 @@ function openBox(event) {
 
           // complementary
           function createPages() {
-               let elementProperties = [{ email: "E-mail" }, { userPassword: "Senha"}];
-
+               let elementProperties = [];
 
                // main process
                setSettingsBeforeCreatingPages();
@@ -286,7 +280,9 @@ function openBox(event) {
 
                // complementary
                function setSettingsBeforeCreatingPages() {
-                    if(pageType === "myCourses") {    
+                    if(pageType === "manageCourses" || (elementData.email && elementData.userPassword)) elementProperties.push({ email: "E-mail" }, { userPassword: "Senha"});
+                    
+                    if(pageType === "myCourses") {
                          specialButton = document.createElement("a");
                          specialButton.href = elementData.url;
                          specialButton.target = "_blank";
@@ -296,17 +292,14 @@ function openBox(event) {
      
                     } else {
                          elementProperties.unshift({ courseName: "Título"}, { coursePlatform: "Plataforma"});
-
                          elementProperties.push({ url: "URL"}, { img: "URL da imagem"})
      
                          specialButton = document.createElement("input");
                          specialButton.type = "submit";                         
                          specialButton.value = "Alterar";
      
-     
                          createdContent = document.createElement("form");
                          createdContent.setAttribute("id", `form${courseId}`);
-
                          createdContent.setAttribute("autocomplete", "off");
                          createdContent.setAttribute("novalidate", "");
 
@@ -330,22 +323,20 @@ function openBox(event) {
                          if(elementCounter % 2 === 0) {
                               pageCounter += 1
 
-                              let temporaryPage = document.createElement("div");
+                              const temporaryPage = document.createElement("div");
 
                               temporaryPage.classList.add("flex-col");
                               temporaryPage.classList.add(`coursePage${pageCounter}`);
                               temporaryPage.classList.add("aCoursePage");
 
                               temporaryPage.appendChild(createRegularPagesTitle(pageCounter));
-                         
 
                               temporaryCreatedPages.push(temporaryPage);
-
                               createdContent.appendChild(temporaryCreatedPages[temporaryCreatedPages.length - 1]);
                          }
 
 
-                         let createdField = createASingleElement(elementProperties[elementCounter]);
+                         const createdField = createASingleElement(elementProperties[elementCounter]);
 
 
                          // allocate pages
@@ -459,8 +450,6 @@ function openBox(event) {
                     let createdElements = {
                          stepperGroup: document.createElement("div"),
                          steppers: document.createElement("div"),
-
-                         resetForm: document.createElement("input"),
                          
                          stepButtons: {
                               backwardStepper: document.createElement("input"),
@@ -478,10 +467,7 @@ function openBox(event) {
                     function setSettings() {
                          createdElements.stepperGroup.classList.add("stepperGroup");
                          createdElements.steppers.classList.add("steppers")
-     
-                         createdElements.resetForm.setAttribute("type", "reset");
-                         createdElements.resetForm.setAttribute("value", "Redefinir");
-     
+                                   
                          createdElements.stepperNumber.setAttribute("type", "number");
                          createdElements.stepperNumber.setAttribute("name", "stepperNumber");
                          createdElements.stepperNumber.setAttribute("value", 1);
@@ -534,7 +520,6 @@ function openBox(event) {
                          createdElements.steppers.appendChild(createdElements.stepperNumber);
                          createdElements.steppers.appendChild(createdElements.stepButtons.forwardStepper);
      
-                         createdElements.stepperGroup.appendChild(createdElements.resetForm);
                          createdElements.stepperGroup.appendChild(createdElements.steppers);
      
                          createdContent.appendChild(createdElements.stepperGroup);
@@ -583,12 +568,9 @@ function openBox(event) {
 
 
 // change page
-// deslocar para managecourses
 function changePage(selectedPage, courseId) {
-     let currentOpenPage = document.querySelector(`div#${courseId} .openPage`);  
-
-     let selectedBox = document.querySelector(`div#${courseId} > .createdContent > .coursePage${selectedPage}`);
-
+     const currentOpenPage = document.querySelector(`div#${courseId} .openPage`);  
+     const selectedBox = document.querySelector(`div#${courseId} > .createdContent > .coursePage${selectedPage}`);
 
      // evitar a mesma página
      if(currentOpenPage != null) {
@@ -596,9 +578,10 @@ function changePage(selectedPage, courseId) {
           currentOpenPage.classList.remove("openPage");
      } 
 
-
-     selectedBox.classList.add("openPage")
-     selectedBox.style.display = "flex";
+     if(selectedBox) {
+          selectedBox.classList.add("openPage")
+          selectedBox.style.display = "flex";
+     }
 }
 
 

@@ -38,11 +38,6 @@
      flex-flow: column wrap;
 }
 
-/* input that isn't correct */
-/* .createdContent fieldset:has(input:not(.correctInput)){
-     border-bottom: 1px solid var(--primaryOpposite);
-} */
-
 .createdContent > div > fieldset {
      border-bottom: 1px solid var(--uiSecondaryGrey);
 }
@@ -77,7 +72,7 @@ div.stepperGroup {
      display: flex;
      flex-flow: row wrap;
 
-     justify-content: space-between;
+     justify-content: right;
      margin-top: 20px;
 }
 
@@ -96,7 +91,6 @@ div.stepperGroup {
 .stepperGroup > input[type=reset]:hover {
      color: var(--primaryOpposite);
 }
-
 
 .steppers {
      display: flex;
@@ -155,8 +149,7 @@ div.stepperGroup {
      flex-flow: column nowrap;
 
      gap: 5px;
-     height: 150px;
-
+     height: 160px;
 
      /* min-width === width e === 100%, para ocupar o tamanho de acess control e torná-lo intransponível, bem como conservar esse width (width: 100%) */
      min-width: 100%;
@@ -164,6 +157,8 @@ div.stepperGroup {
      max-width: 50vw;
 
      border-radius: 15px;
+
+     background-color: var(--uiPrimaryGrey);
 
      overflow: scroll;
 }
@@ -178,18 +173,22 @@ div.stepperGroup {
      cursor: pointer;
 
      color: var(--uiSecondaryWhite);
-     background-color: var(--uiPrimaryGrey);
-     border-bottom: 1px solid var(--uiSecondaryBlack);
-
+     border-bottom: 1px solid var(--uiSecondaryGrey);
 
      word-break: keep-all;
      text-overflow: ellipsis;
      overflow: hidden;
+     
+     transition: all 0.3s;
+}
+
+.thisCourseAcess > li:hover {
+     color: var(--uiPrimaryWhite);
+     border-bottom-color: var(--uiSecondaryWhite);
 }
 
 .thisCourseAcess > .acessEditToggled {
-     color: var(--uiPrimaryWhite);
-     background-color: var(--quaternaryColor);
+     border-bottom-color: var(--tertiaryColor);
 }
 
 
@@ -224,8 +223,6 @@ div.stepperGroup {
      padding: 50px;
 
      /* margin: 50px min(10vw, 50px); */
-     margin-top: 50px;
-
      color: var(--uiSecondaryWhite);
      background-color: var(--uiSecondaryBlack);
 
@@ -267,7 +264,7 @@ div.stepperGroup {
 
 #createCourseForm h3 {
      color: var(--uiPrimaryWhite);
-     font-weight: 700;
+     font-weight: 500;
      margin-bottom: 20px;
 }
 
@@ -319,17 +316,18 @@ div.stepperGroup {
 
 /* buttons */
 .modalPageChange {
-     background-color: var(--uiSecondaryWhite);
+     color: var(--u);
+     background-color: var(--uiPrimaryGrey);
+     border: 1px solid var(--uiSecondaryGrey);
+
      padding: 15px;
 
-     border: none;
      text-align: center;
      font-weight: 600;
 }
 
 .modalPageChange:hover {
-     color: var(--uiPrimaryBlack);
-     background-color: var(--uiPrimaryWhite);
+     border-color: var(--uiPrimaryWhite);
 }
 
 /* user list */
@@ -343,14 +341,13 @@ div.stepperGroup {
      max-height: 400px;
      width: 100%;
 
-     border-radius: 25px;
-
      overflow: scroll;
 }
 
 #userList > li {
      padding: 15px;
      background-color: var(--uiPrimaryGrey);
+     border: 1px solid #00000000;
 }
 
 #userList > li > p {
@@ -397,12 +394,18 @@ div.stepperGroup {
 
 /* users boxes */
 #userList > .editableBox {
-     border-bottom: 1px solid var(--uiSecondaryGrey);
+     border-bottom-color: var(--uiSecondaryGrey);
      cursor: pointer;
+
+     transition: all 0.3s;
+}
+
+#userList > .editableBox:hover {
+     border-bottom-color: var(--uiSecondaryWhite);
 }
 
 #userList > .acessGranted {
-     border-bottom: 1px solid var(--tertiaryColor);
+     border-bottom-color: var(--tertiaryColor);
 }
 
 
@@ -449,7 +452,6 @@ div.stepperGroup {
 /* delete course box */
 /* text */
 #deleteCourseModal {
-     margin-top: 100px;
      max-width: 400px;
 }
 

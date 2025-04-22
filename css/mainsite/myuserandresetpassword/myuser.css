@@ -101,38 +101,3 @@ form#changeOwnUserData .confirmButtonTypeMR:hover {
      }
 }
 
-
-/* pc++ */
-@media screen and (min-width: 768px) {
-     /* main user content box */
-     /* #mainUserContentBox {
-          max-width: none;
-     }
-
-     .inputsArea {
-          display: grid;       
-          grid-template-columns: 1fr 1fr;
-          grid-template-rows: 2fr;
-
-          gap: 0px;
-          
-          border: 1px solid #2bff00;
-     }
-
-     .inputsArea > img {
-          width: 100%;
-          height: 100%;
-          padding: 10%;
-          
-          border: 1px solid white;
-     }
-
-     .inputsArea > fieldset {
-          width: 100%;
-          height: fit-content;
-          
-          border: 1px solid white;
-     } */
-
-
-}

@@ -43,7 +43,7 @@ function createManageCoursesEvents() {
                changeCourseBoxPage(2);
           });
 
-          document.getElementById("createCourseForm").addEventListener("submit", (submitEvent) => {
+          document.getElementById("createCourseForm").addEventListener("submit", async(submitEvent) => {
                submitEvent.preventDefault();
                createCourse();
           });
@@ -222,9 +222,7 @@ function createCourse() {
      if(validateFields("multiple", "", "createCourseForm") === true) {   
           uploadCourse();
           showMessageBox("successMessage", "Curso criado!");
-
-          document.getElementById("createCourseForm").reset();
-          document.querySelectorAll("#createCourseForm .correctInput").forEach((input) => input.classList.remove("correctInput"));
+          resetFormState();
      
      } else {
           showMessageBox("errorMessage", "Preencha corretamente os campos!");
@@ -292,7 +290,18 @@ function createCourse() {
 
           return usersWithAcess;
      }
-     
+
+
+     function resetFormState() {
+          document.getElementById("createCourseForm").reset();
+
+          document.querySelectorAll("#createCourseForm .correctInput").forEach(
+               (input) => input.classList.remove("correctInput")
+          );
+          document.querySelectorAll("#createCourseModal .acessGranted").forEach(
+               (userWithAcessBox) => userWithAcessBox.classList.remove("acessGranted")
+          );
+     }
 }
 
 
@@ -503,11 +512,11 @@ function validateFields(callParameter, selectedInputArray, selectedFormId) {
                          break;
 
                     case "email":
-                         regularExpression = /[\w]{2,}[@][a-z]{2,}[.][a-z]{2,}/;
+                         regularExpression = /^$|[\w]{2,}[@][a-z]{2,}[.][a-z]{2,}/;
                          break;
 
                     case "userPassword":
-                         regularExpression = /[\w\d]{4,}/;
+                         regularExpression = /^$|[\w\d]{4,}/;
                          break;
 
                     case "url":
@@ -696,8 +705,10 @@ async function createAcessControl(courseIdentifier, usersWithAcessInCourse) {
 
      function toggleUsersWithAcess() {
           for(let currentUser = 0; currentUser < usersWithAcessInCourse.length; currentUser ++) {
-               let selectedBoxId = `edit${courseIdentifier + usersWithAcessInCourse[currentUser]}`;
-               document.getElementById(selectedBoxId).classList.add("acessEditToggled");
+               if(usersWithAcessInCourse[currentUser] != currentUserBasicInformation.uid) {
+                    const selectedBoxId = `edit${courseIdentifier + usersWithAcessInCourse[currentUser]}`;
+                    document.getElementById(selectedBoxId).classList.add("acessEditToggled");
+               }
           }
 
      }
