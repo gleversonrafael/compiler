@@ -2,6 +2,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../general/jsfirebase.js";
 import { fetchOwnUserData } from "./jsuserdata.js";
 import { setPageChangeEvents } from "../general/jspagechange.js";
+import { refreshAnimations } from "./jsreusablestructures.js"
 
 // asyncronous unique events - are loaded only when menu hasn't been loaded before.
 const mMenuB = document.getElementById("mMenuB");
@@ -57,10 +58,11 @@ function toggleMenu() {
           document.getElementById("userSec"),
      ];
 
-     let menuChildClass;
+     let menuChildClass, selectedAnimation;
 
-     
      if(menuBox.classList.contains("menuClosed")) {
+          selectedAnimation = "";
+
           menuBox.classList.remove("menuClosed");
           menuBox.classList.add("menuOpen");
 
@@ -70,6 +72,8 @@ function toggleMenu() {
           menuChildClass = "menuChildOpen";
 
      } else {
+          selectedAnimation = "0.3s menuANIM linear reverse";
+
           menuBox.classList.remove("menuOpen");
           menuBox.classList.add("menuClosed");
 
@@ -79,6 +83,7 @@ function toggleMenu() {
           menuChildClass = "menuChildClosed";
      }
 
+     refreshAnimations([menuBox], [selectedAnimation]);
      toggleLeaveMenuBox();
 
      // add and remove classes to menu items
@@ -86,8 +91,7 @@ function toggleMenu() {
           menuChildClass === "menuChildOpen" ? selectedMenuItems[item].classList.remove("menuChildClosed") : selectedMenuItems[item].classList.remove("menuChildOpen");
 
           selectedMenuItems[item].classList.add(menuChildClass);
-     }   
-     
+     }     
 }
 
 function toggleLeaveMenuBox() {

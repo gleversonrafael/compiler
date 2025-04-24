@@ -20,6 +20,7 @@
      width: fit-content;
 
      height: 100vh;
+     animation: 0.3s menuANIM linear;
 }
 
 #mMenuB.menuOpen {
@@ -34,6 +35,7 @@
      padding: 10px;
 
      background-color: var(--uiSecondaryBlack);
+     animation: 0.3s menuANIM linear forwards;
 }
 
 /* menu icon */
@@ -251,8 +253,8 @@
 
 
 /* animations */
-@keyframes leftToRightMenuANIM {
-     from { margin-left: -300px }
+@keyframes menuANIM {
+     from { min-width:0; width: 0; max-width: 0;}
 }
 
 
@@ -276,7 +278,6 @@
 
      #mMenuB.menuOpen {
           position: sticky;
-          animation: 0.4s leftToRightMenuANIM linear;
      }
 
      .mmBlock {

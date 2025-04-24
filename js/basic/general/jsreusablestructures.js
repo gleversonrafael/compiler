@@ -437,11 +437,17 @@ async function obtainDocumentDataFromField(documentObject) {
      return response;
 }
 
-
-
-
-
-
+function refreshAnimations(elementsArray, animationsArray) {
+     // elements = [ element1, element2 ] // animations = [ element1AnimationString, animation2... ]
+     for(let elementIndex = 0; elementIndex < elementsArray.length; elementIndex++) {
+          const element = elementsArray[elementIndex];
+          
+          element.style.animation = "none";
+          requestAnimationFrame(() => {
+               element.style.animation = animationsArray.length > 1 ? animationsArray[elementIndex] : animationsArray[0];
+          });
+     }
+}
 
 export { 
      setReusableEvents, convertHtmlStringToElement,
@@ -450,6 +456,6 @@ export {
      userDataIsValid, checkUserPassword, obtainUserInputedData, generatePasswordHash,
      createUserDataArray, convertSpecificArrayIntoObject,
      forEachPropertyWithDo, obtainArrayFromInputs,
-     toggleModal, 
+     toggleModal, refreshAnimations,
      customUpdateDocument, obtainDocumentDataFromField
 };
