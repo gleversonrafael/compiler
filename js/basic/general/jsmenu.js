@@ -16,7 +16,7 @@ if(mMenuB && mMenuB.dataset.loadState != "true") {
 
 async function loadDefaults() {
      if(window.innerWidth >= 768) {
-          toggleMenu(true, false);
+          toggleMenu();
      }
 
      setMenuEvents();
@@ -29,76 +29,70 @@ function setMenuEvents() {
 
      // similar
      document.getElementById("leaveM").addEventListener("click", () => {
-          toggleMenu(true, true);
-     const mMenuB = document.getElementById("mMenuB");
-});
+          toggleMenu();
+     });
 
      document.getElementById("menuIcon").addEventListener("click", () => { 
-          toggleMenu(true, true);
+          toggleMenu();
      })
 
      // bug fix
      window.addEventListener("resize", () => {
           const menuBox = document.getElementById("mMenuB");
-
-          if(window.innerWidth >= 768 && menuBox.classList.contains("menuClosed")) {
-               toggleMenu(true, false);
-          }
-     
+          if(window.innerWidth >= 768 && menuBox.classList.contains("menuClosed")) toggleMenu();
+          
           toggleLeaveMenuBox();
      });
 }
 
 
 // open / close menu
-function toggleMenu(changeDisplay, changeBackground) {
-     if(changeDisplay === true) {
-          let menuHamburgerIcon  = document.getElementById("menuIcon");
-          let menuBox = document.getElementById("mMenuB");
-          let menuChildClass;
+function toggleMenu() {
+     const menuHamburgerIcon  = document.getElementById("menuIcon"),
+          menuBox = document.getElementById("mMenuB")
+     ;
 
-          let selectedMenuItems = [
-               document.getElementById("mMenu"),
-               document.getElementById("userSec"),
-          ];
+     let selectedMenuItems = [
+          document.getElementById("mMenu"),
+          document.getElementById("userSec"),
+     ];
 
+     let menuChildClass;
 
-          if(menuBox.classList.contains("menuClosed")) {
-               menuBox.classList.remove("menuClosed");
-               menuBox.classList.add("menuOpen");
+     
+     if(menuBox.classList.contains("menuClosed")) {
+          menuBox.classList.remove("menuClosed");
+          menuBox.classList.add("menuOpen");
 
-               menuHamburgerIcon.classList.remove("menuChildOpen");
-               menuHamburgerIcon.classList.add("menuChildClosed");
+          menuHamburgerIcon.classList.remove("menuChildOpen");
+          menuHamburgerIcon.classList.add("menuChildClosed");
 
-               menuChildClass = "menuChildOpen";
+          menuChildClass = "menuChildOpen";
 
+     } else {
+          menuBox.classList.remove("menuOpen");
+          menuBox.classList.add("menuClosed");
 
-          } else {
-               menuBox.classList.remove("menuOpen");
-               menuBox.classList.add("menuClosed");
+          menuHamburgerIcon.classList.remove("menuChildClosed");
+          menuHamburgerIcon.classList.add("menuChildOpen");
 
-               menuHamburgerIcon.classList.remove("menuChildClosed");
-               menuHamburgerIcon.classList.add("menuChildOpen");
+          menuChildClass = "menuChildClosed";
+     }
 
+     toggleLeaveMenuBox();
 
-               menuChildClass = "menuChildClosed";
-          }
+     // add and remove classes to menu items
+     for(let item = 0;  item < selectedMenuItems.length;  item++) {
+          menuChildClass === "menuChildOpen" ? selectedMenuItems[item].classList.remove("menuChildClosed") : selectedMenuItems[item].classList.remove("menuChildOpen");
 
-          toggleLeaveMenuBox();
-
-
-          // add and remove classes to menu items
-          for(let item = 0;  item < selectedMenuItems.length;  item++) {
-               menuChildClass === "menuChildOpen" ? selectedMenuItems[item].classList.remove("menuChildClosed") : selectedMenuItems[item].classList.remove("menuChildOpen");          
-
-               selectedMenuItems[item].classList.add(menuChildClass);
-          }   
-     } 
+          selectedMenuItems[item].classList.add(menuChildClass);
+     }   
+     
 }
 
 function toggleLeaveMenuBox() {
-     let leaveMenuButton = document.getElementById("leaveM");
-
+     const leaveMenuButton = document.getElementById("leaveM");
+     // conditions === bug fixes
      if(window.innerWidth >= 768 && leaveMenuButton.style.display != "none" || window.innerWidth < 768 && leaveMenuButton.style.display === "none") {
           leaveMenuButton.style.display = leaveMenuButton.style.display != "none" ? "none" : "flex"
      }

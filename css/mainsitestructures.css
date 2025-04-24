@@ -34,9 +34,6 @@
      padding: 10px;
 
      background-color: var(--uiSecondaryBlack);
-
-     animation: 300ms openMenuANIM 0 linear forwards;
-     animation-iteration-count: 1;
 }
 
 /* menu icon */
@@ -253,6 +250,11 @@
 }
 
 
+/* animations */
+@keyframes leftToRightMenuANIM {
+     from { margin-left: -300px }
+}
+
 
 /* pc / tablet media */
 @media screen and (min-width: 768px) {
@@ -274,6 +276,7 @@
 
      #mMenuB.menuOpen {
           position: sticky;
+          animation: 0.4s leftToRightMenuANIM linear;
      }
 
      .mmBlock {

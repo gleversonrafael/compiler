@@ -189,62 +189,46 @@ function forEachPropertyWithDo(parameterObject) {
 
 
 // toggle Modal 
-// FINISH ANIMATION
-// FINISH
-// FINISH
 async function toggleModal(selectedModalId) {
+     // E
+     let selectedAnimation, selectedDisplay, outputDelay, functionSuccess;
+     const modalArea = document.getElementById("modalArea"), 
+          thisModal = document.getElementById(selectedModalId)
+     ;
+
+     // P
      if(selectedModalId != "notAModal") {
-          const modalArea = document.getElementById("modalArea"), 
-               thisModal = document.getElementById(selectedModalId), 
-               showItemAnimation = "0.1s showItemANIM linear forwards"
-          ;
-
-          thisModal.style.animation = showItemAnimation;
-          modalArea.style.animation = showItemAnimation; 
-
           if(thisModal.style.display != "flex") {
-               modalArea.style.display = "flex";
-               thisModal.style.display = "flex";
+               selectedDisplay = "flex";
+               selectedAnimation = ""; // use CSS animation
 
           } else {
-               await nullify();
-
-               thisModal.style.animation += showItemAnimation + " reverse"
-               modalArea.style.animation += showItemAnimation + " reverse"
-
-               // console.log("reverse animation");
-
-               await hide();
-
-               async function nullify() {
-                    setTimeout(() => {
-                         // console.log("nullify animation");
-                         thisModal.style.animation = "0s none none none";
-                         modalArea.style.animation = "0s none none none";
-          
-                    }, 0)
-               }
-          
-               async function hide() {
-                    setTimeout(() => {
-                         // console.log("hide");
-                         modalArea.style.display = "none";
-                         thisModal.style.display = "none";
-          
-                    }, 0)
-               }
-
+               selectedDisplay = "none";
+               selectedAnimation = "200ms toggleItemANIM linear reverse";
+               outputDelay = 150;
           }
 
-          // console.log("final result");
-
-          
-     } else {
-          console.log("an attempt to toggle something that isn't a modal by using a modal button occurred.");
+          functionSuccess = true;
      }
 
+     // S
+     showVisualOutput();
 
 
+     function showVisualOutput() {
+          if(functionSuccess === true) {
+               thisModal.style.animation = modalArea.style.animation = "none";
+
+               requestAnimationFrame(
+                    () => thisModal.style.animation = modalArea.style.animation = selectedAnimation                          
+               )
+     
+               setTimeout(() => { thisModal.style.display = modalArea.style.display = selectedDisplay}, outputDelay);
+          
+          } else {
+               console.log("an attempt to toggle something that isn't a modal by using a modal button occurred.");
+          }
+     }
 }
 
 

@@ -222,7 +222,6 @@ div.stepperGroup {
      height: fit-content;
      padding: 50px;
 
-     /* margin: 50px min(10vw, 50px); */
      color: var(--uiSecondaryWhite);
      background-color: var(--uiSecondaryBlack);
 

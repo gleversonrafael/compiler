@@ -80,9 +80,11 @@
      width: 100%;
      height: 100%;
 
-     flex-flow: column wrap;
-
      background-color: var(--uiPrimaryBlackOpacity);
+}
+
+.createdBox, .modalPattern {
+     margin-top: 5vh;
 }
 
 .modalPattern {
@@ -95,8 +97,6 @@
      min-width: 250px;
      width: 70vw;
      max-width: 400px;
-
-     margin-top: 30vh;
 
      background-color: var(--uiSecondaryBlack);
      border: none;
@@ -388,8 +388,6 @@
      opacity: 0.5;
 }
 
-
-
 /* page detail block */
 .pageDetailBlock {
      display: flex;
@@ -423,23 +421,16 @@
      font: normal 1.5em var(--rFont);
 }
 
-
+.modalPattern, #modalArea, .createdBox {
+     animation: 200ms toggleItemANIM forwards linear normal;
+} 
 
 
 /* animations */
-@keyframes openMessageBoxANIM {
-     from { opacity: 0.75; top: 0;}
-     to { opacity: 1;}
-}
+@keyframes openMessageBoxANIM { from { opacity: 0.75; top: 0;} to { opacity: 1;}}
+@keyframes hideMessageBoxANIM { to { opacity: 0;} }
+@keyframes toggleItemANIM { from { opacity: 0; display: none} to { opacity: 1;}}
 
-@keyframes hideMessageBoxANIM {
-     to { opacity: 0;}
-}
-
-@keyframes showItemANIM {
-     from { display: none; opacity: 0; }
-     to { opacity: 1;}
-}
 
 /* media */
 @media screen and (min-width: 768px) {
