@@ -82,6 +82,10 @@
 
 /* media */
 @media screen and (min-width: 768px) {
+     .conPattern nav li {
+          width: fit-content;
+     }
+
      /* dashb content */
      #dashbMsg {
           line-height: 1em;
@@ -99,7 +103,6 @@
 
           gap: 20px;
      }
-
 
      .dashbAnchor {
           flex-flow: column wrap;
