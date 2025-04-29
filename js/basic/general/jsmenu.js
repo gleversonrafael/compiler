@@ -58,40 +58,48 @@ function toggleMenu() {
           document.getElementById("userSec"),
      ];
 
-     let menuChildClass, selectedAnimation;
+     let menuChildClass, selectedAnimation, newState, showItemDelay;
+
 
      if(menuBox.classList.contains("menuClosed")) {
+          newState = "Open"
           selectedAnimation = "";
 
           menuBox.classList.remove("menuClosed");
-          menuBox.classList.add("menuOpen");
-
-          menuHamburgerIcon.classList.remove("menuChildOpen");
           menuHamburgerIcon.classList.add("menuChildClosed");
 
-          menuChildClass = "menuChildOpen";
-
      } else {
-          selectedAnimation = "0.3s menuANIM linear reverse";
+          newState = "Closed"
+          selectedAnimation = "0.3s menuANIM linear reverse forwards";
 
           menuBox.classList.remove("menuOpen");
-          menuBox.classList.add("menuClosed");
-
-          menuHamburgerIcon.classList.remove("menuChildClosed");
           menuHamburgerIcon.classList.add("menuChildOpen");
-
-          menuChildClass = "menuChildClosed";
      }
 
+     finishInitialSetups()
      refreshAnimations([menuBox], [selectedAnimation]);
      toggleLeaveMenuBox();
+     setTimeout(toggleMenuItems, 200);
 
-     // add and remove classes to menu items
-     for(let item = 0;  item < selectedMenuItems.length;  item++) {
-          menuChildClass === "menuChildOpen" ? selectedMenuItems[item].classList.remove("menuChildClosed") : selectedMenuItems[item].classList.remove("menuChildOpen");
 
-          selectedMenuItems[item].classList.add(menuChildClass);
-     }     
+     function finishInitialSetups() {
+          menuBox.classList.add("menu"+newState);
+          menuHamburgerIcon.classList.remove(`menuChild${newState}`);
+          menuChildClass = `menuChild${newState}`;
+
+          // hide/ show items before appearing / dissapearing
+          for(let item = 0;  item < selectedMenuItems.length;  item++) {
+               selectedMenuItems[item].style.opacity = newState === "Open" ? 1 : 0;
+          };
+     }
+
+     function toggleMenuItems() {
+          for(let item = 0;  item < selectedMenuItems.length;  item++) {
+               menuChildClass === "menuChildOpen" ? selectedMenuItems[item].classList.remove("menuChildClosed") : selectedMenuItems[item].classList.remove("menuChildOpen");
+     
+               selectedMenuItems[item].classList.add(menuChildClass);
+          }
+     }
 }
 
 function toggleLeaveMenuBox() {

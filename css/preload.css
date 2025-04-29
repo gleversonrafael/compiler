@@ -8,16 +8,6 @@
     animation-timing-function: linear;
 }
 
-@keyframes loadingSpiral {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-
 .loadingGroup {
     position: fixed;
     z-index: 5;
@@ -81,4 +71,9 @@
 @keyframes loadingSkeletonANIM {
     0% { background-position: 0%;} 
     100% { background-position: 100%;}
+}
+
+@keyframes loadingSpiral {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg);}
 }

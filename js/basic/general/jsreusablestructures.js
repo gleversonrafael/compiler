@@ -384,9 +384,6 @@ function obtainUserInputedData(selectedFormId) {
 
 // create user data array
 function createUserDataArray(operatingMode, selectedData, comparedData) {
-     // console.log(selectedData);
-     // console.log(comparedData);
-
      // selected data accepted == inputs array / node list with values and names
      let newArray = [];
 
@@ -441,10 +438,12 @@ function refreshAnimations(elementsArray, animationsArray) {
      // elements = [ element1, element2 ] // animations = [ element1AnimationString, animation2... ]
      for(let elementIndex = 0; elementIndex < elementsArray.length; elementIndex++) {
           const element = elementsArray[elementIndex];
-          
           element.style.animation = "none";
+
           requestAnimationFrame(() => {
                element.style.animation = animationsArray.length > 1 ? animationsArray[elementIndex] : animationsArray[0];
+
+               console.log(element.style.animation);
           });
      }
 }

@@ -11,7 +11,8 @@
 
 #mMenuB {
      display: grid;
-     position: sticky;
+     position: fixed;
+     overflow: hidden;
 
      top: 0;
      z-index: 2;
@@ -21,12 +22,13 @@
 
      height: 100vh;
      animation: 0.3s menuANIM linear;
+
+     /* border: 1px solid red; */
 }
 
 #mMenuB.menuOpen {
-     position: fixed;
      overflow: auto;
-
+     
      min-width: 225px;
      width: 60vw;
      max-width: 300px;
@@ -192,17 +194,15 @@
      position: relative;
 
      min-height: calc(100vh - 60px);
-     min-width: calc(100% - 100px);
-
-     margin-right: 50px;
-
+     min-width: 100%;
 
      /* border that forces mCon to unfollow it's first children position as the start height "counter" */
+     border: 1px solid #00000000;
 }
-
 
 .conPattern {
      margin: 50px 0px;
+     width: calc(100% - 100px);
      
      height: fit-content;
      max-width: 100%;
@@ -254,7 +254,22 @@
 
 /* animations */
 @keyframes menuANIM {
-     from { min-width:0; width: 0; max-width: 0;}
+     0% {
+          min-width: 50px;
+          width: 0;
+          max-width: 0px;
+     }
+
+     1% {
+          background-color: var(--uiSecondaryBlack);
+     }
+
+     to { 
+          min-width: 225px;
+          width: 60vw;
+          max-width: 300px;
+          background-color: var(--uiSecondaryBlack);
+     }
 }
 
 
@@ -266,6 +281,7 @@
      }
 
      .conPattern  {
+          width: fit-content;
           margin: 80px;
      }
 

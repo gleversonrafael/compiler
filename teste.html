@@ -6,7 +6,7 @@
      <title> TestJS</title>
 
      <style>
-          #box {
+          .box {
                position: absolute;
 
                background-color: red;
@@ -32,11 +32,28 @@
 <body>
      <h1> TestJS</h1>
 
-     <div id="box"></div>
+     <div id="box" class="box"></div>
 
+     <div id="boxesHere">
+          <p>Aqui</p>
+
+     </div>
+
+     <button onclick="createBox()"> Criar</button>
      <button onclick="refreshAnimation()"> Refresh</button>
 
      <script>
+          function createBox() {
+               const area = document.getElementById("boxesHere");
+               const box = document.createElement("div");
+               box.classList.add("box");
+
+               area.appendChild(box);
+
+               console.log("FINISH")
+          }
+
+
           function refreshAnimation() {
                const box = document.getElementById("box");
                let oldAnimation = box.style.animation;

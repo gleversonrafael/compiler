@@ -233,12 +233,20 @@ function openBox(event) {
 
      if(! courseBox.classList.contains("open") && meetConditions(event.target)) {
           const courseAreaClicked = courseBox.parentElement.parentElement.id;
+          const boxFinalHeight = 500;
 
           courseId = courseBox.id;
           courseBox.classList.remove("closed");
      
           elementData = obtainDataSelected(courseAreaClicked === "coursesA" ? "my" : "others")[courseId];
           showElements(courseId);
+
+          toggleBoxAnimation({
+               element: courseBox,
+               animation: "increase",
+               initialHeight: 0,
+               finalHeight: boxFinalHeight,
+          });
      }
      
  
@@ -304,9 +312,8 @@ function openBox(event) {
                          createdContent.setAttribute("novalidate", "");
 
                          createdContent.addEventListener("submit", (genericSubmitEvent) => {
-                              genericSubmitEvent.preventDefault();                              
+                              genericSubmitEvent.preventDefault();                           
                               saveCourseData(courseId, elementData);
-                         
                          })
                     }
                }
@@ -361,7 +368,7 @@ function openBox(event) {
                               pageTitle.innerText = "URLS";
                               break;
 
-                         default: 
+                         default:
                               pageTitle.innerText = "Página inexistente";
                     }
 
@@ -372,12 +379,8 @@ function openBox(event) {
 
                function createASingleElement(elementProperty) {
                     // var
-                    let propertyString = Object.values(elementProperty);
-                    let propertyName = Object.keys(elementProperty);
-
-                    let temporaryName;
-                    let temporaryValue;
-                    let temporaryField;
+                    let temporaryName, temporaryValue, temporaryField;
+                    let propertyString = Object.values(elementProperty), propertyName = Object.keys(elementProperty);
 
 
                     if(pageType === "myCourses") {
@@ -620,8 +623,19 @@ function obtainDataSelected(callPurpose) {
           return coursesData
      }
 
-}   
+}
 
+
+function toggleBoxAnimation(data) {
+     console.log(data);
+     // dataObject = { element, animation, initialHeight, finalHeight}
+
+     if(data[animation] === "increase") {
+          console.log("teste");
+
+     }
+
+}
 
 export { closeBox, showCourses }
 

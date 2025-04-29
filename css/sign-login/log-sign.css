@@ -19,7 +19,10 @@
 #mForm {
     flex-shrink: 1;
     margin: 35px;
-    width: calc(80vw - 70px);
+
+    min-width: fit-content;
+    width: calc(60vw - 70px);
+    max-width: 500px;
 }
 
 
@@ -67,7 +70,7 @@
 
 .inpB label, .inpB > div > p {
     color: var(--uiSecondaryWhite);
-    font: 200 0.9em var(--rFont);
+    font: 300 0.9em var(--rFont);
 }
 
 
@@ -81,7 +84,7 @@
 
 /* buttons */
 .fButton {
-    width: 49%;
+    width: 100%;
     padding: 15px;
 
     cursor: pointer;

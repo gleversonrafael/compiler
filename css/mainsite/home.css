@@ -17,6 +17,10 @@
 
 
 /* dashB nav */
+.conPattern nav li {
+     width: 100%;
+}
+
 .dashbAnchor  {
      align-items: center;
      justify-content: space-between;
@@ -24,10 +28,10 @@
      min-height: 60px;
      padding: 15px 15px 15px 30px;
 
-     width: 80vw;
+     /* width: 80vw; */
      max-width: 100%;
 
-     margin-bottom: 15px;     
+     margin-bottom: 15px;
 
      text-decoration: none;
 
