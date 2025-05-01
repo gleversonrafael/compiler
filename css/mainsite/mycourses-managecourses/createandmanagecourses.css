@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+:root {
+     --customCloseHeight: height: 0px;
+}
+
 
 /* all areas */
 .conPattern section {
@@ -32,8 +36,11 @@
 
 
 /* courseBox == coursesA > div */
-.coursesColumn > div{     
+.coursesColumn > div{
+     overflow: hidden;
+
      width: 100%;
+     height: 120px;
 
      padding: 25px 35px;
      margin-bottom: 5px;
@@ -42,6 +49,7 @@
      border: 1px solid var(--uiSecondaryBlack);
 
      border-radius: 35px;
+
 }
 
 .coursesColumn > div:hover {
@@ -99,8 +107,9 @@ div.courseIcon {
 /* open // courses*/
 .coursesColumn > div.open {
      opacity: 1;
-
      cursor: default;
+
+     height: fit-content;
 
      animation: 0.25s openCourseBoxEffect 0 linear;
      animation-iteration-count: 1;
@@ -224,6 +233,26 @@ input.fieldValue:focus {
      animation-iteration-count: 1;
      animation-direction: reverse;
 }
+
+
+/* anim */
+@keyframes toggleCourseBoxANIM {
+     from { height: 120px; }
+     to { height: var(--customCloseHeight)}
+}
+
+
+/* @keyframes closeManageANIM {
+     to { height: 565px; }
+}
+
+@keyframes closeMyWithANIM { 
+     to { height: 510px};
+}
+
+@keyframes closeMyANIM { 
+     to { height: 280px};
+} */
 
 
 

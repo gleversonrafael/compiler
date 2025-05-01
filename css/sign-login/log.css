@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+/* header */
+.messageBox {
+    margin-left: 0px;
+}
+
 /* main content */
 main {
     align-items: center;

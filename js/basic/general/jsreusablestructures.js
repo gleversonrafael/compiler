@@ -442,8 +442,6 @@ function refreshAnimations(elementsArray, animationsArray) {
 
           requestAnimationFrame(() => {
                element.style.animation = animationsArray.length > 1 ? animationsArray[elementIndex] : animationsArray[0];
-
-               console.log(element.style.animation);
           });
      }
 }

@@ -1,11 +1,11 @@
 // other js
 import { copyData } from "./jsmycourses.js"
 import { createAcessControl, saveCourseData, validateFields } from "./jsmanagecourses.js"
-import { fetchOwnUserData, currentUserBasicInformation } from "../general/jsuserdata.js"
+import { currentUserBasicInformation } from "../general/jsuserdata.js"
 import { removeSkeletons } from "./../general/jsload.js"
 
 // temporary
-import { showMessageBox } from "../general/jsreusablestructures.js"
+import { showMessageBox, refreshAnimations } from "../general/jsreusablestructures.js"
 
 
 // firebase
@@ -233,29 +233,21 @@ function openBox(event) {
 
      if(! courseBox.classList.contains("open") && meetConditions(event.target)) {
           const courseAreaClicked = courseBox.parentElement.parentElement.id;
-          const boxFinalHeight = 500;
-
           courseId = courseBox.id;
+
           courseBox.classList.remove("closed");
-     
+
           elementData = obtainDataSelected(courseAreaClicked === "coursesA" ? "my" : "others")[courseId];
           showElements(courseId);
 
-          toggleBoxAnimation({
-               element: courseBox,
-               animation: "increase",
-               initialHeight: 0,
-               finalHeight: boxFinalHeight,
-          });
+          setToggleBoxTo(courseBox);
+          refreshAnimations([courseBox], ["0.3s toggleCourseBoxANIM linear"]);
      }
-     
- 
 
 
      // complementary   
      function meetConditions(clickedElement) {
           let temporaryDeletedCourses = document.querySelectorAll(".coursesColumn > .canBeDeleted, .coursesColumn > .willBeDeleted").length;
-
 
           if(temporaryDeletedCourses === 0 && ! clickedElement.classList.contains("closeBoxButton")) {
                return true
@@ -592,7 +584,7 @@ function changePage(selectedPage, courseId) {
 
 // close box
 function closeBox(methodData, methodCallReason) {
-     let previouslyCreatedContent, courseBox; 
+     let previouslyCreatedContent, courseBox;
 
      // click event call
      if(! methodCallReason) {
@@ -607,9 +599,32 @@ function closeBox(methodData, methodCallReason) {
           previouslyCreatedContent = courseBox.querySelector(".createdContent");
      }
 
+     setToggleBoxTo(courseBox);
+     refreshAnimations([courseBox], ["0.3s toggleCourseBoxANIM linear reverse"]);
+
      previouslyCreatedContent.remove();
      courseBox.classList.remove("open");
      courseBox.classList.add("closed");
+}
+
+
+function setToggleBoxTo(courseBox) {
+     const cssRoot = document.querySelector(":root");
+     const hasUserData = courseBox.querySelectorAll(".aCoursePage").length > 0;
+
+     let selectedToHeight;
+
+     if(pageType === "manageCourses") {
+          selectedToHeight = "565px";
+
+     } else if(hasUserData) {
+          selectedToHeight = "510px";
+     
+     } else {
+          selectedToHeight = "280px";
+     }
+
+     cssRoot.style.setProperty("--customCloseHeight", selectedToHeight);
 }
 
 
@@ -621,18 +636,6 @@ function obtainDataSelected(callPurpose) {
 
      } else {
           return coursesData
-     }
-
-}
-
-
-function toggleBoxAnimation(data) {
-     console.log(data);
-     // dataObject = { element, animation, initialHeight, finalHeight}
-
-     if(data[animation] === "increase") {
-          console.log("teste");
-
      }
 
 }

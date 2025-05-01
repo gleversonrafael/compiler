@@ -1,6 +1,17 @@
 @charset "UTF-8";
 
 
+/* general */
+.coursesColumn > div.open {
+     height: 280px;
+}
+
+.coursesColumn > div.open:has(.aCoursePage) {
+     height: 510px;
+}
+
+
+
 /* fields */
 .fieldValue {
      vertical-align: bottom;

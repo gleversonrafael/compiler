@@ -19,7 +19,7 @@ function analyzeLogState(data) {
      // prevent unlogged user from acessing the site
      if(data === null && !window.location.href.includes("index")) window.location.href = "./../index.html";
      // prevent logged user from acessing login page
-     if(data != null && ( window.location.href.includes("index") && document.getElementById("passInp").value.length === 0)) window.location.href = "./html/main.html?currentpage=home";
+     if(data != null && ( window.location.href.includes("index"))) window.location.href = "./html/main.html?currentpage=home";
 }
 
 export { removeAdminElements }

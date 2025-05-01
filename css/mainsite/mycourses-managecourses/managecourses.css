@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+
+
 /* operations area / add + create courses */
 #operationsA {
      flex-flow: column wrap;
@@ -194,6 +196,10 @@ div.stepperGroup {
 
 
 /* create courses area */
+.coursesColumn > div.open {
+     height: 565px;
+}
+
 .coursesColumn > div.canBeDeleted {
      outline: 1px solid var(--uiSecondaryGrey);
 }

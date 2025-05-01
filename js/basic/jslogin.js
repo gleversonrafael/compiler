@@ -1,8 +1,7 @@
 // firebase
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { getDocs } from "firebase/firestore";
-import { auth, db, usersCol } from "./general/jsfirebase.js";
-import { obtainDocumentDataFromField } from "./general/jsreusablestructures.js"
+import { auth, usersCol } from "./general/jsfirebase.js";
+import { obtainDocumentDataFromField, showMessageBox } from "./general/jsreusablestructures.js"
 
 
 // global var
@@ -19,22 +18,29 @@ async function loginPerson(saveEvent) {
 
     // user data
     const userEmail = loginForm.email.value, userPassword = loginForm.passw.value;
-    const validationResponse =  await isUserActive(userEmail);
+    const validationResponse = await isUserActive(userEmail);
+    
+    let messageContent, messageType;
 
     if(validationResponse === "dataIsAcessible") {
-      loginResult = await signInWithEmailAndPassword(auth, userEmail, userPassword)
-      .then(() => { return "cor";})
+      await signInWithEmailAndPassword(auth, userEmail, userPassword)
+      .then(() => {
+        window.location.href = "./html/main.html?currentpage=home";
+      
+      })
       .catch((error) => {
+        messageType = "errorMessage";
+        messageContent = "Credenciais incorretas.";
+
         console.log(error.code);
-        return "inc";
       });
     
     } else{
-      loginResult = "inc";
-    
+      messageType = "errorMessage";
+      messageContent = "Usuário inexistente ou inacessível";
     } 
 
-    showMsg(loginResult);
+    if(messageType && messageContent) showMessageBox(messageType, messageContent);
 }
 
 async function isUserActive(receivedEmail) {

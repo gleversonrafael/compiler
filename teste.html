@@ -3,25 +3,33 @@
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title> TestJS</title>
+     <title>Document</title>
 
      <style>
           .box {
-               position: absolute;
+               cursor: pointer;
+               background-color: #9ee0e09d;
 
-               background-color: red;
-               width: 50px;
-               height: 50px;
-               
-               animation: 1s boxANIM linear forwards;
+               height: 100px;
+               width: 100px;
+
+               animation: 1s infinite;
+               animation-name: fromANIM, toANIM;
           }
 
-          @keyframes boxANIM {
+          .box:active {
+               background-color: aqua;
+          }
+
+          @keyframes fromANIM {
                from {
-                    bottom: 80%;
+                    width: 150px;
                }
+          }
+
+          @keyframes toANIM {
                to {
-                    bottom: 10%;
+                    width: 400px;
                }
           }
 
@@ -30,47 +38,16 @@
 </head>
 
 <body>
-     <h1> TestJS</h1>
+     <h1> document</h1>
 
-     <div id="box" class="box"></div>
-
-     <div id="boxesHere">
-          <p>Aqui</p>
+     <div>
+          <div onclick="" class="box"> click</div>
 
      </div>
 
-     <button onclick="createBox()"> Criar</button>
-     <button onclick="refreshAnimation()"> Refresh</button>
-
      <script>
-          function createBox() {
-               const area = document.getElementById("boxesHere");
-               const box = document.createElement("div");
-               box.classList.add("box");
+          function setBoxAnimation() {
 
-               area.appendChild(box);
-
-               console.log("FINISH")
-          }
-
-
-          function refreshAnimation() {
-               const box = document.getElementById("box");
-               let oldAnimation = box.style.animation;
-
-               console.log("none");
-               box.style.animation = "none";               
-
-               requestAnimationFrame((frameEvent) => {
-                    console.log("FE" + frameEvent)
-
-                    if(oldAnimation != "") {
-                         box.style.animation = ""
-
-                    } else {
-                         box.style.animation = "1s boxANIM linear forwards reverse"
-                    }}
-               )
           }
 
      </script>
