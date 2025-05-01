@@ -47,26 +47,28 @@ async function changePage(pageName, pageUrl) {
 
           switch(analyzedString) {
                case "home":
-                    returnedString = "Início"
-                    break
+                    returnedString = "Início";
+                    break;
 
                case "mycourses":
-                    returnedString = "Meus cursos"
-                    break
+                    returnedString = "Meus cursos";
+                    break;
 
                case "managecourses-adb":
-                    returnedString = "Gerir cursos"
-                    break
+                    returnedString = "Gerir cursos";
+                    break;
 
                case "manageusers-adb":
-                    returnedString = "Usuários"
-                    break
+                    returnedString = "Usuários";
+                    break;
 
                case "myuser":
-                    returnedString = "Meu usuário"
-                    break
+                    returnedString = "Meu usuário";
+                    break;
 
                default:
+                    returnedString = "Página inexistente";
+                    break;
           }
           
           return returnedString

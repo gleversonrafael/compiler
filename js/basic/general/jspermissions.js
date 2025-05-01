@@ -1,10 +1,19 @@
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./jsfirebase.js";
-import { fetchOwnUserData } from "./jsuserdata.js"
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth, db } from "./jsfirebase.js";
+import { doc, onSnapshot } from "firebase/firestore";
+import { fetchOwnUserData, currentUserBasicInformation } from "./jsuserdata.js"
 
-onAuthStateChanged(auth, (authData) => {
-     analyzeLogState(authData);     
+onAuthStateChanged(auth, async(authData) => {
+     analyzeLogState(authData);
 })
+
+// inactive user/ deleted user
+onSnapshot(doc(db, "usersInfo", currentUserBasicInformation.uid), async() => {
+     const {deleted, active} = await fetchOwnUserData();
+     if(deleted === true || active === false) {
+          signOut(auth);
+     }
+});
 
 const { usertype } = await fetchOwnUserData();
 if(usertype !== "admin") {removeAdminElements();}
