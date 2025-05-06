@@ -1,0 +1,156 @@
+@charset "UTF-8";
+
+/* dashboard content */
+#dashbMsg {
+     font: 300 1.75em var(--rFont);
+     color: var(--uiSecondaryWhite);
+
+     max-width: 80vw;
+     margin-bottom: 50px;
+}
+
+#userGreetings {
+     display: block;
+
+     color: var(--uiPrimaryWhite);
+
+     font: 300 1.5em var(--rFont);
+     width: 100%;
+}
+
+
+
+
+/* dashB nav */
+.conPattern nav li {
+     width: 100%;
+}
+
+.dashbAnchor  {
+     align-items: center;
+     justify-content: space-between;
+
+     min-height: 60px;
+     padding: 15px 15px 15px 30px;
+
+     /* width: 80vw; */
+     max-width: 100%;
+
+     margin-bottom: 15px;
+
+     text-decoration: none;
+
+     background-color: var(--uiPrimaryGrey);
+     border: 1px solid var(--uiPrimaryGrey) ;
+}
+
+.dashbAnchor::after {
+     content: "";
+
+     background-image: url(../../media/ico/ico-warrow.svg);
+     background-size: cover;
+
+     width: 25px;
+     height: 25px;
+}
+
+
+.dashbAnchor > img {
+     display: none;
+}
+
+
+.dashbAnchor > p {
+     color: var(--uiPrimaryWhite);
+     font: 500 1.1em var(--rFont);
+}
+
+
+
+
+/* dashb anchor pseudo classes  */
+.dashbAnchor:hover {
+     border-color: var(--uiPrimaryWhite);
+}
+
+.dashbAnchor:active {
+     background-color: var(--uiSecondaryBlack);
+}
+
+.dashbAnchor:active::after {
+     content: "";
+     background-image: url(../../media/ico/ico-barrow.svg);
+}
+
+
+
+
+/* media */
+@media screen and (min-width: 768px) {
+     .conPattern nav li {
+          width: fit-content;
+     }
+
+     /* dashb content */
+     #dashbMsg {
+          line-height: 1em;
+          margin-bottom: 50px;
+
+          max-width: min(50vw, 1050px);
+     }
+
+     #dashbMsg.loadingSkeleton:before {
+          border-radius: 15px;
+     }
+
+
+     #pageMain ul {
+          display: flex;
+          flex-flow: row wrap;
+
+          gap: 20px;
+     }
+
+     .dashbAnchor {
+          flex-flow: column wrap;
+
+          width: fit-content;
+          padding: 15px 0px;
+
+          border-radius: 25px;
+     }
+
+     .dashbAnchor::after {
+          display: none;
+     }
+
+
+     .dashbAnchor > img {
+          display: block;
+
+          height: 200px;
+
+          padding: 15px;
+          margin: 20px;
+     }
+
+     .dashbAnchor > p {
+          text-align: center;
+
+          padding: 10px;
+          width: 100%;
+     }
+
+
+     /* hover */
+     /* select others dashbAnchors when one is hovered */
+     ul:has(.dashbAnchor:hover) .dashbAnchor:not(:hover) {
+          opacity: 0.5;
+     }
+
+     .dashbAnchor:hover {
+          opacity: 1;
+          border-color: var(--uiPrimaryGrey);
+     }
+
+}

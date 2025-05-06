@@ -1,0 +1,198 @@
+@charset "UTF-8";
+
+/* header */
+.messageBox {
+    margin-left: 0px;
+}
+
+/* main content */
+main {
+    align-items: center;
+    justify-content: center;
+    
+    width: 100%;
+    min-height: 100vh;
+}
+
+.brandIcon {
+    align-self: center;
+    width: 75px;
+
+    margin-bottom: 15px;
+}
+
+
+#mSignStyle {    
+    display: flex;
+    margin: 40px 20px; 
+}
+
+#mForm { /* main form*/
+    max-width: 400px;
+}
+
+
+/* login title box */
+#signTitle  {
+    color: var(--uiPrimaryWhite);
+    margin-bottom: 20px;
+}
+
+
+/* final box */
+#finalBox {
+    margin-top: 15px;
+}
+
+
+
+
+/* final buttons */
+#lButton {
+    background-color: var(--tertiaryColor);
+}
+
+#lButton:hover {
+    background-color: var(--secondaryColor);
+}
+
+#rButton {
+    color: var(--primaryOpposite);
+    background-color: var(--uiPrimaryGrey);
+
+    text-decoration: none;
+    text-align: center;
+}
+
+#rButton:hover {
+    color: var(--uiPrimaryBlack);
+    background-color: var(--secondaryOpposite);
+}
+
+
+#rButton, #lButton {
+    border: none;
+}
+
+
+
+/* message content */
+#msgCon {
+    display: none;
+    z-index: 1;
+
+    background-color: var(--uiPrimaryBlackOpacity);
+    min-height: 600px;
+    height: 100vh;
+
+    width: 100%;
+}
+
+#msgCon > section {
+    width: fit-content;
+    max-width: 80%;
+}
+
+#msgIco {
+    min-width: 200px;
+    width: 20vw;
+    max-width: 700px;
+}
+
+
+/* msg text */
+#msgT, #msgD {
+    text-align: center;
+}
+
+
+
+#msgT {
+    margin: 10px 0px;
+    font: normal min(8vw, 2em) var(--rFont);
+}
+
+#msgT.inc {
+    color: var(--primaryOpposite);
+}
+
+#msgT.cor {
+    color: var(--primaryColor);
+}
+
+
+
+#msgD {
+    color: var(--uiPrimaryWhite);
+    font: 200 min(5vw, 1.5em) var(--rFont);
+}
+
+
+#closeMsgB {
+    width: 100%;
+    padding: 10px;
+
+    cursor: pointer;
+    margin-top: 10vh;
+
+    font: normal 2em var(--rFont);
+
+    background-color: var(--uiSecondaryBlack);
+    color: var(--uiSecondaryWhite);
+    
+    border: none;
+    border-radius: 15px;
+}
+
+#closeMsgB:hover {
+    background-color: var(--uiPrimaryGrey);
+
+    outline-color: var(--uiPrimaryWhite);
+    color: var(--uiPrimaryWhite);
+    /* outline: none; */
+}
+
+
+
+
+/* media */
+@media screen and (min-width: 1366px) {
+    /* main content
+    #mForm {
+        margin: 50px;
+        max-width: 500px;
+    }
+    
+    #signTitle {
+        font-size: min(2.5em, 3vw);
+    }
+    
+    /* msg content -- bug fix*/
+    /* #msgCon { */
+        /* min-height: 720px; */
+    /* }     */
+
+
+    /* inputs */
+    /* .inpB:nth-of-type(1) { */
+        /* margin-top: 20px; */
+    /* } */
+
+    /* .inpB label, .fButton, .inpB input { */
+        /* border-radius: 200px; */
+    /* } */
+
+    /* .inpB label, .fButton { */
+        /* font: 300 min( 1.25em, 2vw) var(--rFont); */
+        /* font-size: min(1.5em, 2vw); */
+    /* } */
+
+    /* .inpB input { */
+        /* font-size: min(20px, 2vw); */
+        /* height: 60px; */
+    /* } */
+
+    /* #finalBox { */
+        /* margin-top: 70px; */
+    /* } */ 
+}

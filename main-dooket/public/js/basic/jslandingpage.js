@@ -1,0 +1,1 @@
+let mainB=document.styleSheets[1].cssRules[4],loginB=document.getElementById("loginB");loginB.addEventListener("mouseover",()=>{mainB.style.opacity="0.2"}),loginB.addEventListener("mouseout",()=>{mainB.style.opacity="0.1"});

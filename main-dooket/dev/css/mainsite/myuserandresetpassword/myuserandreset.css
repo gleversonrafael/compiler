@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+/* main box */
+#mainUserContentBox {
+     height: fit-content;
+     width: fit-content;
+
+     padding: 25px;
+
+     border-radius: 15px;
+     background-color: var(--uiSecondaryBlack);
+}
+
+
+/* form */
+.labelPattern {
+     font: 200 1em var(--rFont);
+     color: var(--uiPrimaryWhite);
+}
+
+.inputPatternMR {
+     width: 100%;
+
+     padding: 10px 20px;
+     
+     color: var(--uiPrimaryWhite);
+     background-color: var(--uiPrimaryGrey);
+     border: none;
+}
+
+.inputPatternMR:focus {
+     outline: none;
+}
+
+
+
+
+
+
+/* input buttons */
+.inputButtonToggleMR {
+     text-align: left;
+     border: 1px solid var(--uiSecondaryGrey);
+     cursor: pointer;
+}
+
+.inputButtonToggleMR:hover {
+     border-color: var(--uiSecondaryWhite);
+}
+
+.confirmButtonTypeMR {
+     padding: auto 30px;
+     width: 100%;
+     
+     border: none;
+}
+
+
+
+/* others */
+.underEmphasis {
+     color: var(--uiSecondaryGrey);
+     font: 300 0.8em var(--rFont);
+     margin: 5px 0px 10px;
+}

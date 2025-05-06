@@ -1,0 +1,1 @@
+function copyData(e){let t=e.currentTarget.parentElement.children[1].innerText;navigator.clipboard.writeText(t)}export{copyData};

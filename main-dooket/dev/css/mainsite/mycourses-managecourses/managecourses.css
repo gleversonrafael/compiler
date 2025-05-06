@@ -1,0 +1,522 @@
+@charset "UTF-8";
+
+
+
+/* operations area / add + create courses */
+#operationsA {
+     flex-flow: column wrap;
+     align-self: center;
+
+     gap: 10px;
+     margin-bottom: 0px;
+     width: 100%;
+}
+
+#operationsA button {
+     width: 100%;
+     padding: 10px;
+}
+
+#addCourseButton {
+     border: none;
+     color: var(--primaryColor);
+}
+
+#deleteCourseButton {
+     border: none;
+     color: var(--primaryOpposite);
+}
+
+#bgEff {    
+     justify-content: center;
+     overflow: scroll;
+
+     z-index: 1;
+}
+
+
+/* edit courses box */
+.createdContent > div {
+     flex-flow: column wrap;
+}
+
+.createdContent > div > fieldset {
+     border-bottom: 1px solid var(--uiSecondaryGrey);
+}
+
+.createdContent fieldset:has(.incorrectInput) {
+     border-bottom: 1px solid var(--primaryOpposite);
+}
+
+.createdContent > div > fieldset:has(.fieldValue:focus) {
+     border-bottom: 1px solid var(--uiPrimaryWhite);
+     transition: all 500ms;
+}
+
+
+
+
+/* field values */
+input.fieldValue {
+     width: 100%;     
+     margin-bottom: 0px;
+     padding-bottom: 15px;
+
+     background-color: transparent;
+     border: none;
+}
+
+
+
+
+/* steppers and redefine button */
+div.stepperGroup {
+     display: flex;
+     flex-flow: row wrap;
+
+     justify-content: right;
+     margin-top: 20px;
+}
+
+.stepperGroup > input[type=reset] {
+     padding: 0px;
+
+     color: var(--secondaryOpposite);
+     background-color: transparent;
+
+     border: none;
+     
+     cursor: pointer;
+     transition: all 500ms;
+}
+
+.stepperGroup > input[type=reset]:hover {
+     color: var(--primaryOpposite);
+}
+
+.steppers {
+     display: flex;
+     gap: 5px;
+     align-items: center;
+}
+
+
+.stepperNumber {
+     width: 20px;
+     text-align: center;
+
+     font-size: 2em;
+
+     color: var(--uiPrimaryWhite);
+     background-color: transparent;
+     border: none;
+}
+
+
+.stepperNumber:focus {
+     outline: none;
+}
+
+.steppers > input[type=button] {
+     width: 20px;
+
+     background-repeat: no-repeat;
+     background-size: contain;
+     background-color: transparent;
+
+     border: none;
+     border-radius: 0px;
+
+     cursor: pointer;
+}
+
+.forwardStepper {
+     background-image: url(../../../media/ico/mcourses/stepperforward.svg);
+     margin-left: 5px;
+}
+
+.backwardStepper {
+     background-image: url(../../../media/ico/mcourses/stepperbackward.svg);
+}
+
+
+
+/* acess control */
+.acessControl {
+     overflow: hidden;
+}
+
+.thisCourseAcess {
+     display: flex;
+     flex-flow: column nowrap;
+
+     gap: 5px;
+     height: 160px;
+
+     /* min-width === width e === 100%, para ocupar o tamanho de acess control e torná-lo intransponível, bem como conservar esse width (width: 100%) */
+     min-width: 100%;
+     width: 100%;
+     max-width: 50vw;
+
+     border-radius: 15px;
+
+     background-color: var(--uiPrimaryGrey);
+
+     overflow: scroll;
+}
+
+.thisCourseAcess > li {
+     display: flex;
+     align-items: center;     
+
+     height: 40px;
+     padding: 25px;
+
+     cursor: pointer;
+
+     color: var(--uiSecondaryWhite);
+     border-bottom: 1px solid var(--uiSecondaryGrey);
+
+     word-break: keep-all;
+     text-overflow: ellipsis;
+     overflow: hidden;
+     
+     transition: all 0.3s;
+}
+
+.thisCourseAcess > li:hover {
+     color: var(--uiPrimaryWhite);
+     border-bottom-color: var(--uiSecondaryWhite);
+}
+
+.thisCourseAcess > .acessEditToggled {
+     border-bottom-color: var(--tertiaryColor);
+}
+
+
+
+/* create courses area */
+.coursesColumn > div.open {
+     height: 565px;
+}
+
+.coursesColumn > div.canBeDeleted {
+     outline: 1px solid var(--uiSecondaryGrey);
+}
+
+.coursesColumn > div.willBeDeleted {
+     outline: none;
+     outline: 1px solid var(--primaryOpposite);
+}
+
+
+
+/* modals /////////////*/
+.manageCoursesModalPageCSS {
+     width: 100%;
+}
+
+/* create course box //*/
+.createdBox, #createCourseForm, .manageCoursesPageCSS {
+     display: none;
+}
+
+.createdBox {
+     width: 80vw;
+     max-width: 500px;
+     
+     height: fit-content;
+     padding: 50px;
+
+     color: var(--uiSecondaryWhite);
+     background-color: var(--uiSecondaryBlack);
+
+     border-radius: 15px;
+}
+
+#createCourseModal > .createdBoxTitle h1 {
+     color: var(--uiPrimaryWhite);
+}
+
+
+#createCourseModal .cancelModalButton {
+     aspect-ratio: 1;
+     
+     width: 25px;
+     height: fit-content;
+
+     cursor: pointer;
+     border: none;
+
+     background: url(../../../media/ico/closeicon.png) no-repeat;
+     background-size: contain;
+}
+
+
+/* text */
+.createdBox div > h1 {
+     font: 600 min(7vw, 2.25em) var(--rFont);
+     color: var(--uiPrimaryWhite);
+}
+
+#createCourseModal .createdBoxTitle {
+     margin-bottom: 50px;
+}
+
+.createdBoxTitle .createdBoxSubtitle {
+     font: 200 1em var(--rFont);
+}
+
+#createCourseForm h3 {
+     color: var(--uiPrimaryWhite);
+     font-weight: 500;
+     margin-bottom: 20px;
+}
+
+
+/* form */
+#createCourseForm {
+     flex-flow: column wrap;
+     gap: 40px;
+}
+
+#createCourseForm fieldset {
+     border: none;
+}
+
+
+/* inputs */
+#createCourseForm label {
+     color: var(--uiPrimaryWhite);
+     font-weight: 300;
+}
+
+.contentFieldset > input {  
+     width: 100%;
+
+     margin-bottom: 20px;
+     padding-bottom: 10px;
+
+     font: 500 1em var(--rFont);
+
+     background-color: transparent;
+
+     color: var(--uiSecondaryWhite);
+     border-color: transparent transparent var(--uiSecondaryGrey) transparent;
+}
+
+#createCourseForm > .contentFieldset input:focus {
+     outline: none;
+
+     color: var(--uiPrimaryWhite);
+     border-bottom-color: var(--uiPrimaryWhite);
+}
+
+/* correct input */
+#createCourseForm label:has(+ .correctInput) {
+     color: var(--uiSecondaryWhite);
+     position: relative;
+}
+
+
+/* buttons */
+.modalPageChange {
+     color: var(--u);
+     background-color: var(--uiPrimaryGrey);
+     border: 1px solid var(--uiSecondaryGrey);
+
+     padding: 15px;
+
+     text-align: center;
+     font-weight: 600;
+}
+
+.modalPageChange:hover {
+     border-color: var(--uiPrimaryWhite);
+}
+
+/* user list */
+#userList {
+     flex-flow: column nowrap;
+
+     margin-bottom: 15px;
+     gap: 10px;
+
+     height: fit-content;
+     max-height: 400px;
+     width: 100%;
+
+     overflow: scroll;
+}
+
+#userList > li {
+     padding: 15px;
+     background-color: var(--uiPrimaryGrey);
+     border: 1px solid #00000000;
+}
+
+#userList > li > p {
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+
+     width: 40vw;
+     max-width: 100%;
+}
+
+#userList .username {
+     font-weight: 600;
+}
+
+#userList .useremail {
+     font-weight: 200;
+}
+
+
+/* list buttons */
+#grantAcessButtons {
+     align-items: start;
+
+     gap: 10px;
+     margin-bottom: 20px;
+}
+
+.changeAcessButton {
+     flex-grow: 1;
+
+     min-width: fit-content;
+     width: calc(50% - 10px);
+}
+
+#removeAcessButton {
+     color: var(--primaryOpposite);
+}
+
+#grantAcessButton {
+     color: var(--primaryColor);
+}
+
+
+/* users boxes */
+#userList > .editableBox {
+     border-bottom-color: var(--uiSecondaryGrey);
+     cursor: pointer;
+
+     transition: all 0.3s;
+}
+
+#userList > .editableBox:hover {
+     border-bottom-color: var(--uiSecondaryWhite);
+}
+
+#userList > .acessGranted {
+     border-bottom-color: var(--tertiaryColor);
+}
+
+
+/* both delete and add box properties */
+/* buttons */
+.createdBoxButtons{
+     gap: 10px;
+}
+
+.createdBoxButtons > input, .createdBoxButtons > button {
+     /* gap = 10px -> gap for each: 5px */
+     width: calc(50% - 5px);
+     height: 50px;
+
+     cursor: pointer;
+     border: none;
+}
+
+.resetButtonStyle {
+     color: var(--uiSecondaryWhite);
+}
+
+.resetButtonStyle:active {
+     transition: none 0s;
+}
+
+
+.confirmButtonStyle {
+     color: var(--primaryColor);
+}
+
+.confirmButtonStyle:active {
+     background-color: var(--tertiaryColor);
+     transition: none 0ms;
+}
+
+#returnCreateCourse {
+     margin-top: 30px;
+}
+
+
+
+
+/* delete course box */
+/* text */
+#deleteCourseModal {
+     max-width: 400px;
+}
+
+#deleteCourseModal > .createdBoxTitle > h1 {
+     color: var(--primaryOpposite);
+     margin-bottom: 10px;
+}
+
+
+
+/* buttons */
+#deleteCourseModal > .createdBoxButtons {
+     margin-top: 50px;
+}
+
+#confirmExclusion {     
+     background-color: var(--secondaryOpposite);
+}
+
+#confirmExclusion:hover {
+     background-color: var(--primaryOpposite);
+}
+
+#confirmExclusion:disabled {
+     opacity: 0.60;
+}
+
+#cancelExclusion {
+     margin-top: 10px;
+     
+     padding: 25px;
+
+     color: var(--uiPrimaryWhite);
+     background-color: var(--uiPrimaryGrey);
+     border: none;
+
+     cursor: pointer;
+}
+
+#cancelExclusion:hover {
+     background-color: var(--uiSecondaryGrey);
+}
+
+
+
+
+/* media */
+@media screen and (min-width: 768px) {
+     #operationsA {
+          flex-flow: row wrap;
+          width: 100%;
+     }
+
+     #operationsA button {
+          width: calc(50% - 5px);
+          padding: 10px;
+     }
+
+     #cancelExclusion {
+          padding: 15px;
+     } 
+
+}

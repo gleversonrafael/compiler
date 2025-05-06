@@ -1,0 +1,236 @@
+@charset "UTF-8";
+
+/* main doc */
+#mForm { /* main form*/
+    max-width: 600px;
+}
+
+/* msgB Reg */
+#msgB, #closeMsg {
+    align-self: center;
+}
+
+#msgB {  
+    display: none;
+    position: relative;
+
+    min-width: 150px;
+    padding: 15px 50px 15px;
+    margin-top: 1vh;
+
+    background-color: var(--uiPrimaryGrey);
+    box-shadow: 2px 2px 2px #2222223d;
+}
+
+#msgB > p {
+    font: 500 1.25em var(--rFont);
+    color: var(--uiPrimaryWhite);
+}
+
+#msgB a {
+    text-decoration: none;
+    color: var(--primaryColor);
+}
+
+
+
+/* msgB correct / incorrect */
+#msgB.cor {
+    border: 1px solid var(--secondaryColor);
+}
+
+#msgB.inc{
+    border: 1px solid var(--primaryOpposite);
+}
+
+
+#closeMsg.cor {
+    background-color: var(--secondaryColor);
+}
+
+#closeMsg.inc {
+    background-color: var(--tertiaryColor);
+}
+
+
+#closeMsg {
+    position: absolute;
+    top: 100%;
+    
+    padding: 10px;
+
+    border-radius: 0px 0px 25px 25px;
+    border: none;
+}
+
+#closeMsg > img {
+    width: 25px;
+    height: fit-content;
+
+    cursor: pointer;
+}
+
+#closeMsg:hover {
+    color: var(--red);
+}
+
+
+
+
+
+
+
+
+
+
+/* sign title */
+#signTitle {
+    color: var(--uiPrimaryWhite);
+    font: normal 900 min(2em) var(--rFont);
+    text-decoration: none;
+}
+
+
+
+
+/* subtopics */
+.stopic {
+    color: var(--uiPrimaryWhite);
+    font: 500 min(1.25em) var(--rFont);
+    margin: 40px 0px 20px;
+}
+
+.stopic:nth-of-type(2) {
+    margin-top: 50px;
+}
+
+
+
+
+/* inputs */
+.inpB {
+    gap: 10px;
+}
+
+
+/* radio inputs -- user type*/
+input[type=radio] {
+    display: none;
+}
+
+.userTyB {
+    padding: 20px 25px;
+    margin: 5px 0px;
+
+    background-color: var(--uiPrimaryWhiteTT);
+}
+
+.userTyB:hover {
+    color: var(--uiPrimaryWhite);
+    background-color: var(--uiPrimaryGrey);
+    opacity: 0.9;
+
+    cursor: pointer;
+}
+
+#regUserB, #admUserB {
+    font: 300 1em var(--rFont);
+}
+
+
+/* radio box checked? */
+#regUserInp:checked + #regUserB, #admUserInp:checked + #admUserB  {
+    color: var(--uiPrimaryWhite);
+    background-color: var(--primaryColor);
+}
+
+
+
+
+/* final form box - submit - and buttons */
+#finalBox {
+    margin-top: 50px;
+}
+
+#eButton, #cButton {
+    color: var(--uiPrimaryWhite);
+}
+
+#eButton {
+    border: 1px solid var(--uiPrimaryWhiteT);
+}
+
+#eButton:hover {
+    background-color: var(--uiPrimaryWhiteTT);
+}
+
+
+#cButton {
+    border: 1px solid var(--primaryOpposite);
+}
+
+#cButton:hover {
+    background-color: var(--primaryOpposite);
+}
+
+
+
+
+/* visual div */
+#visualD {
+    background-color: var(--primaryOpposites);
+}
+
+
+
+
+/* --------------------------------------------------------------------------- */
+/* media */
+@media screen and (min-width: 768px) {
+    /* message box */
+    #msgB {
+        padding: 15px 80px 15px;
+    }
+
+    #closeMsg{     
+        top: auto;   
+        right: 10px;
+        transition: none;
+    }
+
+    #closeMsg, #closeMsg.inc, #closeMsg.cor {
+        background-color: transparent;
+        border: none;
+    }
+
+
+
+
+    /* form */
+    #mForm {
+        padding: 10px 60px 10px 30px;
+    }
+
+    #userTyDiv {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 1%;
+
+        text-align: center;
+    }
+
+    .userTyB {
+        width: 49%;
+    }
+
+}
+
+
+
+
+/* center the sign box -- bug fix */
+@media screen and (min-width: 1366px) {
+    #mSignStyle {
+        margin-right: 191px;
+    }
+}

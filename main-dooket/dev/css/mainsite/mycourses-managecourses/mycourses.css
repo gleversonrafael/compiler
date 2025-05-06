@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+
+/* general */
+.coursesColumn > div.open {
+     height: 280px;
+}
+
+.coursesColumn > div.open:has(.aCoursePage) {
+     height: 510px;
+}
+
+
+
+/* fields */
+.fieldValue {
+     vertical-align: bottom;
+     display: inline-block;
+}
+
+
+/* others */
+.coursePage1 {
+     margin-bottom: 20px;
+}
+
+.createdContent > div > div {
+     width: 100%;
+}
+
+
+.copyButton {
+     float: right;
+
+     min-width: 30px;
+     min-height: 30px;
+
+     margin: 0px auto 10px 20px;
+
+     background: var(--uiSecondaryGrey) url(../../../media/ico/mcourses/ccopy.svg) center center no-repeat;
+     background-size: 70%;
+
+     border-radius: 25px;
+     border: none;
+}
+
+.copyButton:hover {
+     background-color: var(--uiPrimaryWhite);
+     cursor: pointer;
+     transition: all 300ms;
+}

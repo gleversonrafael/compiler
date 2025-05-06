@@ -1,0 +1,270 @@
+@charset "UTF-8";
+
+:root {
+     --customCloseHeight: height: 0px;
+}
+
+
+/* all areas */
+.conPattern section {
+     margin-bottom: 50px;
+}
+
+.conPattern {
+     width: 75vw;
+     max-width: 1015px;
+}
+
+
+/* explore - courses area */
+#exploreA, .coursesColumn, .coursesArea {
+     width: 100%;
+}
+
+.coursesArea, .coursesColumn {
+     gap: 10px;
+}
+
+.coursesArea {
+     min-width: 240px;
+}
+
+.coursesColumn {
+     flex-grow: 1;
+}
+
+
+
+/* courseBox == coursesA > div */
+.coursesColumn > div{
+     overflow: hidden;
+
+     width: 100%;
+     height: 120px;
+
+     padding: 25px 35px;
+     margin-bottom: 5px;
+
+     background-color: var(--uiSecondaryBlack);
+     border: 1px solid var(--uiSecondaryBlack);
+
+     border-radius: 35px;
+
+}
+
+.coursesColumn > div:hover {
+     transition: all 0.3s;
+     border-color: var(--uiSecondaryGrey);
+
+     cursor: pointer;
+}
+
+
+/* img */
+.coursesColumn > div .courseIcon, .courseIcon {
+     float: left;
+
+     min-width: 20px;
+     width: 15vw;
+     max-width: 70px;
+
+     min-height: 20px;
+     height: 15vw;
+     max-height: 70px;
+
+     margin-right: 20px;
+     border-radius: 20px;
+}
+
+div.courseIcon {
+     background-color: var(--uiPrimaryGrey)
+}
+
+.courseIconParagraph {
+     font: normal 500 2em var(--rFont);
+     color: var(--uiSecondaryWhite);
+}
+
+
+.coursesColumn > div .textOverflowCSS {
+     /* avoids this element increasing its parent width */
+     max-width: 50vw;
+}
+
+.coursesColumn > div h1 {
+     color: var(--uiPrimaryWhite);
+     font: 600 1.5em var(--rFont);
+}
+
+.coursesColumn > div h2 {
+     color: var(--uiSecondaryGrey);
+     font: normal 1.15em var(--rFont);
+     margin-top: 5px;
+}
+
+
+
+/* open // courses*/
+.coursesColumn > div.open {
+     opacity: 1;
+     cursor: default;
+
+     height: fit-content;
+
+     animation: 0.25s openCourseBoxEffect 0 linear;
+     animation-iteration-count: 1;
+}
+
+.coursesColumn > div.open h1 {
+     color: var(--uiPrimaryWhite);
+}
+
+.coursesColumn > div.open h2 {
+     color: var(--uiSecondaryWhite);
+}
+
+
+.courseInformation {
+     height: 70px;
+}
+
+.createdContent {
+     margin-top: 50px;
+}
+
+.aCoursePage > h3 {
+     color: var(--uiSecondaryWhite);
+     font: 500 1.25em var(--rFont);
+}
+
+
+
+
+
+
+/* each page and each field*/
+.createdContent > div {
+     display: none;
+     max-width: 100%;
+
+     flex-flow: column wrap;
+     gap: 20px;
+}
+
+.createdContent > div > fieldset, .createdContent > div > div:not(.steppers) {
+     height: fit-content;
+     border: none;
+}
+
+
+
+.fieldName, .fieldValue {
+     color: var(--uiSecondaryWhite);
+     word-break: break-all;
+}
+
+.fieldName {
+     display: block;
+
+     font: 300 1em var(--rFont);
+     margin-bottom: 5px;
+}
+
+.fieldValue {
+     font: normal 1.15em var(--rFont);
+}
+
+
+input.fieldValue:focus {
+     color: var(--uiPrimaryWhite);
+     outline: none;
+}
+
+
+
+/* buttons */
+.createdContent > a, .closeBoxButton, .createdContent > input[type=submit] {
+     display: inline-block;
+
+     width: 49%;
+     padding: 10px;
+
+     margin: 50px auto 15px;
+
+     font: 600 1em var(--rFont);
+     color: var(--uiSecondaryGrey);
+
+     text-decoration: none;
+     text-align: center;
+
+     border-radius: 25px;
+     border: none;
+
+     cursor: pointer;
+     transition: all 300ms;
+}
+
+
+.createdContent > a, .createdContent > input[type=submit] {
+     float: right;
+
+     color: var(--uiPrimaryBlack);
+     background-color: var(--tertiaryColor);
+}
+
+.createdContent > a:hover, .createdContent > input[type=submit]:hover {
+     background-color: var(--primaryColor);
+}
+
+
+/* close box */
+.closeBoxButton {
+     background-color: var(--uiPrimaryGrey);
+}
+
+.closeBoxButton:hover {
+     color: var(--uiPrimaryWhite);
+     opacity: 0.75;
+}
+
+
+.coursesColumn > div.closed {
+     animation: 0.5s closeCourseBoxEffect 0s linear;
+     animation-iteration-count: 1;
+     animation-direction: reverse;
+}
+
+
+/* anim */
+@keyframes toggleCourseBoxANIM {
+     from { height: 120px; }
+     to { height: var(--customCloseHeight)}
+}
+
+
+/* @keyframes closeManageANIM {
+     to { height: 565px; }
+}
+
+@keyframes closeMyWithANIM { 
+     to { height: 510px};
+}
+
+@keyframes closeMyANIM { 
+     to { height: 280px};
+} */
+
+
+
+/* media */
+@media screen and (min-width: 768px) {
+     .coursesColumn {
+          min-width: 300px;
+          width: calc(50% - 10px);
+
+          flex-grow: 1;
+     }
+}
+
+
+

@@ -1,0 +1,323 @@
+@charset "UTF-8";
+
+
+/* main menu box and its content*/
+#menuIcon {
+     height: 30px;
+     margin: 10px;
+     
+     cursor: pointer;
+}
+
+#mMenuB {
+     display: grid;
+     position: fixed;
+     overflow: hidden;
+
+     top: 0;
+     z-index: 2;
+
+     min-width: 50px;
+     width: fit-content;
+
+     height: 100vh;
+     animation: 0.3s menuANIM linear;
+
+     /* border: 1px solid red; */
+}
+
+#mMenuB.menuOpen {
+     overflow: auto;
+     
+     min-width: 225px;
+     width: 60vw;
+     max-width: 300px;
+
+     grid-template-rows: 2fr 1fr;
+     padding: 10px;
+
+     background-color: var(--uiSecondaryBlack);
+     animation: 0.3s menuANIM linear forwards;
+}
+
+/* menu icon */
+.menuChildClosed {
+     display: none;
+}
+
+
+.brandIcon{
+     background: transparent url(../media/ico/lightfavicon.png) center center no-repeat;
+     background-size: contain;
+
+     height: 40px;
+     width: 100px;
+
+     justify-self: center;
+     margin: 10px 10px 60px 10px; 
+}
+
+#mMenu {
+     justify-content: center;
+     height: 100%;
+
+     margin-top: 50px;
+     gap: 10px;
+}
+
+
+.menuFont {
+     font: 200 0.75em var(--rFont);
+}
+
+
+/* mMenu boxes */
+.mmBlock{
+     height: 60px;
+     width: 100%;
+
+     padding: 0 5px;
+
+     color: var(--uiSecondaryWhite);
+     border: 1px solid var(--uiPrimaryGrey);
+
+     background-color: transparent;
+
+     border-radius: 15px;
+}
+
+
+.mmBlock:hover {
+     color: var(--uiPrimaryWhite);
+     border-color: var(--uiSecondaryGrey);
+
+     cursor: pointer;
+}
+
+.selectedMenuBox {
+     color: var(--uiPrimaryWhite);
+     background-color: var(--uiPrimaryGrey);
+}
+
+.selectedMenuBox > p {
+     font-weight: 500;
+}
+
+
+#mMenu img {
+     height: 50%;
+     margin: 0px 25px;
+     background-size: 100%;
+}
+
+#mMenu p {
+     margin-right: 20px;
+}
+
+
+
+
+/* user section */
+#userSec {
+     justify-self: center;
+     align-self: end;
+
+     height: fit-content;
+
+     width: 80%;
+     max-width: 225px;
+
+     margin: 100px 0px 0px;
+}
+
+#userIcon {
+     height: 80px;
+     width: 80px;
+
+     margin-right: 10px;
+
+     padding: 15px;
+
+     border-radius: 50px;
+     background-color: var(--uiPrimaryGrey);
+}
+
+
+#userInfo {
+     width: 100%;
+}
+
+#userName, #userType {
+     font-weight: 300;
+     max-width: 100px;
+}
+
+#userName {
+     color: var(--uiPrimaryWhite);
+}
+
+#userType {
+     color: var(--uiSecondaryWhite);
+}
+
+
+.userB {
+     width: 100%;
+     padding: 15px;
+
+     border-radius: 50px;
+
+     color: var(--uiSecondaryWhite);
+     background-color: var(--uiPrimaryGrey);
+     border: 1px solid var(--uiPrimaryGrey);
+
+     cursor: pointer;
+}
+
+.userB:hover {
+     border-color: var(--uiSecondaryGrey);
+}
+
+#userSec a {
+     gap: 10px;
+}
+
+
+.userMSpace {
+     margin-bottom: 5px;
+}
+
+
+
+
+/* main content */
+#mCon {
+     position: relative;
+
+     min-height: calc(100vh - 60px);
+     min-width: 100%;
+
+     /* border that forces mCon to unfollow it's first children position as the start height "counter" */
+     border: 1px solid #00000000;
+}
+
+.conPattern {
+     margin: 50px 0px;
+     width: calc(100% - 100px);
+     
+     height: fit-content;
+     max-width: 100%;
+}
+
+.subtitle {
+     color: var(--uiSecondaryWhite);
+     font: 200 0.9em var(--rFont);
+     margin-bottom: 5px;
+}
+
+
+
+.genericButton {
+     padding: 15px;
+
+     font: 500 1em var(--rFont);
+
+     color: var(--uiPrimaryWhite);
+     background-color: var(--uiSecondaryBlack);
+
+     border: 1px solid var(--uiPrimaryWhite);
+}
+
+
+#wallpaperEffect {
+     z-index: -1;
+
+     position: fixed;
+     bottom: 0;
+     left: 50%;
+     right: auto;
+
+     transform: translate(-50%);
+
+     min-width: 250px;
+     width: 70%;
+}
+
+
+.regEff {
+     color: var(--primaryColor);
+}
+
+.admEff {
+     color: var(--primaryOpposite);
+}
+
+
+/* animations */
+@keyframes menuANIM {
+     0% {
+          min-width: 50px;
+          width: 0;
+          max-width: 0px;
+     }
+
+     1% {
+          background-color: var(--uiSecondaryBlack);
+     }
+
+     to { 
+          min-width: 225px;
+          width: 60vw;
+          max-width: 300px;
+          background-color: var(--uiSecondaryBlack);
+     }
+}
+
+
+/* pc / tablet media */
+@media screen and (min-width: 768px) {
+     /* main content */
+     #mCon {
+          min-width: calc(100% - 225px);
+     }
+
+     .conPattern  {
+          width: fit-content;
+          margin: 80px;
+     }
+
+
+     /* menu */
+     #mMenuB {
+          position: sticky;
+          max-width: 225px;
+     }
+
+     #mMenuB.menuOpen {
+          position: sticky;
+     }
+
+     .mmBlock {
+          opacity: 0.75;
+          height: 40px;
+     }
+
+     .mmBlock:hover, .selectedMenuBox {
+          opacity: 1;
+     }
+
+     .userB {
+          padding: 5px;
+     }
+
+     #userIcon {
+          height: 60px;
+          width: 60px;
+          padding: 10px;
+     }
+
+
+     #wallpaperEffect {
+          left: 55%;     
+     }
+}

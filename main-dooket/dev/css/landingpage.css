@@ -1,0 +1,179 @@
+@charset "UTF-8";
+
+* {
+    font-family: var(--rFont);
+}
+
+
+
+
+/* reusable */
+.greenEff {
+    color: var(--euca);
+    font-weight: 300;
+}
+
+
+
+/* main content - conteúdo principal */
+main {
+    position: relative;
+
+    flex-flow: column wrap;
+    justify-content: center;
+
+    width: 100%;
+    
+    min-height: 450px;
+    height: 100vh;
+}
+
+main::before, main::after {
+    content: "";
+    
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: 40vh;
+}
+
+main::before {
+    z-index: -1;
+    opacity: 0.1;
+
+    background-image: linear-gradient(var(--aquaT), var(--aqua));
+    transition: all 500ms;
+}
+
+
+main::after {
+    z-index: -2;
+}
+
+
+
+
+#mCon {
+    justify-content: space-between;
+    flex-flow: column wrap;
+    flex-shrink: 0;
+
+    min-height: 350px;
+    height: 60vh;
+
+    width: fit-content;
+
+    margin: 0px 40px;
+}
+
+
+
+
+/* main title */
+#mTitle-sec {
+    color: var(--uiPrimaryWhite);
+}
+
+#mTitle-sec h1 {
+    font: normal 500 min(5em, 15vw) var(--rFont);
+}
+
+#mTitle-sec h2 {
+    font: normal 100 min(1em, 3.5vw) var(--rFont);  
+    color: var(--tiar);
+
+    opacity: 0.9;
+}
+
+#II-eff {
+    font-weight: bold;
+    color: var(--aqua);
+}
+
+#Ib {
+    font-size: 1.1em;
+}
+
+
+
+
+/* buttons */
+#button-sec {
+    flex-flow: column wrap;
+    gap: 1vh;
+}
+
+#loginB {
+    padding: 15px 15px 15px 30px;
+
+    font: bold 1em;
+    text-align: left;
+
+    background-color: transparent;
+    text-decoration: none;
+    border-radius: 25px;
+}
+
+#loginB:hover {
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--black);
+    transition: all 500ms;    
+}
+
+/* loginB */
+#loginB {
+    width: 100%;
+
+    color: var(--aqua);
+    border: 1px solid var(--aqua);
+}
+
+#loginB:hover {
+    background-color: var(--aqua);
+}
+
+#loginB:active {
+    background-color: var(--euca);
+}
+
+
+
+/* desktop */
+@media screen and (min-width: 768px) {
+    #mCon {
+        min-height: 400px;
+        margin: 0 5vw;
+    }
+
+    main::after {
+        opacity: 0.03;
+    
+        background-image: url(../media/img/F-start-eff.png);
+        background-size: cover;
+
+        height: 70vh;
+    }
+    
+}
+
+@media screen  and (min-width: 1980px) {    
+    #mTitle-sec h1 {
+        font-size: 10vh;
+    }
+
+    #mTitle-sec h2 {
+        font-size: 2vh;
+    }
+
+    #loginB {
+        font-size: 3vh;
+        padding: 2vh 4vh;
+        
+        max-height: none;
+
+        border-radius: 10vh;
+    }
+
+}

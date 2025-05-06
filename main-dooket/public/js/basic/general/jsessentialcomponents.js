@@ -1,0 +1,2 @@
+import{removeSkeletons }from"./general/jsload.js";await initializeScripts();
+async function initializeScripts(){"complete"!=document.readyState?setTimeout(await initializeScripts(),1e3):(await setHomeDefaults(),await removeSkeletons())}
