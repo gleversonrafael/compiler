@@ -149,6 +149,7 @@
 
 #userName, #userType {
      font-weight: 300;
+     max-width: 100px;
 }
 
 #userName {

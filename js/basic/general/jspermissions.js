@@ -10,13 +10,13 @@ onAuthStateChanged(auth, async(authData) => {
 // inactive user/ deleted user
 onSnapshot(doc(db, "usersInfo", currentUserBasicInformation.uid), async() => {
      const {deleted, active} = await fetchOwnUserData();
-     if(deleted === true || active === false) {
-          signOut(auth);
-     }
+     if(deleted === true || active === false) signOut(auth);
 });
 
 const { usertype } = await fetchOwnUserData();
 if(usertype !== "admin") {removeAdminElements();}
+
+
 
 function removeAdminElements(selectedElements) {
      if(!selectedElements) selectedElements = document.querySelectorAll(".adminAcessJS");

@@ -9,8 +9,14 @@
 }
 
 #userGreetings {
+     display: block;
+
      color: var(--uiPrimaryWhite);
+
      font: 300 1.5em var(--rFont);
+
+     min-width: 60vw;
+     max-width: 1000px;
 }
 
 
@@ -90,6 +96,10 @@
      #dashbMsg {
           line-height: 1em;
           margin-bottom: 50px;
+     }
+
+     #userGreetings {
+          width: 50vw;
      }
 
      #dashbMsg.loadingSkeleton:before {
